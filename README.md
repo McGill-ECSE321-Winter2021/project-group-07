@@ -20,3 +20,36 @@
  |Thomas Jarvis|               |                  |
  |Norman Kong |                |                  |
  |Catherine Van Gheluwe|       |                  |
+ 
+## Sprint 2 
+
+  ### Member Roles & Time Spent
+ | Team Member | Roles / Tasks | Time Spent (Hours)|
+ | ------------|---------------| ------------------|
+ |Annabelle Dion|               |                   |
+ |Sia Ham       |              |                   |
+ |Thomas Jarvis|               |                  |
+ |Norman Kong |                |                  |
+ |Catherine Van Gheluwe|       |                  |
+ 
+ ## Sprint 3 
+
+  ### Member Roles & Time Spent
+ | Team Member | Roles / Tasks | Time Spent (Hours)|
+ | ------------|---------------| ------------------|
+ |Annabelle Dion|               |                   |
+ |Sia Ham       |              |                   |
+ |Thomas Jarvis|               |                  |
+ |Norman Kong |                |                  |
+ |Catherine Van Gheluwe|       |                  |
+ 
+  ## Sprint 4 
+
+  ### Member Roles & Time Spent
+ | Team Member | Roles / Tasks | Time Spent (Hours)|
+ | ------------|---------------| ------------------|
+ |Annabelle Dion|               |                   |
+ |Sia Ham       |              |                   |
+ |Thomas Jarvis|               |                  |
+ |Norman Kong |                |                  |
+ |Catherine Van Gheluwe|       |                  |
