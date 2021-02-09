@@ -15,7 +15,7 @@
   ### Member Roles & Time Spent
  | Team Member | Roles / Tasks | Time Spent (Hours)|
  | ------------|---------------| ------------------|
- |Annabele Dion|               |                   |
+ |Annabelle Dion|               |                   |
  |Sia Ham       |              |                   |
  |Thomas Jarvis|               |                  |
  |Norman Kong |                |                  |
