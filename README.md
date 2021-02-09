@@ -11,6 +11,9 @@
 - Catherine Van Gheluwe 
 
 ## Sprint 1 ( Due Friday, February 19th)
+ ### Documentation
+ - [Project Report](https://github.com/McGill-ECSE321-Winter2021/project-group-07/wiki/Project-Report-(-Sprint-1))
+ - [Meeting Minutes](https://github.com/McGill-ECSE321-Winter2021/project-group-07/wiki/Meeting-Minutes)
 
   ### Member Roles & Time Spent
  | Team Member | Roles / Tasks | Time Spent (Hours)|
