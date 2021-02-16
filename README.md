@@ -19,10 +19,10 @@
  | Team Member | Roles / Tasks | Time Spent (Hours)|
  | ------------|---------------| ------------------|
  |Annabelle Dion|      Testing Persistence Layer         | 4                  |
- |Sia Ham       |      Persistence Layer        |           4        |
- |Thomas Jarvis|       Build System and Continuous Integration        | 4                 |
+ |Sia Ham       |      Persistence Layer        |           8        |
+ |Thomas Jarvis|       Build System and Continuous Integration        | 8                |
  |Norman Kong |        Testing Persistence Layer        |                4  |
- |Catherine Van Gheluwe|  Documentation & Persistence Layer     |         4         |
+ |Catherine Van Gheluwe|  Documentation & Persistence Layer     |        8         |
  
 ## Sprint 2 
 
