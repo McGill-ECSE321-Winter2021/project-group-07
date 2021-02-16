@@ -2,7 +2,8 @@
 # Welcome to Group 14's Project - ECSE321 Car Application
 
 ### Project Description
-
+The project aims to develop an interactive and functional web and android application for a local automobile repair shop. The application will allow customers to
+have access and book a variety of services (towing, oil change, tire changes, regular maintenance, car repairs etc.) which are offered by qualified technicians working at the company. The technicians will be able to view their upcoming appointments and the administrator's assistant will be able to moderate, manage the shop's appointments and technicnan work schedule through the platform.
 ### Team Members
 - Annabelle Dion
 - Sia Ham
@@ -10,7 +11,7 @@
 - Norman Kong
 - Catherine Van Gheluwe 
 
-## Sprint 1 ( Due Friday, February 19th)
+## Sprint 1 ( Due Sunday, February 21st)
  ### Documentation
  - [Project Report](https://github.com/McGill-ECSE321-Winter2021/project-group-07/wiki/Project-Report-(-Sprint-1))
  - [Meeting Minutes](https://github.com/McGill-ECSE321-Winter2021/project-group-07/wiki/Meeting-Minutes)
