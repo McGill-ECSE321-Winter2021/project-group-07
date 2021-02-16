@@ -19,10 +19,6 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
-task stage () {
-    dependsOn ':RepairSystem-Backend:assemble'
-}
-
 test {
 	useJUnitPlatform()
 }
