@@ -5,13 +5,11 @@ import javax.persistence.CascadeType;
 import javax.persistence.OneToMany;
 import javax.persistence.Entity;
 
-
 @Entity
 public class RepairSystem
 {
 
   private String shopName;
-  
   
   public String getShopName()
   {
@@ -37,7 +35,6 @@ public class RepairSystem
   
   private int spaceAvailable;
   
-  
   public int getSpaceAvailable()
   {
     return this.spaceAvailable;
@@ -49,8 +46,6 @@ public class RepairSystem
   }
   
   private int numOfEmployees;
-  
-  
   
   public int getNumOfEmployees()
   {
@@ -88,7 +83,7 @@ public class RepairSystem
   }
 
   private List<Appointment> appointment;
-  
+ 
   @OneToMany(cascade={CascadeType.ALL})
   public List<Appointment> getAppointments()
   {
@@ -100,6 +95,7 @@ public class RepairSystem
   }
   
   private List<TimeSlot> timeSlot;
+  
   @OneToMany(cascade={CascadeType.ALL})
   public List<TimeSlot> getTimeSlots()
   {
@@ -110,6 +106,7 @@ public class RepairSystem
 	  this.timeSlot=timeSlots;
   }
 
+  @Override
   public String toString()
   {
     return super.toString() + "["+
