@@ -1,7 +1,15 @@
 package ca.mcgill.ecse321.repairsystem.model;
+import java.sql.Date;
+import java.sql.Time;
+import javax.persistence.Id;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
-// line 70 "model.ump"
-// line 134 "model.ump"
+@Entity
 public class Image
 {
 
@@ -12,46 +20,23 @@ public class Image
   //Image Associations
   private Appointment appointment;
 
-  //------------------------
-  // CONSTRUCTOR
-  //------------------------
-
-  public Image(Appointment aAppointment)
-  {
-    boolean didAddAppointment = setAppointment(aAppointment);
-    if (!didAddAppointment)
-    {
-      throw new RuntimeException("Unable to create image due to appointment. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
-    }
-  }
-
+ 
   //------------------------
   // INTERFACE
   //------------------------
-  /* Code from template association_GetOne */
+ 
+  @ManyToOne
   public Appointment getAppointment()
   {
-    return appointment;
+    return this.appointment;
   }
-  /* Code from template association_SetOneToMany */
-  public boolean setAppointment(Appointment aAppointment)
+  
+  public void setAppointment(Appointment aAppointment)
   {
-    boolean wasSet = false;
-    if (aAppointment == null)
-    {
-      return wasSet;
-    }
-
-    Appointment existingAppointment = appointment;
-    appointment = aAppointment;
-    if (existingAppointment != null && !existingAppointment.equals(aAppointment))
-    {
-      existingAppointment.removeImage(this);
-    }
-    appointment.addImage(this);
-    wasSet = true;
-    return wasSet;
+    this.appointment = aAppointment;
   }
+  
+  
 
   public void delete()
   {
