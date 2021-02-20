@@ -37,15 +37,4 @@ public class Image
   }
   
   
-
-  public void delete()
-  {
-    Appointment placeholderAppointment = appointment;
-    this.appointment = null;
-    if(placeholderAppointment != null)
-    {
-      placeholderAppointment.removeImage(this);
-    }
-  }
-
 }

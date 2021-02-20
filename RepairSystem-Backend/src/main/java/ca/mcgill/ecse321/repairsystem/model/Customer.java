@@ -1,4 +1,4 @@
-package main.java.ca.mcgill.ecse321.repairsystem.model;
+package ca.mcgill.ecse321.repairsystem.model;
 import java.util.*;
 import java.sql.Date;
 import java.sql.Time;
@@ -11,7 +11,12 @@ import javax.persistence.Entity;
 public class Customer extends User
 {
   
-  private String creditHash;
+  public Customer(String aName, int aId, String aPassword, int aPhone, String aEmail, RepairSystem aRepairSystem) {
+		super(aName, aId, aPassword, aPhone, aEmail, aRepairSystem);
+		// TODO Auto-generated constructor stub
+	}
+
+private String creditHash;
   
   public String getCreditHash() {
     return creditHash;
