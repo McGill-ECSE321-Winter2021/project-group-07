@@ -19,11 +19,6 @@ public class Image
 
   //Image Associations
   private Appointment appointment;
-
- 
-  //------------------------
-  // INTERFACE
-  //------------------------
  
   @ManyToOne
   public Appointment getAppointment()
@@ -34,6 +29,17 @@ public class Image
   public void setAppointment(Appointment aAppointment)
   {
     this.appointment = aAppointment;
+  }
+  
+  private int imageID;
+  
+  @Id
+  public int getImageId() {
+	  return this.getImageId();
+  }
+  
+  public void setImageId(int aId) {
+	  this.imageID = aId;
   }
   
   

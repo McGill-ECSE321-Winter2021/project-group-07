@@ -15,6 +15,16 @@ public class Appointment
 
   public enum AppointmentStatus { CarReceived, InRepair, Completed };
 
+  private int appointmentId;
+  
+  @Id
+  public int getAppointmentId() {
+	  return this.appointmentId;
+  }
+  
+  public void setAppointmentId(int aId) {
+	  this.appointmentId = aId;
+  }
   private String note;
   
   public String getNote()

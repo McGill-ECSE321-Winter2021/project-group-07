@@ -9,7 +9,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.ManyToOne;
-//	TODO: @id?? 
+
+
 @Entity
 public class TimeSlot{
 	private int timeSlotId;

@@ -14,6 +14,17 @@ public class Car
 
   public enum CarType { Sedan, Coupe, Sports, Hatchback, MiniVan, StationWagon, Convertible, Truck, SUV, Other }
 
+  private int CarId;
+  
+  @Id
+  public int getCarId() {
+	  return this.CarId;
+  }
+  
+  public void setCarId(int aId) {
+	  this.CarId = aId;
+  }
+   
   private CarType type;
   
   public CarType getType(){
