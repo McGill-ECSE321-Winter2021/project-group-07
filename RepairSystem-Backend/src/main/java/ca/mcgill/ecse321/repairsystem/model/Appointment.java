@@ -13,7 +13,7 @@ import javax.persistence.ManyToOne;
 public class Appointment
 {
 
-  public enum AppointmentStatus { CarReceived, InRepair, Completed }
+  public enum AppointmentStatus { CarReceived, InRepair, Completed };
 
   private String note;
   

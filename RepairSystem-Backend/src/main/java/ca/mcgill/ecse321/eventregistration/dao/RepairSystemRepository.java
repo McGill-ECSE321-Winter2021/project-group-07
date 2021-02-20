@@ -23,7 +23,7 @@ public class RepairSystemRepository {
 
 	@Transactional
 	public Customer createCustomer(String name, int aID, String aPassword, int aPhone, String aEmail, RepairSystem aRepairSystem, String aCreditHash, String aDebitHash, String aAddress) {
-		Customer c = new Customer(name, aID, aPassword, aPhone, aEmail, aRepairSystem, aCreditHash, aDebitHash, aAddress);
+		Customer c = new Customer(name, aID, aPassword, aPhone, aEmail, aRepairSystem);
 		entityManager.persist(c);
 		return c;
 	}
