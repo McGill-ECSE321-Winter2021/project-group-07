@@ -19,6 +19,10 @@ public class Service{
 		type = aType;
 		price = aPrice;
 	}
+	
+	public Service() {
+		
+	}
 
 
 
