@@ -13,7 +13,7 @@ have access and book a variety of services (towing, oil change, tire changes, re
 
 ## Sprint 1 ( Due Sunday, February 21st)
  ### Documentation
- - [Requirement Model](https://github.com/McGill-ECSE321-Winter2021/project-group-07/wiki/Requirements-Model-(-requirements-&-use-case))
+ - [Requirement Model](https://github.com/McGill-ECSE321-Winter2021/project-group-07/wiki/Requirements-Model-(requirements-&-use-case))
  - [Domain Model](https://github.com/McGill-ECSE321-Winter2021/project-group-07/wiki/Domain-Model-Iterations)
  - [Project Report](https://github.com/McGill-ECSE321-Winter2021/project-group-07/wiki/Project-Report-(-Sprint-1))
 
