@@ -2,6 +2,7 @@ language: java
 
 before_install:
  – chmod +x gradlew
- - gradle -b wrapper.gradle wrapper
+ - gradle wrapper
+
 script:
 - gradle build
