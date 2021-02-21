@@ -15,7 +15,6 @@ public class Customer extends Person
   
   public Customer(String aName,  int id, String aPassword, int aPhone, String aEmail, RepairSystem aRepairSystem) {
 		super(aName, id, aPassword, aPhone, aEmail, aRepairSystem);
-		// TODO Auto-generated constructor stub
 	}
   
   public Customer() {
@@ -79,6 +78,7 @@ public class Customer extends Person
   public void setAppointments(List<Appointment> appointmentList) {
     appointments = appointmentList;
   }
+  
 
   private List<Car> cars;
   
@@ -91,5 +91,23 @@ public class Customer extends Person
   public void setCars(List<Car> carList){
     cars = carList;
   }
+  
+  public void addCar(Car car) {
+	  if(this.cars == null) {
+		  
+	  }
+  }
+  
+  private Date lastActive;
+  
+  public Date getDate() {
+	  return this.lastActive;
+  }
+  
+  public void setDate (Date date) {
+	  this.lastActive = date;
+  }
+  
+  
   
 }
