@@ -2,10 +2,6 @@ task stage () {
     dependsOn ':RepairSystem-Backend:assemble'
 }
 
-check.doFirst {
-    println "Running gradle v${project.gradle.gradleVersion}"
-}
-
 task wrapper(type: Wrapper) {
     gradleVersion = '6.6.1'
 }
