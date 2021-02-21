@@ -3,47 +3,75 @@ import java.util.*;
 import java.sql.Date;
 import java.sql.Time;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.CascadeType;
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.ManyToOne;
+import javax.persistence.MappedSuperclass;
 
 @Entity
-public class User{
+@Inheritance(strategy =InheritanceType.JOINED)
+public abstract class User{
 
 	private String name;
-	private int id;
 	private String password;
+	private RepairSystem repairSystem;
+	private int userId;
 	private int phone;
 	private String email;
-
-
-
-	public User(String aName, int aId, String aPassword, int aPhone, String aEmail, RepairSystem aRepairSystem){
+	
+	public User(String aName, int id,String aPassword, int aPhone, String aEmail, RepairSystem aRepairSystem){
 		name = aName;
-		id = aId;
 		password = aPassword;
+		userId = id;
 		phone = aPhone;
 		email = aEmail;
+		repairSystem = aRepairSystem;
 	}
 
-
-	public void setName(String aName){
-		this.name = aName;
+	@Id
+	public int getId()
+	{
+		return this.userId;
 	}
 
 	public void setId(int aId)
 	{
-		id = aId;
+		this.userId = aId;
 
+	}
+	
+
+	public String getName()
+	{
+		return name;
+	}
+	
+
+	public void setName(String aName){
+		this.name = aName;
+	}
+	
+	public String getPassword()
+	{
+		return password;
 	}
 
 	public void setPassword(String aPassword)
 	{
 		password = aPassword;
 
+	}
+	
+
+	public int getPhone()
+	{
+		return phone;
 	}
 
 	public void setPhone(int aPhone)
@@ -52,34 +80,14 @@ public class User{
 
 	}
 
+	public String getEmail()
+	{
+		return email;
+	}
 	public void setEmail(String aEmail)
 	{
 		email = aEmail;
 	}
 
-	public String getName()
-	{
-		return name;
-	}
-	@Id
-	public int getId()
-	{
-		return id;
-	}
-
-	public String getPassword()
-	{
-		return password;
-	}
-
-	public int getPhone()
-	{
-		return phone;
-	}
-
-	public String getEmail()
-	{
-		return email;
-	}
 
 }

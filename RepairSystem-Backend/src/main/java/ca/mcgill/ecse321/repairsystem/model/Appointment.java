@@ -51,7 +51,7 @@ public class Appointment
 
   private TimeSlot appointmentTime;
   
-  @ManyToOne()
+  @ManyToOne
   public TimeSlot getAppointmentTime()
   {
     return appointmentTime;
@@ -63,7 +63,7 @@ public class Appointment
   
   private List<Mechanic> mechanics;
 
-  @ManyToMany()
+  @ManyToMany
   public List<Mechanic> getMechanics()
   {
     return mechanics;
@@ -109,18 +109,7 @@ public class Appointment
     images = imageList;
   }
   
-  private RepairSystem repairSystem;
-  
-  @ManyToOne()
-  public RepairSystem getRepairSystem()
-  {
-    return repairSystem;
-  }
-  
-  public void setRepairSystem(RepairSystem system){
-    repairSystem = system;
-  }
-  
+
   private Car car;
   
   @ManyToOne()

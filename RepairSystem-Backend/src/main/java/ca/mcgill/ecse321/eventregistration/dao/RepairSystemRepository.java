@@ -22,22 +22,22 @@ public class RepairSystemRepository {
 	EntityManager entityManager;
 
 	@Transactional
-	public Customer createCustomer(String name, int aID, String aPassword, int aPhone, String aEmail, RepairSystem aRepairSystem, String aCreditHash, String aDebitHash, String aAddress) {
-		Customer c = new Customer(name, aID, aPassword, aPhone, aEmail, aRepairSystem);
+	public Customer createCustomer(String name, int id, String aPassword, int aPhone, String aEmail, RepairSystem aRepairSystem, String aCreditHash, String aDebitHash, String aAddress) {
+		Customer c = new Customer(name, id, aPassword, aPhone, aEmail, aRepairSystem);
 		entityManager.persist(c);
 		return c;
 	}
 	
 	@Transactional
-	public AdministrativeAssistant createAdministrativeAssistant(String aName, int aId, String aPassword, int aPhone, String aEmail, RepairSystem aRepairSystem) {
-		AdministrativeAssistant a = new AdministrativeAssistant(aName, aId, aPassword, aPhone, aEmail, aRepairSystem);
+	public AdministrativeAssistant createAdministrativeAssistant(String aName, int id, String aPassword, int aPhone, String aEmail, RepairSystem aRepairSystem) {
+		AdministrativeAssistant a = new AdministrativeAssistant(aName, id,aPassword, aPhone, aEmail, aRepairSystem);
 		entityManager.persist(a);
 		return a;
 	}
 	
 	@Transactional
-	public Mechanic createMechanic(String aName, int aId, String aPassword, int aPhone, String aEmail, RepairSystem aRepairSystem, Service... allCapabilities) {
-		Mechanic m = new Mechanic(aName, aId, aPassword, aPhone, aEmail, aRepairSystem, allCapabilities);
+	public Mechanic createMechanic(String aName, int id, String aPassword, int aPhone, String aEmail, RepairSystem aRepairSystem, Service... allCapabilities) {
+		Mechanic m = new Mechanic(aName,id, aPassword, aPhone, aEmail, aRepairSystem, allCapabilities);
 		return m;
 	}
 

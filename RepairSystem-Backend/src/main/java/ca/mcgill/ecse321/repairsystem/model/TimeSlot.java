@@ -5,6 +5,7 @@ import java.sql.Time;
 import javax.persistence.Id;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
@@ -50,36 +51,36 @@ public class TimeSlot{
 		return endTime;
 	}
 
-
-	private Mechanic mechanic;
+	private List<Mechanic> mechanics;
 	@ManyToMany
-	public Mechanic getMechanic(){
-		return this.mechanic;
+	public List<Mechanic> getMechanic(){
+		return this.mechanics;
 	}
-	public void setMechanic(Mechanic mechanic){
-		this.mechanic=mechanic;
-	}
-
-	private Appointment appointment;
-	@ManyToMany
-	public Appointment getAppointment(){
-		return this.appointment;
-	}
-	public void setAppointment(Appointment appointment){
-		this.appointment=appointment;
+	public void setMechanic(List<Mechanic> mechanic){
+		this.mechanics=mechanic;
 	}
 	
-	public void addTimeSlot() {
-		
+	private List<Appointment> appointments;
+	
+	@OneToMany(cascade = {CascadeType.ALL})
+	public List<Appointment> getAppointment(){
+		return this.appointments;
+	}
+	public void setAppointment(List<Appointment> appointment){
+		this.appointments=appointment;
 	}
 	
-	public void deleteTimeSlot() {
-		
+	
+	private RepairSystem repairSystem;
+	@ManyToOne
+	public RepairSystem getRepairSystem() {
+		return this.repairSystem;
+	}
+	public void setRepairSystem(RepairSystem repairSystem) {
+		this.repairSystem = repairSystem;
 	}
 	
-	public void moveTimeSlot() {
-		
-	}
+	
 }
 
 

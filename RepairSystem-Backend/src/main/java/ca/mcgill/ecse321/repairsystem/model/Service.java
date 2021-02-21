@@ -43,7 +43,7 @@ public class Service{
 	}
 
 	private Appointment appointment;
-	@ManyToMany
+	@ManyToOne
 	public Appointment getAppointment(){
 		return this.appointment;
 	}
@@ -52,7 +52,7 @@ public class Service{
 	}
 
 	private Mechanic mechanic;
-	@ManyToMany
+	@ManyToOne
 	public Mechanic getMechanic(){
 		return this.mechanic;
 	}

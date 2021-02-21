@@ -35,7 +35,7 @@ public class Image
   
   @Id
   public int getImageId() {
-	  return this.getImageId();
+	  return this.imageID;
   }
   
   public void setImageId(int aId) {

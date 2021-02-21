@@ -4,13 +4,15 @@ import java.util.*;
 import javax.persistence.CascadeType;
 import javax.persistence.OneToMany;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity
 public class RepairSystem
 {
 
+
   private String shopName;
-  
+  @Id
   public String getShopName()
   {
     return this.shopName;
@@ -58,15 +60,15 @@ public class RepairSystem
   }
 
   //RepairSystem Associations
-  private List<User> user;
   
+  private List<User> user;
   @OneToMany(cascade={CascadeType.ALL})
   public List<User> getUsers()
   {
     return this.user;
   }
 
- public void setUser(List<User> users) {
+ public void setUsers(List<User> users) {
 	  this.user = users;
   }
 
@@ -82,8 +84,9 @@ public class RepairSystem
 	  this.service = services;
   }
 
+
   private List<Appointment> appointment;
- 
+  
   @OneToMany(cascade={CascadeType.ALL})
   public List<Appointment> getAppointments()
   {
@@ -94,15 +97,15 @@ public class RepairSystem
 	  this.appointment=appointments;
   }
   
-  private List<TimeSlot> timeSlot;
   
-  @OneToMany(cascade={CascadeType.ALL})
+  private List<TimeSlot> timeSlot;
+  @OneToMany(targetEntity=TimeSlot.class, mappedBy = "repairSystem", cascade={CascadeType.ALL})
   public List<TimeSlot> getTimeSlots()
   {
     return timeSlot;
   }
 
-  public void setTimeSlot(List<TimeSlot> timeSlots) {
+  public void setTimeSlots(List<TimeSlot> timeSlots) {
 	  this.timeSlot=timeSlots;
   }
 

@@ -7,6 +7,7 @@ import java.sql.Date;
 import java.sql.Time;
 import javax.persistence.Id;
 import javax.persistence.CascadeType;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.ManyToMany;
@@ -17,48 +18,25 @@ import javax.persistence.ManyToOne;
 public class Mechanic extends User
 {
 
-	public Mechanic(String aName, int aId, String aPassword, int aPhone, String aEmail, RepairSystem aRepairSystem, Service... allCapabilities)
+	public Mechanic(String aName, int id, String aPassword, int aPhone, String aEmail, RepairSystem aRepairSystem, Service... allCapabilities)
 	{
-	  super(aName, aId, aPassword, aPhone, aEmail, aRepairSystem);    
+	  super(aName, id, aPassword, aPhone, aEmail, aRepairSystem);    
 	}
 
-  public String getName() {
-	  //will invoke the parent class getName() method;
-	  return super.getName();
-  }
-  
-  @Id
-  public int getID() {
-	  return super.getId();
-  }
-  
-  public void setID(int ID) {
-	  super.setId(ID);
-  }
-  
-  public String getPassword() {
-	  return super.getPassword();
-  }
-  
-  public void setPassword(String password) {
-	  super.setPassword(password);
-  }
-  public int getPhone() {
-	  return super.getPhone();
-  }
-  
-  public void setPhone(int phone) {
-	  super.setPhone(phone);
-  }
-  
-  public String getEmail() {
-	  return super.getEmail();
-  }
-  
-  public void setEmail(String email) {
-	  super.setEmail(email);
-  }
-  
+	
+	private int id;
+	@Id
+	public int getId()
+	{
+		return id;
+	}
+
+	public void setId(int aId)
+	{
+		id = aId;
+
+	}
+
   //Mechanic Associations
   private List<TimeSlot> workHours;
   
