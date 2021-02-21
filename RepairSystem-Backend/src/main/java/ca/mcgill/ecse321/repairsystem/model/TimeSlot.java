@@ -15,7 +15,7 @@ import javax.persistence.ManyToOne;
 @Entity
 public class TimeSlot{
 	private int timeSlotId;
-	private Date date;
+	
 	public void setTimeSlotId(int Id) {
 		this.timeSlotId = Id;
 	}
@@ -27,19 +27,12 @@ public class TimeSlot{
 	private Time startTime;
 	private Time endTime;
 
-	public TimeSlot(Date date, Time aStartTime, Time aEndTime, int Id){
-		this.date = date;
+	public TimeSlot(Time aStartTime, Time aEndTime, int Id){
 		startTime = aStartTime;
 		endTime = aEndTime;
 		timeSlotId = Id;
 	}
 
-	public Date getDate(Date date) {
-		return this.date;
-	}
-	public void setDate (Date date) {
-		this.date = date;
-	}
 	public void setStartTime(Time aStartTime){
 		this.startTime = aStartTime;
 	}
