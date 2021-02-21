@@ -22,6 +22,10 @@ public class Mechanic extends Person{
 	{
 	  super(aName, id, aPassword, aPhone, aEmail, aRepairSystem);    
 	}
+	
+	public Mechanic() {
+		
+	}
 
 	
 	private int id;

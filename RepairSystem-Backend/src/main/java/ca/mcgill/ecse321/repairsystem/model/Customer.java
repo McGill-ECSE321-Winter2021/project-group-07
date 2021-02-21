@@ -16,6 +16,10 @@ public class Customer extends Person
   public Customer(String aName,  int id, String aPassword, int aPhone, String aEmail, RepairSystem aRepairSystem) {
 		super(aName, id, aPassword, aPhone, aEmail, aRepairSystem);
 	}
+  
+  public Customer() {
+	  
+  }
 
 	private int id;
 	@Id

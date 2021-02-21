@@ -33,6 +33,11 @@ public class TimeSlot{
 		timeSlotId = Id;
 	}
 
+	public TimeSlot() {
+		
+	}
+
+
 	public void setStartTime(Time aStartTime){
 		this.startTime = aStartTime;
 	}
