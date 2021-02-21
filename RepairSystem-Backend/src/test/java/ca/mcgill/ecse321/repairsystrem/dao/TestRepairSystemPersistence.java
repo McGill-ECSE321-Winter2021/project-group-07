@@ -9,8 +9,6 @@ import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Month;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -20,14 +18,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import ca.mcgill.ecse321.repairsystem.RepairSystemApplication;
-import ca.mcgill.ecse321.repairsystem.dao.AdministrativeAssistantRepository;
-import ca.mcgill.ecse321.repairsystem.dao.AppointmentRepository;
-import ca.mcgill.ecse321.repairsystem.dao.CarRepository;
-import ca.mcgill.ecse321.repairsystem.dao.CustomerRepository;
-import ca.mcgill.ecse321.repairsystem.dao.ImageRepository;
-import ca.mcgill.ecse321.repairsystem.dao.MechanicRepository;
-import ca.mcgill.ecse321.repairsystem.dao.ServiceRepository;
-import ca.mcgill.ecse321.repairsystem.dao.TimeSlotRepository;
+import ca.mcgill.ecse321.repairsystem.dao.*;
 import ca.mcgill.ecse321.repairsystem.model.*;
 
 @ExtendWith(SpringExtension.class)
@@ -54,13 +45,11 @@ public class TestRepairSystemPersistence {
 	
 	@AfterEach
 	public void clearDatabase() {
-		// Fisrt, we clear appointments to avoid exceptions due to inconsistencies
 		timeSlotRepository.deleteAll();
 		serviceRepository.deleteAll();
 		imageRepository.deleteAll();
 		appointmentRepository.deleteAll();
 		carRepository.deleteAll();
-		// Then we can clear the other tables
 		customerRepository.deleteAll();
 		administrativeAssistantRepository.deleteAll();
 		mechanicRepository.deleteAll();
@@ -193,7 +182,7 @@ public class TestRepairSystemPersistence {
 	@Test
 	public void testPersistAndLoadTimeSlot() {
 		TimeSlot timeSlot = new TimeSlot();
-		int timeSlotId = 801;
+		int timeSlotId = 800;
 		timeSlot.setTimeSlotId(timeSlotId);
 		timeSlotRepository.save(timeSlot);
 		
