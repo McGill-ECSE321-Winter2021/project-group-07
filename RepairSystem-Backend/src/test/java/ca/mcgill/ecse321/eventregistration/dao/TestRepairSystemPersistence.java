@@ -40,6 +40,20 @@ public class TestRepairSystemPersistence {
 		administrativeAssistantRepository.deleteAll();
 		mechanicRepository.deleteAll();
 	}
+	
+	@Test
+	public void testPersistAndLoadCustomer() {
+		RepairSystem repairSystem = new RepairSystem();
+		int Id = 260928845;
+		Customer customer = new Customer("Annabelle Dion", Id, "12345", 5502441, "annabelle.dion@mail.mcgill.ca", repairSystem);
+		customerRepository.save(customer);
+		
+		customer = null;
+		customer = customerRepository.findCustomerById(Id);
+		
+		assertNotNull(customer);
+		assertEquals(Id, customer.getId());
+	}
 	/*
 	 * example of test
 	@Test
