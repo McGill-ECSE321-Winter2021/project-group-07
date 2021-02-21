@@ -17,6 +17,10 @@ public class Customer extends Person
 		super(aName, id, aPassword, aPhone, aEmail, aRepairSystem);
 		// TODO Auto-generated constructor stub
 	}
+  
+  public Customer() {
+	  
+  }
 
 	private int id;
 	@Id

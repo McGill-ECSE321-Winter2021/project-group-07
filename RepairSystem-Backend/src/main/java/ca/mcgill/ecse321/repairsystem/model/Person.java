@@ -33,6 +33,10 @@ public abstract class Person{
 		email = aEmail;
 		repairSystem = aRepairSystem;
 	}
+	
+	public Person() {
+		
+	}
 
 	@Id
 	public int getId()

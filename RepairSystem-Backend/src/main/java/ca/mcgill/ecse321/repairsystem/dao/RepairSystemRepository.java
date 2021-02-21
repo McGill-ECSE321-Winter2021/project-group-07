@@ -1,4 +1,4 @@
-package ca.mcgill.ecse321.eventregistration.dao;
+package ca.mcgill.ecse321.repairsystem.dao;
 
 import java.sql.Date;
 import java.sql.Time;

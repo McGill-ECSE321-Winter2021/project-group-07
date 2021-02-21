@@ -1,6 +1,7 @@
-package ca.mcgill.ecse321.eventregistration.dao;
+package ca.mcgill.ecse321.repairsystrem.dao;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.sql.Date;
@@ -16,15 +17,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import ca.mcgill.ecse321.repairsystem.RepairSystemApplication;
+import ca.mcgill.ecse321.repairsystem.dao.AdministrativeAssistantRepository;
+import ca.mcgill.ecse321.repairsystem.dao.AppointmentRepository;
+import ca.mcgill.ecse321.repairsystem.dao.CustomerRepository;
+import ca.mcgill.ecse321.repairsystem.dao.MechanicRepository;
 import ca.mcgill.ecse321.repairsystem.model.*;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest
+
+@SpringBootTest(classes = RepairSystemApplication.class)
 public class TestRepairSystemPersistence {
 	
 	@Autowired
 	private AdministrativeAssistantRepository administrativeAssistantRepository;
-	@Autowired
+	//@Autowired
 	private AppointmentRepository appointmentRepository;
 	@Autowired
 	private CustomerRepository customerRepository;
@@ -34,7 +41,7 @@ public class TestRepairSystemPersistence {
 	@AfterEach
 	public void clearDatabase() {
 		// Fisrt, we clear appointments to avoid exceptions due to inconsistencies
-		appointmentRepository.deleteAll();
+		//appointmentRepository.deleteAll();
 		// Then we can clear the other tables
 		customerRepository.deleteAll();
 		administrativeAssistantRepository.deleteAll();
@@ -43,9 +50,9 @@ public class TestRepairSystemPersistence {
 	
 	@Test
 	public void testPersistAndLoadCustomer() {
-		RepairSystem repairSystem = new RepairSystem();
 		int Id = 260928845;
-		Customer customer = new Customer("Annabelle Dion", Id, "12345", 5502441, "annabelle.dion@mail.mcgill.ca", repairSystem);
+		Customer customer = new Customer();
+		customer.setId(Id);
 		customerRepository.save(customer);
 		
 		customer = null;
@@ -54,23 +61,6 @@ public class TestRepairSystemPersistence {
 		assertNotNull(customer);
 		assertEquals(Id, customer.getId());
 	}
-	/*
-	 * example of test
-	@Test
-	public void testPersistAndLoadPerson() {
-		String name = "TestPerson";
-		// First example for object save/load
-		Person person = new Person();
-		// First example for attribute save/load
-		person.setName(name);
-		personRepository.save(person);
-
-		person = null;
-
-		person = personRepository.findPersonByName(name);
-		assertNotNull(person);
-		assertEquals(name, person.getName());
-	}
-	*/
+	
 
 }
