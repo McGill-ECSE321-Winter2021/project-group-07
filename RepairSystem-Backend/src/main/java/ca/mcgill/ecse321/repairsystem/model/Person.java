@@ -16,7 +16,7 @@ import javax.persistence.MappedSuperclass;
 
 @Entity
 @Inheritance(strategy =InheritanceType.JOINED)
-public abstract class User{
+public abstract class Person{
 
 	private String name;
 	private String password;
@@ -25,7 +25,7 @@ public abstract class User{
 	private int phone;
 	private String email;
 	
-	public User(String aName, int id,String aPassword, int aPhone, String aEmail, RepairSystem aRepairSystem){
+	public Person(String aName, int id,String aPassword, int aPhone, String aEmail, RepairSystem aRepairSystem){
 		name = aName;
 		password = aPassword;
 		userId = id;

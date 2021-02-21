@@ -15,8 +15,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Mechanic extends User
-{
+public class Mechanic extends Person{
+
 
 	public Mechanic(String aName, int id, String aPassword, int aPhone, String aEmail, RepairSystem aRepairSystem, Service... allCapabilities)
 	{

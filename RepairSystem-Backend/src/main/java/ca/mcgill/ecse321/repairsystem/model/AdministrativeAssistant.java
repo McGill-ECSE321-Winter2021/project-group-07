@@ -11,7 +11,7 @@ import javax.persistence.Entity;
 
 
 @Entity
-public class AdministrativeAssistant extends User
+public class AdministrativeAssistant extends Person
 {
 	
 	public AdministrativeAssistant(String aName, int id,String aPassword, int aPhone, String aEmail,RepairSystem aRepairSystem) {

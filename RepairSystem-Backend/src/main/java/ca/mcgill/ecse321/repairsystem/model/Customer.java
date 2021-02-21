@@ -10,7 +10,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Entity;
 
 @Entity
-public class Customer extends User
+public class Customer extends Person
 {
   
   public Customer(String aName,  int id, String aPassword, int aPhone, String aEmail, RepairSystem aRepairSystem) {

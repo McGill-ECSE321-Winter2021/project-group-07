@@ -61,15 +61,16 @@ public class RepairSystem
 
   //RepairSystem Associations
   
-  private List<User> user;
+  private List<Person> persons;
+  
   @OneToMany(cascade={CascadeType.ALL})
-  public List<User> getUsers()
+  public List<Person> getPersons()
   {
-    return this.user;
+    return this.persons;
   }
 
- public void setUsers(List<User> users) {
-	  this.user = users;
+ public void setPersons(List<Person> personsList) {
+	  this.persons = personsList;
   }
 
   private List<Service> service;

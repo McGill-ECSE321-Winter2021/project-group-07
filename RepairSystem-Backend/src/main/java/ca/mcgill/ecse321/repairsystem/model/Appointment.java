@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Appointment
 {
-
+	
   public enum AppointmentStatus { CarReceived, InRepair, Completed };
 
   private int appointmentId;
