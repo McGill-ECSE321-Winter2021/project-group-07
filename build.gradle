@@ -1,7 +1,3 @@
 task stage () {
     dependsOn ':RepairSystem-Backend:assemble'
 }
-
-task wrapper(type: Wrapper) {
-    gradleVersion = '6.6.1'
-}
