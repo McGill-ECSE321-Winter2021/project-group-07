@@ -13,17 +13,18 @@ have access and book a variety of services (towing, oil change, tire changes, re
 
 ## Sprint 1 ( Due Sunday, February 21st)
  ### Documentation
+ - [Requirement Model](https://github.com/McGill-ECSE321-Winter2021/project-group-07/wiki/Requirements-Model-(-requirements-&-use-case))
+ - [Domain Model](https://github.com/McGill-ECSE321-Winter2021/project-group-07/wiki/Domain-Model-Iterations)
  - [Project Report](https://github.com/McGill-ECSE321-Winter2021/project-group-07/wiki/Project-Report-(-Sprint-1))
- - [Meeting Minutes](https://github.com/McGill-ECSE321-Winter2021/project-group-07/wiki/Meeting-Minutes)
 
   ### Member Roles & Time Spent
  | Team Member | Roles / Tasks | Time Spent (Hours)|
  | ------------|---------------| ------------------|
- |Annabelle Dion|      Testing Persistence Layer         | 4                  |
- |Sia Ham       |      Persistence Layer        |           8        |
- |Thomas Jarvis|       Build System and Continuous Integration        | 8                |
- |Norman Kong |        Testing Persistence Layer        |                4  |
- |Catherine Van Gheluwe|  Documentation & Persistence Layer     |        8         |
+ |Annabelle Dion|     Requirements Model, Domain Mode, Persistence Layer & Testing Persistence Layer         | 4                  |
+ |Sia Ham       |      Requirements Model, Domain Model, Build System & Persistence Layer        |           8        |
+ |Thomas Jarvis|      Requirements Model, Domain Model, Build System, Persistence Layer & Bug fixing       | 8                |
+ |Norman Kong |       Requirements Model, Domain Model, Documentation & Testing Persistence Layer        |                4  |
+ |Catherine Van Gheluwe|  Requirements Model, Domain Model, Documentation, Build System, Persistence Layer & Bug fixing    |        8         |
  
 ## Sprint 2 
 
