@@ -6,7 +6,7 @@ The project aims to develop an interactive and functional web and android applic
 have access and book a variety of services (towing, oil change, tire changes, regular maintenance, car repairs etc.) which are offered by qualified technicians working at the company. The technicians will be able to view their upcoming appointments and the administrator's assistant will be able to moderate, manage the shop's appointments and technicnan work schedule through the platform.
 ### Team Members
 - Annabelle Dion
-- Sia Ham
+- Sia Han
 - Thomas Jarvis
 - Norman Kong
 - Catherine Van Gheluwe 
