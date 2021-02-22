@@ -23,7 +23,7 @@ have access and book a variety of services (towing, oil change, tire changes, re
  |Annabelle Dion|     Requirements Model, Domain Mode, Persistence Layer & Testing Persistence Layer         | 4                  |
  |Sia Ham       |      Requirements Model, Domain Model, Build System & Persistence Layer        |           8        |
  |Thomas Jarvis|      Requirements Model, Domain Model, Build System, Persistence Layer & Bug fixing       | 8                |
- |Norman Kong |       Requirements Model, Domain Model, Documentation & Testing Persistence Layer        |                4  |
+ |Norman Kong |       Requirements Model, Domain Model, Documentation, Build System & Testing Persistence Layer        |                4  |
  |Catherine Van Gheluwe|  Requirements Model, Domain Model, Documentation, Build System, Persistence Layer & Bug fixing    |        8         |
  
 ## Sprint 2 
