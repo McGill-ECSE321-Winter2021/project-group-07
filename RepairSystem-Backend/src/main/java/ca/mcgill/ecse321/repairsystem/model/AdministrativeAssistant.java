@@ -21,6 +21,12 @@ public class AdministrativeAssistant extends Person
 	
 	
 
+	public AdministrativeAssistant() {
+		// TODO Auto-generated constructor stub
+	}
+
+
+
 	private int id;
 	@Id
 	public int getId()

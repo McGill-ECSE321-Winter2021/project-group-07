@@ -2,19 +2,28 @@ package ca.mcgill.ecse321.repairsystem.model;
 import java.util.*;
 import java.sql.Date;
 import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import javax.persistence.Id;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.aspectj.weaver.patterns.ThisOrTargetAnnotationPointcut;
+
 import javax.persistence.ManyToOne;
+
 
 
 @Entity
 public class TimeSlot{
 	private int timeSlotId;
+	
 	public void setTimeSlotId(int Id) {
 		this.timeSlotId = Id;
 	}
@@ -23,32 +32,34 @@ public class TimeSlot{
 		return this.timeSlotId;
 	}
 	
-	private Time startTime;
-	private Time endTime;
 
+	private LocalDateTime startTime;
+	private LocalDateTime endTime;
 
-	public TimeSlot(Time aStartTime, Time aEndTime, int Id){
+	public TimeSlot(LocalDateTime aStartTime, LocalDateTime aEndTime, int Id){
 		startTime = aStartTime;
 		endTime = aEndTime;
 		timeSlotId = Id;
 	}
 
+	public TimeSlot() {
+		
+	}
 
-
-	public void setStartTime(Time aStartTime){
+	public void setStartTime(LocalDateTime aStartTime){
 		this.startTime = aStartTime;
 	}
 
-	public void setEndTime(Time aEndTime)  {
+	public void setEndTime(LocalDateTime aEndTime)  {
 		this.endTime = aEndTime;
 	}
 
-	public Time getStartTime(){
-		return startTime;
+	public LocalDateTime getStartTime(){
+		return this.startTime;
 	}
 
-	public Time getEndTime(){
-		return endTime;
+	public LocalDateTime getEndTime(){
+		return this.endTime;
 	}
 
 	private List<Mechanic> mechanics;

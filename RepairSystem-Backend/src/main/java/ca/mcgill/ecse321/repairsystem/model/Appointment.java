@@ -25,6 +25,7 @@ public class Appointment
   public void setAppointmentId(int aId) {
 	  this.appointmentId = aId;
   }
+  
   private String note;
   
   public String getNote()

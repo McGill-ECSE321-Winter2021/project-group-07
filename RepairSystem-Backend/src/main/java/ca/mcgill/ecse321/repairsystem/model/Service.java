@@ -16,12 +16,13 @@ public class Service{
 	public enum ServiceType { CarRepair, OilChange, RegularCheckup, CarWash, TireChange, RoadsideAssistance, Towing, CarInspection, Other }
 
 	public Service(ServiceType aType, int aPrice){
-		type = aType;
-		price = aPrice;
+		this.type = aType;
+		this.price = aPrice;
 	}
-
-
-
+	
+	public Service() {
+		
+	}
 	private ServiceType type;
 	public void setType(ServiceType aType){
 		type = aType;
@@ -59,5 +60,6 @@ public class Service{
 	public void setMechanic(Mechanic mechanic){
 		this.mechanic=mechanic;
 	}
+	
 
 }

@@ -1,6 +1,7 @@
-package ca.mcgill.ecse321.eventregistration.dao;
+package ca.mcgill.ecse321.repairsystem.dao;
 
 import java.sql.Date;
+
 import java.sql.Time;
 import java.util.List;
 
@@ -12,8 +13,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import ca.mcgill.ecse321.repairsystem.model.*;
-
-//things to insert in the database
 
 @Repository
 public class RepairSystemRepository {
@@ -58,8 +57,6 @@ public class RepairSystemRepository {
 		Mechanic m = entityManager.find(Mechanic.class, aId);
 		return m;
 	}
-	
-	//create query later for testing
 	
 
 }

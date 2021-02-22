@@ -22,6 +22,10 @@ public class Mechanic extends Person{
 	{
 	  super(aName, id, aPassword, aPhone, aEmail, aRepairSystem);    
 	}
+	
+	public Mechanic() {
+		
+	}
 
 	
 	private int id;
@@ -50,8 +54,8 @@ public class Mechanic extends Person{
 	 this.workHours = workHours;
  }
   
-  
   private List<Service> capabilities;
+  
   @ManyToMany
   public List<Service> getCapabilities()
   {
@@ -67,8 +71,8 @@ public class Mechanic extends Person{
   @ManyToMany
   public List<Appointment> getAppointments()
   {
-    List<Appointment> newAppointments = Collections.unmodifiableList(appointments);
-    return newAppointments;
+  
+    return this.appointments;
   }
   
   public void setAppointments(List<Appointment> appointment) {
