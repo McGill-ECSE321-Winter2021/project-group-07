@@ -25,13 +25,18 @@ public abstract class Person{
 	private int phone;
 	private String email;
 	
-	public Person(String aName, int id,String aPassword, int aPhone, String aEmail, RepairSystem aRepairSystem){
+	@Temporal(TemporalType.DATE)
+	private Calendar lastActive;
+	
+	public Person(String aName, int id,String aPassword, int aPhone, String aEmail, Calendar lastActive, RepairSystem aRepairSystem)
+	{
 		name = aName;
 		password = aPassword;
 		userId = id;
 		phone = aPhone;
 		email = aEmail;
 		repairSystem = aRepairSystem;
+		lastActive = lastActive;
 	}
 	
 	public Person() {
@@ -92,6 +97,15 @@ public abstract class Person{
 	{
 		email = aEmail;
 	}
-
+	
+	public Calendar getLastActive()
+	{
+		return lastActive;
+	}
+	
+	public void setLastActive(Calendar lastActive)
+	{
+		lastActive = lastActive;
+	}
 
 }
