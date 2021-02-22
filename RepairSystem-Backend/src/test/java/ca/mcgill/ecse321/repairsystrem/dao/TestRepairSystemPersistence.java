@@ -1,14 +1,9 @@
 package ca.mcgill.ecse321.repairsystrem.dao;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import java.sql.Date;
-import java.sql.Time;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.Month;
+import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -20,6 +15,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import ca.mcgill.ecse321.repairsystem.RepairSystemApplication;
 import ca.mcgill.ecse321.repairsystem.dao.*;
 import ca.mcgill.ecse321.repairsystem.model.*;
+import ca.mcgill.ecse321.repairsystem.model.Service.ServiceType;
 
 @ExtendWith(SpringExtension.class)
 
@@ -171,10 +167,13 @@ public class TestRepairSystemPersistence {
 		Service service = new Service();
 		int price = 701;
 		service.setPrice(price);
+		ServiceType serviceType = ServiceType.OilChange;
+		service.setType(serviceType);
+		service.setMechanic(mechanic);
+		serviceRepository.save(service);
 		
 		service = null;
 		service = serviceRepository.findByMechanic(mechanic);
-		
 		assertNotNull(service);
 		assertEquals(price, service.getPrice());
 	}
@@ -184,13 +183,12 @@ public class TestRepairSystemPersistence {
 		TimeSlot timeSlot = new TimeSlot();
 		int timeSlotId = 800;
 		timeSlot.setTimeSlotId(timeSlotId);
+		LocalDateTime start = LocalDateTime.now();
+		timeSlot.setStartTime(start);
 		timeSlotRepository.save(timeSlot);
 		
-		Time time = new Time(1);
-		timeSlot.setStartTime(time);
-		
 		timeSlot = null;
-		timeSlot = timeSlotRepository.findByStartTime(time);
+		timeSlot = timeSlotRepository.findByStartTime(start);
 		
 		assertNotNull(timeSlot);
 		assertEquals(timeSlotId, timeSlot.getTimeSlotId());
