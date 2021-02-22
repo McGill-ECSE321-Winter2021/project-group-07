@@ -13,9 +13,10 @@ import javax.persistence.Entity;
 public class Customer extends Person
 {
   
-  public Customer(String aName,  int id, String aPassword, int aPhone, String aEmail, RepairSystem aRepairSystem) {
-		super(aName, id, aPassword, aPhone, aEmail, aRepairSystem);
-	}
+  public Customer(String aName,  int id, String aPassword, int aPhone, String aEmail, Calendar lastActive, RepairSystem aRepairSystem)
+  {
+		super(aName, id, aPassword, aPhone, aEmail, lastActive, aRepairSystem);
+  }
   
   public Customer() {
 	  
