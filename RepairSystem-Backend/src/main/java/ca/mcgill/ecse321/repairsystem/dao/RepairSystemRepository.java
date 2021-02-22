@@ -1,13 +1,7 @@
 package ca.mcgill.ecse321.repairsystem.dao;
 
-import java.sql.Date;
-
-import java.sql.Time;
-import java.util.List;
-
+import java.util.Calendar;
 import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,22 +15,22 @@ public class RepairSystemRepository {
 	EntityManager entityManager;
 
 	@Transactional
-	public Customer createCustomer(String name, int id, String aPassword, int aPhone, String aEmail, RepairSystem aRepairSystem, String aCreditHash, String aDebitHash, String aAddress) {
-		Customer c = new Customer(name, id, aPassword, aPhone, aEmail, aRepairSystem);
+	public Customer createCustomer(String name, int id, String aPassword, int aPhone, String aEmail, Calendar lastActive, RepairSystem aRepairSystem, String aCreditHash, String aDebitHash, String aAddress) {
+		Customer c = new Customer(name, id, aPassword, aPhone, aEmail, lastActive, aRepairSystem);
 		entityManager.persist(c);
 		return c;
 	}
 	
 	@Transactional
-	public AdministrativeAssistant createAdministrativeAssistant(String aName, int id, String aPassword, int aPhone, String aEmail, RepairSystem aRepairSystem) {
-		AdministrativeAssistant a = new AdministrativeAssistant(aName, id,aPassword, aPhone, aEmail, aRepairSystem);
+	public AdministrativeAssistant createAdministrativeAssistant(String aName, int id, String aPassword, int aPhone, String aEmail,Calendar lastActive, RepairSystem aRepairSystem) {
+		AdministrativeAssistant a = new AdministrativeAssistant(aName, id,aPassword, aPhone, aEmail, lastActive, aRepairSystem);
 		entityManager.persist(a);
 		return a;
 	}
 	
 	@Transactional
-	public Mechanic createMechanic(String aName, int id, String aPassword, int aPhone, String aEmail, RepairSystem aRepairSystem, Service... allCapabilities) {
-		Mechanic m = new Mechanic(aName,id, aPassword, aPhone, aEmail, aRepairSystem, allCapabilities);
+	public Mechanic createMechanic(String aName, int id, String aPassword, int aPhone, String aEmail, Calendar lastActive, RepairSystem aRepairSystem, Service... allCapabilities) {
+		Mechanic m = new Mechanic(aName,id, aPassword, aPhone, aEmail, lastActive, aRepairSystem, allCapabilities);
 		return m;
 	}
 

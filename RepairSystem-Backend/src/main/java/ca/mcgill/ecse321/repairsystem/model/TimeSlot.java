@@ -1,8 +1,5 @@
 package ca.mcgill.ecse321.repairsystem.model;
 import java.util.*;
-import java.sql.Date;
-import java.sql.Time;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.persistence.Id;
@@ -10,12 +7,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
-import org.aspectj.weaver.patterns.ThisOrTargetAnnotationPointcut;
-
 import javax.persistence.ManyToOne;
 
 

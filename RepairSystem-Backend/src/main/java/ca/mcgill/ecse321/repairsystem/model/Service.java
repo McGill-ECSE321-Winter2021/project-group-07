@@ -1,13 +1,6 @@
 package ca.mcgill.ecse321.repairsystem.model;
-import java.util.*;
-import java.sql.Date;
-import java.sql.Time;
 import javax.persistence.Id;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.ManyToOne;
 
 @Entity
