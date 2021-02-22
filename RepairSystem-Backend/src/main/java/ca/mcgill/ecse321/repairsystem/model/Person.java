@@ -4,8 +4,10 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Entity;
+
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
 
 
 @Entity
@@ -99,7 +101,7 @@ public abstract class Person{
 	
 	public void setLastActive(Calendar lastActive)
 	{
-		lastActive = lastActive;
+		this.lastActive = lastActive;
 	}
 
 }
