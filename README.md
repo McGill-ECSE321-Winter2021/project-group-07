@@ -20,7 +20,7 @@ have access and book a variety of services (towing, oil change, tire changes, re
   ### Member Roles & Time Spent
  | Team Member | Roles / Tasks | Time Spent (Hours)|
  | ------------|---------------| ------------------|
- |Annabelle Dion|     Requirements Model, Domain Mode, Persistence Layer & Testing Persistence Layer         | 4                  |
+ |Annabelle Dion|     Requirements Model, Domain Mode, Persistence Layer & Testing Persistence Layer         | 10                  |
  |Sia Ham       |      Requirements Model, Domain Model, Build System & Persistence Layer        |           13        |
  |Thomas Jarvis|      Requirements Model, Domain Model, Build System, Persistence Layer & Bug fixing       | 8                |
  |Norman Kong |       Requirements Model, Domain Model, Documentation, Build System & Testing Persistence Layer        |                4  |
