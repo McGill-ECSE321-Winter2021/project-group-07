@@ -49,7 +49,7 @@ sourceSets {
   }
 }
 
-mainClassName='application.RepairSystemApplication'
+mainClassName='ca.mcgill.ecse321.repairsystem.RepairSystemApplication'
 
 
 jar {
