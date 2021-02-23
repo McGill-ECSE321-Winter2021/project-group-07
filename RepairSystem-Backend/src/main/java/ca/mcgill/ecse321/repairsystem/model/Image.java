@@ -36,5 +36,15 @@ public class Image
 	  this.imageID = aId;
   }
   
+  private String url;
+  
+  public String getUrl() {
+	  return this.url;
+  }
+  
+  public void setUrl(String newUrl) {
+	  this.url = newUrl;
+  }
+  
   
 }

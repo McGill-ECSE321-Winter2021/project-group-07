@@ -21,9 +21,6 @@ public abstract class Person{
 	private int phone;
 	private String email;
 	
-	@Temporal(TemporalType.DATE)
-	private Calendar lastActive;
-	
 	public Person(String aName, int id,String aPassword, int aPhone, String aEmail, RepairSystem aRepairSystem)
 	{
 		name = aName;

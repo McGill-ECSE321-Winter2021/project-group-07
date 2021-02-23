@@ -10,7 +10,7 @@ import javax.persistence.Entity;
 public class Car
 {
 
-  public enum CarType { Sedan, Coupe, Sports, Hatchback, MiniVan, StationWagon, Convertible, Truck, SUV, Other }
+  public enum CarType { Sedan, Coupe, Sports, Hatchback, Minivan, StationWagon, Convertible, Truck, SUV, Other }
 
   private int CarId;
   
