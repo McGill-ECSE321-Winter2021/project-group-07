@@ -22,15 +22,15 @@ public class RepairSystemRepository {
 	}
 	
 	@Transactional
-	public AdministrativeAssistant createAdministrativeAssistant(String aName, int id, String aPassword, int aPhone, String aEmail,Calendar lastActive, RepairSystem aRepairSystem) {
-		AdministrativeAssistant a = new AdministrativeAssistant(aName, id,aPassword, aPhone, aEmail, lastActive, aRepairSystem);
+	public AdministrativeAssistant createAdministrativeAssistant(String aName, int id, String aPassword, int aPhone, String aEmail, RepairSystem aRepairSystem) {
+		AdministrativeAssistant a = new AdministrativeAssistant(aName, id,aPassword, aPhone, aEmail, aRepairSystem);
 		entityManager.persist(a);
 		return a;
 	}
 	
 	@Transactional
-	public Mechanic createMechanic(String aName, int id, String aPassword, int aPhone, String aEmail, Calendar lastActive, RepairSystem aRepairSystem, Service... allCapabilities) {
-		Mechanic m = new Mechanic(aName,id, aPassword, aPhone, aEmail, lastActive, aRepairSystem, allCapabilities);
+	public Mechanic createMechanic(String aName, int id, String aPassword, int aPhone, String aEmail, RepairSystem aRepairSystem, Service... allCapabilities) {
+		Mechanic m = new Mechanic(aName,id, aPassword, aPhone, aEmail, aRepairSystem, allCapabilities);
 		return m;
 	}
 

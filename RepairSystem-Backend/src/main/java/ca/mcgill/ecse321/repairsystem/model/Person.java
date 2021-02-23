@@ -24,7 +24,7 @@ public abstract class Person{
 	@Temporal(TemporalType.DATE)
 	private Calendar lastActive;
 	
-	public Person(String aName, int id,String aPassword, int aPhone, String aEmail, Calendar lastActiveDate, RepairSystem aRepairSystem)
+	public Person(String aName, int id,String aPassword, int aPhone, String aEmail, RepairSystem aRepairSystem)
 	{
 		name = aName;
 		password = aPassword;
@@ -32,7 +32,6 @@ public abstract class Person{
 		phone = aPhone;
 		email = aEmail;
 		repairSystem = aRepairSystem;
-		lastActive = lastActiveDate;
 	}
 	
 	public Person() {
@@ -94,14 +93,6 @@ public abstract class Person{
 		email = aEmail;
 	}
 	
-	public Calendar getLastActive()
-	{
-		return lastActive;
-	}
-	
-	public void setLastActive(Calendar lastActive)
-	{
-		this.lastActive = lastActive;
-	}
+
 
 }

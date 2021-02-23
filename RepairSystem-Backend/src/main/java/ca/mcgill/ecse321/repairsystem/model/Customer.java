@@ -9,15 +9,15 @@ import javax.persistence.Entity;
 @Entity
 public class Customer extends Person
 {
-  
-  public Customer(String aName,  int id, String aPassword, int aPhone, String aEmail, Calendar lastActive, RepairSystem aRepairSystem)
-  {
-		super(aName, id, aPassword, aPhone, aEmail, lastActive, aRepairSystem);
-  }
-  
-  public Customer() {
-	  
-  }
+
+	public Customer(String aName,  int id, String aPassword, int aPhone, String aEmail, Calendar lastActive, RepairSystem aRepairSystem)
+	{
+		super(aName, id, aPassword, aPhone, aEmail, aRepairSystem);
+	}
+
+	public Customer() {
+
+	}
 
 	private int id;
 	@Id
@@ -33,79 +33,80 @@ public class Customer extends Person
 	}
 
 	private String creditHash;
-  
+
 	public String getCreditHash() {
 		return creditHash;
 	}
 
-  public void setCreditHash(String aCreditHash)
-  {
-    creditHash = aCreditHash;
-  }
-  
-  private String debitHash;
-  
-  public String getDebitHash() {
-    return debitHash;
-  }
+	public void setCreditHash(String aCreditHash)
+	{
+		creditHash = aCreditHash;
+	}
 
-  public void setDebitHash(String aDebitHash)
-  {
-    debitHash = aDebitHash;
-  }
-  
-  private String address;
-  
-  public String getAddress(){
-    return address;
-  }
+	private String debitHash;
 
-  public void setAddress(String aAddress)
-  {
-    address = aAddress;
-  }
-  
-  private List<Appointment> appointments;
- 
-  @OneToMany(cascade={CascadeType.ALL})
-  public List<Appointment> getAppointments()
-  {
-    return appointments;
-  }
-  
-  public void setAppointments(List<Appointment> appointmentList) {
-    appointments = appointmentList;
-  }
-  
+	public String getDebitHash() {
+		return debitHash;
+	}
 
-  private List<Car> cars;
-  
-  @OneToMany(cascade={CascadeType.ALL})
-  public List<Car> getCars()
-  {
-    return cars;
-  }
-  
-  public void setCars(List<Car> carList){
-    cars = carList;
-  }
-  
-  public void addCar(Car car) {
-	  if(this.cars == null) {
-		  
-	  }
-  }
-  
-  private Date lastActive;
-  
-  public Date getDate() {
-	  return this.lastActive;
-  }
-  
-  public void setDate (Date date) {
-	  this.lastActive = date;
-  }
-  
-  
-  
+	public void setDebitHash(String aDebitHash)
+	{
+		debitHash = aDebitHash;
+	}
+
+	private String address;
+
+	public String getAddress(){
+		return address;
+	}
+
+	public void setAddress(String aAddress)
+	{
+		address = aAddress;
+	}
+
+	private List<Appointment> appointments;
+
+	@OneToMany(cascade={CascadeType.ALL})
+	public List<Appointment> getAppointments()
+	{
+		return appointments;
+	}
+
+	public void setAppointments(List<Appointment> appointmentList) {
+		appointments = appointmentList;
+	}
+
+
+	private List<Car> cars;
+
+	@OneToMany(cascade={CascadeType.ALL})
+	public List<Car> getCars()
+	{
+		return cars;
+	}
+
+	public void setCars(List<Car> carList){
+		cars = carList;
+	}
+
+	public void addCar(Car car) {
+		if(this.cars == null) {
+
+		}
+	}
+
+
+	private Calendar lastActive;
+
+	public Calendar getLastActive()
+	{
+		return lastActive;
+	}
+
+	public void setLastActive(Calendar lastActive)
+	{
+		this.lastActive = lastActive;
+	}
+
 }
