@@ -15,7 +15,7 @@ have access and book a variety of services (towing, oil change, tire changes, re
  ### Documentation
  - [Requirement Model](https://github.com/McGill-ECSE321-Winter2021/project-group-07/wiki/Requirements-Model-(requirements-&-use-case))
  - [Domain Model](https://github.com/McGill-ECSE321-Winter2021/project-group-07/wiki/Domain-Model-Iterations)
- - [Project Report](https://github.com/McGill-ECSE321-Winter2021/project-group-07/wiki/Project-Report-(-Sprint-1))
+ - [Project Report](https://github.com/McGill-ECSE321-Winter2021/project-group-07/wiki/Project-Report-(Sprint-1))
 
   ### Member Roles & Time Spent
  | Team Member | Roles / Tasks | Time Spent (Hours)|
