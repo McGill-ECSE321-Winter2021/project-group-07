@@ -29,7 +29,6 @@ public abstract class Person{
 		phone = aPhone;
 		email = aEmail;
 		repairSystem = aRepairSystem;
-		this.lastActive = lastActive;
 	}
 	
 	public Person() {
@@ -89,17 +88,6 @@ public abstract class Person{
 	public void setEmail(String aEmail)
 	{
 		email = aEmail;
-	}
-	
-
-	public Calendar getLastActive()
-	{
-		return lastActive;
-	}
-
-	public void setLastActive(Calendar lastActive)
-	{
-		this.lastActive = lastActive;
 	}
 
 }

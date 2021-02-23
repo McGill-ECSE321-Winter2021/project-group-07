@@ -9,9 +9,9 @@ import javax.persistence.ManyToMany;
 public class Mechanic extends Person{
 
 
-	public Mechanic(String aName, int id, String aPassword, int aPhone, String aEmail, Calendar lastActive, RepairSystem aRepairSystem, Service... allCapabilities)
+	public Mechanic(String aName, int id, String aPassword, int aPhone, String aEmail, RepairSystem aRepairSystem, Service... allCapabilities)
 	{
-	  super(aName, id, aPassword, aPhone, aEmail, lastActive, aRepairSystem);    
+	  super(aName, id, aPassword, aPhone, aEmail, aRepairSystem);    
 	}
 	
 	public Mechanic() {
