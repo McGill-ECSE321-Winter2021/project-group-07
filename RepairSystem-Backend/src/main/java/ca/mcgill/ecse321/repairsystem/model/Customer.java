@@ -9,10 +9,9 @@ import javax.persistence.Entity;
 @Entity
 public class Customer extends Person
 {
-
 	public Customer(String aName,  int id, String aPassword, int aPhone, String aEmail, Calendar lastActive, RepairSystem aRepairSystem)
 	{
-		super(aName, id, aPassword, aPhone, aEmail, aRepairSystem);
+		super(aName, id, aPassword, aPhone, aEmail, lastActive, aRepairSystem);
 	}
 
 	public Customer() {
@@ -94,19 +93,6 @@ public class Customer extends Person
 		if(this.cars == null) {
 
 		}
-	}
-
-
-	private Calendar lastActive;
-
-	public Calendar getLastActive()
-	{
-		return lastActive;
-	}
-
-	public void setLastActive(Calendar lastActive)
-	{
-		this.lastActive = lastActive;
 	}
 
 }
