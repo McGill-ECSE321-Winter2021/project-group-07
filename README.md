@@ -11,7 +11,7 @@ have access and book a variety of services (towing, oil change, tire changes, re
 - Norman Kong
 - Catherine Van Gheluwe 
 
-## Sprint 1 ( Due Sunday, February 21st)
+## Sprint 1 (Due Monday, February 22nd)
  ### Documentation
  - [Requirement Model](https://github.com/McGill-ECSE321-Winter2021/project-group-07/wiki/Requirements-Model-(requirements-&-use-case))
  - [Domain Model](https://github.com/McGill-ECSE321-Winter2021/project-group-07/wiki/Domain-Model-Iterations)
@@ -26,7 +26,7 @@ have access and book a variety of services (towing, oil change, tire changes, re
  |Norman Kong |       Requirements Model, Domain Model, Documentation, Build System & Testing Persistence Layer        |                10  |
  |Catherine Van Gheluwe|  Requirements Model, Domain Model, Documentation, Build System, Persistence Layer & Bug fixing    |      17       |
  
-## Sprint 2 
+## Sprint 2 (Due Friday, March 12th)
 
   ### Member Roles & Time Spent
  | Team Member | Roles / Tasks | Time Spent (Hours)|
