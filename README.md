@@ -29,7 +29,7 @@ have access and book a variety of services (towing, oil change, tire changes, re
 ## Sprint 2 (Due Friday, March 12th)
  ### Documentation
  - [RESTful service endpoints]()
- - [Project Report]()
+ - [Project Report](https://github.com/McGill-ECSE321-Winter2021/project-group-07/wiki/Project-Report-(Sprint-2))
 
 
   ### Member Roles & Time Spent
