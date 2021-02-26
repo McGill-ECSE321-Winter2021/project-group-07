@@ -26,7 +26,7 @@ have access and book a variety of services (towing, oil change, tire changes, re
  |Norman Kong |       Requirements Model, Domain Model, Documentation, Build System & Testing Persistence Layer        |                10  |
  |Catherine Van Gheluwe|  Requirements Model, Domain Model, Documentation, Build System, Persistence Layer & Bug fixing    |      17       |
  
-## Sprint 2 (Due Friday, March 12th)
+## Sprint 2 (Due Tuesday, March 16th)
  ### Documentation
  - [RESTful Service Endpoints](https://github.com/McGill-ECSE321-Winter2021/project-group-07/wiki/RESTful-Service-Endpoints)
  - [Project Report #2](https://github.com/McGill-ECSE321-Winter2021/project-group-07/wiki/Project-Report-(Sprint-2))
