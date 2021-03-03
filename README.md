@@ -28,10 +28,9 @@ have access and book a variety of services (towing, oil change, tire changes, re
  
 ## Sprint 2 (Due Tuesday, March 16th)
  ### Documentation
- - [RESTful Service Endpoints](https://github.com/McGill-ECSE321-Winter2021/project-group-07/wiki/RESTful-Service-Endpoints)
- - [Project Report #2](https://github.com/McGill-ECSE321-Winter2021/project-group-07/wiki/Project-Report-(Sprint-2))
-
-
+* [RESTful Service Endpoints](https://github.com/McGill-ECSE321-Winter2021/project-group-07/wiki/RESTful-Service-Endpoints)
+* [Software Quality Assurance Plan and Report](https://github.com/McGill-ECSE321-Winter2021/project-group-07/wiki/Software-Quality-Assurance-Plan-and-Report)
+* [Project Report #2](https://github.com/McGill-ECSE321-Winter2021/project-group-07/wiki/Project-Report-(Sprint-2))
 
   ### Member Roles & Time Spent
  | Team Member | Roles / Tasks | Time Spent (Hours)|
