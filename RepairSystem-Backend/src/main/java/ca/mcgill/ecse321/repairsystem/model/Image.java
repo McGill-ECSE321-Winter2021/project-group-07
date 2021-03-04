@@ -28,11 +28,11 @@ public class Image
   private int imageID;
   
   @Id
-  public int getImageId() {
+  public int getId() {
 	  return this.imageID;
   }
   
-  public void setImageId(int aId) {
+  public void setId(int aId) {
 	  this.imageID = aId;
   }
   

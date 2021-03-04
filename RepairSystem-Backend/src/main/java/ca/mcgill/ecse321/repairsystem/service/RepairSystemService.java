@@ -110,6 +110,54 @@ public class RepairSystemService {
 		return appointmentsByCustomer;
 	}
 	
+	@Transactional
+	public Car createCar(int id) {
+		Car c = new Car();
+		c.setId(id);
+		carRepository.save(c);
+		return c;
+	}
+	
+	@Transactional Car getCarById(int id) {
+		Car c = carRepository.findById(id);
+		return c;
+	}
+	
+	@Transactional
+	public Car getCarByAppointment(Appointment a) {
+		return carRepository.findByAppointment(a);
+	}
+	
+	@Transactional
+	public List<Car> getCarsByCustomer(Customer customer) {
+		return carRepository.findCarsByCustomer(customer);
+	}
+	
+	@Transactional
+	public List<Car> getAllCars() {
+		return toList(carRepository.findAll());
+	}
+	
+	@Transactional
+	public Image createImage(int id) {
+		Image i = new Image();
+		i.setId(id);
+		imageRepository.save(i);
+		return i;
+	}
+	
+	@Transactional List<Image> getImagesByAppointment(Appointment a) {
+		List<Image> i = imageRepository.findImagesByAppointment(a);
+		return i;
+	}
+	
+	@Transactional
+	public List<Image> getAllImages() {
+		return toList(imageRepository.findAll());
+	}
+	
+	
+	
 	/* 
 	 * helper method
 	 */

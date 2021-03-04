@@ -15,11 +15,11 @@ public class Car
   private int CarId;
   
   @Id
-  public int getCarId() {
+  public int getId() {
 	  return this.CarId;
   }
   
-  public void setCarId(int aId) {
+  public void setId(int aId) {
 	  this.CarId = aId;
   }
    
