@@ -9,6 +9,6 @@ import java.util.*;
 
 public interface ImageRepository extends CrudRepository<Image, String>{
 
-	List<Image> findImagesByAppointment(Appointment appointment);
+	List<Image> findByAppointment(Appointment appointment);
 	
 }

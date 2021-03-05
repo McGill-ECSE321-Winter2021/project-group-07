@@ -33,28 +33,28 @@ public class Mechanic extends Person{
 	}
 
   //Mechanic Associations
-  private List<TimeSlot> workHours;
+  private List<TimeSlot> timeSlots;
   
   @ManyToMany
-  public List<TimeSlot> getWorkHours()
+  public List<TimeSlot> getTimeSlots()
   {
-    return this.workHours;
+    return this.timeSlots;
   }
 
- public void setWorkHours(List<TimeSlot> workHours) {
-	 this.workHours = workHours;
+ public void setTimeSlots(List<TimeSlot> workHours) {
+	 this.timeSlots = workHours;
  }
   
-  private List<Service> capabilities;
+  private List<Service> services;
   
   @ManyToMany
-  public List<Service> getCapabilities()
+  public List<Service> getServices()
   {
-	  return this.capabilities;
+	  return this.services;
   }
 
-  public void setCapabilities(List<Service> service) {
-	  this.capabilities = service;
+  public void setServices(List<Service> service) {
+	  this.services = service;
   }
   
   private List<Appointment> appointments;

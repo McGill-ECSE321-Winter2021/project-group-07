@@ -11,16 +11,16 @@ import javax.persistence.ManyToOne;
 public class Appointment
 {
 
-  public Appointment(Customer customer, int id, Timeslot time, List<Mechanic> mechanics, Car car, List<Image> image, List<Service> services, String note, AppointmentStatus status) {
+  public Appointment(Customer customer, int id, TimeSlot time, List<Mechanic> mechanics, Car car, List<Image> image, List<Service> services, String note, AppointmentStatus status) {
 	  this.customer = customer;
-	  this.appointmentId = id;
+	  this.Id = id;
 	  this.status = status;
 	  this.note = note;
-	  appointmentTime = time;
+	  this.timeSlot = time;
 	  this.mechanics = mechanics;
 	  this.customer = customer;
 	  this.images = images;
-	  requiredServices = services;
+	  this.services = services;
 	  this.car = car;
   }
   
@@ -29,15 +29,15 @@ public class Appointment
   
   public enum AppointmentStatus { CarReceived, InRepair, Completed };
 
-  private int appointmentId;
+  private int Id;
   
   @Id
-  public int getAppointmentId() {
-	  return this.appointmentId;
+  public int getId() {
+	  return this.Id;
   }
   
-  public void setAppointmentId(int aId) {
-	  this.appointmentId = aId;
+  public void setId(int aId) {
+	  this.Id = aId;
   }
   
   private String note;
@@ -64,16 +64,16 @@ public class Appointment
     status = aStatus;
   }
 
-  private TimeSlot appointmentTime;
+  private TimeSlot timeSlot;
   
   @ManyToOne
-  public TimeSlot getAppointmentTime()
+  public TimeSlot getTimeSlot()
   {
-    return appointmentTime;
+    return timeSlot;
   }
   
-  public void setAppointmentTime(TimeSlot appTime){
-    appointmentTime = appTime;
+  public void setTimeSlot(TimeSlot appTime){
+	  timeSlot = appTime;
   }
   
   private List<Mechanic> mechanics;
@@ -99,15 +99,15 @@ public class Appointment
     customer = c;
   }
   
-  private List<Service> requiredServices;
+  private List<Service> services;
   
   @ManyToMany()
-  public List<Service> getRequiredServices() {
-    return requiredServices;
+  public List<Service> getServices() {
+    return services;
   }
   
-  public void setRequiredServices(List<Service> serviceList){
-    requiredServices = serviceList;
+  public void setServices(List<Service> serviceList){
+    services = serviceList;
   }
   
   private List<Image> images;

@@ -1,6 +1,6 @@
 package ca.mcgill.ecse321.repairsystem.dao;
 
-import java.util.Calendar;
+import java.util.*;
 import javax.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -29,7 +29,7 @@ public class RepairSystemRepository {
 	}
 	
 	@Transactional
-	public Mechanic createMechanic(String aName, int id, String aPassword, int aPhone, String aEmail, Calendar lastActive, RepairSystem aRepairSystem, Service... allCapabilities) {
+	public Mechanic createMechanic(String aName, int id, String aPassword, int aPhone, String aEmail, RepairSystem aRepairSystem, List<Service> allCapabilities) {
 		Mechanic m = new Mechanic(aName,id, aPassword, aPhone, aEmail, aRepairSystem, allCapabilities);
 		return m;
 	}

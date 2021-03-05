@@ -1,9 +1,7 @@
 package ca.mcgill.ecse321.repairsystem.service;
 
-import java.sql.Date;
-import java.sql.Time;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDateTime;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ca.mcgill.ecse321.repairsystem.dao.*;
 import ca.mcgill.ecse321.repairsystem.model.*;
+import ca.mcgill.ecse321.repairsystem.model.Appointment.AppointmentStatus;
+import ca.mcgill.ecse321.repairsystem.model.Car.CarType;
+import ca.mcgill.ecse321.repairsystem.model.Service.ServiceType;
 
 @Service
 public class RepairSystemService {
@@ -43,25 +44,25 @@ public class RepairSystemService {
 	
 	@Transactional 
 	public AdministrativeAssistant getAdminById(int id) {
-		AdministrativeAssistant admin = administrativeAssistantRepository.findAdministrativeAssistantById(id);
+		AdministrativeAssistant admin = administrativeAssistantRepository.findById(id);
 		return admin;
 	}
 	
 	@Transactional 
 	public List<AdministrativeAssistant> getAdminsByName(String name) {
-		List<AdministrativeAssistant> admins = toList(administrativeAssistantRepository.findAdministrativeAssistantsByName(name));
-		return admin;
+		List<AdministrativeAssistant> admins = toList(administrativeAssistantRepository.findByName(name));
+		return admins;
 	}
 	
 	@Transactional 
 	public AdministrativeAssistant getAdminByNumber(int number) {
-		AdministrativeAssistant admin = administrativeAssistantRepository.findAdministrativeAssistantByNumber(number);
+		AdministrativeAssistant admin = administrativeAssistantRepository.findByPhone(number);
 		return admin;
 	}
 	
 	@Transactional 
 	public AdministrativeAssistant getAdminByEmail(String email) {
-		AdministrativeAssistant admin = administrativeAssistantRepository.findAdministrativeAssistantByEmail(email);
+		AdministrativeAssistant admin = administrativeAssistantRepository.findByEmail(email);
 		return admin;
 	}
 	
@@ -73,7 +74,7 @@ public class RepairSystemService {
 	////////////////////SERVICE MECHANIC METHODS //////////////////// 
 	
 	@Transactional
-	public Mechanic createMechanic(String aName, String aPassword, int aPhone, String aEmail, RepairSystem aRepairSystem, List<Service> allCapabilities) {
+	public Mechanic createMechanic(String aName, String aPassword, int aPhone, String aEmail, RepairSystem aRepairSystem, List<ca.mcgill.ecse321.repairsystem.model.Service> allCapabilities) {
 		int id = aName.hashCode() * aPassword.hashCode();
 		Mechanic mechanic = new Mechanic(aName, id, aPassword, aPhone, aEmail, aRepairSystem, allCapabilities);
 		mechanicRepository.save(mechanic);
@@ -82,45 +83,27 @@ public class RepairSystemService {
 	
 	@Transactional 
 	public Mechanic getMechanicById(int id) {
-		Mechanic mechanic = mechanicRepository.findMechanicById(id);
+		Mechanic mechanic = mechanicRepository.findById(id);
 		return mechanic;
 	}
 	
 	@Transactional 
 	public List<Mechanic> getMechanicsByName(String name) {
-		List<Mechanic> mechanics = toList(MechanicRepository.findMechanicsByName(name));
+		List<Mechanic> mechanics = toList(mechanicRepository.findByName(name));
 		return mechanics;
 	}
 	
 	@Transactional 
 	public Mechanic getMechanicByNumber(int aPhone) {
-		Mechanic mechanic = MechanicRepository.findMechanicByNumber(aPhone);
+		Mechanic mechanic = mechanicRepository.findByPhone(aPhone);
 		return mechanic;
 	}
 	
 	
 	@Transactional 
 	public Mechanic getMechanicByEmail(String email) {
-		Mechanic mechanic = MechanicRepository.findMechanicByEmail(email);
+		Mechanic mechanic = mechanicRepository.findByEmail(email);
 		return mechanic;
-	}
-	
-	@Transactional 
-	public List<Mechanic> getMechanicByService(Service service) {
-		List<Mechanic> mechanics = toList(MechanicRepository.findMechanicsByService(service));
-		return mechanics;
-	}
-	
-	@Transactional 
-	public List<Mechanic> getMechanicByAppointment(Appointment appointment) {
-		List<Mechanic> mechanics = toList(MechanicRepository.findMechanicsByAppointment(appointment));
-		return mechanics;
-	}
-	
-	@Transactional 
-	public List<Mechanic> getMechanicByTimeSlot(TimeSlot timeslot) {
-		List<Mechanic> mechanics = toList(MechanicRepository.findMechanicsByTimeSlot(timeslot));
-		return mechanics;
 	}
 	
 	@Transactional
@@ -140,44 +123,32 @@ public class RepairSystemService {
 	
 	@Transactional 
 	public Customer getCustomerById(int id) {
-		Customer customer = customerRepository.findCustomerById(id);
+		Customer customer = customerRepository.findById(id);
 		return customer;
 	}
 	
 	@Transactional 
 	public List<Customer> getCustomersByName(String name) {
-		List<Customer> customers = toList(customerRepository.findCustomersByName(name));
+		List<Customer> customers = toList(customerRepository.findByName(name));
 		return customers;
 	}
 	
 	@Transactional 
 	public Customer getCustomerByNumber(int number) {
-		Customer customer = customerRepository.findCustomerByNumber(number);
+		Customer customer = customerRepository.findByPhone(number);
 		return customer;
 	}
 	
 	@Transactional 
 	public Customer getCustomerByEmail(String email) {
-		Customer customer = customerRepository.findCustomerByEmail(email);
+		Customer customer = customerRepository.findByEmail(email);
 		return customer;
 	}
 	
 	@Transactional 
-	public Customer getCustomerByAddress(String address) {
-		List<Customer> customers = toList(customerRepository.findCustomersByAddress(address));
+	public List<Customer> getCustomersByAddress(String address) {
+		List<Customer> customers = toList(customerRepository.findByAddress(address));
 		return customers;
-	}
-	
-	@Transactional 
-	public Customer getCustomerByAppointment(Appointment app) {
-		Customer customer = customerRepository.findCustomerByAppointment(app);
-		return customer;
-	}
-	
-	@Transactional 
-	public Customer getCustomerByCar(Car car) {
-		Customer customer = customerRepository.findCustomerByCar(car);
-		return customer;
 	}
 	
 	@Transactional
@@ -188,8 +159,8 @@ public class RepairSystemService {
 	////////////////////SERVICE APPOINTMENT METHODS //////////////////// 
 	
 	@Transactional 
-	public Appointment createApp(Customer customer, Timeslot time, List<Mechanic> mechanics, Car car, List<Image> image, List<Service> services, String note, AppointmentStatus status) {
-		int id = customer.getId().hashCode() * time.getId().hashCode();
+	public Appointment createApp(Customer customer, TimeSlot time, List<Mechanic> mechanics, Car car, List<Image> images, List<ca.mcgill.ecse321.repairsystem.model.Service> services, String note, AppointmentStatus status) {
+		int id = customer.hashCode() * time.hashCode();
 		Appointment app = new Appointment(customer, id, time, mechanics, car, images, services, note, status);
 		appointmentRepository.save(app);
 		return app;
@@ -197,43 +168,31 @@ public class RepairSystemService {
 	
 	@Transactional
 	public List<Appointment> getAppointmentsByCustomer(Customer customer) {
-		List<Appointment> appointments = toList(appointmentRepository.getAppointmentsByCustomer(customer));
+		List<Appointment> appointments = toList(appointmentRepository.findByCustomer(customer));
 		return appointments;
 	}
 	
 	@Transactional
 	public List<Appointment> getAppointmentsByCar(Car car) {
-		List<Appointment> appointments = toList(appointmentRepository.getAppointmentsByCar(car));
+		List<Appointment> appointments = toList(appointmentRepository.findByCar(car));
 		return appointments;
 	}
 	
 	@Transactional
 	public List<Appointment> getAppointmentsByStatus(AppointmentStatus status) {
-		List<Appointment> appointments = toList(appointmentRepository.getAppointmentsByStatus(status));
-		return appointments;
-	}
-	
-	@Transactional
-	public List<Appointment> getAppointmentsByService(Service service) {
-		List<Appointment> appointments = toList(appointmentRepository.getAppointmentsByService(service));
+		List<Appointment> appointments = toList(appointmentRepository.findByStatus(status));
 		return appointments;
 	}
 	
 	@Transactional
 	public List<Appointment> getAppointmentsByTimeSlot(TimeSlot time) {
-		List<Appointment> appointments = toList(appointmentRepository.getAppointmentsByTimeSlot(time));
-		return appointments;
-	}
-	
-	@Transactional
-	public List<Appointment> getAppointmentsByMechanic(Mechanic mechanic) {
-		List<Appointment> appointments = toList(appointmentRepository.getAppointmentsByMechanics(mechanic));
+		List<Appointment> appointments = toList(appointmentRepository.findByTimeSlot(time));
 		return appointments;
 	}
 	
 	@Transactional
 	public Appointment getAppointmentsById(int id) {
-		Appointment appointment = appointmentRepository.getAppointmentById(id);
+		Appointment appointment = appointmentRepository.findById(id);
 		return appointment;
 	}
 	
@@ -245,8 +204,8 @@ public class RepairSystemService {
 	//////////////////// SERVICE CAR METHODS //////////////////// 
 	
 	@Transactional
-	public Car createCar(int id, CarType type, boolean winterTires, int numOfKm, List<Appointment> appointments, Customer customer) {
-		int id = numOfKm.hashCode() * customer.getId().hashCode();
+	public Car createCar(CarType type, boolean winterTires, int numOfKm, List<Appointment> appointments, Customer customer) {
+		int id = (Integer.toString(numOfKm)).hashCode() * customer.hashCode();
 		Car c = new Car(id, type, winterTires, numOfKm, appointments, customer);
 		carRepository.save(c);
 		return c;
@@ -259,23 +218,18 @@ public class RepairSystemService {
 	}
 	
 	@Transactional
-	public Car getCarByAppointment(Appointment a) {
-		return carRepository.findByAppointment(a);
-	}
-	
-	@Transactional
 	public List<Car> getCarsByCustomer(Customer customer) {
-		return toList(carRepository.findCarsByCustomer(customer));
+		return toList(carRepository.findByCustomer(customer));
 	}
 	
 	@Transactional
 	public List<Car> getCarsByCarType(CarType type) {
-		return toList(carRepository.findCarsByCarType(type));
+		return toList(carRepository.findByCarType(type));
 	}
 	
 	@Transactional
 	public List<Car> getCarsByWinterTires(boolean winterTires) {
-		return toList(carRepository.findCarsByWinterTires(boolean winterTires));
+		return toList(carRepository.findByWinterTires(winterTires));
 	}
 	
 	@Transactional
@@ -294,7 +248,7 @@ public class RepairSystemService {
 	}
 	
 	@Transactional List<Image> getImagesByAppointment(Appointment a) {
-		List<Image> i = toList(imageRepository.findImagesByAppointment(a));
+		List<Image> i = toList(imageRepository.findByAppointment(a));
 		return i;
 	}
 	
@@ -306,51 +260,40 @@ public class RepairSystemService {
 	////////////////////SERVICE SERVICE METHODS //////////////////// 
 	
 	@Transactional
-	public Service createService(ServiceType aType, List<Mechanics> mechanics, List<Appointments> a) {
-		int id = aType.hashCode();
-		Service service = new Service(aType, mechanics, a);
-		ServiceRepository.save(service);
+	public ca.mcgill.ecse321.repairsystem.model.Service createService(ServiceType aType, int price, List<Mechanic> mechanics, List<Appointment> appointment) {
+		ca.mcgill.ecse321.repairsystem.model.Service service = new ca.mcgill.ecse321.repairsystem.model.Service(aType, price, mechanics, appointment);
+		serviceRepository.save(service);
 		return service;
 	}
 	
 	@Transactional
-	public List<Service> getServicesByMechanic(Mechanic mechanic) {
-		return toList(serviceRepository.findServicesByMechanic(mechanic));
-	}
-	
-	@Transactional
-	public List<Service> getServicesByAppointment(Appointment a) {
-		return toList(serviceRepository.findServicesByAppointment(a));
-	}
-	
-	@Transactional
-	public Service getServiceByServiceType(ServiceType type) {
-		return serviceRepository.findServiceByServiceType(type);
+	public ca.mcgill.ecse321.repairsystem.model.Service getServiceByServiceType(ServiceType type) {
+		return serviceRepository.findByServiceType(type);
 	}
 	
 	////////////////////SERVICE TIMESLOT METHODS //////////////////// 
 	
 	@Transactional 
-	public TimeSlot createTimeSlot(LocalDateTime aStartTime, LocalDateTime aEndTime, List<Mechanics> mechanics, List<Appointments> appointments) {
+	public TimeSlot createTimeSlot(LocalDateTime aStartTime, LocalDateTime aEndTime, List<Mechanic> mechanics, List<Appointment> appointments) {
 		int id = aStartTime.hashCode() * aEndTime.hashCode();
 		TimeSlot timeslot = new TimeSlot(aStartTime, aEndTime, id, mechanics, appointments);
-		TimeSlotRepository.save(timeslot);
+		timeSlotRepository.save(timeslot);
 		return timeslot;
 	}
 	
 	@Transactional
-	public List<TimeSlot> getTimeSlotsByMechanic(Mechanic m) { 
-		return toList(TimeSlotRepository.findTimeSlotByMechanic(m));
-	}
-	
-	@Transactional
 	public TimeSlot getTimeSlotById(int id) { 
-		return TimeSlotRepository.findTimeSlotById(id);
+		return timeSlotRepository.findById(id);
 	}
 	
 	@Transactional
-	public TimeSlot getTimeSlotByAppointment(Appointment a) { 
-		return TimeSlotRepository.findTimeSlotById(a);
+	public List<TimeSlot> getTimeSlotByStartTime(LocalDateTime time) { 
+		return timeSlotRepository.findByStartTime(time);
+	}
+	
+	@Transactional
+	public List<TimeSlot> getTimeSlotByEndTime(LocalDateTime time) { 
+		return timeSlotRepository.findByEndTime(time);
 	}
 	
 	/* 

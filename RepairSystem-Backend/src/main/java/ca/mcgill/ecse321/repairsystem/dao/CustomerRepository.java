@@ -2,16 +2,15 @@ package ca.mcgill.ecse321.repairsystem.dao;
 
 import org.springframework.data.repository.CrudRepository;
 
-import ca.mcgill.ecse321.repairsystem.model.Customer;
+import ca.mcgill.ecse321.repairsystem.model.*;
+import java.util.*;
 
 public interface CustomerRepository extends CrudRepository<Customer, String>{
 	
-	Customer findCustomerById(int Id);
-	List<Customer> findCustomersByName(String name);
-	Customer findCustomerByNumber(int number);
-	Customer findCustomerByEmail(String email);
-	List<Customer> findCustomersByAddress(String address);
-	Customer findCustomerByAppointment(Appointment app);
-	Customer findCustomerByCar(Car car);
+	Customer findById(int Id);
+	List<Customer> findByName(String name);
+	Customer findByPhone(int number);
+	Customer findByEmail(String email);
+	List<Customer> findByAddress(String address);
 	
 }

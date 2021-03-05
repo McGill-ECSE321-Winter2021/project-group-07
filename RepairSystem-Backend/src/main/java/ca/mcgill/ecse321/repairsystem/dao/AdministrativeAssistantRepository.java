@@ -3,14 +3,15 @@ package ca.mcgill.ecse321.repairsystem.dao;
 import org.springframework.data.repository.CrudRepository;
 
 import ca.mcgill.ecse321.repairsystem.model.AdministrativeAssistant;
+import java.util.*;
 
 //@RepositoryRestResource(collectionResourceRel = "administrativeAssistant_data", path = "administrativeAssistant_data")
 public interface AdministrativeAssistantRepository extends CrudRepository<AdministrativeAssistant, String>{
 	
-	AdministrativeAssistant findAdministrativeAssistantById(int Id);
-	List<AdministrativeAssistant> findAdministrativeAssistantsByName(String name);
-	AdministrativeAssistant findAdministrativeAssistantByNumber(int number);
-	AdministrativeAssistant findAdministrativeAssistantByEmail(String email);
+	AdministrativeAssistant findById(int id);
+	List<AdministrativeAssistant> findByName(String name);
+	AdministrativeAssistant findByPhone(int phone);
+	AdministrativeAssistant findByEmail(String email);
 
 
 }

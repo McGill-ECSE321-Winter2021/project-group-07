@@ -12,7 +12,7 @@ public class Car
   
   public Car(int id, CarType type, boolean winterTires, int numOfKm, List<Appointment> appointments, Customer customer) {
 	 carId = id;
-	 this.type = type;
+	 this.carType = type;
 	 this.winterTires = winterTires;
 	 numOfKilometers = numOfKm;
 	 this.appointments = appointments;
@@ -36,15 +36,15 @@ public class Car
 	  this.carId = aId;
   }
    
-  private CarType type;
+  private CarType carType;
   
-  public CarType getType(){
-    return type;
+  public CarType getCarType(){
+    return carType;
   }
   
-  public void setType(CarType aType)
+  public void setCarType(CarType aType)
   {
-    type = aType;
+    carType = aType;
   }
 
   private boolean winterTires;

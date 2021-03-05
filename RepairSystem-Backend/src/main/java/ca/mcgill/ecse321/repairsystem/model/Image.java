@@ -8,7 +8,7 @@ public class Image
 {
 
   public Image(int id, String url, Appointment a) {
-	  this.id = id;
+	  this.imageId = id;
 	  this.url = url;
 	  this.appointment = a;
   }
@@ -31,15 +31,15 @@ public class Image
     this.appointment = aAppointment;
   }
   
-  private int imageID;
+  private int imageId;
   
   @Id
   public int getId() {
-	  return this.imageID;
+	  return this.imageId;
   }
   
   public void setId(int aId) {
-	  this.imageID = aId;
+	  this.imageId = aId;
   }
   
   private String url;

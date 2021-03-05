@@ -13,24 +13,24 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class TimeSlot{
-	private int timeSlotId;
+	private int id;
 	
-	public void setTimeSlotId(int Id) {
-		this.timeSlotId = Id;
+	public void setId(int id) {
+		this.id = id;
 	}
 	@Id
-	public int getTimeSlotId() {
-		return this.timeSlotId;
+	public int getId() {
+		return this.id;
 	}
 	
 
 	private LocalDateTime startTime;
 	private LocalDateTime endTime;
 
-	public TimeSlot(LocalDateTime aStartTime, LocalDateTime aEndTime, int Id, List<Mechanics> mechanics, List<Appointments> appointments){
+	public TimeSlot(LocalDateTime aStartTime, LocalDateTime aEndTime, int Id, List<Mechanic> mechanics, List<Appointment> appointments){
 		startTime = aStartTime;
 		endTime = aEndTime;
-		timeSlotId = Id;
+		this.id = Id;
 		this.mechanics = mechanics;
 		this.appointments = appointments;
 	}

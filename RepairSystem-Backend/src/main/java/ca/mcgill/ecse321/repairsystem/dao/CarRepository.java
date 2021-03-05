@@ -3,15 +3,15 @@ package ca.mcgill.ecse321.repairsystem.dao;
 import org.springframework.data.repository.CrudRepository;
 
 import ca.mcgill.ecse321.repairsystem.model.*;
+import ca.mcgill.ecse321.repairsystem.model.Car.CarType;
 
 import java.util.*;
 
 public interface CarRepository extends CrudRepository<Car, String>{
 
-	List<Car> findCarsByCustomer(Customer customer);
+	List<Car> findByCustomer(Customer customer);
 	Car findById(int Id);
-	Car findByAppointment(Appointment a);
-	List<Car> findCarsByCarType(CarType type);
-	List<Car> findCarsByWinterTires(boolean tires);
+	List<Car> findByCarType(CarType type);
+	List<Car> findByWinterTires(boolean tires);
 	
 }

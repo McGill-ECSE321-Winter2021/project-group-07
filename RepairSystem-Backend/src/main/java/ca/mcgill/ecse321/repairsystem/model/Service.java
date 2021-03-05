@@ -1,31 +1,33 @@
 package ca.mcgill.ecse321.repairsystem.model;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import java.util.*;
 
 @Entity
 public class Service{
 
 	public enum ServiceType { CarRepair, OilChange, RegularCheckup, CarWash, TireChange, RoadsideAssistance, Towing, CarInspection, Other }
 
-	public Service(ServiceType aType, int aPrice, List<Mechanics> mechanics, List<Appointments> a){
-		this.type = aType;
+	public Service(ServiceType aType, int aPrice, List<Mechanic> mechanics, List<Appointment> a){
+		this.serviceType = aType;
 		this.price = aPrice;
 		this.mechanics = mechanics;
-		appointments = a;
+		this.appointments = a;
 	}
 	
 	public Service() {
 		
 	}
 	
-	private ServiceType type;
-	public void setType(ServiceType aType){
-		type = aType;
+	private ServiceType serviceType;
+	public void setServiceType(ServiceType aType){
+		serviceType = aType;
 	}
 	@Id
-	public ServiceType getType() {
-		return type;  
+	public ServiceType getServiceType() {
+		return serviceType;  
 	}
 
 	private int price;
@@ -39,18 +41,18 @@ public class Service{
 		return price;
 	}
 
-	private Appointment List<appointments>;
-	@ManyToOne
-	public Appointment getAppointments(){
+	private List<Appointment> appointments;
+	@ManyToMany
+	public List<Appointment> getAppointments(){
 		return this.appointments;
 	}
 	public void setAppointments(List<Appointment> appointments){
-		this.appointment=appointment;
+		this.appointments=appointments;
 	}
 
 	private List<Mechanic> mechanics;
-	@ManyToOne
-	public Mechanic getMechanics(){
+	@ManyToMany
+	public List<Mechanic> getMechanics(){
 		return this.mechanics;
 	}
 	public void setMechanics(List<Mechanic> mechanics){
