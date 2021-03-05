@@ -7,10 +7,16 @@ import javax.persistence.ManyToOne;
 public class Image
 {
 
-  //------------------------
-  // MEMBER VARIABLES
-  //------------------------
-
+  public Image(int id, String url, Appointment a) {
+	  this.id = id;
+	  this.url = url;
+	  this.appointment = a;
+  }
+  
+  public Image() {
+	  
+  }
+  
   //Image Associations
   private Appointment appointment;
  

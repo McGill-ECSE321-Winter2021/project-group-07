@@ -8,5 +8,9 @@ import ca.mcgill.ecse321.repairsystem.model.AdministrativeAssistant;
 public interface AdministrativeAssistantRepository extends CrudRepository<AdministrativeAssistant, String>{
 	
 	AdministrativeAssistant findAdministrativeAssistantById(int Id);
+	List<AdministrativeAssistant> findAdministrativeAssistantsByName(String name);
+	AdministrativeAssistant findAdministrativeAssistantByNumber(int number);
+	AdministrativeAssistant findAdministrativeAssistantByEmail(String email);
+
 
 }

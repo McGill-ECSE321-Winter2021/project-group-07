@@ -27,10 +27,12 @@ public class TimeSlot{
 	private LocalDateTime startTime;
 	private LocalDateTime endTime;
 
-	public TimeSlot(LocalDateTime aStartTime, LocalDateTime aEndTime, int Id){
+	public TimeSlot(LocalDateTime aStartTime, LocalDateTime aEndTime, int Id, List<Mechanics> mechanics, List<Appointments> appointments){
 		startTime = aStartTime;
 		endTime = aEndTime;
 		timeSlotId = Id;
+		this.mechanics = mechanics;
+		this.appointments = appointments;
 	}
 
 	public TimeSlot() {

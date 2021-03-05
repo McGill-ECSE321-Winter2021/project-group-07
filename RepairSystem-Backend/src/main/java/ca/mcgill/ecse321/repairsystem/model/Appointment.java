@@ -10,7 +10,23 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Appointment
 {
-	
+
+  public Appointment(Customer customer, int id, Timeslot time, List<Mechanic> mechanics, Car car, List<Image> image, List<Service> services, String note, AppointmentStatus status) {
+	  this.customer = customer;
+	  this.appointmentId = id;
+	  this.status = status;
+	  this.note = note;
+	  appointmentTime = time;
+	  this.mechanics = mechanics;
+	  this.customer = customer;
+	  this.images = images;
+	  requiredServices = services;
+	  this.car = car;
+  }
+  
+  public Appointment() {
+  }
+  
   public enum AppointmentStatus { CarReceived, InRepair, Completed };
 
   private int appointmentId;
@@ -68,27 +84,25 @@ public class Appointment
     return mechanics;
   }
   
-  public void setMechanics(List<Mechanic> mechanicList){
+  public void setMechanics(List<Mechanic> mechanicList) {
     mechanics = mechanicList;
   }
   
   private Customer customer;
  
   @ManyToOne()
-  public Customer getCustomer()
-  {
+  public Customer getCustomer() {
     return customer;
   }
   
-  public void setCustomer(Customer c){
+  public void setCustomer(Customer c) {
     customer = c;
   }
   
   private List<Service> requiredServices;
   
   @ManyToMany()
-  public List<Service> getRequiredServices()
-  {
+  public List<Service> getRequiredServices() {
     return requiredServices;
   }
   

@@ -8,14 +8,17 @@ public class Service{
 
 	public enum ServiceType { CarRepair, OilChange, RegularCheckup, CarWash, TireChange, RoadsideAssistance, Towing, CarInspection, Other }
 
-	public Service(ServiceType aType, int aPrice){
+	public Service(ServiceType aType, int aPrice, List<Mechanics> mechanics, List<Appointments> a){
 		this.type = aType;
 		this.price = aPrice;
+		this.mechanics = mechanics;
+		appointments = a;
 	}
 	
 	public Service() {
 		
 	}
+	
 	private ServiceType type;
 	public void setType(ServiceType aType){
 		type = aType;
@@ -36,22 +39,22 @@ public class Service{
 		return price;
 	}
 
-	private Appointment appointment;
+	private Appointment List<appointments>;
 	@ManyToOne
-	public Appointment getAppointment(){
-		return this.appointment;
+	public Appointment getAppointments(){
+		return this.appointments;
 	}
-	public void setAppointment(Appointment appointment){
+	public void setAppointments(List<Appointment> appointments){
 		this.appointment=appointment;
 	}
 
-	private Mechanic mechanic;
+	private List<Mechanic> mechanics;
 	@ManyToOne
-	public Mechanic getMechanic(){
-		return this.mechanic;
+	public Mechanic getMechanics(){
+		return this.mechanics;
 	}
-	public void setMechanic(Mechanic mechanic){
-		this.mechanic=mechanic;
+	public void setMechanics(List<Mechanic> mechanics){
+		this.mechanics = mechanics;
 	}
 	
 

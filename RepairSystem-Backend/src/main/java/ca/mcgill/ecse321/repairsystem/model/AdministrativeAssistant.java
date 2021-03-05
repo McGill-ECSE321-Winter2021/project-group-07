@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 public class AdministrativeAssistant extends Person
 {
 	
-	public AdministrativeAssistant(String aName, int id,String aPassword, int aPhone, String aEmail, RepairSystem aRepairSystem) {
+	public AdministrativeAssistant(String aName, int id, String aPassword, int aPhone, String aEmail, RepairSystem aRepairSystem) {
 		super(aName,id, aPassword, aPhone, aEmail, aRepairSystem);
 		
 	}

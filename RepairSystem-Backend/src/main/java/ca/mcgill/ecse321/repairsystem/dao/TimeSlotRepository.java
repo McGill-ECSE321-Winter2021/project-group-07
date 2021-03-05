@@ -10,6 +10,7 @@ import ca.mcgill.ecse321.repairsystem.model.TimeSlot;
 
 public interface TimeSlotRepository extends CrudRepository<TimeSlot, String>{
 
-	TimeSlot findByStartTime(LocalDateTime time);
-
+	TimeSlot findById(int id);
+	TimeSlot findByAppointment(Appointment a);
+	List<TimeSlot> findByMechanic(Mechanic m);
 }

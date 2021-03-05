@@ -9,18 +9,31 @@ import javax.persistence.Entity;
 @Entity
 public class Car
 {
-
+  
+  public Car(int id, CarType type, boolean winterTires, int numOfKm, List<Appointment> appointments, Customer customer) {
+	 carId = id;
+	 this.type = type;
+	 this.winterTires = winterTires;
+	 numOfKilometers = numOfKm;
+	 this.appointments = appointments;
+	 this.customer = customer;
+  }
+  
+  public Car() {
+	  
+  }
+	
   public enum CarType { Sedan, Coupe, Sports, Hatchback, Minivan, StationWagon, Convertible, Truck, SUV, Other }
 
-  private int CarId;
+  private int carId;
   
   @Id
   public int getId() {
-	  return this.CarId;
+	  return this.carId;
   }
   
   public void setId(int aId) {
-	  this.CarId = aId;
+	  this.carId = aId;
   }
    
   private CarType type;

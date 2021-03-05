@@ -9,9 +9,9 @@ import java.util.*;
 public interface CarRepository extends CrudRepository<Car, String>{
 
 	List<Car> findCarsByCustomer(Customer customer);
-	
 	Car findById(int Id);
-	
 	Car findByAppointment(Appointment a);
+	List<Car> findCarsByCarType(CarType type);
+	List<Car> findCarsByWinterTires(boolean tires);
 	
 }
