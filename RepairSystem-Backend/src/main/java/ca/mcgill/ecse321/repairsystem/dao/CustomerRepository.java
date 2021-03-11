@@ -6,7 +6,7 @@ import ca.mcgill.ecse321.repairsystem.model.*;
 import java.util.*;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
-@RepositoryRestResource(collectionResourceRel = "customer_data", path = "person_data" )
+@RepositoryRestResource(collectionResourceRel = "customer_data", path = "customer_data" )
 public interface CustomerRepository extends CrudRepository<Customer, String>{
 	
 	Customer findById(int Id);
