@@ -4,7 +4,9 @@ import org.springframework.data.repository.CrudRepository;
 
 import ca.mcgill.ecse321.repairsystem.model.*;
 import java.util.*;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
+@RepositoryRestResource(collectionResourceRel = "mechanic_data" , path ="mechanic_data")
 public interface MechanicRepository extends CrudRepository<Mechanic, String>{
 
 	Mechanic findById(int Id);

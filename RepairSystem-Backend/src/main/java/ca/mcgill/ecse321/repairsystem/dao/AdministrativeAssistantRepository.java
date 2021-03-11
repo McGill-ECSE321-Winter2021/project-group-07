@@ -4,8 +4,9 @@ import org.springframework.data.repository.CrudRepository;
 
 import ca.mcgill.ecse321.repairsystem.model.AdministrativeAssistant;
 import java.util.*;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
-//@RepositoryRestResource(collectionResourceRel = "administrativeAssistant_data", path = "administrativeAssistant_data")
+@RepositoryRestResource(collectionResourceRel = "administrativeAssistant_data", path = "administrativeAssistant_data")
 public interface AdministrativeAssistantRepository extends CrudRepository<AdministrativeAssistant, String>{
 	
 	AdministrativeAssistant findById(int id);

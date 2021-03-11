@@ -6,7 +6,9 @@ import java.util.*;
 import org.springframework.data.repository.CrudRepository;
 
 import ca.mcgill.ecse321.repairsystem.model.*;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
+@RepositoryRestResource(collectionResourceRel = "timeSlot_data" , path ="timeSlot_data")
 
 public interface TimeSlotRepository extends CrudRepository<TimeSlot, String>{
 

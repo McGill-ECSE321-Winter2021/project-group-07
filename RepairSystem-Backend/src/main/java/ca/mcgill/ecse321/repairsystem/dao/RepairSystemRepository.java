@@ -7,7 +7,9 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import ca.mcgill.ecse321.repairsystem.model.*;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
+@RepositoryRestResource(collectionResourceRel = "repairSystem_data" , path ="repairSystem_data")
 @Repository
 public class RepairSystemRepository {
 
