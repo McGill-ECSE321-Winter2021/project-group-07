@@ -2,7 +2,6 @@ package ca.mcgill.ecse321.repairsystem.model;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
 import java.util.*;
 
 @Entity
