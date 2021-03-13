@@ -15,6 +15,9 @@ public class CustomerService {
 
 	@Transactional
 	public Customer createCustomer(String aName, String aPassword, int aPhone, String aEmail, Calendar lastDate, RepairSystem aRepairSystem, String credit, String debit, String add) {
+		if(aName == null || aName.trim().length() == 0) {
+			throw new IllegalArgumentException("Customer name cannot be empty!");
+		}
 		int id = aName.hashCode() * aPassword.hashCode();
 		Customer customer = new Customer(aName, id, aPassword, aPhone, aEmail, lastDate, aRepairSystem, credit, debit, add);
 		customerRepository.save(customer);
