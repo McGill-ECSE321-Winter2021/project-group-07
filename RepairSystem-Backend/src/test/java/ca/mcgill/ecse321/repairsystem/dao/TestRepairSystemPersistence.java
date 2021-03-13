@@ -1,4 +1,4 @@
-package ca.mcgill.ecse321.repairsystrem.dao;
+package ca.mcgill.ecse321.repairsystem.dao;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
