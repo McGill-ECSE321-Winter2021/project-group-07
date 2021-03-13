@@ -32,7 +32,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
 
 
-public class TestAdministrativeAssistantService {
+public class AdministrativeAssistantService {
 	@Autowired
 	private AdministrativeAssistantRepository administrativeAssistantRepository;
 

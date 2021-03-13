@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ca.mcgill.ecse321.repairsystem.dao.*;
 import ca.mcgill.ecse321.repairsystem.model.*;
 import ca.mcgill.ecse321.repairsystem.model.Appointment.AppointmentStatus;
+import ca.mcgill.ecse321.repairsystem.model.Service.ServiceType;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -30,46 +31,26 @@ import org.mockito.Mock;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
-import java.util.ArrayList;
-import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import ca.mcgill.ecse321.repairsystem.dao.CarRepository;
-import ca.mcgill.ecse321.repairsystem.dao.CustomerRepository;
-import ca.mcgill.ecse321.repairsystem.dao.ImageRepository;
-import ca.mcgill.ecse321.repairsystem.dao.MechanicRepository;
-import ca.mcgill.ecse321.repairsystem.dao.ServiceRepository;
-import ca.mcgill.ecse321.repairsystem.dao.TimeSlotRepository;
-
-public class TestImageService {
-
+public class ServiceService {
 	@Autowired
-	private ImageRepository imageRepository;
-
-	////////////////////SERVICE IMAGE METHODS //////////////////// 
-
+	private ServiceRepository serviceRepository;
+	
 	@Transactional
-	public Image createImage(String url, Appointment a) {
-		int id = url.hashCode();
-		Image i = new Image(id, url, a);
-		imageRepository.save(i);
-		return i;
+	public ca.mcgill.ecse321.repairsystem.model.Service createService(ServiceType aType, int price, List<Mechanic> mechanics, List<Appointment> appointment) {
+		ca.mcgill.ecse321.repairsystem.model.Service service = new ca.mcgill.ecse321.repairsystem.model.Service(aType, price, mechanics, appointment);
+		serviceRepository.save(service);
+		return service;
 	}
-
-	@Transactional List<Image> getImagesByAppointment(Appointment a) {
-		List<Image> i = toList(imageRepository.findByAppointment(a));
-		return i;
-	}
-
+	
 	@Transactional
-	public List<Image> getAllImages() {
-		return toList(imageRepository.findAll());
+	public ca.mcgill.ecse321.repairsystem.model.Service getServiceByServiceType(ServiceType type) {
+		return serviceRepository.findByServiceType(type);
 	}
-
+	
 	/* 
 	 * helper method
-	 */
+	 */	
 	private <T> List<T> toList(Iterable<T> iterable){
 		List<T> resultList = new ArrayList<T>();
 		for (T t : iterable) {

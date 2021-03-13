@@ -1,5 +1,5 @@
 package ca.mcgill.ecse321.repairsystem.service;
-import java.time.LocalDateTime;
+
 import java.util.*;
 import java.sql.Date;
 import java.sql.Time;
@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 import ca.mcgill.ecse321.repairsystem.dao.*;
 import ca.mcgill.ecse321.repairsystem.model.*;
 import ca.mcgill.ecse321.repairsystem.model.Appointment.AppointmentStatus;
-import ca.mcgill.ecse321.repairsystem.model.Service.ServiceType;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -31,43 +30,47 @@ import org.mockito.Mock;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
-import java.util.ArrayList;
-import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
+public class CarService {
+	@Autowired 
+	private CarRepository carRepository;
 
-import ca.mcgill.ecse321.repairsystem.dao.TimeSlotRepository;
-import ca.mcgill.ecse321.repairsystem.model.Appointment;
-import ca.mcgill.ecse321.repairsystem.model.Mechanic;
-import ca.mcgill.ecse321.repairsystem.model.TimeSlot;
+	////////////////////SERVICE CAR METHODS //////////////////// 
 
-public class TestTimeSlotService {
-	@Autowired
-	private TimeSlotRepository timeSlotRepository;
+	@Transactional
+	public Car createCar(CarType type, boolean winterTires, int numOfKm, List<Appointment> appointments, Customer customer) {
+		int id = (Integer.toString(numOfKm)).hashCode() * customer.hashCode();
+		Car c = new Car(id, type, winterTires, numOfKm, appointments, customer);
+		carRepository.save(c);
+		return c;
+	}
+
 	@Transactional 
-	public TimeSlot createTimeSlot(LocalDateTime aStartTime, LocalDateTime aEndTime, List<Mechanic> mechanics, List<Appointment> appointments) {
-		int id = aStartTime.hashCode() * aEndTime.hashCode();
-		TimeSlot timeslot = new TimeSlot(aStartTime, aEndTime, id, mechanics, appointments);
-		timeSlotRepository.save(timeslot);
-		return timeslot;
+	public Car getCarById(int id) {
+		Car c = carRepository.findById(id);
+		return c;
 	}
-	
+
 	@Transactional
-	public TimeSlot getTimeSlotById(int id) { 
-		return timeSlotRepository.findById(id);
+	public List<Car> getCarsByCustomer(Customer customer) {
+		return toList(carRepository.findByCustomer(customer));
 	}
-	
+
 	@Transactional
-	public List<TimeSlot> getTimeSlotByStartTime(LocalDateTime time) { 
-		return timeSlotRepository.findByStartTime(time);
+	public List<Car> getCarsByCarType(CarType type) {
+		return toList(carRepository.findByCarType(type));
 	}
-	
+
 	@Transactional
-	public List<TimeSlot> getTimeSlotByEndTime(LocalDateTime time) { 
-		return timeSlotRepository.findByEndTime(time);
+	public List<Car> getCarsByWinterTires(boolean winterTires) {
+		return toList(carRepository.findByWinterTires(winterTires));
 	}
-	
+
+	@Transactional
+	public List<Car> getAllCars() {
+		return toList(carRepository.findAll());
+	}
+
 	/* 
 	 * helper method
 	 */

@@ -30,6 +30,9 @@ import org.mockito.Mock;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import ca.mcgill.ecse321.repairsystem.dao.CarRepository;
@@ -39,56 +42,50 @@ import ca.mcgill.ecse321.repairsystem.dao.MechanicRepository;
 import ca.mcgill.ecse321.repairsystem.dao.ServiceRepository;
 import ca.mcgill.ecse321.repairsystem.dao.TimeSlotRepository;
 
-public class TestCustomerService {
+public class MachanicService {
 
 	@Autowired
-	private CustomerRepository customerRepository;
-
-	////////////////////SERVICE CUSTOMER METHODS //////////////////// 
-
+	private MechanicRepository mechanicRepository;
+	////////////////////SERVICE MECHANIC METHODS //////////////////// 
+	
 	@Transactional
-	public Customer createCustomer(String aName, String aPassword, int aPhone, String aEmail, Calendar lastDate, RepairSystem aRepairSystem, String credit, String debit, String add) {
+	public Mechanic createMechanic(String aName, String aPassword, int aPhone, String aEmail, RepairSystem aRepairSystem, List<ca.mcgill.ecse321.repairsystem.model.Service> allCapabilities) {
 		int id = aName.hashCode() * aPassword.hashCode();
-		Customer customer = new Customer(aName, id, aPassword, aPhone, aEmail, lastDate, aRepairSystem, credit, debit, add);
-		customerRepository.save(customer);
-		return customer;
+		Mechanic mechanic = new Mechanic(aName, id, aPassword, aPhone, aEmail, aRepairSystem, allCapabilities);
+		mechanicRepository.save(mechanic);
+		return mechanic;
 	}
-
+	
 	@Transactional 
-	public Customer getCustomerById(int id) {
-		Customer customer = customerRepository.findById(id);
-		return customer;
+	public Mechanic getMechanicById(int id) {
+		Mechanic mechanic = mechanicRepository.findById(id);
+		return mechanic;
 	}
-
+	
 	@Transactional 
-	public List<Customer> getCustomersByName(String name) {
-		List<Customer> customers = toList(customerRepository.findByName(name));
-		return customers;
+	public List<Mechanic> getMechanicsByName(String name) {
+		List<Mechanic> mechanics = toList(mechanicRepository.findByName(name));
+		return mechanics;
 	}
-
+	
 	@Transactional 
-	public Customer getCustomerByNumber(int number) {
-		Customer customer = customerRepository.findByPhone(number);
-		return customer;
+	public Mechanic getMechanicByNumber(int aPhone) {
+		Mechanic mechanic = mechanicRepository.findByPhone(aPhone);
+		return mechanic;
 	}
-
+	
+	
 	@Transactional 
-	public Customer getCustomerByEmail(String email) {
-		Customer customer = customerRepository.findByEmail(email);
-		return customer;
+	public Mechanic getMechanicByEmail(String email) {
+		Mechanic mechanic = mechanicRepository.findByEmail(email);
+		return mechanic;
 	}
-
-	@Transactional 
-	public List<Customer> getCustomersByAddress(String address) {
-		List<Customer> customers = toList(customerRepository.findByAddress(address));
-		return customers;
-	}
-
+	
 	@Transactional
-	public List<Customer> getAllCustomers() {
-		return toList(customerRepository.findAll());
+	public List<Mechanic> getAllMechanics() {
+		return toList(mechanicRepository.findAll());
 	}
-
+	
 	/* 
 	 * helper method
 	 */

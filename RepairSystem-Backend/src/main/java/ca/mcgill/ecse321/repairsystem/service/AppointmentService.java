@@ -31,7 +31,7 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
 
-public class TestAppointmentService {
+public class AppointmentService {
 	////////////////////SERVICE APPOINTMENT METHODS //////////////////// 
 	@Autowired
 	private AppointmentRepository appointmentRepository;

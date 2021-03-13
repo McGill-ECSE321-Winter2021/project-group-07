@@ -30,45 +30,41 @@ import org.mockito.Mock;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
+import java.util.ArrayList;
+import java.util.List;
 
-public class TestCarService {
-	@Autowired 
-	private CarRepository carRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 
-	////////////////////SERVICE CAR METHODS //////////////////// 
+import ca.mcgill.ecse321.repairsystem.dao.CarRepository;
+import ca.mcgill.ecse321.repairsystem.dao.CustomerRepository;
+import ca.mcgill.ecse321.repairsystem.dao.ImageRepository;
+import ca.mcgill.ecse321.repairsystem.dao.MechanicRepository;
+import ca.mcgill.ecse321.repairsystem.dao.ServiceRepository;
+import ca.mcgill.ecse321.repairsystem.dao.TimeSlotRepository;
 
-	@Transactional
-	public Car createCar(CarType type, boolean winterTires, int numOfKm, List<Appointment> appointments, Customer customer) {
-		int id = (Integer.toString(numOfKm)).hashCode() * customer.hashCode();
-		Car c = new Car(id, type, winterTires, numOfKm, appointments, customer);
-		carRepository.save(c);
-		return c;
-	}
+public class ImageService {
 
-	@Transactional 
-	public Car getCarById(int id) {
-		Car c = carRepository.findById(id);
-		return c;
-	}
+	@Autowired
+	private ImageRepository imageRepository;
+
+	////////////////////SERVICE IMAGE METHODS //////////////////// 
 
 	@Transactional
-	public List<Car> getCarsByCustomer(Customer customer) {
-		return toList(carRepository.findByCustomer(customer));
+	public Image createImage(String url, Appointment a) {
+		int id = url.hashCode();
+		Image i = new Image(id, url, a);
+		imageRepository.save(i);
+		return i;
 	}
 
-	@Transactional
-	public List<Car> getCarsByCarType(CarType type) {
-		return toList(carRepository.findByCarType(type));
-	}
-
-	@Transactional
-	public List<Car> getCarsByWinterTires(boolean winterTires) {
-		return toList(carRepository.findByWinterTires(winterTires));
+	@Transactional List<Image> getImagesByAppointment(Appointment a) {
+		List<Image> i = toList(imageRepository.findByAppointment(a));
+		return i;
 	}
 
 	@Transactional
-	public List<Car> getAllCars() {
-		return toList(carRepository.findAll());
+	public List<Image> getAllImages() {
+		return toList(imageRepository.findAll());
 	}
 
 	/* 
