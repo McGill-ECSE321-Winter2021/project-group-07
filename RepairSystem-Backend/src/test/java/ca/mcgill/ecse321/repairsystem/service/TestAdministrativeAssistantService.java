@@ -26,6 +26,14 @@ import org.mockito.stubbing.Answer;
 import ca.mcgill.ecse321.repairsystem.dao.*;
 import ca.mcgill.ecse321.repairsystem.model.*;
 
+@ExtendWith(MockitoExtension.class)
 public class TestAdministrativeAssistantService {
+	@Mock
+	private AdministrativeAssistantRepository administrativeAssistantDao;
+
+	@InjectMocks
+	private AdministrativeAssistantService administrativeAssistantService;
+	
+	private static String ADMINISTRATIVEASSISTANT_KEY = "TestAdministrativeAssistant";
 
 }

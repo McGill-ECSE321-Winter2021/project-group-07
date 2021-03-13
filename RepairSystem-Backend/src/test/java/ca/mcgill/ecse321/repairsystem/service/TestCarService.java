@@ -24,6 +24,15 @@ import org.mockito.stubbing.Answer;
 
 import ca.mcgill.ecse321.repairsystem.dao.*;
 import ca.mcgill.ecse321.repairsystem.model.*;
+
+@ExtendWith(MockitoExtension.class)
 public class TestCarService {
+	@Mock
+	private CarRepository carDao;
+
+	@InjectMocks
+	private CarService carService;
+	
+	private static String CAR_KEY = "TestCar";
 
 }

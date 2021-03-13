@@ -24,6 +24,15 @@ import org.mockito.stubbing.Answer;
 
 import ca.mcgill.ecse321.repairsystem.dao.*;
 import ca.mcgill.ecse321.repairsystem.model.*;
+
+@ExtendWith(MockitoExtension.class)
 public class TestTimeSlotService {
+	@Mock
+	private TimeSlotRepository timeslotDao;
+
+	@InjectMocks
+	private TimeSlotService timeSlotService;
+	
+	private static String TIMESLOT_KEY = "TestTimeSlot";
 
 }

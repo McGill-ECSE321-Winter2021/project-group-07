@@ -24,6 +24,16 @@ import org.mockito.stubbing.Answer;
 
 import ca.mcgill.ecse321.repairsystem.dao.*;
 import ca.mcgill.ecse321.repairsystem.model.*;
+
+@ExtendWith(MockitoExtension.class)
 public class TestAppointmentService {
+	@Mock
+	private AppointmentRepository appointmentDao;
+
+	@InjectMocks
+	private AppointmentService appointmentService;
+	
+	private static String APPOINTMENT_KEY = "TestAppointment";
+
 
 }

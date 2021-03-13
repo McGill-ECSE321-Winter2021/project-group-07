@@ -24,6 +24,16 @@ import org.mockito.stubbing.Answer;
 
 import ca.mcgill.ecse321.repairsystem.dao.*;
 import ca.mcgill.ecse321.repairsystem.model.*;
+
+@ExtendWith(MockitoExtension.class)
 public class TestImageService {
+	@Mock
+	private ImageRepository imageDao;
+
+	@InjectMocks
+	private ImageService imageService;
+	
+	private static String IMAGE_KEY = "TestImage";
+
 
 }
