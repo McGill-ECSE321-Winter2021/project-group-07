@@ -16,7 +16,7 @@ import ca.mcgill.ecse321.repairsystem.model.*;
 
 @SpringBootTest(classes = RepairSystemApplication.class)
 
-public class TestAppointmnetPersistence {
+public class TestAppointmentPersistence {
 	@Autowired
 	private AppointmentRepository appointmentRepository;
 	@Autowired
