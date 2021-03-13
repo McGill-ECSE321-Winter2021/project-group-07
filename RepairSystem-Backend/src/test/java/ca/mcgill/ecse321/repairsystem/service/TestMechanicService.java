@@ -35,4 +35,21 @@ public class TestMechanicService {
 	
 	private static String MECHANIC_KEY = "TestMechanic";
 
+	@BeforeEach
+	public void setMockOutput() {
+		lenient().when(mechanicDao.findByName(anyString())).thenAnswer( (InvocationOnMock invocation) -> {
+			if(invocation.getArgument(0).equals(MECHANIC_KEY)) {
+				Mechanic mechanic = new Mechanic();
+				mechanic.setName(MECHANIC_KEY);
+				return mechanic;
+			} else {
+				return null;
+			}
+		});
+
+		Answer<?> returnParameterAsAnswer = (InvocationOnMock invocation) -> {
+			return invocation.getArgument(0);
+		};
+		lenient().when(mechanicDao.save(any(Mechanic.class))).thenAnswer(returnParameterAsAnswer);
+	}
 }

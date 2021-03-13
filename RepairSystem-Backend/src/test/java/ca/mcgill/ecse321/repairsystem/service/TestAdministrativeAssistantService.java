@@ -35,5 +35,24 @@ public class TestAdministrativeAssistantService {
 	private AdministrativeAssistantService administrativeAssistantService;
 	
 	private static String ADMINISTRATIVEASSISTANT_KEY = "TestAdministrativeAssistant";
+	
+	
+	@BeforeEach
+	public void setMockOutput() {
+		lenient().when(administrativeAssistantDao.findByName(anyString())).thenAnswer( (InvocationOnMock invocation) -> {
+			if(invocation.getArgument(0).equals(ADMINISTRATIVEASSISTANT_KEY)) {
+				AdministrativeAssistant administrativeAssistant = new AdministrativeAssistant();
+				administrativeAssistant.setName(ADMINISTRATIVEASSISTANT_KEY);
+				return administrativeAssistant;
+			} else {
+				return null;
+			}
+		});
+
+		Answer<?> returnParameterAsAnswer = (InvocationOnMock invocation) -> {
+			return invocation.getArgument(0);
+		};
+		lenient().when(administrativeAssistantDao.save(any(AdministrativeAssistant.class))).thenAnswer(returnParameterAsAnswer);
+	}
 
 }
