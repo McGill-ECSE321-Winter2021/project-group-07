@@ -42,7 +42,7 @@ import ca.mcgill.ecse321.repairsystem.dao.MechanicRepository;
 import ca.mcgill.ecse321.repairsystem.dao.ServiceRepository;
 import ca.mcgill.ecse321.repairsystem.dao.TimeSlotRepository;
 
-public class MachanicService {
+public class MechanicService {
 
 	@Autowired
 	private MechanicRepository mechanicRepository;
