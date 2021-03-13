@@ -36,7 +36,7 @@ public class TestRepairSystemService {
 	private CustomerRepository customerDao;
 	
 	@InjectMocks
-	private RepairSystemService service;
+	private CustomerService service;
 	
 	private static String CUSTOMER_KEY = "TestCustomer";
 	
