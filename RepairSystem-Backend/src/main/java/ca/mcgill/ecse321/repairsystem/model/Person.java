@@ -1,14 +1,8 @@
 package ca.mcgill.ecse321.repairsystem.model;
-import java.util.*;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Entity;
-
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
-
 
 @Entity
 @Inheritance(strategy =InheritanceType.JOINED)

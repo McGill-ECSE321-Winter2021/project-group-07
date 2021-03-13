@@ -1,7 +1,6 @@
 package ca.mcgill.ecse321.repairsystem.model;
 import java.util.*;
 import java.time.LocalDateTime;
-
 import javax.persistence.Id;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
