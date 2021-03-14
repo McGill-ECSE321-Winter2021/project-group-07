@@ -9,7 +9,7 @@ public class CarDto {
 	private List<Appointment> appointments;
 	private CarType carType;
 
-	public Car(int id, CarType type, boolean winterTires, int numOfKm, List<Appointment> appointments, Customer customer) {
+	public CarDto(int id, CarType type, boolean winterTires, int numOfKm, List<Appointment> appointments, Customer customer) {
 		carId = id;
 		this.carType = type;
 		this.winterTires = winterTires;
@@ -18,7 +18,7 @@ public class CarDto {
 		this.customer = customer;
 	}
 		  
-	public Car() {
+	public CarDto() {
 	}
 	
 	public Customer getCustomer() {

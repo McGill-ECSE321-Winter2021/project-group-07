@@ -15,21 +15,6 @@ public class Mechanic extends Person{
 	}
 	
 	public Mechanic() {
-		
-	}
-
-	
-	private int id;
-	@Id
-	public int getId()
-	{
-		return id;
-	}
-
-	public void setId(int aId)
-	{
-		id = aId;
-
 	}
 
   //Mechanic Associations
@@ -62,23 +47,11 @@ public class Mechanic extends Person{
   @ManyToMany
   public List<Appointment> getAppointments()
   {
-  
     return this.appointments;
   }
   
   public void setAppointments(List<Appointment> appointment) {
 	  this.appointments=appointment;
   }
-
- 
-
- 
-
- 
-
-
-
-
-
 
 }

@@ -1,6 +1,6 @@
 package ca.mcgill.ecse321.dto;
 
-public class AdministrativeAssistantDto {
+public class AppointmentDto {
 	private Customer customer;
 	private int id;
 	private AppointmentStatus status;
@@ -11,7 +11,7 @@ public class AdministrativeAssistantDto {
 	private List<Image> images;
 	private List<Service> services;
 	
-	public AdministrativeAssistant(Customer customer, int id, TimeSlot time, List<Mechanic> mechanics, Car car, List<Image> images, List<Service> services, String note, AppointmentStatus status) {
+	public AppointmentDto(Customer customer, int id, TimeSlot time, List<Mechanic> mechanics, Car car, List<Image> images, List<Service> services, String note, AppointmentStatus status) {
 		  this.customer = customer;
 		  this.Id = id;
 		  this.status = status;
@@ -24,7 +24,7 @@ public class AdministrativeAssistantDto {
 		  this.car = car;
 	}
 	
-	public Appointment() {
+	public AppointmentDto() {
 	}
 	
 	public Customer getCustomer() {

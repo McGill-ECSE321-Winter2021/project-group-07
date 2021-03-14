@@ -8,7 +8,7 @@ public class CustomerDto {
 	private List<Car> cars;
 	private Calendar lastActive;
 
-	public Customer(String aName,  int id, String aPassword, int aPhone, String aEmail, Calendar lastDate, RepairSystem aRepairSystem, String credit, String debit, String add) {
+	public CustomerDto(String aName,  int id, String aPassword, int aPhone, String aEmail, Calendar lastDate, RepairSystem aRepairSystem, String credit, String debit, String add) {
 		super(aName, id, aPassword, aPhone, aEmail, aRepairSystem);
 		creditHash = credit;
 		debitHash = debit;
@@ -16,7 +16,7 @@ public class CustomerDto {
 		lastActive = lastDate;
 	}
 	
-	public Customer() {
+	public CustomerDto() {
 	}
 	
 	public String getCreditHash() {

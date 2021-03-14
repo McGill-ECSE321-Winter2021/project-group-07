@@ -8,12 +8,11 @@ public class AdministrativeAssistantDto extends PersonDto {
 	private String aEmail;
 	private RepairSystem aRepairSystem;
 	
-	public AdministrativeAssistant(String aName, int id, String aPassword, int aPhone, String aEmail, RepairSystem aRepairSystem) {
+	public AdministrativeAssistantDto(String aName, int id, String aPassword, int aPhone, String aEmail, RepairSystem aRepairSystem) {
 		super(aName,id, aPassword, aPhone, aEmail, aRepairSystem);
 	}
 	
 	public AdministrativeAssistantDto() {
-		
 	}
 	
 	public String getName() {
