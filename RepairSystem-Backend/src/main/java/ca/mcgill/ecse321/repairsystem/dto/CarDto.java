@@ -1,15 +1,17 @@
 package ca.mcgill.ecse321.dto;
 
+import java.util.*;
+import ca.mcgill.ecse321.repairsystem.model.Car.CarType;
+
 public class CarDto {
 	private int carId;
 	private CarType carType;
-	private Customer customer;
+	private CustomerDto customer;
 	private boolean winterTires;
 	private int numOfKilometers;
-	private List<Appointment> appointments;
-	private CarType carType;
+	private List<AppointmentDto> appointments;
 
-	public CarDto(int id, CarType type, boolean winterTires, int numOfKm, List<Appointment> appointments, Customer customer) {
+	public CarDto(int id, CarType type, boolean winterTires, int numOfKm, List<AppointmentDto> appointments, CustomerDto customer) {
 		carId = id;
 		this.carType = type;
 		this.winterTires = winterTires;
@@ -21,7 +23,7 @@ public class CarDto {
 	public CarDto() {
 	}
 	
-	public Customer getCustomer() {
+	public CustomerDto getCustomer() {
 		return customer;
 	}
 	
@@ -42,11 +44,7 @@ public class CarDto {
 	    return numOfKilometers;
 	}
 	  
-	public Customer getCustomer() {
-	    return customer;
-	}
-	  
-	public List<Appointment> getAppointments() {
+	public List<AppointmentDto> getAppointments() {
 	    return appointments;
 	}
 }

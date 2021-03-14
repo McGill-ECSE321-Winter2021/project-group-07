@@ -4,19 +4,17 @@ public class PersonDto {
 
 	private String name;
 	private String password;
-	private RepairSystem repairSystem;
 	private int userId;
 	private int phone;
 	private String email;
 
-	public PersonDto(String aName, int id,String aPassword, int aPhone, String aEmail, RepairSystem aRepairSystem)
+	public PersonDto(String aName, int id,String aPassword, int aPhone, String aEmail)
 	{
 		name = aName;
 		password = aPassword;
 		userId = id;
 		phone = aPhone;
 		email = aEmail;
-		repairSystem = aRepairSystem;
 	}
 	
 	public PersonDto() {		
