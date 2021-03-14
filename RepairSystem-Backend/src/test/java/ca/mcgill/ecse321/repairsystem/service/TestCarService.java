@@ -6,14 +6,9 @@ import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyBoolean;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.lenient;
-import static org.mockito.Mockito.when;
 
-import java.sql.Date;
-import java.sql.Time;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
+import static org.mockito.Mockito.lenient;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -152,6 +147,9 @@ public class TestCarService {
 		assertEquals(type, car.getCarType());
 	}
 
+	/**
+	 * Verifies that the car type is not null
+	 */
 	public void testCreateCarTypeNull()
 	{
 		String error = null;
@@ -173,6 +171,9 @@ public class TestCarService {
 		assertEquals("Car Type cannot be null", error);
 	}
 	
+	/**
+	 * Verifies that a boolean is assigned to winter tires of a car
+	 */
 	public void testCreateWinterTiresNull()
 	{
 		String error = null;
@@ -194,6 +195,9 @@ public class TestCarService {
 		assertEquals("Winter Tires cannot be null", error);
 	}
 	
+	/**
+	 * Verifies that the number of kilometers associated to a car is not null
+	 */
 	public void testCreateKilometersNull()
 	{
 		String error = null;
@@ -215,6 +219,9 @@ public class TestCarService {
 		assertEquals("Number of kilometers cannot be null", error);
 	}
 	
+	/**
+	 * Verifies that there is a list of appointments associated to a car object
+	 */
 	public void testCreateAppointmentsNull()
 	{
 		String error = null;
@@ -237,6 +244,9 @@ public class TestCarService {
 		assertEquals("List of Appointments cannot be null", error);
 	}
 	
+	/**
+	 * Verifies that a customer object is associated to a car
+	 */
 	public void testCreateCustomerNull()
 	{
 		String error = null;
