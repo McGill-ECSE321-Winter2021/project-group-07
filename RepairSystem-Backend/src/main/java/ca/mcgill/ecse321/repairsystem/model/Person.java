@@ -38,7 +38,6 @@ public abstract class Person{
 	public void setId(int aId)
 	{
 		this.userId = aId;
-
 	}
 	
 

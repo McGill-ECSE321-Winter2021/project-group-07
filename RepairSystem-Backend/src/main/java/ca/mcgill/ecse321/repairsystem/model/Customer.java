@@ -18,20 +18,6 @@ public class Customer extends Person
 	}
 
 	public Customer() {
-
-	}
-
-	private int id;
-	@Id
-	public int getId()
-	{
-		return id;
-	}
-
-	public void setId(int aId)
-	{
-		id = aId;
-
 	}
 
 	private String creditHash;
@@ -79,7 +65,6 @@ public class Customer extends Person
 		appointments = appointmentList;
 	}
 
-
 	private List<Car> cars;
 
 	@OneToMany(cascade={CascadeType.ALL})
@@ -93,9 +78,7 @@ public class Customer extends Person
 	}
 
 	public void addCar(Car car) {
-		if(this.cars == null) {
-
-		}
+		cars.add(car);
 	}
 	
 	private Calendar lastActive;
