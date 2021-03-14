@@ -145,6 +145,10 @@ public class TestCarService {
 		}
 		assertNotNull(car);
 		assertEquals(type, car.getCarType());
+		assertEquals(winterTires, car.getWinterTires());
+		assertEquals(numOfKm,car.getNumOfKilometers());
+		assertEquals(APPOINTMENTS, car.getAppointments());
+		assertEquals(customer, car.getCustomer());
 	}
 
 	/**

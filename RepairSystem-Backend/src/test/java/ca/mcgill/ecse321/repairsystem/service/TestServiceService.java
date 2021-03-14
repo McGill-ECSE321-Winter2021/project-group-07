@@ -79,6 +79,8 @@ public class TestServiceService {
 		
 		assertNotNull(service);
 		assertEquals(type, service.getServiceType());
+		assertEquals(mechanics, service.getMechanics());
+		assertEquals(appointments, service.getAppointments());
 	}
 
 	/**
