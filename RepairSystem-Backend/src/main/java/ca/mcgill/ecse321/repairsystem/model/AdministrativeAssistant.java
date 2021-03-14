@@ -1,6 +1,5 @@
 package ca.mcgill.ecse321.repairsystem.model;
 
-import javax.persistence.Id;
 import javax.persistence.Entity;
 
 

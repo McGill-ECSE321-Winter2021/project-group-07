@@ -1,4 +1,4 @@
-package ca.mcgill.ecse321.dto;
+package ca.mcgill.ecse321.repairsystem.dto;
 
 public class MechanicDto {
 

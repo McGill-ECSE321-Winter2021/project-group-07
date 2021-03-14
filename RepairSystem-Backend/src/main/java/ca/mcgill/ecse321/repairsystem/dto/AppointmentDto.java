@@ -1,22 +1,25 @@
-package ca.mcgill.ecse321.dto;
+package ca.mcgill.ecse321.repairsystem.dto;
+
+import java.util.List;
+import ca.mcgill.ecse321.repairsystem.model.Appointment.AppointmentStatus;
 
 public class AppointmentDto {
-	private Customer customer;
+	private CustomerDto customer;
 	private int id;
 	private AppointmentStatus status;
-	private Note note;
-	private TimeSlot timeslot;
-	private List<Mechanic> mechanics;
-	private Car car;
-	private List<Image> images;
-	private List<Service> services;
+	private String note;
+	private TimeSlotDto timeslot;
+	private List<MechanicDto> mechanics;
+	private CarDto car;
+	private List<ImageDto> images;
+	private List<ServiceDto> services;
 	
-	public AppointmentDto(Customer customer, int id, TimeSlot time, List<Mechanic> mechanics, Car car, List<Image> images, List<Service> services, String note, AppointmentStatus status) {
+	public AppointmentDto(CustomerDto customer, int id, TimeSlotDto time, List<MechanicDto> mechanics, CarDto car, List<ImageDto> images, List<ServiceDto> services, String note, AppointmentStatus status) {
 		  this.customer = customer;
-		  this.Id = id;
+		  this.id = id;
 		  this.status = status;
 		  this.note = note;
-		  this.timeSlot = time;
+		  timeslot = time;
 		  this.mechanics = mechanics;
 		  this.customer = customer;
 		  this.images = images;
@@ -27,7 +30,7 @@ public class AppointmentDto {
 	public AppointmentDto() {
 	}
 	
-	public Customer getCustomer() {
+	public CustomerDto getCustomer() {
 		return customer;
 	}
 	
@@ -36,30 +39,30 @@ public class AppointmentDto {
 	}
 	
 	public AppointmentStatus getStatus() {
-		return aPassword;
+		return status;
 	}
 	
-	public Note getNote() {
-		return aEmail;
+	public String getNote() {
+		return note;
 	}
 
-	public TimeSlot getTimeSlot() {
+	public TimeSlotDto getTimeSlot() {
 		return timeslot;
 	}
 	
-	public List<Mechanic> getMechanics() {
+	public List<MechanicDto> getMechanics() {
 		return mechanics;
 	}
 	
-	public Car getCar() {
+	public CarDto getCar() {
 		return car;
 	}
 	
-	public List<Image> getImages() {
+	public List<ImageDto> getImages() {
 		return images;
 	}
 	
-	public List<Service> getServices() {
+	public List<ServiceDto> getServices() {
 		return services;
 	}
 }

@@ -1,4 +1,4 @@
-package ca.mcgill.ecse321.dto;
+package ca.mcgill.ecse321.repairsystem.dto;
 
 public class AdministrativeAssistantDto extends PersonDto {
 	private String aName;
@@ -6,10 +6,9 @@ public class AdministrativeAssistantDto extends PersonDto {
 	private String aPassword;
 	private int aPhone;
 	private String aEmail;
-	private RepairSystem aRepairSystem;
 	
-	public AdministrativeAssistantDto(String aName, int id, String aPassword, int aPhone, String aEmail, RepairSystem aRepairSystem) {
-		super(aName,id, aPassword, aPhone, aEmail, aRepairSystem);
+	public AdministrativeAssistantDto(String aName, int id, String aPassword, int aPhone, String aEmail) {
+		super(aName,id, aPassword, aPhone, aEmail);
 	}
 	
 	public AdministrativeAssistantDto() {
@@ -19,8 +18,8 @@ public class AdministrativeAssistantDto extends PersonDto {
 		return aName;
 	}
 	
-	public int getId() {
-		return id;
+	public int getPhone() {
+		return aPhone;
 	}
 	
 	public String getPassword() {
@@ -31,7 +30,4 @@ public class AdministrativeAssistantDto extends PersonDto {
 		return aEmail;
 	}
 	
-	public RepairSystem getRepairSystem() {
-		return aRepairSystem;
-	}
 }
