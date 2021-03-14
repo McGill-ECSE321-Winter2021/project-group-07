@@ -1,11 +1,11 @@
 package ca.mcgill.ecse321.repairsystem.dto;
 
 public class ImageDto {
-	private Appointment appointment;
+	private AppointmentDto appointment;
 	private int imageId;
 	private String url;
 	
-	public ImageDto(int id, String url, Appointment a) {
+	public ImageDto(int id, String url, AppointmentDto a) {
 		  this.imageId = id;
 		  this.url = url;
 		  this.appointment = a;
@@ -14,7 +14,7 @@ public class ImageDto {
 	public ImageDto() {
 	}
 	 
-	public Appointment getAppointment() {
+	public AppointmentDto getAppointment() {
 	    return appointment;
 	}
 	 

@@ -1,10 +1,12 @@
 package ca.mcgill.ecse321.repairsystem.dto;
 
-public class MechanicDto {
+import java.util.*;
 
-	private List<TimeSlot> timeSlots;
-	private List<Service> services;
-	private List<Appointment> appointments;
+public class MechanicDto extends PersonDto{
+
+	private List<TimeSlotDto> timeSlots;
+	private List<ServiceDto> services;
+	private List<AppointmentDto> appointments;
 
 	public MechanicDto(String aName, int id, String aPassword, int aPhone, String aEmail, RepairSystem aRepairSystem, List<Service> allCapabilities) {
 		super(aName, id, aPassword, aPhone, aEmail, aRepairSystem);    
@@ -13,15 +15,15 @@ public class MechanicDto {
 	public MechanicDto() {
 	}
 	
-	public List<TimeSlot> getTimeSlots() {
+	public List<TimeSlotDto> getTimeSlots() {
 		return timeSlots;
 	}
 	
-	public List<Service> getServices() {
+	public List<ServiceDto> getServices() {
 		return services;
 	}
 	
-	public List<Appointment> getAppointments() {
+	public List<AppointmentDto> getAppointments() {
 	    return appointments;
 	}
 }

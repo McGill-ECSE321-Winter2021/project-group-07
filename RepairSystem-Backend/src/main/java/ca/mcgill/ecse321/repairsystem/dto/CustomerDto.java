@@ -1,15 +1,17 @@
 package ca.mcgill.ecse321.repairsystem.dto;
 
-public class CustomerDto {
-	private Sring creditHash; 
+import java.util.*;
+
+public class CustomerDto extends PersonDto{
+	private String creditHash; 
 	private String debitHash; 
 	private String address;
-	private List<Appointment> appointments;
-	private List<Car> cars;
+	private List<AppointmentDto> appointments;
+	private List<CarDto> cars;
 	private Calendar lastActive;
 
-	public CustomerDto(String aName,  int id, String aPassword, int aPhone, String aEmail, Calendar lastDate, RepairSystem aRepairSystem, String credit, String debit, String add) {
-		super(aName, id, aPassword, aPhone, aEmail, aRepairSystem);
+	public CustomerDto(String aName,  int id, String aPassword, int aPhone, String aEmail, Calendar lastDate, String credit, String debit, String add) {
+		super(aName, id, aPassword, aPhone, aEmail);
 		creditHash = credit;
 		debitHash = debit;
 		address = add;
@@ -30,11 +32,11 @@ public class CustomerDto {
 		return address;
 	}
 	  
-	public List<Appointment> getAppointments() {
+	public List<AppointmentDto> getAppointments() {
 	    return appointments;
 	}
 	
-	public List<Car> getCars() {
+	public List<CarDto> getCars() {
 		return cars;
 	}
 	
