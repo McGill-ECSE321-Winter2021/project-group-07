@@ -15,9 +15,12 @@ public class CustomerService {
 
 	@Transactional
 	public Customer createCustomer(String aName, String aPassword, int aPhone, String aEmail, Calendar lastDate, RepairSystem aRepairSystem, String credit, String debit, String add) {
-		if(aName == null || aName.trim().length() == 0) {
-			throw new IllegalArgumentException("Customer name cannot be empty!");
-		}
+		if(aName == null || aName.trim().length() == 0) throw new IllegalArgumentException("Customer name cannot be empty!");
+		if(aPassword == null || aPassword.trim().length() == 0) throw new IllegalArgumentException("Customer passward cannot be empty!");
+		if(aEmail == null || aEmail.trim().length() == 0) throw new IllegalArgumentException("Customer email cannot be empty!");
+		if(aRepairSystem == null || aEmail.trim().length() == 0) throw new IllegalArgumentException("Customer repair system cannot be empty!");
+		if(lastDate == null || aEmail.trim().length() == 0) throw new IllegalArgumentException("Customer last date cannot be empty!");
+
 		int id = aName.hashCode() * aPassword.hashCode();
 		Customer customer = new Customer(aName, id, aPassword, aPhone, aEmail, lastDate, aRepairSystem, credit, debit, add);
 		customerRepository.save(customer);

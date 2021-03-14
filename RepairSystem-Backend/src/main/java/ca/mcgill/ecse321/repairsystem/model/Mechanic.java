@@ -17,20 +17,20 @@ public class Mechanic extends Person{
 	public Mechanic() {
 		
 	}
-
-	
 	private int id;
-	@Id
-	public int getId()
-	{
-		return id;
-	}
 
 	public void setId(int aId)
 	{
 		id = aId;
 
 	}
+	@Id
+	public int getId()
+	{
+		return id;
+	}
+
+
 
   //Mechanic Associations
   private List<TimeSlot> timeSlots;

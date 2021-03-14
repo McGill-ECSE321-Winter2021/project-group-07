@@ -20,6 +20,11 @@ public class AdministrativeAssistantService {
 
 	@Transactional
 	public AdministrativeAssistant createAdmin(String aName, String aPassword, int aPhone, String aEmail, RepairSystem aRepairSystem) {
+		if(aName == null || aName.trim().length() == 0) throw new IllegalArgumentException("Administrative assistant name cannot be empty!");
+		if(aPassword == null || aPassword.trim().length() == 0) throw new IllegalArgumentException("Administrative assistant passward cannot be empty!");
+		if(aEmail == null || aEmail.trim().length() == 0) throw new IllegalArgumentException("Administrative assistant email cannot be empty!");
+		if(aRepairSystem == null || aEmail.trim().length() == 0) throw new IllegalArgumentException("Administrative assistant repair system cannot be empty!");
+
 		int id = aName.hashCode() * aPassword.hashCode();
 		AdministrativeAssistant admin = new AdministrativeAssistant(aName, id, aPassword, aPhone, aEmail, aRepairSystem);
 		administrativeAssistantRepository.save(admin);

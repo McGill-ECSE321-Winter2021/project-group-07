@@ -12,9 +12,11 @@ public class ImageService {
 	private ImageRepository imageRepository;
 
 	////////////////////SERVICE IMAGE METHODS //////////////////// 
-
 	@Transactional
 	public Image createImage(String url, Appointment a) {
+		if(url == null || url.trim().length() == 0) throw new IllegalArgumentException("Image url cannot be empty!");
+		if(a == null) throw new IllegalArgumentException("Image appointment cannot be empty!");
+
 		int id = url.hashCode();
 		Image i = new Image(id, url, a);
 		imageRepository.save(i);
