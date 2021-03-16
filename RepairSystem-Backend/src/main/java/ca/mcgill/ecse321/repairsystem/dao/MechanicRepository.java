@@ -13,6 +13,7 @@ public interface MechanicRepository extends CrudRepository<Mechanic, String>{
 	List<Mechanic> findByName(String name);
 	Mechanic findByPhone(int aPhone);
 	Mechanic findByEmail(String email);
+	List<Mechanic> findAll();
 	
 
 }

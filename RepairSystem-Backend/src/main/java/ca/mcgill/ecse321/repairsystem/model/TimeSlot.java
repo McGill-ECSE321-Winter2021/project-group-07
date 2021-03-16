@@ -56,7 +56,7 @@ public class TimeSlot{
 
 	private List<Mechanic> mechanics;
 	@ManyToMany
-	public List<Mechanic> getMechanic(){
+	public List<Mechanic> getMechanics(){
 		return this.mechanics;
 	}
 	public void setMechanic(List<Mechanic> mechanic){
@@ -66,7 +66,7 @@ public class TimeSlot{
 	private List<Appointment> appointments;
 	
 	@OneToMany(cascade = {CascadeType.ALL})
-	public List<Appointment> getAppointment(){
+	public List<Appointment> getAppointments(){
 		return this.appointments;
 	}
 	public void setAppointment(List<Appointment> appointment){

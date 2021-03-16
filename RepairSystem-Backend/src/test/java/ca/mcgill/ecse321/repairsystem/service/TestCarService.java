@@ -42,9 +42,8 @@ public class TestCarService {
 	private static boolean WINTER_TIRES=false;
 	private static List<Appointment> APPOINTMENTS = new ArrayList<Appointment>();
 	private static Appointment APPOINTMENT = new Appointment();
-	private static RepairSystem repair = new RepairSystem();
 	private static Calendar c =  new GregorianCalendar(2021,3,13);
-	private static Customer CUSTOMER = new Customer("TestPerson", 2001, "123abc", 76523455,"TestPerson@gmail.com", c, repair, "123456789","987654321", "123 Street Avenue");
+	private static Customer CUSTOMER = new Customer("TestPerson", 2001, "123abc", 76523455,"TestPerson@gmail.com", c, "123456789","987654321", "123 Street Avenue");
 
 	@BeforeEach
 	public void setMockOutput()
@@ -134,7 +133,7 @@ public class TestCarService {
 		boolean winterTires = true;
 		int numOfKm = 53467;
 		RepairSystem repairSystem = new RepairSystem();
-		Customer customer  = new Customer("Marcus", 345678, "password", 6789876, "Marcus@gmail.com", new GregorianCalendar(2021,3,13), repairSystem, "123456", "678954", "123 avenue street");
+		Customer customer  = new Customer("Marcus", 012123, "password", 6789876, "Marcus@gmail.com", new GregorianCalendar(2021,3,13),"123456", "678954", "123 avenue street");
 		Car car = null;
 		try
 		{
@@ -160,8 +159,7 @@ public class TestCarService {
 		CarType type = null;
 		boolean winterTires = false;
 		int numOfKm = 53467;
-		RepairSystem repairSystem = new RepairSystem();
-		Customer customer  = new Customer("Marcus", 345678, "password", 6789876, "Marcus@gmail.com", new GregorianCalendar(2021,3,13), repairSystem, "123456", "678954", "123 avenue street");
+		Customer customer  = new Customer("Marcus", 012123, "password", 6789876, "Marcus@gmail.com", new GregorianCalendar(2021,3,13),"123456", "678954", "123 avenue street");
 		Car car = null;
 		
 		try {
@@ -185,7 +183,7 @@ public class TestCarService {
 		RepairSystem repairSystem = new RepairSystem();
 		boolean winterTires = (Boolean) null;
 		int numOfKm = 67800;
-		Customer customer  = new Customer("Marcus", 345678, "password", 6789876, "Marcus@gmail.com", new GregorianCalendar(2021,3,13), repairSystem, "123456", "678954", "123 avenue street");
+		Customer customer  = new Customer("Marcus", 012123, "password", 6789876, "Marcus@gmail.com", new GregorianCalendar(2021,3,13),"123456", "678954", "123 avenue street");
 		Car car = null;
 		
 		try {
@@ -209,7 +207,7 @@ public class TestCarService {
 		boolean winterTires = false;
 		int numOfKm = (Integer) null;
 		RepairSystem repairSystem = new RepairSystem();
-		Customer customer  = new Customer("Marcus", 345678, "password", 6789876, "Marcus@gmail.com", new GregorianCalendar(2021,3,13), repairSystem, "123456", "678954", "123 avenue street");
+		Customer customer  = new Customer("Marcus", 012123, "password", 6789876, "Marcus@gmail.com", new GregorianCalendar(2021,3,13),"123456", "678954", "123 avenue street");
 		Car car = null;
 		
 		try {
@@ -234,7 +232,7 @@ public class TestCarService {
 		int numOfKm = 455679;
 		RepairSystem repairSystem = new RepairSystem();
 		APPOINTMENTS = null;
-		Customer customer  = new Customer("Marcus", 345678, "password", 6789876, "Marcus@gmail.com", new GregorianCalendar(2021,3,13), repairSystem, "123456", "678954", "123 avenue street");
+		Customer customer  = new Customer("Marcus", 012123, "password", 6789876, "Marcus@gmail.com", new GregorianCalendar(2021,3,13),"123456", "678954", "123 avenue street");
 		Car car = null;
 		
 		try {

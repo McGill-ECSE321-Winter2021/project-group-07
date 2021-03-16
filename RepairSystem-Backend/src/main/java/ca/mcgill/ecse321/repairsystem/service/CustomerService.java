@@ -3,9 +3,11 @@ package ca.mcgill.ecse321.repairsystem.service;
 import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Service;
 import ca.mcgill.ecse321.repairsystem.model.*;
 import ca.mcgill.ecse321.repairsystem.dao.CustomerRepository;
 
+@Service
 public class CustomerService {
 
 	@Autowired
@@ -14,15 +16,9 @@ public class CustomerService {
 	////////////////////SERVICE CUSTOMER METHODS //////////////////// 
 
 	@Transactional
-	public Customer createCustomer(String aName, String aPassword, int aPhone, String aEmail, Calendar lastDate, RepairSystem aRepairSystem, String credit, String debit, String add) {
-		if(aName == null || aName.trim().length() == 0) throw new IllegalArgumentException("Customer name cannot be empty!");
-		if(aPassword == null || aPassword.trim().length() == 0) throw new IllegalArgumentException("Customer passward cannot be empty!");
-		if(aEmail == null || aEmail.trim().length() == 0) throw new IllegalArgumentException("Customer email cannot be empty!");
-		if(aRepairSystem == null || aEmail.trim().length() == 0) throw new IllegalArgumentException("Customer repair system cannot be empty!");
-		if(lastDate == null || aEmail.trim().length() == 0) throw new IllegalArgumentException("Customer last date cannot be empty!");
-
+	public Customer createCustomer(String aName, String aPassword, int aPhone, String aEmail, Calendar lastDate, String credit, String debit, String add) {
 		int id = aName.hashCode() * aPassword.hashCode();
-		Customer customer = new Customer(aName, id, aPassword, aPhone, aEmail, lastDate, aRepairSystem, credit, debit, add);
+		Customer customer = new Customer(aName, id, aPassword, aPhone, aEmail, lastDate, credit, debit, add);
 		customerRepository.save(customer);
 		return customer;
 	}

@@ -1,32 +1,23 @@
 package ca.mcgill.ecse321.repairsystem.service;
 
 import java.util.*;
-import java.sql.Date;
-import java.sql.Time;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Service;
 
 import ca.mcgill.ecse321.repairsystem.dao.*;
 import ca.mcgill.ecse321.repairsystem.model.*;
 
+@Service
 public class AdministrativeAssistantService {
 	@Autowired
 	private AdministrativeAssistantRepository administrativeAssistantRepository;
 
 	@Transactional
-	public AdministrativeAssistant createAdmin(String aName, String aPassword, int aPhone, String aEmail, RepairSystem aRepairSystem) {
-		if(aName == null || aName.trim().length() == 0) throw new IllegalArgumentException("Administrative assistant name cannot be empty!");
-		if(aPassword == null || aPassword.trim().length() == 0) throw new IllegalArgumentException("Administrative assistant passward cannot be empty!");
-		if(aEmail == null || aEmail.trim().length() == 0) throw new IllegalArgumentException("Administrative assistant email cannot be empty!");
-		if(aRepairSystem == null || aEmail.trim().length() == 0) throw new IllegalArgumentException("Administrative assistant repair system cannot be empty!");
-
+	public AdministrativeAssistant createAdmin(String aName, String aPassword, int aPhone, String aEmail) {
 		int id = aName.hashCode() * aPassword.hashCode();
-		AdministrativeAssistant admin = new AdministrativeAssistant(aName, id, aPassword, aPhone, aEmail, aRepairSystem);
+		AdministrativeAssistant admin = new AdministrativeAssistant(aName, id, aPassword, aPhone, aEmail);
 		administrativeAssistantRepository.save(admin);
 		return admin;
 	}
@@ -59,8 +50,6 @@ public class AdministrativeAssistantService {
 	public List<AdministrativeAssistant> getAllAdmins() {
 		return toList(administrativeAssistantRepository.findAll());
 	}
-
-
 
 	/* 
 	 * helper method

@@ -50,7 +50,7 @@ public class TestAppointmentService {
 	//fields for creating a customer 
 	private static RepairSystem repair = new RepairSystem();
 	private static Calendar c =  new GregorianCalendar(2021,3,13);
-	private static Customer CUSTOMER = new Customer("TestPerson", 2001, "123abc", 76523455,"TestPerson@gmail.com", c, repair, "123456789","987654321", "123 Street Avenue");
+	private static Customer CUSTOMER = new Customer("TestPerson", 2001, "123abc", 76523455,"TestPerson@gmail.com", c, "123456789","987654321", "123 Street Avenue");
 
 	//fields for creating timeslot 
 	private static TimeSlot TIME_SLOT = new TimeSlot(LocalDateTime.of(2021, Month.MARCH,21,14,12,00),LocalDateTime.of(2021, Month.MARCH,21, 20, 00,00), 240, new ArrayList<Mechanic>(), new ArrayList<Appointment>() );
@@ -191,8 +191,7 @@ public class TestAppointmentService {
 	public void testCreateAppointment()
 	{
 		assertEquals(0, service.getAllAppointments().size());
-		RepairSystem repairSystem = new RepairSystem();
-		Customer customer  = new Customer("Marcus", 345678, "password", 6789876, "Marcus@gmail.com", new GregorianCalendar(2021,3,13), repairSystem, "123456", "678954", "123 avenue street");
+		Customer customer  = new Customer("Marcus", 012123, "password", 6789876, "Marcus@gmail.com", new GregorianCalendar(2021,3,13),"123456", "678954", "123 avenue street");
 		TimeSlot dummyTime = new TimeSlot(LocalDateTime.of(2021, Month.MARCH,21,14,12,00),LocalDateTime.of(2021, Month.MARCH,21, 20, 00,00), 240, new ArrayList<Mechanic>(), new ArrayList<Appointment>() );
 		Car dummyCar = new Car(451, CarType.Hatchback, true, 50000, null, customer);
 		String dummyNote = "dummy Note";
@@ -250,7 +249,7 @@ public class TestAppointmentService {
 	{
 		String error = null;
 		RepairSystem repairSystem = new RepairSystem();
-		Customer customer  = new Customer("Marcus", 345678, "password", 6789876, "Marcus@gmail.com", new GregorianCalendar(2021,3,13), repairSystem, "123456", "678954", "123 avenue street");
+		Customer customer  = new Customer("Marcus", 012123, "password", 6789876, "Marcus@gmail.com", new GregorianCalendar(2021,3,13),"123456", "678954", "123 avenue street");
 		TimeSlot dummyTime = new TimeSlot(LocalDateTime.of(2021, Month.MARCH,21,14,12,00),LocalDateTime.of(2021, Month.MARCH,21, 20, 00,00), 240, new ArrayList<Mechanic>(), new ArrayList<Appointment>() );
 		Car dummyCar = new Car(451, CarType.Hatchback, true, 50000, null, customer);
 		String dummyNote = "dummy Note";
@@ -302,7 +301,7 @@ public class TestAppointmentService {
 	{
 		String error = null;
 		RepairSystem repairSystem = new RepairSystem();
-		Customer customer  =  new Customer("Marcus", 345678, "password", 6789876, "Marcus@gmail.com", new GregorianCalendar(2021,3,13), repairSystem, "123456", "678954", "123 avenue street");
+		Customer customer  = new Customer("Marcus", 012123, "password", 6789876, "Marcus@gmail.com", new GregorianCalendar(2021,3,13),"123456", "678954", "123 avenue street");
 		TimeSlot dummyTime = null;
 		Car dummyCar = new Car(451, CarType.Hatchback, true, 50000, null, customer);
 		String dummyNote = "dummy Note";
@@ -329,7 +328,7 @@ public class TestAppointmentService {
 	{
 		String error = null;
 		RepairSystem repairSystem = new RepairSystem();
-		Customer customer  =  new Customer("Marcus", 345678, "password", 6789876, "Marcus@gmail.com", new GregorianCalendar(2021,3,13), repairSystem, "123456", "678954", "123 avenue street");
+		Customer customer  = new Customer("Marcus", 012123, "password", 6789876, "Marcus@gmail.com", new GregorianCalendar(2021,3,13),"123456", "678954", "123 avenue street");
 		TimeSlot dummyTime =  new TimeSlot(LocalDateTime.of(2021, Month.MARCH,21,14,12,00),LocalDateTime.of(2021, Month.MARCH,21, 20, 00,00), 240, new ArrayList<Mechanic>(), new ArrayList<Appointment>() );
 		Car dummyCar = null;
 		String dummyNote = "dummy Note";

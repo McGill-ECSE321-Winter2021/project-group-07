@@ -15,4 +15,5 @@ public interface TimeSlotRepository extends CrudRepository<TimeSlot, String>{
 	TimeSlot findById(int id);
 	List<TimeSlot> findByStartTime(LocalDateTime time);
 	List<TimeSlot> findByEndTime(LocalDateTime time);
+	List<TimeSlot> findAll();
 }

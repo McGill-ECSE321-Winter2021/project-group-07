@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 public class Appointment
 {
 
-  public Appointment(Customer customer, int id, TimeSlot time, List<Mechanic> mechanics, Car car, List<Image> image, List<Service> services, String note, AppointmentStatus status) {
+  public Appointment(Customer customer, int id, TimeSlot time, List<Mechanic> mechanics, Car car, List<Image> images, List<Service> services, String note, AppointmentStatus status) {
 	  this.customer = customer;
 	  this.Id = id;
 	  this.status = status;

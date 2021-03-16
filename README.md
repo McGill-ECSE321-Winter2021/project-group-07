@@ -11,7 +11,7 @@ have access and book a variety of services (towing, oil change, tire changes, re
 - Norman Kong
 - Catherine Van Gheluwe 
 
-## Sprint 1 ( Due Sunday, February 21st)
+## Sprint 1 (Due Monday, February 22nd)
  ### Documentation
  - [Requirement Model](https://github.com/McGill-ECSE321-Winter2021/project-group-07/wiki/Requirements-Model-(requirements-&-use-case))
  - [Domain Model](https://github.com/McGill-ECSE321-Winter2021/project-group-07/wiki/Domain-Model-Iterations)
@@ -26,16 +26,20 @@ have access and book a variety of services (towing, oil change, tire changes, re
  |Norman Kong |       Requirements Model, Domain Model, Documentation, Build System & Testing Persistence Layer        |                10  |
  |Catherine Van Gheluwe|  Requirements Model, Domain Model, Documentation, Build System, Persistence Layer & Bug fixing    |      17       |
  
-## Sprint 2 
+## Sprint 2 (Due Tuesday, March 16th)
+ ### Documentation
+ - [RESTful Service Endpoints](https://github.com/McGill-ECSE321-Winter2021/project-group-07/wiki/RESTful-Service-Endpoints)
+ - [Software Quality Assurance Plan and Report](https://github.com/McGill-ECSE321-Winter2021/project-group-07/wiki/Software-Quality-Assurance-Plan-and-Report)
+ - [Project Report #2](https://github.com/McGill-ECSE321-Winter2021/project-group-07/wiki/Project-Report-(Sprint-2))
 
   ### Member Roles & Time Spent
  | Team Member | Roles / Tasks | Time Spent (Hours)|
  | ------------|---------------| ------------------|
- |Annabelle Dion|               |                   |
- |Sia Ham       |              |                   |
- |Thomas Jarvis|               |                  |
- |Norman Kong |                |                  |
- |Catherine Van Gheluwe|       |                  |
+ |Annabelle Dion|      RESTful Service Class, Unit Testing, QA Plan        |                   |
+ |Sia Ham       |   RESTful API, Documentation, Unit Testing, QA Plan           |                   |
+ |Thomas Jarvis|     RESTful Service Class           |                  |
+ |Norman Kong |     RESTful Service Class            |                  |
+ |Catherine Van Gheluwe| RESTful API, Unit Testing, QA Plan   |                  |
  
  ## Sprint 3 
 

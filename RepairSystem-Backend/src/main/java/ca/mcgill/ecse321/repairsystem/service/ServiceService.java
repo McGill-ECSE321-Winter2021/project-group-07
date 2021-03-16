@@ -3,12 +3,13 @@ package ca.mcgill.ecse321.repairsystem.service;
 import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Service;
 
 import ca.mcgill.ecse321.repairsystem.dao.*;
 import ca.mcgill.ecse321.repairsystem.model.*;
 import ca.mcgill.ecse321.repairsystem.model.Service.ServiceType;
 
-
+@Service
 public class ServiceService {
 	@Autowired
 	private ServiceRepository serviceRepository;
@@ -25,14 +26,9 @@ public class ServiceService {
 		return serviceRepository.findByServiceType(type);
 	}
 	
-	/* 
-	 * helper method
-	 */	
-	private <T> List<T> toList(Iterable<T> iterable){
-		List<T> resultList = new ArrayList<T>();
-		for (T t : iterable) {
-			resultList.add(t);
-		}
-		return resultList;
+	@Transactional
+	public List<ca.mcgill.ecse321.repairsystem.model.Service> getAllServices() {
+		return serviceRepository.findAll();
 	}
+	
 }

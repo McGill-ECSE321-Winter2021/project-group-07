@@ -10,23 +10,20 @@ public abstract class Person{
 
 	private String name;
 	private String password;
-	private RepairSystem repairSystem;
 	private int userId;
 	private int phone;
 	private String email;
 	
-	public Person(String aName, int id,String aPassword, int aPhone, String aEmail, RepairSystem aRepairSystem)
+	public Person(String aName, int id,String aPassword, int aPhone, String aEmail)
 	{
 		name = aName;
 		password = aPassword;
 		userId = id;
 		phone = aPhone;
 		email = aEmail;
-		repairSystem = aRepairSystem;
 	}
 	
 	public Person() {
-		
 	}
 
 	@Id
@@ -38,7 +35,6 @@ public abstract class Person{
 	public void setId(int aId)
 	{
 		this.userId = aId;
-
 	}
 	
 

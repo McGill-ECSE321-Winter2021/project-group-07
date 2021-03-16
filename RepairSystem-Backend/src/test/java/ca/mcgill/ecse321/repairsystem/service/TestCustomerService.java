@@ -175,12 +175,11 @@ public class TestCustomerService {
 		String aPassword = "123412";
 		int aPhone = 123456789;
 		String aEmail = "email@repairsystem.com";
-		RepairSystem system = new RepairSystem();
 		Calendar lastDate = Calendar.getInstance();
 		int customerId = name.hashCode() * aPassword.hashCode();
 
 		try {
-			customer = customerService.createCustomer(name, aPassword, aPhone, aEmail, lastDate, system, name, aPassword, aEmail);	
+			customer = customerService.createCustomer(name, aPassword, aPhone, aEmail, lastDate, name, aPassword, aEmail);	
 		} catch (IllegalArgumentException e) {
 			// Check that no error occurred
 			fail();
@@ -200,7 +199,7 @@ public class TestCustomerService {
 		Calendar lastDate = Calendar.getInstance();
 		String error = null;
 		try {
-			customer = customerService.createCustomer(name, aPassword, aPhone, aEmail, lastDate, system, name, aPassword, aEmail);	
+			customer = customerService.createCustomer(name, aPassword, aPhone, aEmail, lastDate, name, aPassword, aEmail);	
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
@@ -219,7 +218,7 @@ public class TestCustomerService {
 		Calendar lastDate = Calendar.getInstance();
 		String error = null;
 		try {
-			customer = customerService.createCustomer(name, aPassword, aPhone, aEmail, lastDate, system, name, aPassword, aEmail);	
+			customer = customerService.createCustomer(name, aPassword, aPhone, aEmail, lastDate, name, aPassword, aEmail);	
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
@@ -238,7 +237,7 @@ public class TestCustomerService {
 		Calendar lastDate = Calendar.getInstance();
 		String error = null;
 		try {
-			customer = customerService.createCustomer(name, aPassword, aPhone, aEmail, lastDate, system, name, aPassword, aEmail);	
+			customer = customerService.createCustomer(name, aPassword, aPhone, aEmail, lastDate, name, aPassword, aEmail);	
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
@@ -257,7 +256,7 @@ public class TestCustomerService {
 		Calendar lastDate = Calendar.getInstance();
 		String error = null;
 		try {
-			customer = customerService.createCustomer(name, aPassword, aPhone, aEmail, lastDate, system, name, aPassword, aEmail);	
+			customer = customerService.createCustomer(name, aPassword, aPhone, aEmail, lastDate, name, aPassword, aEmail);	
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
@@ -276,7 +275,7 @@ public class TestCustomerService {
 		Calendar lastDate = Calendar.getInstance();
 		String error = null;
 		try {
-			customer = customerService.createCustomer(name, aPassword, aPhone, aEmail, lastDate, system, name, aPassword, aEmail);	
+			customer = customerService.createCustomer(name, aPassword, aPhone, aEmail, lastDate, name, aPassword, aEmail);	
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
@@ -295,7 +294,7 @@ public class TestCustomerService {
 		Calendar lastDate = Calendar.getInstance();
 		String error = null;
 		try {
-			customer = customerService.createCustomer(name, aPassword, aPhone, aEmail, lastDate, system, name, aPassword, aEmail);	
+			customer = customerService.createCustomer(name, aPassword, aPhone, aEmail, lastDate, name, aPassword, aEmail);	
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
@@ -314,7 +313,7 @@ public class TestCustomerService {
 		Calendar lastDate = Calendar.getInstance();
 		String error = null;
 		try {
-			customer = customerService.createCustomer(name, aPassword, aPhone, aEmail, lastDate, system, name, aPassword, aEmail);	
+			customer = customerService.createCustomer(name, aPassword, aPhone, aEmail, lastDate, name, aPassword, aEmail);	
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
@@ -333,7 +332,7 @@ public class TestCustomerService {
 		Calendar lastDate = null;
 		String error = null;
 		try {
-			customer = customerService.createCustomer(name, aPassword, aPhone, aEmail, lastDate, system, name, aPassword, aEmail);	
+			customer = customerService.createCustomer(name, aPassword, aPhone, aEmail, lastDate, name, aPassword, aEmail);	
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}

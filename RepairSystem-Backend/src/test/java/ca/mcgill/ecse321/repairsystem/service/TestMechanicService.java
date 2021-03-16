@@ -139,12 +139,11 @@ public class TestMechanicService {
 		String aPassword = "123412";
 		int aPhone = 123456789;
 		String aEmail = "email@repairsystem.com";
-		RepairSystem system = new RepairSystem();
 		List<Service> allCapabilities = new ArrayList<Service>();
 		int mechanicId = name.hashCode() * aPassword.hashCode();
 
 		try {
-			mechanic = mechanicService.createMechanic(name, aPassword, aPhone, aEmail, system, allCapabilities);		
+			mechanic = mechanicService.createMechanic(name, aPassword, aPhone, aEmail, allCapabilities);		
 		} catch (IllegalArgumentException e) {
 			// Check that no error occurred
 			fail();
@@ -165,7 +164,7 @@ public class TestMechanicService {
 		List<Service> allCapabilities = new ArrayList<Service>();
 		String error = null;
 		try {
-			mechanic = mechanicService.createMechanic(name, aPassword, aPhone, aEmail, system, allCapabilities);		
+			mechanic = mechanicService.createMechanic(name, aPassword, aPhone, aEmail, allCapabilities);			
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
@@ -184,7 +183,7 @@ public class TestMechanicService {
 		List<Service> allCapabilities = new ArrayList<Service>();
 		String error = null;
 		try {
-			mechanic = mechanicService.createMechanic(name, aPassword, aPhone, aEmail, system, allCapabilities);		
+			mechanic = mechanicService.createMechanic(name, aPassword, aPhone, aEmail, allCapabilities);			
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
@@ -203,7 +202,7 @@ public class TestMechanicService {
 		List<Service> allCapabilities = new ArrayList<Service>();
 		String error = null;
 		try {
-			mechanic = mechanicService.createMechanic(name, aPassword, aPhone, aEmail, system, allCapabilities);		
+			mechanic = mechanicService.createMechanic(name, aPassword, aPhone, aEmail, allCapabilities);			
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
@@ -222,7 +221,7 @@ public class TestMechanicService {
 		List<Service> allCapabilities = new ArrayList<Service>();
 		String error = null;
 		try {
-			mechanic = mechanicService.createMechanic(name, aPassword, aPhone, aEmail, system, allCapabilities);		
+			mechanic = mechanicService.createMechanic(name, aPassword, aPhone, aEmail, allCapabilities);			
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
@@ -241,7 +240,7 @@ public class TestMechanicService {
 		List<Service> allCapabilities = new ArrayList<Service>();
 		String error = null;
 		try {
-			mechanic = mechanicService.createMechanic(name, aPassword, aPhone, aEmail, system, allCapabilities);		
+			mechanic = mechanicService.createMechanic(name, aPassword, aPhone, aEmail, allCapabilities);			
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
@@ -260,7 +259,7 @@ public class TestMechanicService {
 		List<Service> allCapabilities = new ArrayList<Service>();
 		String error = null;
 		try {
-			mechanic = mechanicService.createMechanic(name, aPassword, aPhone, aEmail, system, allCapabilities);		
+			mechanic = mechanicService.createMechanic(name, aPassword, aPhone, aEmail, allCapabilities);			
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
@@ -279,7 +278,7 @@ public class TestMechanicService {
 		List<Service> allCapabilities = new ArrayList<Service>();
 		String error = null;
 		try {
-			mechanic = mechanicService.createMechanic(name, aPassword, aPhone, aEmail, system, allCapabilities);		
+			mechanic = mechanicService.createMechanic(name, aPassword, aPhone, aEmail, allCapabilities);		
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
@@ -298,7 +297,7 @@ public class TestMechanicService {
 		List<Service> allCapabilities = null;
 		String error = null;
 		try {
-			mechanic = mechanicService.createMechanic(name, aPassword, aPhone, aEmail, system, allCapabilities);		
+			mechanic = mechanicService.createMechanic(name, aPassword, aPhone, aEmail, allCapabilities);			
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}

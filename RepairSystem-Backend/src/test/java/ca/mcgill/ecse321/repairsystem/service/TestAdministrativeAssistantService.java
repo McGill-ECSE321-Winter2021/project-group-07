@@ -125,7 +125,7 @@ public class TestAdministrativeAssistantService {
 		int administrativeAssistantId = name.hashCode() * aPassword.hashCode();
 
 		try {
-			administrativeAssistant = administrativeAssistantService.createAdmin(name, aPassword, aPhone, aEmail, system);
+			administrativeAssistant = administrativeAssistantService.createAdmin(name, aPassword, aPhone, aEmail);
 		} catch (IllegalArgumentException e) {
 			// Check that no error occurred
 			fail();
@@ -142,10 +142,9 @@ public class TestAdministrativeAssistantService {
 		String aPassword = "123412";
 		int aPhone = 123456789;
 		String aEmail = "email@repairsystem.com";
-		RepairSystem system = new RepairSystem();
 		String error = null;
 		try {
-			administrativeAssistant = administrativeAssistantService.createAdmin(name, aPassword, aPhone, aEmail, system);
+			administrativeAssistant = administrativeAssistantService.createAdmin(name, aPassword, aPhone, aEmail);
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
@@ -160,10 +159,9 @@ public class TestAdministrativeAssistantService {
 		String aPassword = "123412";
 		int aPhone = 123456789;
 		String aEmail = "email@repairsystem.com";
-		RepairSystem system = new RepairSystem();
 		String error = null;
 		try {
-			administrativeAssistant = administrativeAssistantService.createAdmin(name, aPassword, aPhone, aEmail, system);
+			administrativeAssistant = administrativeAssistantService.createAdmin(name, aPassword, aPhone, aEmail);
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
@@ -178,10 +176,9 @@ public class TestAdministrativeAssistantService {
 		String aPassword = null;
 		int aPhone = 123456789;
 		String aEmail = "email@repairsystem.com";
-		RepairSystem system = new RepairSystem();
 		String error = null;
 		try {
-			administrativeAssistant = administrativeAssistantService.createAdmin(name, aPassword, aPhone, aEmail, system);
+			administrativeAssistant = administrativeAssistantService.createAdmin(name, aPassword, aPhone, aEmail);
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
@@ -196,10 +193,9 @@ public class TestAdministrativeAssistantService {
 		String aPassword = "";
 		int aPhone = 123456789;
 		String aEmail = "email@repairsystem.com";
-		RepairSystem system = new RepairSystem();
 		String error = null;
 		try {
-			administrativeAssistant = administrativeAssistantService.createAdmin(name, aPassword, aPhone, aEmail, system);
+			administrativeAssistant = administrativeAssistantService.createAdmin(name, aPassword, aPhone, aEmail);
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
@@ -214,10 +210,9 @@ public class TestAdministrativeAssistantService {
 		String aPassword = "123412";
 		int aPhone = 123456789;
 		String aEmail = null;
-		RepairSystem system = new RepairSystem();
 		String error = null;
 		try {
-			administrativeAssistant = administrativeAssistantService.createAdmin(name, aPassword, aPhone, aEmail, system);
+			administrativeAssistant = administrativeAssistantService.createAdmin(name, aPassword, aPhone, aEmail);
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
@@ -232,10 +227,9 @@ public class TestAdministrativeAssistantService {
 		String aPassword = "123412";
 		int aPhone = 123456789;
 		String aEmail = "";
-		RepairSystem system = new RepairSystem();
 		String error = null;
 		try {
-			administrativeAssistant = administrativeAssistantService.createAdmin(name, aPassword, aPhone, aEmail, system);
+			administrativeAssistant = administrativeAssistantService.createAdmin(name, aPassword, aPhone, aEmail);
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
@@ -243,23 +237,6 @@ public class TestAdministrativeAssistantService {
 		assertEquals("Administrative assistant email cannot be empty!", error);
 	}
 	
-	@Test
-	public void testCreateSystemNull() {
-		AdministrativeAssistant administrativeAssistant = null;
-		String name = "Oscar";
-		String aPassword = "123412";
-		int aPhone = 123456789;
-		String aEmail = "email@repairsystem.com";
-		RepairSystem system = null;
-		String error = null;
-		try {
-			administrativeAssistant = administrativeAssistantService.createAdmin(name, aPassword, aPhone, aEmail, system);
-		} catch (IllegalArgumentException e) {
-			error = e.getMessage();
-		}
-		assertNull(administrativeAssistant);
-		assertEquals("Administrative assistant repair system cannot be empty!", error);
-	}
 	
 
 }
