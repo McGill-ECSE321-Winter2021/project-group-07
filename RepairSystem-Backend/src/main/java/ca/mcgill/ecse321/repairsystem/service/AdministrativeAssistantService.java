@@ -51,8 +51,6 @@ public class AdministrativeAssistantService {
 		return toList(administrativeAssistantRepository.findAll());
 	}
 
-
-
 	/* 
 	 * helper method
 	 */
