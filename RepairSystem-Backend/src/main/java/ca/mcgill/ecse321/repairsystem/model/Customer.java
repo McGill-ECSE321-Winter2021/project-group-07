@@ -1,7 +1,5 @@
 package ca.mcgill.ecse321.repairsystem.model;
 import java.util.*;
-import java.sql.Date;
-import javax.persistence.Id;
 import javax.persistence.CascadeType;
 import javax.persistence.OneToMany;
 import javax.persistence.Entity;
@@ -9,9 +7,9 @@ import javax.persistence.Entity;
 @Entity
 public class Customer extends Person
 {
-	public Customer(String aName,  int id, String aPassword, int aPhone, String aEmail, Calendar lastDate, RepairSystem aRepairSystem, String credit, String debit, String add)
+	public Customer(String aName,  int id, String aPassword, int aPhone, String aEmail, Calendar lastDate, String credit, String debit, String add)
 	{
-		super(aName, id, aPassword, aPhone, aEmail, aRepairSystem);
+		super(aName, id, aPassword, aPhone, aEmail);
 		creditHash = credit;
 		debitHash = debit;
 		address = add;
@@ -19,20 +17,6 @@ public class Customer extends Person
 	}
 
 	public Customer() {
-
-	}
-
-	private int id;
-	@Id
-	public int getId()
-	{
-		return id;
-	}
-
-	public void setId(int aId)
-	{
-		id = aId;
-
 	}
 
 	private String creditHash;
@@ -80,7 +64,6 @@ public class Customer extends Person
 		appointments = appointmentList;
 	}
 
-
 	private List<Car> cars;
 
 	@OneToMany(cascade={CascadeType.ALL})
@@ -94,9 +77,7 @@ public class Customer extends Person
 	}
 
 	public void addCar(Car car) {
-		if(this.cars == null) {
-
-		}
+		cars.add(car);
 	}
 	
 	private Calendar lastActive;

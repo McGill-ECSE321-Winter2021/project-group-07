@@ -10,18 +10,34 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Appointment
 {
-	
-  public enum AppointmentStatus { CarReceived, InRepair, Completed };
 
-  private int appointmentId;
-  
-  @Id
-  public int getAppointmentId() {
-	  return this.appointmentId;
+  public Appointment(Customer customer, int id, TimeSlot time, List<Mechanic> mechanics, Car car, List<Image> images, List<Service> services, String note, AppointmentStatus status) {
+	  this.customer = customer;
+	  this.Id = id;
+	  this.status = status;
+	  this.note = note;
+	  this.timeSlot = time;
+	  this.mechanics = mechanics;
+	  this.customer = customer;
+	  this.images = images;
+	  this.services = services;
+	  this.car = car;
   }
   
-  public void setAppointmentId(int aId) {
-	  this.appointmentId = aId;
+  public Appointment() {
+  }
+  
+  public enum AppointmentStatus { CarReceived, InRepair, Completed };
+
+  private int Id;
+  
+  @Id
+  public int getId() {
+	  return this.Id;
+  }
+  
+  public void setId(int aId) {
+	  this.Id = aId;
   }
   
   private String note;
@@ -48,16 +64,16 @@ public class Appointment
     status = aStatus;
   }
 
-  private TimeSlot appointmentTime;
+  private TimeSlot timeSlot;
   
   @ManyToOne
-  public TimeSlot getAppointmentTime()
+  public TimeSlot getTimeSlot()
   {
-    return appointmentTime;
+    return timeSlot;
   }
   
-  public void setAppointmentTime(TimeSlot appTime){
-    appointmentTime = appTime;
+  public void setTimeSlot(TimeSlot appTime){
+	  timeSlot = appTime;
   }
   
   private List<Mechanic> mechanics;
@@ -68,32 +84,30 @@ public class Appointment
     return mechanics;
   }
   
-  public void setMechanics(List<Mechanic> mechanicList){
+  public void setMechanics(List<Mechanic> mechanicList) {
     mechanics = mechanicList;
   }
   
   private Customer customer;
  
   @ManyToOne()
-  public Customer getCustomer()
-  {
+  public Customer getCustomer() {
     return customer;
   }
   
-  public void setCustomer(Customer c){
+  public void setCustomer(Customer c) {
     customer = c;
   }
   
-  private List<Service> requiredServices;
+  private List<Service> services;
   
   @ManyToMany()
-  public List<Service> getRequiredServices()
-  {
-    return requiredServices;
+  public List<Service> getServices() {
+    return services;
   }
   
-  public void setRequiredServices(List<Service> serviceList){
-    requiredServices = serviceList;
+  public void setServices(List<Service> serviceList){
+    services = serviceList;
   }
   
   private List<Image> images;

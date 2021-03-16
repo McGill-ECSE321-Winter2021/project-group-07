@@ -1,7 +1,6 @@
 package ca.mcgill.ecse321.repairsystem.model;
 import java.util.*;
 import java.time.LocalDateTime;
-
 import javax.persistence.Id;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -13,24 +12,26 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class TimeSlot{
-	private int timeSlotId;
+	private int id;
 	
-	public void setTimeSlotId(int Id) {
-		this.timeSlotId = Id;
+	public void setId(int id) {
+		this.id = id;
 	}
 	@Id
-	public int getTimeSlotId() {
-		return this.timeSlotId;
+	public int getId() {
+		return this.id;
 	}
 	
 
 	private LocalDateTime startTime;
 	private LocalDateTime endTime;
 
-	public TimeSlot(LocalDateTime aStartTime, LocalDateTime aEndTime, int Id){
+	public TimeSlot(LocalDateTime aStartTime, LocalDateTime aEndTime, int Id, List<Mechanic> mechanics, List<Appointment> appointments){
 		startTime = aStartTime;
 		endTime = aEndTime;
-		timeSlotId = Id;
+		this.id = Id;
+		this.mechanics = mechanics;
+		this.appointments = appointments;
 	}
 
 	public TimeSlot() {
@@ -55,7 +56,7 @@ public class TimeSlot{
 
 	private List<Mechanic> mechanics;
 	@ManyToMany
-	public List<Mechanic> getMechanic(){
+	public List<Mechanic> getMechanics(){
 		return this.mechanics;
 	}
 	public void setMechanic(List<Mechanic> mechanic){
@@ -65,7 +66,7 @@ public class TimeSlot{
 	private List<Appointment> appointments;
 	
 	@OneToMany(cascade = {CascadeType.ALL})
-	public List<Appointment> getAppointment(){
+	public List<Appointment> getAppointments(){
 		return this.appointments;
 	}
 	public void setAppointment(List<Appointment> appointment){

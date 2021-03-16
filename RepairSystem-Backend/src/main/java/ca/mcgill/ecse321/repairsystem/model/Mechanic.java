@@ -1,6 +1,5 @@
 package ca.mcgill.ecse321.repairsystem.model;
 import java.util.*;
-import javax.persistence.Id;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 
@@ -9,52 +8,37 @@ import javax.persistence.ManyToMany;
 public class Mechanic extends Person{
 
 
-	public Mechanic(String aName, int id, String aPassword, int aPhone, String aEmail, RepairSystem aRepairSystem, Service... allCapabilities)
+	public Mechanic(String aName, int id, String aPassword, int aPhone, String aEmail, List<Service> allCapabilities)
 	{
-	  super(aName, id, aPassword, aPhone, aEmail, aRepairSystem);    
+	  super(aName, id, aPassword, aPhone, aEmail);    
 	}
 	
 	public Mechanic() {
-		
-	}
-
-	
-	private int id;
-	@Id
-	public int getId()
-	{
-		return id;
-	}
-
-	public void setId(int aId)
-	{
-		id = aId;
-
 	}
 
   //Mechanic Associations
-  private List<TimeSlot> workHours;
+  private List<TimeSlot> timeSlots;
   
   @ManyToMany
-  public List<TimeSlot> getWorkHours()
+  public List<TimeSlot> getTimeSlots()
   {
-    return this.workHours;
+    return this.timeSlots;
   }
 
- public void setWorkHours(List<TimeSlot> workHours) {
-	 this.workHours = workHours;
+ public void setTimeSlots(List<TimeSlot> workHours) {
+	 this.timeSlots = workHours;
  }
   
-  private List<Service> capabilities;
+  private List<Service> services;
   
   @ManyToMany
-  public List<Service> getCapabilities()
+  public List<Service> getServices()
   {
-	  return this.capabilities;
+	  return this.services;
   }
 
-  public void setCapabilities(List<Service> service) {
-	  this.capabilities = service;
+  public void setServices(List<Service> service) {
+	  this.services = service;
   }
   
   private List<Appointment> appointments;
@@ -62,23 +46,11 @@ public class Mechanic extends Person{
   @ManyToMany
   public List<Appointment> getAppointments()
   {
-  
     return this.appointments;
   }
   
   public void setAppointments(List<Appointment> appointment) {
 	  this.appointments=appointment;
   }
-
- 
-
- 
-
- 
-
-
-
-
-
 
 }

@@ -1,9 +1,11 @@
-package ca.mcgill.ecse321.repairsystrem.dao;
+package ca.mcgill.ecse321.repairsystem.dao;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -60,7 +62,7 @@ public class TestRepairSystemPersistence {
 		administrativeAssistantRepository.save(assistant);
 		
 		assistant = null;
-		assistant = administrativeAssistantRepository.findAdministrativeAssistantById(Id);
+		assistant = administrativeAssistantRepository.findById(Id);
 		
 		assertNotNull(assistant);
 		assertEquals(Id, assistant.getId());
@@ -75,7 +77,7 @@ public class TestRepairSystemPersistence {
 		customerRepository.save(customer);
 		
 		customer = null;
-		customer = customerRepository.findCustomerById(Id);
+		customer = customerRepository.findById(Id);
 		
 		assertNotNull(customer);
 		assertEquals(Id, customer.getId());
@@ -90,7 +92,7 @@ public class TestRepairSystemPersistence {
 		mechanicRepository.save(mechanic);
 		
 		mechanic = null;
-		mechanic = mechanicRepository.findMechanicById(Id);
+		mechanic = mechanicRepository.findById(Id);
 		
 		assertNotNull(mechanic);
 		assertEquals(Id, mechanic.getId());
@@ -105,15 +107,15 @@ public class TestRepairSystemPersistence {
 		
 		Appointment appointment = new Appointment();
 		int appointmentId = 401;
-		appointment.setAppointmentId(appointmentId);
+		appointment.setId(appointmentId);
 		appointment.setCustomer(customer);
 		appointmentRepository.save(appointment);
 		
 		appointment = null;
-		appointment = appointmentRepository.findByCustomer(customer);
+		appointment = appointmentRepository.findByCustomer(customer).get(0);
 		
 		assertNotNull(appointment);
-		assertEquals(appointmentId, appointment.getAppointmentId());
+		assertEquals(appointmentId, appointment.getId());
 	}
 	
 	@Test
@@ -125,35 +127,35 @@ public class TestRepairSystemPersistence {
 		
 		Car car = new Car();
 		int carId = 501;
-		car.setCarId(carId);
+		car.setId(carId);
 		car.setCustomer(customer);
 		carRepository.save(car);
 		
 		car = null;
-		car = carRepository.findByCustomer(customer);
+		car = carRepository.findByCustomer(customer).get(0);
 		
 		assertNotNull(car);
-		assertEquals(carId, car.getCarId());
+		assertEquals(carId, car.getId());
 	}
 	
 	@Test
 	public void testPersistAndLoadImage() {
 		Appointment appointment = new Appointment();
 		int appointmentId = 601;
-		appointment.setAppointmentId(appointmentId);
+		appointment.setId(appointmentId);
 		appointmentRepository.save(appointment);
 		
 		Image image = new Image();
 		int  imageId = 601;
-		image.setImageId(imageId);
+		image.setId(imageId);
 		image.setAppointment(appointment);
 		imageRepository.save(image);
 		
 		image = null;
-		image = imageRepository.findByAppointment(appointment);
+		image = imageRepository.findByAppointment(appointment).get(0);
 		
 		assertNotNull(image);
-		assertEquals(imageId, image.getImageId());
+		assertEquals(imageId, image.getId());
 	
 	}
 	
@@ -168,12 +170,14 @@ public class TestRepairSystemPersistence {
 		int price = 701;
 		service.setPrice(price);
 		ServiceType serviceType = ServiceType.OilChange;
-		service.setType(serviceType);
-		service.setMechanic(mechanic);
+		service.setServiceType(serviceType);
+		List<Mechanic> mechanics = new ArrayList<Mechanic>();
+		mechanics.add(mechanic);
+		service.setMechanics(mechanics);
 		serviceRepository.save(service);
 		
 		service = null;
-		service = serviceRepository.findByMechanic(mechanic);
+		service = serviceRepository.findByServiceType(ServiceType.OilChange);
 		assertNotNull(service);
 		assertEquals(price, service.getPrice());
 	}
@@ -182,16 +186,16 @@ public class TestRepairSystemPersistence {
 	public void testPersistAndLoadTimeSlot() {
 		TimeSlot timeSlot = new TimeSlot();
 		int timeSlotId = 800;
-		timeSlot.setTimeSlotId(timeSlotId);
+		timeSlot.setId(timeSlotId);
 		LocalDateTime start = LocalDateTime.now();
 		timeSlot.setStartTime(start);
 		timeSlotRepository.save(timeSlot);
 		
 		timeSlot = null;
-		timeSlot = timeSlotRepository.findByStartTime(start);
+		timeSlot = timeSlotRepository.findByStartTime(start).get(0);
 		
 		assertNotNull(timeSlot);
-		assertEquals(timeSlotId, timeSlot.getTimeSlotId());
+		assertEquals(timeSlotId, timeSlot.getId());
 	}
 
 }

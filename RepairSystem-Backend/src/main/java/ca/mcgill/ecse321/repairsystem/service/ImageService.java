@@ -1,0 +1,51 @@
+package ca.mcgill.ecse321.repairsystem.service;
+
+import java.util.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Service;
+import ca.mcgill.ecse321.repairsystem.model.*;
+import ca.mcgill.ecse321.repairsystem.dao.ImageRepository;
+
+@Service
+public class ImageService {
+
+	@Autowired
+	private ImageRepository imageRepository;
+
+	////////////////////SERVICE IMAGE METHODS //////////////////// 
+
+	@Transactional
+	public Image createImage(String url, Appointment a) {
+		int id = url.hashCode();
+		Image i = new Image(id, url, a);
+		imageRepository.save(i);
+		return i;
+	}
+
+	@Transactional List<Image> getImagesByAppointment(Appointment a) {
+		List<Image> i = toList(imageRepository.findByAppointment(a));
+		return i;
+	}
+
+	@Transactional
+	public List<Image> getAllImages() {
+		return toList(imageRepository.findAll());
+	}
+	
+	@Transactional
+	public Image getImageByUrl(String url) {
+		return imageRepository.findByUrl(url);
+	}
+
+	/* 
+	 * helper method
+	 */
+	private <T> List<T> toList(Iterable<T> iterable){
+		List<T> resultList = new ArrayList<T>();
+		for (T t : iterable) {
+			resultList.add(t);
+		}
+		return resultList;
+	}
+}
