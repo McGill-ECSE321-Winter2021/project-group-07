@@ -1,27 +1,23 @@
 package ca.mcgill.ecse321.repairsystem.service;
 
 import java.util.*;
-import java.sql.Date;
-import java.sql.Time;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Service;
 
 import ca.mcgill.ecse321.repairsystem.dao.*;
 import ca.mcgill.ecse321.repairsystem.model.*;
 
+@Service
 public class AdministrativeAssistantService {
 	@Autowired
 	private AdministrativeAssistantRepository administrativeAssistantRepository;
 
 	@Transactional
-	public AdministrativeAssistant createAdmin(String aName, String aPassword, int aPhone, String aEmail, RepairSystem aRepairSystem) {
+	public AdministrativeAssistant createAdmin(String aName, String aPassword, int aPhone, String aEmail) {
 		int id = aName.hashCode() * aPassword.hashCode();
-		AdministrativeAssistant admin = new AdministrativeAssistant(aName, id, aPassword, aPhone, aEmail, aRepairSystem);
+		AdministrativeAssistant admin = new AdministrativeAssistant(aName, id, aPassword, aPhone, aEmail);
 		administrativeAssistantRepository.save(admin);
 		return admin;
 	}

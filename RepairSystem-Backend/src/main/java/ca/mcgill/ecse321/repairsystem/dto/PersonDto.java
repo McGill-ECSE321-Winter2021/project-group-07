@@ -17,7 +17,12 @@ public class PersonDto {
 		email = aEmail;
 	}
 	
-	public PersonDto() {		
+	public PersonDto(int id) {	
+		this.userId = id;
+	}
+	
+	public PersonDto() {	
+		
 	}
 	
 	public int getId() {

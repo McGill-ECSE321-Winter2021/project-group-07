@@ -15,19 +15,24 @@ public class AppointmentDto {
 	private List<ServiceDto> services;
 	
 	public AppointmentDto(CustomerDto customer, int id, TimeSlotDto time, List<MechanicDto> mechanics, CarDto car, List<ImageDto> images, List<ServiceDto> services, String note, AppointmentStatus status) {
-		  this.customer = customer;
-		  this.id = id;
-		  this.status = status;
-		  this.note = note;
-		  timeslot = time;
-		  this.mechanics = mechanics;
-		  this.customer = customer;
-		  this.images = images;
-		  this.services = services;
-		  this.car = car;
+		this.customer = customer;
+		this.id = id;
+		this.status = status;
+		this.note = note;
+		this.timeslot = time;
+		this.mechanics = mechanics;
+		this.customer = customer;
+		this.images = images;
+		this.services = services;
+		this.car = car;
+	}
+	
+	public AppointmentDto(int Id) {
+		this.id = Id;
 	}
 	
 	public AppointmentDto() {
+		
 	}
 	
 	public CustomerDto getCustomer() {

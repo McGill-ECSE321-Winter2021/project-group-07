@@ -2,6 +2,7 @@ package ca.mcgill.ecse321.repairsystem.service;
 import java.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import ca.mcgill.ecse321.repairsystem.dao.TimeSlotRepository;
@@ -9,6 +10,7 @@ import ca.mcgill.ecse321.repairsystem.model.Appointment;
 import ca.mcgill.ecse321.repairsystem.model.Mechanic;
 import ca.mcgill.ecse321.repairsystem.model.TimeSlot;
 
+@Service
 public class TimeSlotService {
 	@Autowired
 	private TimeSlotRepository timeSlotRepository;
@@ -26,13 +28,18 @@ public class TimeSlotService {
 	}
 	
 	@Transactional
-	public List<TimeSlot> getTimeSlotByStartTime(LocalDateTime time) { 
-		return timeSlotRepository.findByStartTime(time);
+	public List<TimeSlot> getTimeSlotsByStartTime(LocalDateTime time) { 
+		return toList(timeSlotRepository.findByStartTime(time));
 	}
 	
 	@Transactional
-	public List<TimeSlot> getTimeSlotByEndTime(LocalDateTime time) { 
-		return timeSlotRepository.findByEndTime(time);
+	public List<TimeSlot> getTimeSlotsByEndTime(LocalDateTime time) { 
+		return toList(timeSlotRepository.findByEndTime(time));
+	}
+	
+	@Transactional
+	public List<TimeSlot> getAllTimeSlots() { 
+		return toList(timeSlotRepository.findAll());
 	}
 	
 	/* 

@@ -2,11 +2,13 @@ package ca.mcgill.ecse321.repairsystem.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Service;
 import ca.mcgill.ecse321.repairsystem.model.*;
 import java.util.ArrayList;
 import java.util.List;
 import ca.mcgill.ecse321.repairsystem.dao.MechanicRepository;
 
+@Service
 public class MechanicService {
 
 	@Autowired
@@ -14,9 +16,9 @@ public class MechanicService {
 	////////////////////SERVICE MECHANIC METHODS //////////////////// 
 	
 	@Transactional
-	public Mechanic createMechanic(String aName, String aPassword, int aPhone, String aEmail, RepairSystem aRepairSystem, List<ca.mcgill.ecse321.repairsystem.model.Service> allCapabilities) {
+	public Mechanic createMechanic(String aName, String aPassword, int aPhone, String aEmail, List<ca.mcgill.ecse321.repairsystem.model.Service> allCapabilities) {
 		int id = aName.hashCode() * aPassword.hashCode();
-		Mechanic mechanic = new Mechanic(aName, id, aPassword, aPhone, aEmail, aRepairSystem, allCapabilities);
+		Mechanic mechanic = new Mechanic(aName, id, aPassword, aPhone, aEmail, allCapabilities);
 		mechanicRepository.save(mechanic);
 		return mechanic;
 	}

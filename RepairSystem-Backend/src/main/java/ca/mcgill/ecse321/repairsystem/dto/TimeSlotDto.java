@@ -25,6 +25,10 @@ public class TimeSlotDto{
 		this.mechanics = mechanics;
 		this.appointments = appointments;
 	}
+	
+	public TimeSlotDto(int id){
+		this.id = id;
+	}
 
 	public TimeSlotDto() {
 		

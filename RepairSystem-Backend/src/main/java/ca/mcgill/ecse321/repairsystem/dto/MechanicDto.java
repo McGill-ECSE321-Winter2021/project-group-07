@@ -12,18 +12,35 @@ public class MechanicDto extends PersonDto{
 		super(aName, id, aPassword, aPhone, aEmail);    
 	}
 	
+	public MechanicDto(int Id) {
+		super(Id);
+	}
+	
 	public MechanicDto() {
+		
 	}
 	
 	public List<TimeSlotDto> getTimeSlots() {
 		return timeSlots;
 	}
 	
+	public void setTimeSlots(List<TimeSlotDto> timeslots) {
+		this.timeSlots = timeslots;
+	}
+	
 	public List<ServiceDto> getServices() {
 		return services;
 	}
 	
+	public void setServices(List<ServiceDto> services) {
+		this.services = services;
+	}
+	
 	public List<AppointmentDto> getAppointments() {
 	    return appointments;
+	}
+	
+	public void setAppointments(List<AppointmentDto> appointments) {
+	    this.appointments = appointments;
 	}
 }

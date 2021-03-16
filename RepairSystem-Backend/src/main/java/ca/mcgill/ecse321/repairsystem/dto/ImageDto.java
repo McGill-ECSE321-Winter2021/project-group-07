@@ -11,7 +11,12 @@ public class ImageDto {
 		  this.appointment = a;
 	}
 	
+	public ImageDto(int id) {
+		this.imageId = id;
+	}
+	
 	public ImageDto() {
+		
 	}
 	 
 	public AppointmentDto getAppointment() {

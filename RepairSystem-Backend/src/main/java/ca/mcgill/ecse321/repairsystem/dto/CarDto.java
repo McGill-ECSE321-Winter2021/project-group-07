@@ -19,8 +19,13 @@ public class CarDto {
 		this.appointments = appointments;
 		this.customer = customer;
 	}
+	
+	public CarDto(int id) {
+		this.carId = id;
+	}
 		  
 	public CarDto() {
+		
 	}
 	
 	public CustomerDto getCustomer() {

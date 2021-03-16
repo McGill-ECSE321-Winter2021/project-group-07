@@ -1,16 +1,19 @@
 package ca.mcgill.ecse321.repairsystem.dto;
 
 import java.util.*;
+import ca.mcgill.ecse321.repairsystem.model.Service.ServiceType;
 
 public class ServiceDto{
-
-	public enum ServiceType { CarRepair, OilChange, RegularCheckup, CarWash, TireChange, RoadsideAssistance, Towing, CarInspection, Other }
 
 	public ServiceDto(ServiceType aType, int aPrice, List<MechanicDto> mechanics, List<AppointmentDto> a){
 		this.serviceType = aType;
 		this.price = aPrice;
 		this.mechanics = mechanics;
 		this.appointments = a;
+	}
+	
+	public ServiceDto(ServiceType aType) {
+		this.serviceType = aType;
 	}
 	
 	public ServiceDto() {

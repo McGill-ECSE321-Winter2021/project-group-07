@@ -3,9 +3,11 @@ package ca.mcgill.ecse321.repairsystem.service;
 import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Service;
 import ca.mcgill.ecse321.repairsystem.model.*;
 import ca.mcgill.ecse321.repairsystem.dao.ImageRepository;
 
+@Service
 public class ImageService {
 
 	@Autowired
@@ -29,6 +31,11 @@ public class ImageService {
 	@Transactional
 	public List<Image> getAllImages() {
 		return toList(imageRepository.findAll());
+	}
+	
+	@Transactional
+	public Image getImageByUrl(String url) {
+		return imageRepository.findByUrl(url);
 	}
 
 	/* 

@@ -3,9 +3,11 @@ package ca.mcgill.ecse321.repairsystem.service;
 import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Service;
 import ca.mcgill.ecse321.repairsystem.model.*;
 import ca.mcgill.ecse321.repairsystem.dao.CustomerRepository;
 
+@Service
 public class CustomerService {
 
 	@Autowired
@@ -14,9 +16,9 @@ public class CustomerService {
 	////////////////////SERVICE CUSTOMER METHODS //////////////////// 
 
 	@Transactional
-	public Customer createCustomer(String aName, String aPassword, int aPhone, String aEmail, Calendar lastDate, RepairSystem aRepairSystem, String credit, String debit, String add) {
+	public Customer createCustomer(String aName, String aPassword, int aPhone, String aEmail, Calendar lastDate, String credit, String debit, String add) {
 		int id = aName.hashCode() * aPassword.hashCode();
-		Customer customer = new Customer(aName, id, aPassword, aPhone, aEmail, lastDate, aRepairSystem, credit, debit, add);
+		Customer customer = new Customer(aName, id, aPassword, aPhone, aEmail, lastDate, credit, debit, add);
 		customerRepository.save(customer);
 		return customer;
 	}

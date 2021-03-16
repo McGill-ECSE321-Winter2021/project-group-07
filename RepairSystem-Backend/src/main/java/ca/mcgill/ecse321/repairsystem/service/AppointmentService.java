@@ -1,20 +1,16 @@
 package ca.mcgill.ecse321.repairsystem.service;
 
 import java.util.*;
-import java.sql.Date;
-import java.sql.Time;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Service;
 
 import ca.mcgill.ecse321.repairsystem.dao.*;
 import ca.mcgill.ecse321.repairsystem.model.*;
 import ca.mcgill.ecse321.repairsystem.model.Appointment.AppointmentStatus;
 
-
+@Service
 public class AppointmentService {
 	////////////////////SERVICE APPOINTMENT METHODS //////////////////// 
 	@Autowired
@@ -53,7 +49,7 @@ public class AppointmentService {
 	}
 
 	@Transactional
-	public Appointment getAppointmentsById(int id) {
+	public Appointment getAppointmentById(int id) {
 		Appointment appointment = appointmentRepository.findById(id);
 		return appointment;
 	}

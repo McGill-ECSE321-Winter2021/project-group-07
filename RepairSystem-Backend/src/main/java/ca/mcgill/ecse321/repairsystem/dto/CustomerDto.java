@@ -18,6 +18,10 @@ public class CustomerDto extends PersonDto{
 		lastActive = lastDate;
 	}
 	
+	public CustomerDto(int id){
+		super(id);
+	}
+	
 	public CustomerDto() {
 	}
 	
@@ -36,8 +40,16 @@ public class CustomerDto extends PersonDto{
 	    return appointments;
 	}
 	
+	public void setAppointments(List<AppointmentDto> appointmentsDto) {
+	    appointments = appointmentsDto;
+	}
+	
 	public List<CarDto> getCars() {
 		return cars;
+	}
+	
+	public void setCars(List<CarDto> cars) {
+		this.cars = cars;
 	}
 	
 	public Calendar getLastActive() {

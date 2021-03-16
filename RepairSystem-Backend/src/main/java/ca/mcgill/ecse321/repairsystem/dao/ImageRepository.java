@@ -12,5 +12,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 public interface ImageRepository extends CrudRepository<Image, String>{
 
 	List<Image> findByAppointment(Appointment appointment);
+	List<Image> findAll();
+	Image findByUrl(String url);
 	
 }
