@@ -18,6 +18,21 @@ public class AppointmentService {
 	
 	@Transactional 
 	public Appointment createApp(Customer customer, TimeSlot time, List<Mechanic> mechanics, Car car, List<Image> images, List<ca.mcgill.ecse321.repairsystem.model.Service> services, String note, AppointmentStatus status) {
+	
+		if(customer == null)
+		{
+			throw new IllegalArgumentException("Customer cannot be null");
+		} else if (status == null)
+		{
+			throw new IllegalArgumentException("Appointment status cannot be null");
+		}else if (time == null)
+		{
+			throw new IllegalArgumentException("TimeSlot cannot be null");
+		}else if (car == null)
+		{
+			throw new IllegalArgumentException("Car cannot be null");
+		}
+		
 		int id = customer.hashCode() * time.hashCode();
 		Appointment app = new Appointment(customer, id, time, mechanics, car, images, services, note, status);
 		appointmentRepository.save(app);

@@ -83,6 +83,7 @@ public class TestServiceService {
 		assertEquals(appointments, service.getAppointments());
 	}
 
+	@Test
 	/**
 	 * Verifies that the service type of a service object is not null
 	 */
@@ -106,6 +107,7 @@ public class TestServiceService {
 		assertEquals("Service type cannot be null", error);
 	}
 	
+	@Test
 	public void testCreateMechanicsNull()
 	{
 		
@@ -123,9 +125,10 @@ public class TestServiceService {
 		}
 		
 		assertNull(service);
-		assertEquals("List of Mechanics cannot be null", error);
+		assertEquals("List of mechanics cannnot be null", error);
 	}
 	
+	@Test
 	/**
 	 * Verifies that the list of appointments associated to a particular service is not null
 	 */
@@ -146,6 +149,7 @@ public class TestServiceService {
 		}
 		
 		assertNull(service);
-		assertEquals("List of Appointments cannot be null", error);
+		assertEquals(0, mechanics.size());
+		assertEquals("List of appointments cannot be null", error);
 	}
 }

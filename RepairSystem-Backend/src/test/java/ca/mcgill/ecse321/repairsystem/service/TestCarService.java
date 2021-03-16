@@ -9,6 +9,8 @@ import static org.mockito.ArgumentMatchers.anyBoolean;
 
 import static org.mockito.Mockito.lenient;
 
+import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -25,6 +27,7 @@ import org.mockito.stubbing.Answer;
 
 import ca.mcgill.ecse321.repairsystem.dao.*;
 import ca.mcgill.ecse321.repairsystem.model.*;
+import ca.mcgill.ecse321.repairsystem.model.Appointment.AppointmentStatus;
 import ca.mcgill.ecse321.repairsystem.model.Car.CarType;
 
 @ExtendWith(MockitoExtension.class)
@@ -41,7 +44,6 @@ public class TestCarService {
 	private static int NUMBER_KILOMETERS= 143290;
 	private static boolean WINTER_TIRES=false;
 	private static List<Appointment> APPOINTMENTS = new ArrayList<Appointment>();
-	private static Appointment APPOINTMENT = new Appointment();
 	private static Calendar c =  new GregorianCalendar(2021,3,13);
 	private static Customer CUSTOMER = new Customer("TestPerson", 2001, "123abc", 76523455,"TestPerson@gmail.com", c, "123456789","987654321", "123 Street Avenue");
 
@@ -132,12 +134,12 @@ public class TestCarService {
 		CarType type = CarType.Convertible;
 		boolean winterTires = true;
 		int numOfKm = 53467;
-		RepairSystem repairSystem = new RepairSystem();
+		List<Appointment> appointment = new ArrayList<Appointment>();
 		Customer customer  = new Customer("Marcus", 012123, "password", 6789876, "Marcus@gmail.com", new GregorianCalendar(2021,3,13),"123456", "678954", "123 avenue street");
 		Car car = null;
 		try
 		{
-			car = carService.createCar(type, winterTires, numOfKm, APPOINTMENTS, customer);
+			car = carService.createCar(type, winterTires, numOfKm, appointment, customer);
 		}catch(IllegalArgumentException e)
 		{
 			fail();
@@ -146,10 +148,11 @@ public class TestCarService {
 		assertEquals(type, car.getCarType());
 		assertEquals(winterTires, car.getWinterTires());
 		assertEquals(numOfKm,car.getNumOfKilometers());
-		assertEquals(APPOINTMENTS, car.getAppointments());
+		assertEquals(appointment, car.getAppointments());
 		assertEquals(customer, car.getCustomer());
 	}
 
+	@Test
 	/**
 	 * Verifies that the car type is not null
 	 */
@@ -173,54 +176,7 @@ public class TestCarService {
 		assertEquals("Car Type cannot be null", error);
 	}
 	
-	/**
-	 * Verifies that a boolean is assigned to winter tires of a car
-	 */
-	public void testCreateWinterTiresNull()
-	{
-		String error = null;
-		CarType type = CarType.Minivan;
-		RepairSystem repairSystem = new RepairSystem();
-		boolean winterTires = (Boolean) null;
-		int numOfKm = 67800;
-		Customer customer  = new Customer("Marcus", 012123, "password", 6789876, "Marcus@gmail.com", new GregorianCalendar(2021,3,13),"123456", "678954", "123 avenue street");
-		Car car = null;
-		
-		try {
-			car = carService.createCar(type, winterTires, numOfKm, APPOINTMENTS, customer);
-		}catch(IllegalArgumentException e)
-		{
-			error = e.getMessage();
-		}
-		
-		assertNull(car);
-		assertEquals("Winter Tires cannot be null", error);
-	}
-	
-	/**
-	 * Verifies that the number of kilometers associated to a car is not null
-	 */
-	public void testCreateKilometersNull()
-	{
-		String error = null;
-		CarType type = CarType.Truck;
-		boolean winterTires = false;
-		int numOfKm = (Integer) null;
-		RepairSystem repairSystem = new RepairSystem();
-		Customer customer  = new Customer("Marcus", 012123, "password", 6789876, "Marcus@gmail.com", new GregorianCalendar(2021,3,13),"123456", "678954", "123 avenue street");
-		Car car = null;
-		
-		try {
-			car = carService.createCar(type, winterTires, numOfKm, APPOINTMENTS, customer);
-		}catch(IllegalArgumentException e)
-		{
-			error = e.getMessage();
-		}
-		
-		assertNull(car);
-		assertEquals("Number of kilometers cannot be null", error);
-	}
-	
+	@Test
 	/**
 	 * Verifies that there is a list of appointments associated to a car object
 	 */
@@ -246,6 +202,7 @@ public class TestCarService {
 		assertEquals("List of Appointments cannot be null", error);
 	}
 	
+	@Test
 	/**
 	 * Verifies that a customer object is associated to a car
 	 */
@@ -256,17 +213,18 @@ public class TestCarService {
 		boolean winterTires = false;
 		int numOfKm = 455679;
 		Customer customer  = null;
+		List<Appointment> appointments = new ArrayList<Appointment>();
 		Car car = null;
 		
 		try {
-			car = carService.createCar(type, winterTires, numOfKm, APPOINTMENTS, customer);
+			car = carService.createCar(type, winterTires, numOfKm, appointments, customer);
 		}catch(IllegalArgumentException e)
 		{
 			error = e.getMessage();
 		}
 		
 		assertNull(car);
-		assertEquals("Customer cannot be null ", error);
+		assertEquals("Customer cannot be null", error);
 	}
 	
 }

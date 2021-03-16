@@ -17,6 +17,18 @@ public class MechanicService {
 	
 	@Transactional
 	public Mechanic createMechanic(String aName, String aPassword, int aPhone, String aEmail, List<ca.mcgill.ecse321.repairsystem.model.Service> allCapabilities) {
+		
+		if(aName == null || aName.trim().length() == 0)
+		{
+			throw new IllegalArgumentException("Mechanic name cannot be empty!");
+				
+		}else if (aPassword == null || aPassword.trim().length() == 0)
+		{
+			throw new IllegalArgumentException("Mechanic password cannot be empty!");
+		}else if (aEmail == null || aEmail.trim().length() == 0)
+		{
+			throw new IllegalArgumentException("Mechanic email cannot be empty!");
+		}
 		int id = aName.hashCode() * aPassword.hashCode();
 		Mechanic mechanic = new Mechanic(aName, id, aPassword, aPhone, aEmail, allCapabilities);
 		mechanicRepository.save(mechanic);

@@ -121,7 +121,6 @@ public class TestAdministrativeAssistantService {
 		String aPassword = "123412";
 		int aPhone = 123456789;
 		String aEmail = "email@repairsystem.com";
-		RepairSystem system = new RepairSystem();
 		int administrativeAssistantId = name.hashCode() * aPassword.hashCode();
 
 		try {
@@ -133,7 +132,6 @@ public class TestAdministrativeAssistantService {
 		assertNotNull(administrativeAssistant);
 		assertEquals(administrativeAssistantId, administrativeAssistant.getId());
 	}
-
 
 	@Test
 	public void testCreateNameNull() {
@@ -183,7 +181,7 @@ public class TestAdministrativeAssistantService {
 			error = e.getMessage();
 		}
 		assertNull(administrativeAssistant);
-		assertEquals("Administrative assistant passward cannot be empty!", error);
+		assertEquals("Administrative assistant password cannot be empty!", error);
 	}
 	
 	@Test
@@ -200,7 +198,7 @@ public class TestAdministrativeAssistantService {
 			error = e.getMessage();
 		}
 		assertNull(administrativeAssistant);
-		assertEquals("Administrative assistant passward cannot be empty!", error);
+		assertEquals("Administrative assistant password cannot be empty!", error);
 	}
 	
 	@Test

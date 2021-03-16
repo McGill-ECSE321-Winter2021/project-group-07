@@ -242,7 +242,7 @@ public class TestCustomerService {
 			error = e.getMessage();
 		}
 		assertNull(customer);
-		assertEquals("Customer passward cannot be empty!", error);
+		assertEquals("Customer password cannot be empty!", error);
 	}
 	@Test
 	public void testCreatePasswardEmpty() {
@@ -261,7 +261,7 @@ public class TestCustomerService {
 			error = e.getMessage();
 		}
 		assertNull(customer);
-		assertEquals("Customer passward cannot be empty!", error);
+		assertEquals("Customer password cannot be empty!", error);
 	}
 	@Test
 	public void testCreateEmailNull() {
@@ -301,25 +301,7 @@ public class TestCustomerService {
 		assertNull(customer);
 		assertEquals("Customer email cannot be empty!", error);
 	}
-	@Test
-	public void testCreateSystemNull() {
 
-		Customer customer = null;
-		String name = "Oscar";
-		String aPassword = "123412";
-		int aPhone = 123456789;
-		String aEmail = "email@repairsystem.com";
-		RepairSystem system = null;
-		Calendar lastDate = Calendar.getInstance();
-		String error = null;
-		try {
-			customer = customerService.createCustomer(name, aPassword, aPhone, aEmail, lastDate, name, aPassword, aEmail);	
-		} catch (IllegalArgumentException e) {
-			error = e.getMessage();
-		}
-		assertNull(customer);
-		assertEquals("Customer repair system cannot be empty!", error);
-	}
 	@Test
 	public void testCreateLastDateNull() {
 
@@ -328,7 +310,6 @@ public class TestCustomerService {
 		String aPassword = "123412";
 		int aPhone = 123456789;
 		String aEmail = "email@repairsystem.com";
-		RepairSystem system = new RepairSystem();
 		Calendar lastDate = null;
 		String error = null;
 		try {
@@ -337,6 +318,6 @@ public class TestCustomerService {
 			error = e.getMessage();
 		}
 		assertNull(customer);
-		assertEquals("Customer last date cannot be empty!", error);
+		assertEquals("Customer last active date cannot be empty!", error);
 	}
 }

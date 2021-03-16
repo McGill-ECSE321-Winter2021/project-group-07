@@ -17,6 +17,28 @@ public class CustomerService {
 
 	@Transactional
 	public Customer createCustomer(String aName, String aPassword, int aPhone, String aEmail, Calendar lastDate, String credit, String debit, String add) {
+		
+		if(aName == null || aName.trim().length() == 0)
+		{
+			throw new IllegalArgumentException("Customer name cannot be empty!");
+				
+		}else if (aPassword == null || aPassword.trim().length() == 0)
+		{
+			throw new IllegalArgumentException("Customer password cannot be empty!");
+		}else if(credit == null || credit.trim().length()==0) {
+			throw new IllegalArgumentException("Customer credit card number cannot be empty!");
+		}else if(debit == null || debit.trim().length()==0) {
+			throw new IllegalArgumentException("Customer debit card number cannot be empty!");
+		}else if (aEmail == null || aEmail.trim().length() == 0)
+		{
+			throw new IllegalArgumentException("Customer email cannot be empty!");
+		}else if (add == null || add.trim().length() == 0)
+		{
+			throw new IllegalArgumentException("Customer address cannot be empty!");
+		}else if (lastDate == null)
+		{
+			throw new IllegalArgumentException("Customer last active date cannot be empty!");
+		}
 		int id = aName.hashCode() * aPassword.hashCode();
 		Customer customer = new Customer(aName, id, aPassword, aPhone, aEmail, lastDate, credit, debit, add);
 		customerRepository.save(customer);

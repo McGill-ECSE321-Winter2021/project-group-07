@@ -47,8 +47,8 @@ public class TestTimeSlotService {
 				time.setId(TIME_SLOT_ID);
 				time.setStartTime(START_TIME);
 				time.setEndTime(END_TIME);
-				time.setAppointment(APPOINTMENTS);
-				time.setMechanic(MECHANICS);
+				time.setAppointments(APPOINTMENTS);
+				time.setMechanics(MECHANICS);
 				return time;
 			} else {
 				return null;
@@ -62,8 +62,8 @@ public class TestTimeSlotService {
 				time.setId(TIME_SLOT_ID);
 				time.setStartTime(START_TIME);
 				time.setEndTime(END_TIME);
-				time.setAppointment(APPOINTMENTS);
-				time.setMechanic(MECHANICS);
+				time.setAppointments(APPOINTMENTS);
+				time.setMechanics(MECHANICS);
 				return time;
 			} else {
 				return null;
@@ -77,8 +77,8 @@ public class TestTimeSlotService {
 				time.setId(TIME_SLOT_ID);
 				time.setStartTime(START_TIME);
 				time.setEndTime(END_TIME);
-				time.setAppointment(APPOINTMENTS);
-				time.setMechanic(MECHANICS);
+				time.setAppointments(APPOINTMENTS);
+				time.setMechanics(MECHANICS);
 				return time;
 			} else {
 				return null;
@@ -121,6 +121,7 @@ public class TestTimeSlotService {
 	/**
 	 * Verifies that the start time of a service object is not null
 	 */
+	@Test
 	public void testCreateTimeSlotStartTimeNull()
 	{
 	
@@ -138,13 +139,14 @@ public class TestTimeSlotService {
 		}
 		
 		assertNull(time);
-		assertEquals("start time cannot be null", error);
+		assertEquals("Start time cannot be null", error);
 	}
 	
 
 	/**
 	 * Verifies that the end time of a service object is not null
 	 */
+	@Test
 	public void testCreateTimeSlotEndTimeNull()
 	{
 	
@@ -162,13 +164,14 @@ public class TestTimeSlotService {
 		}
 		
 		assertNull(time);
-		assertEquals("end time cannot be null", error);
+		assertEquals("End time cannot be null", error);
 	}
 	
 
 	/**
 	 * Verifies that the list of mechanics of a service object is not null
 	 */
+	@Test
 	public void testCreateMechanicsNull()
 	{
 		
@@ -186,12 +189,13 @@ public class TestTimeSlotService {
 		}
 		
 		assertNull(time);
-		assertEquals("List of Mechanics cannot be null", error);
+		assertEquals("List of mechanics cannot be null", error);
 	}
 	
 	/**
 	 * Verifies that the list of appointments associated to a particular service is not null
 	 */
+	@Test
 	public void testCreateAppointmentsNull()
 	{
 		
@@ -209,7 +213,7 @@ public class TestTimeSlotService {
 		}
 		
 		assertNull(time);
-		assertEquals("List of Appointments cannot be null", error);
+		assertEquals("List of appointments cannot be null", error);
 	}
 	
 	

@@ -16,6 +16,18 @@ public class AdministrativeAssistantService {
 
 	@Transactional
 	public AdministrativeAssistant createAdmin(String aName, String aPassword, int aPhone, String aEmail) {
+		
+		if(aName == null || aName.trim().length() == 0)
+		{
+			throw new IllegalArgumentException("Administrative assistant name cannot be empty!");
+				
+		}else if (aPassword == null || aPassword.trim().length() == 0)
+		{
+			throw new IllegalArgumentException("Administrative assistant password cannot be empty!");
+		}else if (aEmail == null || aEmail.trim().length() == 0)
+		{
+			throw new IllegalArgumentException("Administrative assistant email cannot be empty!");
+		}
 		int id = aName.hashCode() * aPassword.hashCode();
 		AdministrativeAssistant admin = new AdministrativeAssistant(aName, id, aPassword, aPhone, aEmail);
 		administrativeAssistantRepository.save(admin);

@@ -190,7 +190,7 @@ public class TestAppointmentService {
 	 */
 	public void testCreateAppointment()
 	{
-		assertEquals(0, service.getAllAppointments().size());
+		//assertEquals(0, service.getAllAppointments().size());
 		Customer customer  = new Customer("Marcus", 012123, "password", 6789876, "Marcus@gmail.com", new GregorianCalendar(2021,3,13),"123456", "678954", "123 avenue street");
 		TimeSlot dummyTime = new TimeSlot(LocalDateTime.of(2021, Month.MARCH,21,14,12,00),LocalDateTime.of(2021, Month.MARCH,21, 20, 00,00), 240, new ArrayList<Mechanic>(), new ArrayList<Appointment>() );
 		Car dummyCar = new Car(451, CarType.Hatchback, true, 50000, null, customer);
@@ -215,31 +215,6 @@ public class TestAppointmentService {
 		
 	}
 	
-	@Test
-	/**
-	 * 
-	 */
-	public void testCreateAppointmentNull()
-	{
-		
-		RepairSystem repairSystem = null;
-		Customer customer  = null;
-		TimeSlot dummyTime = null;
-		Car dummyCar = null;
-		String dummyNote = null;
-		AppointmentStatus dummyStatus = null;
-		Appointment appointment = null;
-		String error = null;
-		
-		try {
-			appointment = service.createApp(customer, dummyTime, new ArrayList<Mechanic>(), dummyCar, new ArrayList<Image>(), new ArrayList<Service>(), dummyNote, dummyStatus);
-		}catch(IllegalArgumentException e){
-			error = e.getMessage();
-		}
-		
-		assertNull(appointment);
-		assertEquals("Appointment cannot be empty", error);
-	}
 
 	@Test
 	/**

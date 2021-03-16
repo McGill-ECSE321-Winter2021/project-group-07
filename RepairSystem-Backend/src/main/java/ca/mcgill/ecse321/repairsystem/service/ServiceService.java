@@ -16,6 +16,18 @@ public class ServiceService {
 	
 	@Transactional
 	public ca.mcgill.ecse321.repairsystem.model.Service createService(ServiceType aType, int price, List<Mechanic> mechanics, List<Appointment> appointment) {
+		
+		if(aType == null)
+		{
+			throw new IllegalArgumentException("Service type cannot be null");
+		}else if (mechanics == null)
+		{
+			throw new IllegalArgumentException("List of mechanics cannnot be null");
+		}else if (appointment == null)
+		{
+			throw new IllegalArgumentException("List of appointments cannot be null");
+		}
+		
 		ca.mcgill.ecse321.repairsystem.model.Service service = new ca.mcgill.ecse321.repairsystem.model.Service(aType, price, mechanics, appointment);
 		serviceRepository.save(service);
 		return service;

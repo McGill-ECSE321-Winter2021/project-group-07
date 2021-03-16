@@ -153,6 +153,7 @@ public class TestMechanicService {
 	}
 
 
+	
 	@Test
 	public void testCreateNameNull() {
 		Mechanic mechanic = null;
@@ -179,7 +180,6 @@ public class TestMechanicService {
 		String aPassword = "123412";
 		int aPhone = 123456789;
 		String aEmail = "email@repairsystem.com";
-		RepairSystem system = new RepairSystem();
 		List<Service> allCapabilities = new ArrayList<Service>();
 		String error = null;
 		try {
@@ -207,7 +207,7 @@ public class TestMechanicService {
 			error = e.getMessage();
 		}
 		assertNull(mechanic);
-		assertEquals("Mechanic passward cannot be empty!", error);
+		assertEquals("Mechanic password cannot be empty!", error);
 	}
 	
 	@Test
@@ -226,7 +226,7 @@ public class TestMechanicService {
 			error = e.getMessage();
 		}
 		assertNull(mechanic);
-		assertEquals("Mechanic passward cannot be empty!", error);
+		assertEquals("Mechanic password cannot be empty!", error);
 	}
 	
 	@Test
@@ -267,42 +267,5 @@ public class TestMechanicService {
 		assertEquals("Mechanic email cannot be empty!", error);
 	}
 	
-	@Test
-	public void testCreateSystemNull() {
-		Mechanic mechanic = null;
-		String name = "Oscar";
-		String aPassword = "123412";
-		int aPhone = 123456789;
-		String aEmail = "email@repairsystem.com";
-		RepairSystem system = null;
-		List<Service> allCapabilities = new ArrayList<Service>();
-		String error = null;
-		try {
-			mechanic = mechanicService.createMechanic(name, aPassword, aPhone, aEmail, allCapabilities);		
-		} catch (IllegalArgumentException e) {
-			error = e.getMessage();
-		}
-		assertNull(mechanic);
-		assertEquals("Mechanic repair system cannot be empty!", error);
-	}
-	
-	@Test
-	public void testCreateServiceNull() {
-		Mechanic mechanic = null;
-		String name = "Oscar";
-		String aPassword = "123412";
-		int aPhone = 123456789;
-		String aEmail = "email@repairsystem.com";
-		RepairSystem system = new RepairSystem();
-		List<Service> allCapabilities = null;
-		String error = null;
-		try {
-			mechanic = mechanicService.createMechanic(name, aPassword, aPhone, aEmail, allCapabilities);			
-		} catch (IllegalArgumentException e) {
-			error = e.getMessage();
-		}
-		assertNull(mechanic);
-		assertEquals("Mechanic service cannot be empty!", error);
-	}
 
 }
