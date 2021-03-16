@@ -67,8 +67,8 @@ public class TimeSlotRestController {
 		TimeSlot timeslot = timeSlotService.getTimeSlotById(oldStartTime.hashCode()*oldEndTime.hashCode());
 		timeslot.setStartTime(startTime);
 		timeslot.setEndTime(endTime);
-		timeslot.setAppointment(appointments);
-		timeslot.setMechanic(mechanics);
+		timeslot.setAppointments(appointments);
+		timeslot.setMechanics(mechanics);
 		timeslot.setId(startTime.hashCode()*endTime.hashCode());
 		return Converter.convertToDto(timeslot);
 	}

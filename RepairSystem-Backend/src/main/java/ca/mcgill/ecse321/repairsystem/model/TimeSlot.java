@@ -59,7 +59,7 @@ public class TimeSlot{
 	public List<Mechanic> getMechanics(){
 		return this.mechanics;
 	}
-	public void setMechanic(List<Mechanic> mechanic){
+	public void setMechanics(List<Mechanic> mechanic){
 		this.mechanics=mechanic;
 	}
 	
@@ -69,7 +69,7 @@ public class TimeSlot{
 	public List<Appointment> getAppointments(){
 		return this.appointments;
 	}
-	public void setAppointment(List<Appointment> appointment){
+	public void setAppointments(List<Appointment> appointment){
 		this.appointments=appointment;
 	}
 	
