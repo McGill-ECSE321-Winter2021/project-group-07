@@ -59,15 +59,33 @@ public class AppointmentDto {
 		return mechanics;
 	}
 	
+	public void setMechanics(List<MechanicDto> mechanics)
+	{
+		this.mechanics = mechanics;
+	}
 	public CarDto getCar() {
 		return car;
+	}
+	
+	public void setCar(CarDto car)
+	{
+		this.car = car;
 	}
 	
 	public List<ImageDto> getImages() {
 		return images;
 	}
 	
+	public void setImages(List<ImageDto> images)
+	{
+		this.images = images;
+	}
 	public List<ServiceDto> getServices() {
 		return services;
+	}
+	
+	public void setServices(List<ServiceDto> services)
+	{
+		this.services = services;
 	}
 }

@@ -13,6 +13,11 @@ public class Converter {
 	}
 	
 	public static AppointmentDto convertToDto(Appointment appointment) {
+		
+		if(appointment == null)
+		{
+			throw new IllegalArgumentException("There is no such Appointment!");
+		}
 		List<MechanicDto> mechanicsDto = new ArrayList<MechanicDto>();
 		List<ImageDto> imagesDto = new ArrayList<ImageDto>();
 		List<ServiceDto> servicesDto = new ArrayList<ServiceDto>();
@@ -29,6 +34,10 @@ public class Converter {
 	}
 	
 	public static CarDto convertToDto(Car car) {
+		if( car == null)
+		{
+			throw new IllegalArgumentException("There is no such Car!");
+		}
 		List<AppointmentDto> appointmentsDto = new ArrayList<AppointmentDto>();
 		for(Appointment appointment: car.getAppointments()) {
 			appointmentsDto.add(new AppointmentDto(appointment.getId()));
@@ -37,7 +46,10 @@ public class Converter {
 	}
 	
 	public static CustomerDto convertToDto(Customer customer) {
-		
+		if(customer == null)
+		{
+			throw new IllegalArgumentException("There is no such Customer!");
+		}
 		CustomerDto customerDto = new CustomerDto(customer.getName(), customer.getId(), customer.getPassword(), customer.getPhone(), customer.getEmail(), customer.getLastActive(), customer.getCreditHash(), customer.getDebitHash(), customer.getAddress());
 		List<AppointmentDto> appointmentsDto = new ArrayList<AppointmentDto>();
 		List<CarDto> carsDto = new ArrayList<CarDto>();
@@ -53,10 +65,18 @@ public class Converter {
 	}
 	
 	public static ImageDto convertToDto(Image image) {
+		if(image == null)
+		{
+			throw new IllegalArgumentException("There is no such Image!");
+		}
 		return new ImageDto(image.getId(), image.getUrl(), new AppointmentDto(image.getAppointment().getId()));
 	}
 	
 	public static MechanicDto convertToDto(Mechanic mechanic) {
+		if(mechanic == null)
+		{
+			throw new IllegalArgumentException("There is no such Mechanic!");
+		}
 		List<ServiceDto> servicesDto = new ArrayList<ServiceDto>();
 		List<AppointmentDto> appointmentsDto = new ArrayList<AppointmentDto>();
 		List<TimeSlotDto> timeslotsDto = new ArrayList<TimeSlotDto>();
@@ -76,6 +96,10 @@ public class Converter {
 	}
 	
 	public static ServiceDto convertToDto(Service service) {
+		if(service == null)
+		{
+			throw new IllegalArgumentException("There is no such Service!");
+		}
 		List<MechanicDto> mechanicsDto = new ArrayList<MechanicDto>();
 		List<AppointmentDto> appointmentsDto = new ArrayList<AppointmentDto>();
 		for(Appointment appointment: service.getAppointments()) {
@@ -88,6 +112,10 @@ public class Converter {
 	}
 	
 	public static TimeSlotDto convertToDto(TimeSlot timeslot) {
+		if(timeslot == null)
+		{
+			throw new IllegalArgumentException("There is no such TimeSlot!");
+		}
 		List<MechanicDto> mechanicsDto = new ArrayList<MechanicDto>();
 		List<AppointmentDto> appointmentsDto = new ArrayList<AppointmentDto>();
 		for(Mechanic mechanic: timeslot.getMechanics()) {

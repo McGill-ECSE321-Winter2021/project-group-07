@@ -22,6 +22,11 @@ public class ImageDto {
 	public AppointmentDto getAppointment() {
 	    return appointment;
 	}
+	
+	public void setAppointment(AppointmentDto appointment)
+	{
+		this.appointment = appointment;
+	}
 	 
 	public int getId() {
 		return imageId;

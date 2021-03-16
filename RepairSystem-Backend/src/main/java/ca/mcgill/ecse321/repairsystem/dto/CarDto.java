@@ -32,6 +32,11 @@ public class CarDto {
 		return customer;
 	}
 	
+	public void setCustomer(CustomerDto customer)
+	{
+		this.customer = customer;
+	}
+	
 	public int getId() {
 		return carId;
 	}
@@ -51,5 +56,10 @@ public class CarDto {
 	  
 	public List<AppointmentDto> getAppointments() {
 	    return appointments;
+	}
+	
+	public void setAppointments(List<AppointmentDto> appointments)
+	{
+		this.appointments = appointments;
 	}
 }

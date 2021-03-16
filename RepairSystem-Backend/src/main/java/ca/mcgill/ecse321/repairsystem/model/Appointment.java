@@ -90,7 +90,7 @@ public class Appointment
   
   private Customer customer;
  
-  @ManyToOne()
+  @ManyToOne
   public Customer getCustomer() {
     return customer;
   }
@@ -101,7 +101,7 @@ public class Appointment
   
   private List<Service> services;
   
-  @ManyToMany()
+  @ManyToMany
   public List<Service> getServices() {
     return services;
   }
