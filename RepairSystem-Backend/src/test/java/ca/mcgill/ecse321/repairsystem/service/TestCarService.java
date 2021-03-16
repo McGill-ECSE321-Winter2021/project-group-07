@@ -8,9 +8,6 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyBoolean;
 
 import static org.mockito.Mockito.lenient;
-
-import java.time.LocalDateTime;
-import java.time.Month;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -27,7 +24,6 @@ import org.mockito.stubbing.Answer;
 
 import ca.mcgill.ecse321.repairsystem.dao.*;
 import ca.mcgill.ecse321.repairsystem.model.*;
-import ca.mcgill.ecse321.repairsystem.model.Appointment.AppointmentStatus;
 import ca.mcgill.ecse321.repairsystem.model.Car.CarType;
 
 @ExtendWith(MockitoExtension.class)
@@ -37,8 +33,6 @@ public class TestCarService {
 
 	@InjectMocks
 	private CarService carService;
-	
-	private static String CAR_KEY = "TestCar";
 	private static int CAR_ID= 231424;
 	private static CarType CAR_TYPE= CarType.Sports;
 	private static int NUMBER_KILOMETERS= 143290;

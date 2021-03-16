@@ -108,6 +108,9 @@ public class TestServiceService {
 	}
 	
 	@Test
+	/**
+	 * check if the list of mechanics is null
+	 */
 	public void testCreateMechanicsNull()
 	{
 		

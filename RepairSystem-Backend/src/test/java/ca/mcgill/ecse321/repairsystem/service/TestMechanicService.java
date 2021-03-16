@@ -132,6 +132,9 @@ public class TestMechanicService {
 	}
 
 	@Test
+	/**
+	 * Test the creation mechanic
+	 */
 	public void testCreateMechanicNull() {
 
 		Mechanic mechanic = null;
@@ -155,6 +158,9 @@ public class TestMechanicService {
 
 	
 	@Test
+	/**
+	 * Test if the name is null
+	 */
 	public void testCreateNameNull() {
 		Mechanic mechanic = null;
 		String name = null;
@@ -174,6 +180,9 @@ public class TestMechanicService {
 	}
 
 	@Test
+	/**
+	 * check if the name is empty
+	 */
 	public void testCreateNameSpace() {
 		Mechanic mechanic = null;
 		String name = " ";
@@ -249,6 +258,9 @@ public class TestMechanicService {
 	}
 	
 	@Test
+	/**
+	 * Test to check if email is empty
+	 */
 	public void testCreateEmailEmpty() {
 		Mechanic mechanic = null;
 		String name = "Oscar";

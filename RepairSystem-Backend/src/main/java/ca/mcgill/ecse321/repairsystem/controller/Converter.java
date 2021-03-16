@@ -6,14 +6,18 @@ import java.util.List;
 import ca.mcgill.ecse321.repairsystem.dto.*;
 import ca.mcgill.ecse321.repairsystem.model.*;
 
+/**
+ * @author Thomas Jarvis, Norman Kong
+ * Class converts DAO to DTO. 
+ *
+ */
 public class Converter {
 	
 	public static AdministrativeAssistantDto convertToDto(AdministrativeAssistant administrativeAssistant) {
 		return new AdministrativeAssistantDto(administrativeAssistant.getName(), administrativeAssistant.getId(), administrativeAssistant.getPassword(), administrativeAssistant.getPhone(), administrativeAssistant.getEmail());
 	}
 	
-	public static AppointmentDto convertToDto(Appointment appointment) {
-		
+	public static AppointmentDto convertToDto(Appointment appointment) {		
 		if(appointment == null)
 		{
 			throw new IllegalArgumentException("There is no such Appointment!");
