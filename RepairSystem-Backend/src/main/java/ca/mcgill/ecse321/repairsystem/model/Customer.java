@@ -69,6 +69,11 @@ public class Customer extends Person
 	public void setAppointments(List<Appointment> appointmentList) {
 		appointments = appointmentList;
 	}
+	
+	public void removeAppointment(Appointment appointment)
+	{
+		appointments.remove(appointment);
+	}
 
 	private List<Car> cars;
 
@@ -84,6 +89,11 @@ public class Customer extends Person
 
 	public void addCar(Car car) {
 		cars.add(car);
+	}
+	
+	public void removeCar(Car car)
+	{
+		cars.remove(car);
 	}
 	
 	private Calendar lastActive;

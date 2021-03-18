@@ -46,24 +46,33 @@ public class CustomerRestController {
 		Customer customer = customerService.createCustomer(name, password, Integer.parseInt(phone), email, credit, debit, address);
 		return Converter.convertToDto(customer);
 	}
-	
+
 	@PutMapping(value = { "/customer/{oldEmail}", "/customer/{oldEmail}/" })
-	public CustomerDto editCustomer(@PathVariable("oldEmail") String oldEmail, @RequestParam String email, @RequestParam String password, @RequestParam String phone, @RequestParam String name, @RequestParam String credit, @RequestParam String debit, @RequestParam String address) throws IllegalArgumentException {
-		Customer customer = customerService.getCustomerByEmail(oldEmail);
-		customer.setName(name);
-		customer.setPassword(password);
-		customer.setPhone(Integer.parseInt(phone));
-		customer.setEmail(email);
-		LocalDateTime time = LocalDateTime.now();
-		Calendar c = Calendar.getInstance();
-		c.set(time.getYear(), time.getMonthValue(), time.getDayOfMonth());
-		customer.setLastActive(c);
-		customer.setCreditHash(credit);
-		customer.setDebitHash(debit);
-		customer.setAddress(address);
-		customer.setId(name.hashCode()*password.hashCode());
+	public CustomerDto editAllCustomerCredentials(@PathVariable("oldEmail") String oldEmail, @RequestParam String newEmail, @RequestParam String newPassword, @RequestParam String newPhone,  @RequestParam String newCredit, @RequestParam String newDebit, @RequestParam String newAddress) throws IllegalArgumentException {
+		Customer customer = customerService.getCustomerByEmail(oldEmail); 
+		customerService.updateAllCredentials(customer, newEmail, newPassword, newPhone, newCredit, newDebit, newAddress);
+		return  Converter.convertToDto(customer);
+	}
+	
+	@PutMapping(value = {"/customer/{carId}" , "/customer/{carId}/"})
+	public CustomerDto editCars(@PathVariable("carId") String carId, @RequestParam String customerEmail, @RequestParam String addRemove)
+	{
+		Customer customer = customerService.getCustomerByEmail(customerEmail); 
+		customerService.editCars(String.valueOf(customer.getId()), carId, addRemove);
+		return  Converter.convertToDto(customer);
+	}
+	
+	@PutMapping(value= {"/customer/{appointmentId}" , "/customer/{appointmentId}/"})
+	public CustomerDto editAppointments(@PathVariable("appointmentId") String appointmentId, @RequestParam String customerId, @RequestParam String addRemove)
+	{
+		Customer customer = customerService.getCustomerById(Integer.parseInt(customerId));
+		customerService.editAppointments(customerId, appointmentId, addRemove);
 		return Converter.convertToDto(customer);
 	}
+	
+
+	
+
 
 }
 

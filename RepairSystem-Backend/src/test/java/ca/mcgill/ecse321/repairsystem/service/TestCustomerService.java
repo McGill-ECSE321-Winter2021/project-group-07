@@ -43,13 +43,21 @@ public class TestCustomerService {
 	private static String PASSWORD = "customer";
 	private static int PHONE = 123000000;
 	private static String EMAIL = "customer@repairsystem.com";
-	private static RepairSystem REPAIR_SYSTEM = new RepairSystem();
 	private static Calendar LAST_DATE = Calendar.getInstance();
 	private static String DEBIT = "4321";
 	private static String CREDIT = "1234";
-	private static String ADD = "add";
+	private static String ADD = "456 Swan Lake";
 	private static List<Car> CARS = new ArrayList<Car>();
 	private static List<Appointment> APPOINTMENTS = new ArrayList<Appointment>();	
+	
+	private static String CUSTOMER2_NAME = "customer2";
+	private static String PASSWORD2="customer2";
+	private static int PHONE2 = 967854321;
+	private static String EMAIL2 = "customer2@gmail.com";
+	private static Calendar LAST_DATE2=Calendar.getInstance();
+	private static String DEBIT2="09985641";
+	private static String CREDIT2="45632145";
+	
 
 	@BeforeEach
 	public void setMockOutput()
@@ -168,7 +176,7 @@ public class TestCustomerService {
 	}
 
 	@Test
-	public void testCreateCustomerNull() {
+	public void testCreateCustomer() {
 
 		Customer customer = null;
 		String name = "Oscar";
@@ -178,7 +186,7 @@ public class TestCustomerService {
 		String credit = "1234566";
 		String debit = "0987766";
 		String address = "123 avenue street";
-		int customerId = name.hashCode() * aPassword.hashCode();
+		int customerId = aEmail.hashCode();
 
 		try {
 			customer = customerService.createCustomer(name, aPassword, aPhone, aEmail,  credit, debit, address);	
@@ -237,8 +245,6 @@ public class TestCustomerService {
 		String aPassword = null;
 		int aPhone = 123456789;
 		String aEmail = "email@repairsystem.com";
-		RepairSystem system = new RepairSystem();
-		Calendar lastDate = Calendar.getInstance();
 		String credit = "1234566";
 		String debit = "0987766";
 		String address = "123 avenue street";
@@ -310,6 +316,30 @@ public class TestCustomerService {
 		}
 		assertNull(customer);
 		assertEquals("Customer email cannot be empty!", error);
+	}
+	
+	@Test 
+	public void testResetPassword()
+	{
+		
+		String name = "Oscar";
+		String aPassword = "123412";
+		int aPhone = 123456789;
+		String aEmail = "ocascar@gmail.com";
+		String credit = "1234566";
+		String debit = "0987766";
+		String address = "123 avenue street";
+		String newPassword = "newPassword";
+		String error = null;
+		Customer customer = customerService.createCustomer(name, aPassword, aPhone, aEmail, credit, debit, address);	
+		try {
+			
+			customerService.resetPassword(customer, newPassword);
+		} catch (IllegalArgumentException e) {
+			error = e.getMessage();
+		}
+		
+		assertEquals(newPassword, customer.getPassword());
 	}
 
 }

@@ -48,7 +48,6 @@ public class TestAppointmentService {
 	private static String APPOINTMENT_NOTE = "SomDescription"; 
 
 	//fields for creating a customer 
-	private static RepairSystem repair = new RepairSystem();
 	private static Customer CUSTOMER = new Customer("TestPerson", 2001, "123abc", 76523455,"TestPerson@gmail.com", "123456789","987654321", "123 Street Avenue");
 
 	//fields for creating timeslot 
@@ -198,7 +197,7 @@ public class TestAppointmentService {
 		Appointment appointment = null;
 		
 		try {
-			appointment = service.createApp(customer, dummyTime, new ArrayList<Mechanic>(), dummyCar, new ArrayList<Image>(), new ArrayList<Service>(), dummyNote, dummyStatus);
+			appointment = service.createApp(customer, dummyTime, dummyCar, dummyNote);
 		}catch(IllegalArgumentException e)
 		{
 			fail();
@@ -229,7 +228,7 @@ public class TestAppointmentService {
 		Appointment appointment = null;
 		
 		try {
-			appointment = service.createApp(customer, dummyTime, new ArrayList<Mechanic>(), dummyCar, new ArrayList<Image>(), new ArrayList<Service>(), dummyNote, dummyStatus);
+			appointment = service.createApp(customer, dummyTime, dummyCar, dummyNote);
 		}catch(IllegalArgumentException e)
 		{
 			error = e.getMessage();
@@ -254,7 +253,7 @@ public class TestAppointmentService {
 		Appointment appointment = null;
 		
 		try {
-			appointment = service.createApp(customer, dummyTime, new ArrayList<Mechanic>(), dummyCar, new ArrayList<Image>(), new ArrayList<Service>(), dummyNote, dummyStatus);
+			appointment = service.createApp(customer, dummyTime, dummyCar, dummyNote);
 		}catch(IllegalArgumentException e)
 		{
 			error = e.getMessage();
@@ -279,7 +278,7 @@ public class TestAppointmentService {
 		Appointment appointment = null;
 		
 		try {
-			appointment = service.createApp(customer, dummyTime, new ArrayList<Mechanic>(), dummyCar, new ArrayList<Image>(), new ArrayList<Service>(), dummyNote, dummyStatus);
+			appointment = service.createApp(customer, dummyTime, dummyCar, dummyNote);
 		}catch(IllegalArgumentException e)
 		{
 			error = e.getMessage();
@@ -305,7 +304,7 @@ public class TestAppointmentService {
 		Appointment appointment = null;
 		
 		try {
-			appointment = service.createApp(customer, dummyTime, new ArrayList<Mechanic>(), dummyCar, new ArrayList<Image>(), new ArrayList<Service>(), dummyNote, dummyStatus);
+			appointment = service.createApp(customer, dummyTime, dummyCar, dummyNote);
 		}catch(IllegalArgumentException e)
 		{
 			error = e.getMessage();
