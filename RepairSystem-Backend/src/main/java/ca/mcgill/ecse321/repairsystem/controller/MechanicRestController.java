@@ -51,7 +51,7 @@ public class MechanicRestController {
 	public MechanicDto editMechanic(@PathVariable("oldEmail") String oldEmail, @RequestParam String name, @RequestParam String password, @RequestParam String phone, @RequestParam String email) throws IllegalArgumentException {
 		Mechanic mechanic = mechanicService.getMechanicByEmail(oldEmail);
 		mechanic.setName(name);
-		mechanic.setId(name.hashCode()*password.hashCode());
+		mechanic.setId(email.hashCode());
 		mechanic.setPassword(password);
 		mechanic.setPhone(Integer.parseInt(phone));
 		mechanic.setEmail(email);

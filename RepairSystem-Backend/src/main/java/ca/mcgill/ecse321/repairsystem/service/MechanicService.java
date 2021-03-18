@@ -34,7 +34,7 @@ public class MechanicService {
 		{
 			throw new IllegalArgumentException("Mechanic email cannot be empty!");
 		}
-		int id = aName.hashCode() * aPassword.hashCode();
+		int id = aEmail.hashCode();
 		Mechanic mechanic = new Mechanic(aName, id, aPassword, aPhone, aEmail, allCapabilities);
 		mechanicRepository.save(mechanic);
 		return mechanic;
