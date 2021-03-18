@@ -98,6 +98,7 @@ public class TestAdministrativeAssistantService {
 				return null;
 			}
 		});
+		
 
 		lenient().when(administrativeAssistantDao.findByEmail(anyString())).thenAnswer((InvocationOnMock invocation) -> {
 			AdministrativeAssistant administrativeAssistant = new AdministrativeAssistant();
