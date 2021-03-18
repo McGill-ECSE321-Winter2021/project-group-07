@@ -21,20 +21,17 @@ public class CarService {
 	//////////////////// SERVICE CAR METHODS //////////////////// 
 
 	@Transactional
-	public Car createCar(CarType type, boolean winterTires, int numOfKm, List<Appointment> appointments, Customer customer) {
+	public Car createCar(CarType type, boolean winterTires, int numOfKm,  Customer customer) {
 		
 		if(type == null)
 		{
 			throw new IllegalArgumentException("Car Type cannot be null");
-		}else if (appointments == null)
-		{
-			throw new IllegalArgumentException("List of Appointments cannot be null");
 		}else if ( customer == null)
 		{
 			throw new IllegalArgumentException("Customer cannot be null");
 		}
 		int id = (Integer.toString(numOfKm)).hashCode() * customer.hashCode();
-		Car c = new Car(id, type, winterTires, numOfKm, appointments, customer);
+		Car c = new Car(id, type, winterTires, numOfKm, customer);
 		//customerRepository.delete(customer);
 		customer.addCar(c);
 		carRepository.save(c);

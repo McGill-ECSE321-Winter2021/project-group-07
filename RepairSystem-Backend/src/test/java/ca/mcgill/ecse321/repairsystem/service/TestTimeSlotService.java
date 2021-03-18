@@ -108,7 +108,7 @@ public class TestTimeSlotService {
 		int timeId =startTime.hashCode() * endTime.hashCode();
 		TimeSlot time = null;
 		try {
-			time = timeSlotService.createTimeSlot(startTime, endTime, mechanics, appointments);
+			time = timeSlotService.createTimeSlot(startTime, endTime);
 		}catch(IllegalArgumentException e)
 		{
 			fail();
@@ -133,7 +133,7 @@ public class TestTimeSlotService {
 		String error = null;
 		
 		try {
-			time = timeSlotService.createTimeSlot(startTime, endTime, mechanics, appointments);
+			time = timeSlotService.createTimeSlot(startTime, endTime);
 		}catch(IllegalArgumentException e){
 			error = e.getMessage();
 		}
@@ -158,7 +158,7 @@ public class TestTimeSlotService {
 		String error = null;
 		
 		try {
-			time = timeSlotService.createTimeSlot(startTime, endTime, mechanics, appointments);
+			time = timeSlotService.createTimeSlot(startTime, endTime);
 		}catch(IllegalArgumentException e){
 			error = e.getMessage();
 		}
@@ -183,7 +183,7 @@ public class TestTimeSlotService {
 		String error = null;
 		
 		try {
-			time = timeSlotService.createTimeSlot(startTime, endTime, mechanics, appointments);
+			time = timeSlotService.createTimeSlot(startTime, endTime);
 		}catch(IllegalArgumentException e){
 			error = e.getMessage();
 		}
@@ -201,13 +201,11 @@ public class TestTimeSlotService {
 		
 		LocalDateTime startTime = LocalDateTime.of(2021, 3, 13, 10, 00);
 		LocalDateTime endTime =  LocalDateTime.of(2021, 3, 13, 14, 00);
-		List<Mechanic> mechanics = new ArrayList<Mechanic>();
-		List<Appointment> appointments = null;
 		TimeSlot time = null;
 		String error = null;
 		
 		try {
-			time = timeSlotService.createTimeSlot(startTime, endTime, mechanics, appointments);
+			time = timeSlotService.createTimeSlot(startTime, endTime);
 		}catch(IllegalArgumentException e){
 			error = e.getMessage();
 		}

@@ -44,29 +44,35 @@ public class CustomerService {
 		
 		if(aName == null || aName.trim().length() == 0)
 		{
-			throw new IllegalArgumentException("Customer name cannot be empty!");
-				
-		}else if (aPassword == null || aPassword.trim().length() == 0)
+			throw new IllegalArgumentException("Customer name cannot be empty!");		
+		}
+		if (aPassword == null || aPassword.trim().length() == 0)
 		{
 			throw new IllegalArgumentException("Customer password cannot be empty!");
-		}else if(credit == null || credit.trim().length()==0) {
+		}
+		if(credit == null || credit.trim().length()==0) {
 			throw new IllegalArgumentException("Customer credit card number cannot be empty!");
-		}else if(debit == null || debit.trim().length()==0) {
+		}
+		if(debit == null || debit.trim().length()==0) {
 			throw new IllegalArgumentException("Customer debit card number cannot be empty!");
-		}else if (aEmail == null || aEmail.trim().length() == 0)
+		}
+		if (aEmail == null || aEmail.trim().length() == 0)
 		{
 			throw new IllegalArgumentException("Customer email cannot be empty!");
-		}else if (add == null || add.trim().length() == 0)
+		}
+		if (add == null || add.trim().length() == 0)
 		{
 			throw new IllegalArgumentException("Customer address cannot be empty!");
-		}else if(customerRepository.findByEmail(aEmail) != null)
+		}
+		if(customerRepository.findByEmail(aEmail) != null)
 		{
 			throw new IllegalArgumentException("Email is already taken!");
-		}else if(customerRepository.findByPhone(aPhone) != null)
+		}
+		if(customerRepository.findByPhone(aPhone) != null)
 		{
 			throw new IllegalArgumentException("Phone number is already taken!");
 		}
-		else if (customerRepository.findByName(aName) != null && customerRepository.findByAddress(add) != null && customerRepository.findByEmail(aEmail) != null ) {
+		if (customerRepository.findByName(aName) != null && customerRepository.findByAddress(add) != null && customerRepository.findByEmail(aEmail) != null ) {
 			throw new IllegalArgumentException("a user with the same credentials already exists!");
 		}
 		int id = aEmail.hashCode() ;

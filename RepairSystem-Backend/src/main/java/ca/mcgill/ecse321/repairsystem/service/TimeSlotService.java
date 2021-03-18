@@ -15,7 +15,7 @@ public class TimeSlotService {
 	@Autowired
 	private TimeSlotRepository timeSlotRepository;
 	@Transactional 
-	public TimeSlot createTimeSlot(LocalDateTime aStartTime, LocalDateTime aEndTime, List<Mechanic> mechanics, List<Appointment> appointments) {
+	public TimeSlot createTimeSlot(LocalDateTime aStartTime, LocalDateTime aEndTime) {
 	
 		if(aStartTime == null)
 		{
@@ -23,15 +23,10 @@ public class TimeSlotService {
 		}else if (aEndTime == null)
 		{
 			throw new IllegalArgumentException("End time cannot be null");
-		}else if (mechanics == null)
-		{
-			throw new IllegalArgumentException("List of mechanics cannot be null");
-		}else if (appointments == null)		
-		{
-			throw new IllegalArgumentException("List of appointments cannot be null");
 		}
+		//check that endtime is not before start time
 		int id = aStartTime.hashCode() * aEndTime.hashCode();
-		TimeSlot timeslot = new TimeSlot(aStartTime, aEndTime, id, mechanics, appointments);
+		TimeSlot timeslot = new TimeSlot(aStartTime, aEndTime, id);
 		timeSlotRepository.save(timeslot);
 		return timeslot;
 	}

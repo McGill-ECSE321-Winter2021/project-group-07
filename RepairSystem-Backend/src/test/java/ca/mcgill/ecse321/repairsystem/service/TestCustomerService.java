@@ -342,4 +342,27 @@ public class TestCustomerService {
 		assertEquals(newPassword, customer.getPassword());
 	}
 
+	
+	@Test
+	public void testUpdateEmail()
+	{
+		String name = "Oscar";
+		String aPassword = "123412";
+		int aPhone = 123456789;
+		String aEmail = "ocascar@gmail.com";
+		String credit = "1234566";
+		String debit = "0987766";
+		String address = "123 avenue street";
+		String newEmail = "marie@gmail.com";
+		String error = null;
+		Customer customer = customerService.createCustomer(name, aPassword, aPhone, aEmail, credit, debit, address);	
+		try {
+			
+			customerService.updateCustomerEmail(customer, newEmail);
+		} catch (IllegalArgumentException e) {
+			error = e.getMessage();
+		}
+		
+		assertEquals(newEmail, customer.getEmail());
+	}
 }

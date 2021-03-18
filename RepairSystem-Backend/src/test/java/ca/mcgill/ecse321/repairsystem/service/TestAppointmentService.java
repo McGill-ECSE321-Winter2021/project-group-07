@@ -51,9 +51,8 @@ public class TestAppointmentService {
 	private static Customer CUSTOMER = new Customer("TestPerson", 2001, "123abc", 76523455,"TestPerson@gmail.com", "123456789","987654321", "123 Street Avenue");
 
 	//fields for creating timeslot 
-	private static TimeSlot TIME_SLOT = new TimeSlot(LocalDateTime.of(2021, Month.MARCH,21,14,12,00),LocalDateTime.of(2021, Month.MARCH,21, 20, 00,00), 240, new ArrayList<Mechanic>(), new ArrayList<Appointment>() );
-
-	private static Car CAR = new Car(40567, CarType.Sedan,false, 170000, new ArrayList<Appointment>(), CUSTOMER);
+	private static TimeSlot TIME_SLOT = new TimeSlot(LocalDateTime.of(2021, Month.MARCH,21,14,12,00),LocalDateTime.of(2021, Month.MARCH,21, 20, 00,00), 240);
+	private static Car CAR = new Car(40567, CarType.Sedan,false, 170000,  CUSTOMER);
 	@BeforeEach
 	public void setMockOutput() {
 		
@@ -189,10 +188,9 @@ public class TestAppointmentService {
 	{
 		//assertEquals(0, service.getAllAppointments().size());
 		Customer customer  = new Customer("Marcus", 012123, "password", 6789876, "Marcus@gmail.com","123456", "678954", "123 avenue street");
-		TimeSlot dummyTime = new TimeSlot(LocalDateTime.of(2021, Month.MARCH,21,14,12,00),LocalDateTime.of(2021, Month.MARCH,21, 20, 00,00), 240, new ArrayList<Mechanic>(), new ArrayList<Appointment>() );
-		Car dummyCar = new Car(451, CarType.Hatchback, true, 50000, null, customer);
+		TimeSlot dummyTime = new TimeSlot(LocalDateTime.of(2021, Month.MARCH,21,14,12,00),LocalDateTime.of(2021, Month.MARCH,21, 20, 00,00), 240);
+		Car dummyCar = new Car(451, CarType.Hatchback, true, 50000,  customer);
 		String dummyNote = "dummy Note";
-		AppointmentStatus dummyStatus = AppointmentStatus.InRepair;
 		int appointmentId = customer.hashCode() * dummyTime.hashCode();
 		Appointment appointment = null;
 		
@@ -206,38 +204,13 @@ public class TestAppointmentService {
 		assertNotNull(appointment);
 		assertEquals(appointmentId, appointment.getId());
 		assertEquals(dummyNote, appointment.getNote());
-		assertEquals(dummyStatus, appointment.getStatus());
 		assertEquals(dummyCar, appointment.getCar());
 		assertEquals(dummyTime, appointment.getTimeSlot());
 		
 	}
 	
 
-	@Test
-	/**
-	 * Verify if there is a status assigned to the appointment
-	 */
-	public void testCreateAppointionNullStatus()
-	{
-		String error = null;
-		Customer customer  = new Customer("Marcus", 012123, "password", 6789876, "Marcus@gmail.com","123456", "678954", "123 avenue street");
-		TimeSlot dummyTime = new TimeSlot(LocalDateTime.of(2021, Month.MARCH,21,14,12,00),LocalDateTime.of(2021, Month.MARCH,21, 20, 00,00), 240, new ArrayList<Mechanic>(), new ArrayList<Appointment>() );
-		Car dummyCar = new Car(451, CarType.Hatchback, true, 50000, null, customer);
-		String dummyNote = "dummy Note";
-		AppointmentStatus dummyStatus = null;
-		Appointment appointment = null;
-		
-		try {
-			appointment = service.createApp(customer, dummyTime, dummyCar, dummyNote);
-		}catch(IllegalArgumentException e)
-		{
-			error = e.getMessage();
-		}
-		
-		assertNull(appointment);
-		assertEquals("Appointment status cannot be null", error);	
-	}
-	
+
 	@Test
 	/**
 	 * Verify that the appointment object has a customer assigned to it
@@ -246,8 +219,8 @@ public class TestAppointmentService {
 	{
 		String error = null;
 		Customer customer  = null;
-		TimeSlot dummyTime = new TimeSlot(LocalDateTime.of(2021, Month.MARCH,21,14,12,00),LocalDateTime.of(2021, Month.MARCH,21, 20, 00,00), 240, new ArrayList<Mechanic>(), new ArrayList<Appointment>() );
-		Car dummyCar = new Car(451, CarType.Hatchback, true, 50000, null, customer);
+		TimeSlot dummyTime = new TimeSlot(LocalDateTime.of(2021, Month.MARCH,21,14,12,00),LocalDateTime.of(2021, Month.MARCH,21, 20, 00,00), 240);
+		Car dummyCar = new Car(451, CarType.Hatchback, true, 50000, customer);
 		String dummyNote = "dummy Note";
 		AppointmentStatus dummyStatus = AppointmentStatus.CarReceived;
 		Appointment appointment = null;
@@ -272,7 +245,7 @@ public class TestAppointmentService {
 		String error = null;
 		Customer customer  = new Customer("Marcus", 012123, "password", 6789876, "Marcus@gmail.com","123456", "678954", "123 avenue street");
 		TimeSlot dummyTime = null;
-		Car dummyCar = new Car(451, CarType.Hatchback, true, 50000, null, customer);
+		Car dummyCar = new Car(451, CarType.Hatchback, true, 50000, customer);
 		String dummyNote = "dummy Note";
 		AppointmentStatus dummyStatus =  AppointmentStatus.CarReceived;
 		Appointment appointment = null;
@@ -297,7 +270,7 @@ public class TestAppointmentService {
 	{
 		String error = null;
 		Customer customer  = new Customer("Marcus", 012123, "password", 6789876, "Marcus@gmail.com","123456", "678954", "123 avenue street");
-		TimeSlot dummyTime =  new TimeSlot(LocalDateTime.of(2021, Month.MARCH,21,14,12,00),LocalDateTime.of(2021, Month.MARCH,21, 20, 00,00), 240, new ArrayList<Mechanic>(), new ArrayList<Appointment>() );
+		TimeSlot dummyTime =  new TimeSlot(LocalDateTime.of(2021, Month.MARCH,21,14,12,00),LocalDateTime.of(2021, Month.MARCH,21, 20, 00,00), 240);
 		Car dummyCar = null;
 		String dummyNote = "dummy Note";
 		AppointmentStatus dummyStatus =  AppointmentStatus.CarReceived;

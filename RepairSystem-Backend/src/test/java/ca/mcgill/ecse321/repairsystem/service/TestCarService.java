@@ -132,7 +132,7 @@ public class TestCarService {
 		Car car = null;
 		try
 		{
-			car = carService.createCar(type, winterTires, numOfKm, appointment, customer);
+			car = carService.createCar(type, winterTires, numOfKm,  customer);
 		}catch(IllegalArgumentException e)
 		{
 			fail();
@@ -159,7 +159,7 @@ public class TestCarService {
 		Car car = null;
 		
 		try {
-			car = carService.createCar(type, winterTires, numOfKm, APPOINTMENTS, customer);
+			car = carService.createCar(type, winterTires, numOfKm,  customer);
 		}catch(IllegalArgumentException e)
 		{
 			error = e.getMessage();
@@ -184,7 +184,7 @@ public class TestCarService {
 		Car car = null;
 		
 		try {
-			car = carService.createCar(type, winterTires, numOfKm, APPOINTMENTS, customer);
+			car = carService.createCar(type, winterTires, numOfKm,  customer);
 		}catch(IllegalArgumentException e)
 		{
 			error = e.getMessage();
@@ -209,7 +209,7 @@ public class TestCarService {
 		Car car = null;
 		
 		try {
-			car = carService.createCar(type, winterTires, numOfKm, appointments, customer);
+			car = carService.createCar(type, winterTires, numOfKm, customer);
 		}catch(IllegalArgumentException e)
 		{
 			error = e.getMessage();

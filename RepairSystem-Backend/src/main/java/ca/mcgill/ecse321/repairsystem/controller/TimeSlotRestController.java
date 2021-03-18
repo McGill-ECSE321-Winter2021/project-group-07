@@ -48,7 +48,7 @@ public class TimeSlotRestController {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH:mm");
 		LocalDateTime start = LocalDateTime.parse(startTime, formatter);
 		LocalDateTime end = LocalDateTime.parse(endTime, formatter);
-		TimeSlot timeslot = timeSlotService.createTimeSlot(start, end, new ArrayList<Mechanic>(), new ArrayList<Appointment>());
+		TimeSlot timeslot = timeSlotService.createTimeSlot(start, end);
 		return Converter.convertToDto(timeslot);
 	}
 	

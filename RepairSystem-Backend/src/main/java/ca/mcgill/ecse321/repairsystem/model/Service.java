@@ -9,11 +9,11 @@ public class Service{
 
 	public enum ServiceType { CarRepair, OilChange, RegularCheckup, CarWash, TireChange, RoadsideAssistance, Towing, CarInspection, Other }
 
-	public Service(ServiceType aType, int aPrice, List<Mechanic> mechanics, List<Appointment> a){
+	public Service(ServiceType aType, int aPrice){
 		this.serviceType = aType;
 		this.price = aPrice;
-		this.mechanics = mechanics;
-		this.appointments = a;
+		this.mechanics = new ArrayList<Mechanic>();
+		this.appointments = new ArrayList<Appointment>();
 	}
 	
 	public Service() {

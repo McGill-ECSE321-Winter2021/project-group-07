@@ -37,7 +37,7 @@ public class CarRestController {
 	@PostMapping(value = { "/car/{customerId}", "/car/{customerId}/" })
 	public CarDto createCar(@PathVariable("customerId") String customerId, @RequestParam String carType, @RequestParam String winterTires, @RequestParam String numOfKilometers) throws IllegalArgumentException {
 		Customer customer = customerService.getCustomerById(Integer.parseInt(customerId));
-		Car car = carService.createCar(CarType.valueOf(carType), Boolean.valueOf(winterTires), Integer.parseInt(numOfKilometers), new ArrayList<Appointment>(), customer);
+		Car car = carService.createCar(CarType.valueOf(carType), Boolean.valueOf(winterTires), Integer.parseInt(numOfKilometers),  customer);
 		return Converter.convertToDto(car);
 	}
 	

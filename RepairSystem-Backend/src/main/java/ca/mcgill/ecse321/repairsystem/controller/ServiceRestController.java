@@ -45,7 +45,7 @@ public class ServiceRestController {
 
 	@PostMapping(value = { "/services/{serviceType}", "/services/{serviceType}/" })
 	public ServiceDto createService(@PathVariable("serviceType") String serviceType, @RequestParam String price) throws IllegalArgumentException {
-		Service service = serviceService.createService(ServiceType.valueOf(serviceType), Integer.parseInt(price), new ArrayList<Mechanic>(), new ArrayList<Appointment>());
+		Service service = serviceService.createService(ServiceType.valueOf(serviceType), Integer.parseInt(price));
 		return Converter.convertToDto(service);
 	}
 	

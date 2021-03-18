@@ -71,7 +71,7 @@ public class TestServiceService {
 		int price = 142;
 		Service service = null;
 		try {
-			service = serviceService.createService(type, price, mechanics, appointments);
+			service = serviceService.createService(type, price);
 		}catch(IllegalArgumentException e)
 		{
 			fail();
@@ -98,7 +98,7 @@ public class TestServiceService {
 		String error = null;
 		
 		try {
-			service = serviceService.createService(type, price, mechanics, appointments);
+			service = serviceService.createService(type, price);
 		}catch(IllegalArgumentException e){
 			error = e.getMessage();
 		}
@@ -122,7 +122,7 @@ public class TestServiceService {
 		String error = null;
 		
 		try {
-			service = serviceService.createService(type, price, mechanics, appointments);
+			service = serviceService.createService(type, price);
 		}catch(IllegalArgumentException e){
 			error = e.getMessage();
 		}
@@ -146,7 +146,7 @@ public class TestServiceService {
 		String error = null;
 		
 		try {
-			service = serviceService.createService(type, price, mechanics, appointments);
+			service = serviceService.createService(type, price);
 		}catch(IllegalArgumentException e){
 			error = e.getMessage();
 		}
