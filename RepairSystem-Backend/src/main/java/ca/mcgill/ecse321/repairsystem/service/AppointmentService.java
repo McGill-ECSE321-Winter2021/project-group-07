@@ -17,14 +17,11 @@ public class AppointmentService {
 	private AppointmentRepository appointmentRepository;
 	
 	@Transactional 
-	public Appointment createApp(Customer customer, TimeSlot time, List<Mechanic> mechanics, Car car, List<Image> images, List<ca.mcgill.ecse321.repairsystem.model.Service> services, String note, AppointmentStatus status) {
-	
+	public Appointment createApp(Customer customer, TimeSlot time, Car car,String note) {
+		//input validation
 		if(customer == null)
 		{
 			throw new IllegalArgumentException("Customer cannot be null");
-		} else if (status == null)
-		{
-			throw new IllegalArgumentException("Appointment status cannot be null");
 		}else if (time == null)
 		{
 			throw new IllegalArgumentException("TimeSlot cannot be null");
@@ -34,7 +31,7 @@ public class AppointmentService {
 		}
 		
 		int id = customer.hashCode() * time.hashCode();
-		Appointment app = new Appointment(customer, id, time, mechanics, car, images, services, note, status);
+		Appointment app = new Appointment(customer, id, time,  car, note );
 		appointmentRepository.save(app);
 		return app;
 	}
@@ -73,7 +70,24 @@ public class AppointmentService {
 	public List<Appointment> getAllAppointments() {
 		return toList(appointmentRepository.findAll());
 	}
-
+	
+	@Transactional
+	public void addMechanic(Appointment appointment, Mechanic mechanic)
+	{
+		appointment.addMechanic(mechanic);
+	}
+	
+	@Transactional 
+	public void addService(Appointment appointment, ca.mcgill.ecse321.repairsystem.model.Service service)
+	{
+		appointment.addService(service);
+	}
+	
+	@Transactional
+	public void addImage(Appointment appointment, Image image)
+	{
+		appointment.addImage(image);
+	}
 	/* 
 	 * helper method
 	 */

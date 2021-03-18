@@ -175,11 +175,13 @@ public class TestCustomerService {
 		String aPassword = "123412";
 		int aPhone = 123456789;
 		String aEmail = "email@repairsystem.com";
-		Calendar lastDate = Calendar.getInstance();
+		String credit = "1234566";
+		String debit = "0987766";
+		String address = "123 avenue street";
 		int customerId = name.hashCode() * aPassword.hashCode();
 
 		try {
-			customer = customerService.createCustomer(name, aPassword, aPhone, aEmail, lastDate, name, aPassword, aEmail);	
+			customer = customerService.createCustomer(name, aPassword, aPhone, aEmail,  credit, debit, address);	
 		} catch (IllegalArgumentException e) {
 			// Check that no error occurred
 			fail();
@@ -193,13 +195,14 @@ public class TestCustomerService {
 		Customer customer = null;
 		String name = null;
 		String aPassword = "123412";
+		String credit = "1234566";
+		String debit = "0987766";
+		String address = "123 avenue street";
 		int aPhone = 123456789;
 		String aEmail = "email@repairsystem.com";
-		RepairSystem system = new RepairSystem();
-		Calendar lastDate = Calendar.getInstance();
 		String error = null;
 		try {
-			customer = customerService.createCustomer(name, aPassword, aPhone, aEmail, lastDate, name, aPassword, aEmail);	
+			customer = customerService.createCustomer(name, aPassword, aPhone, aEmail, credit, debit, address);	
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
@@ -214,11 +217,12 @@ public class TestCustomerService {
 		String aPassword = "123412";
 		int aPhone = 123456789;
 		String aEmail = "email@repairsystem.com";
-		RepairSystem system = new RepairSystem();
-		Calendar lastDate = Calendar.getInstance();
+		String credit = "1234566";
+		String debit = "0987766";
+		String address = "123 avenue street";
 		String error = null;
 		try {
-			customer = customerService.createCustomer(name, aPassword, aPhone, aEmail, lastDate, name, aPassword, aEmail);	
+			customer = customerService.createCustomer(name, aPassword, aPhone, aEmail, credit, debit, address);	
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
@@ -235,9 +239,12 @@ public class TestCustomerService {
 		String aEmail = "email@repairsystem.com";
 		RepairSystem system = new RepairSystem();
 		Calendar lastDate = Calendar.getInstance();
+		String credit = "1234566";
+		String debit = "0987766";
+		String address = "123 avenue street";
 		String error = null;
 		try {
-			customer = customerService.createCustomer(name, aPassword, aPhone, aEmail, lastDate, name, aPassword, aEmail);	
+			customer = customerService.createCustomer(name, aPassword, aPhone, aEmail, credit, debit, address);	
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
@@ -252,11 +259,12 @@ public class TestCustomerService {
 		String aPassword = "";
 		int aPhone = 123456789;
 		String aEmail = "email@repairsystem.com";
-		RepairSystem system = new RepairSystem();
-		Calendar lastDate = Calendar.getInstance();
+		String credit = "1234566";
+		String debit = "0987766";
+		String address = "123 avenue street";
 		String error = null;
 		try {
-			customer = customerService.createCustomer(name, aPassword, aPhone, aEmail, lastDate, name, aPassword, aEmail);	
+			customer = customerService.createCustomer(name, aPassword, aPhone, aEmail, credit, debit, address);	
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
@@ -271,11 +279,12 @@ public class TestCustomerService {
 		String aPassword = "123412";
 		int aPhone = 123456789;
 		String aEmail = null;
-		RepairSystem system = new RepairSystem();
-		Calendar lastDate = Calendar.getInstance();
+		String credit = "1234566";
+		String debit = "0987766";
+		String address = "123 avenue street";
 		String error = null;
 		try {
-			customer = customerService.createCustomer(name, aPassword, aPhone, aEmail, lastDate, name, aPassword, aEmail);	
+			customer = customerService.createCustomer(name, aPassword, aPhone, aEmail, credit, debit, address);	
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
@@ -290,11 +299,12 @@ public class TestCustomerService {
 		String aPassword = "123412";
 		int aPhone = 123456789;
 		String aEmail = "";
-		RepairSystem system = new RepairSystem();
-		Calendar lastDate = Calendar.getInstance();
+		String credit = "1234566";
+		String debit = "0987766";
+		String address = "123 avenue street";
 		String error = null;
 		try {
-			customer = customerService.createCustomer(name, aPassword, aPhone, aEmail, lastDate, name, aPassword, aEmail);	
+			customer = customerService.createCustomer(name, aPassword, aPhone, aEmail, credit, debit, address);	
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
@@ -302,22 +312,4 @@ public class TestCustomerService {
 		assertEquals("Customer email cannot be empty!", error);
 	}
 
-	@Test
-	public void testCreateLastDateNull() {
-
-		Customer customer = null;
-		String name = "Oscar";
-		String aPassword = "123412";
-		int aPhone = 123456789;
-		String aEmail = "email@repairsystem.com";
-		Calendar lastDate = null;
-		String error = null;
-		try {
-			customer = customerService.createCustomer(name, aPassword, aPhone, aEmail, lastDate, name, aPassword, aEmail);	
-		} catch (IllegalArgumentException e) {
-			error = e.getMessage();
-		}
-		assertNull(customer);
-		assertEquals("Customer last active date cannot be empty!", error);
-	}
 }

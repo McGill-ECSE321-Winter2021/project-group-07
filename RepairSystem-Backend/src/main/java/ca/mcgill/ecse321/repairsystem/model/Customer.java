@@ -1,4 +1,5 @@
 package ca.mcgill.ecse321.repairsystem.model;
+import java.time.LocalDateTime;
 import java.util.*;
 import javax.persistence.CascadeType;
 import javax.persistence.OneToMany;
@@ -7,13 +8,18 @@ import javax.persistence.Entity;
 @Entity
 public class Customer extends Person
 {
-	public Customer(String aName,  int id, String aPassword, int aPhone, String aEmail, Calendar lastDate, String credit, String debit, String add)
+	public Customer(String aName,  int id, String aPassword, int aPhone, String aEmail, String credit, String debit, String add)
 	{
 		super(aName, id, aPassword, aPhone, aEmail);
+		cars = new ArrayList<Car>();
+		appointments = new ArrayList<Appointment>();
 		creditHash = credit;
 		debitHash = debit;
 		address = add;
-		lastActive = lastDate;
+		lastActive = Calendar.getInstance();
+		LocalDateTime time = LocalDateTime.now();
+		lastActive.set(time.getYear(), time.getMonthValue(), time.getDayOfMonth());
+		
 	}
 
 	public Customer() {

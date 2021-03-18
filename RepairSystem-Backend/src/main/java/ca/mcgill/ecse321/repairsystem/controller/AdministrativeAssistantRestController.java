@@ -20,8 +20,8 @@ public class AdministrativeAssistantRestController {
 	private AdministrativeAssistantService adminService;
 
 	@PostMapping(value = { "/admin/{name}", "/admin/{name}/" })
-	public AdministrativeAssistantDto createAdmin(@PathVariable("name") String name, @RequestParam String password, @RequestParam int phone, @RequestParam String email) throws IllegalArgumentException {
-		AdministrativeAssistant admin = adminService.createAdmin(name, password, phone, email);
+	public AdministrativeAssistantDto createAdmin(@PathVariable("name") String name, @RequestParam String password, @RequestParam String phone, @RequestParam String email) throws IllegalArgumentException {
+		AdministrativeAssistant admin = adminService.createAdmin(name, password, Integer.parseInt(phone), email);
 		return Converter.convertToDto(admin);
 	}
 	

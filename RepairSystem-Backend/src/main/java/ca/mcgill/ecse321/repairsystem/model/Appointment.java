@@ -11,23 +11,43 @@ import javax.persistence.ManyToOne;
 public class Appointment
 {
 
-  public Appointment(Customer customer, int id, TimeSlot time, List<Mechanic> mechanics, Car car, List<Image> images, List<Service> services, String note, AppointmentStatus status) {
+  public Appointment(Customer customer, int id, TimeSlot time, Car car, String note) {
 	  this.customer = customer;
+	  
 	  this.Id = id;
-	  this.status = status;
+	  this.status = AppointmentStatus.AppointmentBooked;
 	  this.note = note;
 	  this.timeSlot = time;
-	  this.mechanics = mechanics;
+	  this.mechanics = new ArrayList<Mechanic>();
 	  this.customer = customer;
-	  this.images = images;
-	  this.services = services;
+	  this.images = new ArrayList<Image>();
+	  this.services = new ArrayList<Service>();
 	  this.car = car;
   }
   
   public Appointment() {
   }
   
-  public enum AppointmentStatus { CarReceived, InRepair, Completed };
+  public void addMechanic(Mechanic mechanic)
+  {
+	  this.mechanics.add(mechanic);
+  }
+  
+  public void addImage(Image image)
+  {
+	  this.images.add(image);
+  }
+  
+  public void addService(Service service)
+  {
+	  this.services.add(service);
+  }
+  
+  public void updateAppointmentStatus(AppointmentStatus status)
+  {
+	  this.status = status;
+  }
+  public enum AppointmentStatus { AppointmentBooked, CarReceived, InRepair, Completed };
 
   private int Id;
   

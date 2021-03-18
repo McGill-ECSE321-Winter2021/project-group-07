@@ -1,8 +1,12 @@
 package ca.mcgill.ecse321.repairsystem.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -35,13 +39,13 @@ public class CustomerRestController {
 	}
 	
 	@GetMapping(value = { "/customer/{id}", "/customer/{id}/"})
-	public CustomerDto getCustomerById(int id) {
+	public CustomerDto getCustomerById(@PathVariable("id") int id) {
 		return Converter.convertToDto(customerService.getCustomerById(id));
 	}
 
 	@PostMapping(value = { "/customer/{name}", "/customer/{name}/" })
-	public CustomerDto createCustomer(@PathVariable("name") String name, @RequestParam String password, @RequestParam int phone, @RequestParam String email, @RequestParam Calendar lastActive, @RequestParam String credit, @RequestParam String debit, @RequestParam String address) throws IllegalArgumentException {
-		Customer customer = customerService.createCustomer(name, password, phone, email, lastActive, credit, debit, address);
+	public CustomerDto createCustomer(@PathVariable("name") String name, @RequestParam String password, @RequestParam String phone, @RequestParam String email, @RequestParam String credit, @RequestParam String debit, @RequestParam String address) throws IllegalArgumentException, ParseException {
+		Customer customer = customerService.createCustomer(name, password, Integer.parseInt(phone), email, credit, debit, address);
 		return Converter.convertToDto(customer);
 	}
 	

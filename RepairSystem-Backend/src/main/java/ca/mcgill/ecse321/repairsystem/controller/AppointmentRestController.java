@@ -25,9 +25,6 @@ public class AppointmentRestController {
 	private AppointmentService appointmentService;
 	private CustomerService customerService;
 	private TimeSlotService timeSlotService;
-	private MechanicService mechanicService;
-	private ImageService imageService;
-	private ServiceService serviceService;
 	private CarService carService;
 	
 	@GetMapping(value = { "/appointment/{id}", "/appointment/{id}/"})
@@ -35,55 +32,27 @@ public class AppointmentRestController {
 		return Converter.convertToDto(appointmentService.getAppointmentById(id));
 	}
 
-	@PostMapping(value = { "/appointment/{customer}", "/appointment/{customer}/"})
-	public AppointmentDto createAppointment(@PathVariable("customer") CustomerDto customerDto, @RequestParam TimeSlotDto timeslotDto, @RequestParam List<MechanicDto> mechanicsDto, @RequestParam CarDto carDto, @RequestParam List<ImageDto> imagesDto, @RequestParam List<ServiceDto> servicesDto, @RequestParam String note, @RequestParam AppointmentStatus appointmentStatus) throws IllegalArgumentException {
-		Customer customer = customerService.getCustomerById(customerDto.getId());
-		TimeSlot timeslot = timeSlotService.getTimeSlotById(timeslotDto.getId());
-		Car car = carService.getCarById(carDto.getId());
-		List<Mechanic> mechanics = new ArrayList<Mechanic>();
-		for(MechanicDto mechanic: mechanicsDto) {
-			mechanics.add(mechanicService.getMechanicById(mechanic.getId()));
-		}
-		List<Image> images = new ArrayList<Image>();
-		for(ImageDto image: imagesDto) {
-			images.add(imageService.getImageByUrl(image.getUrl()));
-		}
-		List<Service> services = new ArrayList<Service>();
-		for(ServiceDto service : servicesDto) {
-			services.add(serviceService.getServiceByServiceType(service.getServiceType()));
-		}
-		Appointment appointment = appointmentService.createApp(customer, timeslot, mechanics, car, images, services, note, appointmentStatus);
+	@PostMapping(value = { "/appointment/{customerId}", "/appointment/{customerId}/"})
+	public AppointmentDto createAppointment(@PathVariable("customerId") String customerId, @RequestParam String timeSlotId,  @RequestParam String carId,  @RequestParam(defaultValue = "") String note) throws IllegalArgumentException {
+		Customer customer = customerService.getCustomerById(Integer.parseInt(customerId));
+		TimeSlot timeslot = timeSlotService.getTimeSlotById(Integer.parseInt(timeSlotId));
+		Car car = carService.getCarById(Integer.parseInt(carId));
+		Appointment appointment = appointmentService.createApp(customer, timeslot, car, note);
 		return Converter.convertToDto(appointment);
 	}
 	
-	@PutMapping(value = { "/appointment/{customer}", "/appointment/{customer}/"})
-	public AppointmentDto editAppointment(@PathVariable("customer") CustomerDto customerDto, @RequestParam TimeSlotDto oldTimeSlotDto, @RequestParam TimeSlotDto timeslotDto, @RequestParam List<MechanicDto> mechanicsDto, @RequestParam CarDto carDto, @RequestParam List<ImageDto> imagesDto, @RequestParam List<ServiceDto> servicesDto, @RequestParam String note, @RequestParam AppointmentStatus appointmentStatus) throws IllegalArgumentException {
-		TimeSlot oldTimeSlot = timeSlotService.getTimeSlotById(oldTimeSlotDto.getId());
-		Customer customer = customerService.getCustomerById(customerDto.getId());
-		TimeSlot timeslot = timeSlotService.getTimeSlotById(timeslotDto.getId());
-		
-		Appointment appointment = appointmentService.getAppointmentById(customer.hashCode()*oldTimeSlot.hashCode());
-		
-		Car car = carService.getCarById(carDto.getId());
-		List<Mechanic> mechanics = new ArrayList<Mechanic>();
-		for(MechanicDto mechanic: mechanicsDto) {
-			mechanics.add(mechanicService.getMechanicById(mechanic.getId()));
-		}
-		List<Image> images = new ArrayList<Image>();
-		for(ImageDto image: imagesDto) {
-			images.add(imageService.getImageByUrl(image.getUrl()));
-		}
-		List<Service> services = new ArrayList<Service>();
-		for(ServiceDto service : servicesDto) {
-			services.add(serviceService.getServiceByServiceType(service.getServiceType()));
-		}
+	@PutMapping(value = { "/appointment/{customerId}", "/appointment/{customerId}/"})
+	public AppointmentDto editAppointment(@PathVariable("customer") String customerId, @RequestParam String timeSlotOldId, @RequestParam String timeSlotNewId,String carId,  @RequestParam String note) throws IllegalArgumentException {
+		TimeSlot oldTimeSlot = timeSlotService.getTimeSlotById(Integer.parseInt(timeSlotOldId));
+		Customer customer = customerService.getCustomerById(Integer.parseInt(customerId));
+		TimeSlot timeslot = timeSlotService.getTimeSlotById(Integer.parseInt(timeSlotNewId));		
+		Appointment appointment = appointmentService.getAppointmentById(customer.hashCode()*oldTimeSlot.hashCode());	
+		Car car = carService.getCarById(Integer.parseInt(carId));	
 		appointment.setCar(car);
-		appointment.setImages(images);
-		appointment.setMechanics(mechanics);
-		appointment.setServices(services);
+		appointment.setMechanics(new ArrayList<Mechanic>());
 		appointment.setId(customer.hashCode()*timeslot.hashCode());
 		appointment.setNote(note);
-		appointment.setStatus(appointmentStatus);
+		appointment.setStatus(AppointmentStatus.AppointmentBooked);
 		appointment.setTimeSlot(timeslot);
 		return Converter.convertToDto(appointment);
 	}
