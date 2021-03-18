@@ -9,12 +9,15 @@ import ca.mcgill.ecse321.repairsystem.model.Service.ServiceType;
 import java.util.ArrayList;
 import java.util.List;
 import ca.mcgill.ecse321.repairsystem.dao.MechanicRepository;
+import ca.mcgill.ecse321.repairsystem.dao.ServiceRepository;
 
 @Service
 public class MechanicService {
 
 	@Autowired
 	private MechanicRepository mechanicRepository;
+	@Autowired
+	private ServiceRepository serviceRepository;
 	////////////////////SERVICE MECHANIC METHODS //////////////////// 
 	
 	@Transactional
@@ -65,14 +68,18 @@ public class MechanicService {
 	@Transactional 
 	public Mechanic addService(ca.mcgill.ecse321.repairsystem.model.Service service, Mechanic mechanic) {
 		mechanic.addService(service);
+		service.addMechanic(mechanic);
 		mechanicRepository.save(mechanic);
+		serviceRepository.save(service);
 		return mechanic;
 	}
 	
 	@Transactional 
 	public Mechanic removeService(ca.mcgill.ecse321.repairsystem.model.Service service, Mechanic mechanic) {
 		mechanic.removeService(service);
+		service.removeMechanic(mechanic);
 		mechanicRepository.save(mechanic);
+		serviceRepository.save(service);
 		return mechanic;
 	}
 	

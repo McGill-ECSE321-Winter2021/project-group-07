@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 import ca.mcgill.ecse321.repairsystem.model.*;
+import ca.mcgill.ecse321.repairsystem.dao.AppointmentRepository;
 import ca.mcgill.ecse321.repairsystem.dao.ImageRepository;
 
 @Service
@@ -12,6 +13,8 @@ public class ImageService {
 
 	@Autowired
 	private ImageRepository imageRepository;
+	@Autowired
+	private AppointmentRepository appointmentRepository;
 
 	////////////////////SERVICE IMAGE METHODS //////////////////// 
 	@Transactional
@@ -21,7 +24,9 @@ public class ImageService {
 
 		int id = url.hashCode();
 		Image i = new Image(id, url, a);
+		a.addImage(i);
 		imageRepository.save(i);
+		appointmentRepository.save(a);
 		return i;
 	}
 

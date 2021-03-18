@@ -13,6 +13,10 @@ import ca.mcgill.ecse321.repairsystem.model.Service.ServiceType;
 public class ServiceService {
 	@Autowired
 	private ServiceRepository serviceRepository;
+	@Autowired
+	private MechanicRepository mechanicRepository;
+	@Autowired
+	private AppointmentRepository appointmentRepository;
 	
 	@Transactional
 	public ca.mcgill.ecse321.repairsystem.model.Service createService(ServiceType aType, int price, List<Mechanic> mechanics, List<Appointment> appointment) {
@@ -46,25 +50,33 @@ public class ServiceService {
 	@Transactional
 	public void addMechanic(Mechanic mechanic, ca.mcgill.ecse321.repairsystem.model.Service service) {
 		service.addMechanic(mechanic);
+		mechanic.addService(service);
 		serviceRepository.save(service);
+		mechanicRepository.save(mechanic);
 	}
 	
 	@Transactional
 	public void addAppointment(Appointment appointment, ca.mcgill.ecse321.repairsystem.model.Service service) {
 		service.addAppointment(appointment);
+		appointment.addService(service);
 		serviceRepository.save(service);
+		appointmentRepository.save(appointment);
 	}
 	
 	@Transactional
 	public void removeMechanic(Mechanic mechanic, ca.mcgill.ecse321.repairsystem.model.Service service) {
 		service.removeMechanic(mechanic);
+		mechanic.removeService(service);
 		serviceRepository.save(service);
+		mechanicRepository.save(mechanic);
 	}
 	
 	@Transactional
 	public void removeAppointment(Appointment appointment, ca.mcgill.ecse321.repairsystem.model.Service service) {
 		service.removeAppointment(appointment);
+		appointment.removeService(service);
 		serviceRepository.save(service);
+		appointmentRepository.save(appointment);
 	}
 	
 }

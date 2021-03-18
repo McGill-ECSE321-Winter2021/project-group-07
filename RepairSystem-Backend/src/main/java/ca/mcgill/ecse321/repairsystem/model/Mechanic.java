@@ -60,5 +60,9 @@ public class Mechanic extends Person{
   public void removeService(Service service) {
 	  services.remove(service);
   }
+  
+  public void addAppointment(Appointment appointment) {
+	  appointments.add(appointment);
+  }
 
 }

@@ -33,6 +33,11 @@ public class Appointment
 	  this.mechanics.add(mechanic);
   }
   
+  public void removeMechanic(Mechanic mechanic)
+  {
+	  this.mechanics.remove(mechanic);
+  }
+  
   public void addImage(Image image)
   {
 	  this.images.add(image);
@@ -41,6 +46,10 @@ public class Appointment
   public void addService(Service service)
   {
 	  this.services.add(service);
+  }
+  
+  public void removeService(Service service) {
+	  this.services.remove(service);
   }
   
   public void updateAppointmentStatus(AppointmentStatus status)

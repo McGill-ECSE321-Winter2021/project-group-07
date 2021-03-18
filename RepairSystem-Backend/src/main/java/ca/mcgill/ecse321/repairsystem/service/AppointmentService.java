@@ -21,6 +21,12 @@ public class AppointmentService {
 	private TimeSlotRepository timeslotRepository;
 	@Autowired
 	private CarRepository carRepository;
+	@Autowired
+	private MechanicRepository mechanicRepository;
+	@Autowired
+	private ServiceRepository serviceRepository;
+	@Autowired
+	private ImageRepository imageRepository;
 	
 	@Transactional 
 	public Appointment createApp(Customer customer, TimeSlot time, Car car,String note) {
@@ -87,21 +93,27 @@ public class AppointmentService {
 	public void addMechanic(Appointment appointment, Mechanic mechanic)
 	{
 		appointment.addMechanic(mechanic);
+		mechanic.addAppointment(appointment);
 		appointmentRepository.save(appointment);
+		mechanicRepository.save(mechanic);
 	}
 	
 	@Transactional 
 	public void addService(Appointment appointment, ca.mcgill.ecse321.repairsystem.model.Service service)
 	{
 		appointment.addService(service);
+		service.addAppointment(appointment);
 		appointmentRepository.save(appointment);
+		serviceRepository.save(service);
 	}
 	
 	@Transactional
 	public void addImage(Appointment appointment, Image image)
 	{
 		appointment.addImage(image);
+		image.setAppointment(appointment);
 		appointmentRepository.save(appointment);
+		imageRepository.save(image);
 	}
 	/* 
 	 * helper method
