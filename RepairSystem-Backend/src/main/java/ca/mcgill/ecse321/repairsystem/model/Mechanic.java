@@ -11,6 +11,9 @@ public class Mechanic extends Person{
 	public Mechanic(String aName, int id, String aPassword, int aPhone, String aEmail, List<Service> allCapabilities)
 	{
 	  super(aName, id, aPassword, aPhone, aEmail);    
+	  services = allCapabilities;
+	  appointments = new ArrayList<Appointment>();
+	  timeSlots = new ArrayList<TimeSlot>();
 	}
 	
 	public Mechanic() {
