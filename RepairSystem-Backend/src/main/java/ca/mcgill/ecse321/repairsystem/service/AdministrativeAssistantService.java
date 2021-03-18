@@ -28,9 +28,19 @@ public class AdministrativeAssistantService {
 		{
 			throw new IllegalArgumentException("Administrative assistant email cannot be empty!");
 		}
-		int id = aName.hashCode() * aPassword.hashCode();
+		int id = aEmail.hashCode();
 		AdministrativeAssistant admin = new AdministrativeAssistant(aName, id, aPassword, aPhone, aEmail);
 		administrativeAssistantRepository.save(admin);
+		return admin;
+	}
+	
+	public AdministrativeAssistant editAdmin(String oldEmail, String name, String password, int phone, String email) {
+		AdministrativeAssistant admin = administrativeAssistantRepository.findByEmail(oldEmail);
+		admin.setEmail(email);
+		admin.setId(email.hashCode());
+		admin.setName(name);
+		admin.setPassword(password);
+		admin.setPhone(phone);
 		return admin;
 	}
 

@@ -167,53 +167,6 @@ public class TestTimeSlotService {
 		assertEquals("End time cannot be null", error);
 	}
 	
-
-	/**
-	 * Verifies that the list of mechanics of a service object is not null
-	 */
-	@Test
-	public void testCreateMechanicsNull()
-	{
-		
-		LocalDateTime startTime = LocalDateTime.of(2021, 3, 13, 10, 00);
-		LocalDateTime endTime =  LocalDateTime.of(2021, 3, 13, 14, 00);
-		List<Mechanic> mechanics = null;
-		List<Appointment> appointments = new ArrayList<Appointment>();
-		TimeSlot time = null;
-		String error = null;
-		
-		try {
-			time = timeSlotService.createTimeSlot(startTime, endTime);
-		}catch(IllegalArgumentException e){
-			error = e.getMessage();
-		}
-		
-		assertNull(time);
-		assertEquals("List of mechanics cannot be null", error);
-	}
-	
-	/**
-	 * Verifies that the list of appointments associated to a particular service is not null
-	 */
-	@Test
-	public void testCreateAppointmentsNull()
-	{
-		
-		LocalDateTime startTime = LocalDateTime.of(2021, 3, 13, 10, 00);
-		LocalDateTime endTime =  LocalDateTime.of(2021, 3, 13, 14, 00);
-		TimeSlot time = null;
-		String error = null;
-		
-		try {
-			time = timeSlotService.createTimeSlot(startTime, endTime);
-		}catch(IllegalArgumentException e){
-			error = e.getMessage();
-		}
-		
-		assertNull(time);
-		assertEquals("List of appointments cannot be null", error);
-	}
-	
 	
 
 }

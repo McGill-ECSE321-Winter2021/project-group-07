@@ -30,6 +30,8 @@ import ca.mcgill.ecse321.repairsystem.model.Car.CarType;
 public class TestCarService {
 	@Mock
 	private CarRepository carDao;
+	@Mock
+	private CustomerRepository customerDao;
 
 	@InjectMocks
 	private CarService carService;
@@ -112,7 +114,7 @@ public class TestCarService {
 	};
 	
 	lenient().when(carDao.save(any(Car.class))).thenAnswer(returnParameterAsAnswer);
-	
+	lenient().when(customerDao.save(any(Customer.class))).thenAnswer(returnParameterAsAnswer);
 		
 	}
 	
@@ -167,31 +169,6 @@ public class TestCarService {
 		
 		assertNull(car);
 		assertEquals("Car Type cannot be null", error);
-	}
-	
-	@Test
-	/**
-	 * Verifies that there is a list of appointments associated to a car object
-	 */
-	public void testCreateAppointmentsNull()
-	{
-		String error = null;
-		CarType type = CarType.Truck;
-		boolean winterTires = false;
-		int numOfKm = 455679;
-		APPOINTMENTS = null;
-		Customer customer  = new Customer("Marcus", 012123, "password", 6789876, "Marcus@gmail.com", "123456", "678954", "123 avenue street");
-		Car car = null;
-		
-		try {
-			car = carService.createCar(type, winterTires, numOfKm,  customer);
-		}catch(IllegalArgumentException e)
-		{
-			error = e.getMessage();
-		}
-		
-		assertNull(car);
-		assertEquals("List of Appointments cannot be null", error);
 	}
 	
 	@Test

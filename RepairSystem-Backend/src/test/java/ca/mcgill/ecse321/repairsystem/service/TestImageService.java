@@ -33,6 +33,8 @@ import ca.mcgill.ecse321.repairsystem.model.*;
 public class TestImageService {
 	@Mock
 	private ImageRepository imageDao;
+	@Mock
+	private AppointmentRepository appointmentDao;
 
 	@InjectMocks
 	private ImageService imageService;
@@ -62,6 +64,7 @@ public class TestImageService {
 		};
 
 		lenient().when(imageDao.save(any(Image.class))).thenAnswer(returnParameterAsAnswer);
+		lenient().when(appointmentDao.save(any(Appointment.class))).thenAnswer(returnParameterAsAnswer);
 	}
 	
 	@Test

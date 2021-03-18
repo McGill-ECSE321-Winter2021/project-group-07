@@ -121,7 +121,7 @@ public class TestAdministrativeAssistantService {
 		String aPassword = "123412";
 		int aPhone = 123456789;
 		String aEmail = "email@repairsystem.com";
-		int administrativeAssistantId = name.hashCode() * aPassword.hashCode();
+		int administrativeAssistantId = aEmail.hashCode();
 
 		try {
 			administrativeAssistant = administrativeAssistantService.createAdmin(name, aPassword, aPhone, aEmail);

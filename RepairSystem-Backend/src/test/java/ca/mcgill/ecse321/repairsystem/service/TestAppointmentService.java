@@ -38,6 +38,12 @@ public class TestAppointmentService {
 	@Mock
 	private CustomerRepository customerDao;
 	
+	@Mock
+	private TimeSlotRepository timeSlotDao;
+	
+	@Mock
+	private CarRepository carDao;
+	
 	
 	@InjectMocks
 	private AppointmentService service;
@@ -174,6 +180,8 @@ public class TestAppointmentService {
 		};
 		
 		lenient().when(appointmentDao.save(any(Appointment.class))).thenAnswer(returnParameterAsAnswer);
+		lenient().when(timeSlotDao.save(any(TimeSlot.class))).thenAnswer(returnParameterAsAnswer);
+		lenient().when(carDao.save(any(Car.class))).thenAnswer(returnParameterAsAnswer);
 		
 	}
 	

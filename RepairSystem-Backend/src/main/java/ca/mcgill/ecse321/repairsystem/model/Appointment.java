@@ -13,7 +13,6 @@ public class Appointment
 
   public Appointment(Customer customer, int id, TimeSlot time, Car car, String note) {
 	  this.customer = customer;
-	  
 	  this.Id = id;
 	  this.status = AppointmentStatus.AppointmentBooked;
 	  this.note = note;
@@ -26,6 +25,12 @@ public class Appointment
   }
   
   public Appointment() {
+	  this.images = new ArrayList<Image>();
+	  this.services = new ArrayList<Service>();
+	  this.mechanics = new ArrayList<Mechanic>();
+	  this.customer = null;
+	  this.car = null;
+	  this.timeSlot = null;
   }
   
   public void addMechanic(Mechanic mechanic)
