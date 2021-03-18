@@ -43,21 +43,28 @@ public class TestAdministrativeAssistantService {
 	private static String PASSWORD = "administrativeAssistant";
 	private static int PHONE = 123000000;
 	private static String EMAIL = "administrativeAssistant@repairsystem.com";
-	private static RepairSystem REPAIR_SYSTEM = new RepairSystem();
+	
+	private static String ADMINISTRATIVE_ASSISTANT_KEY2 = "TestAdministrativeAssistant";
+	private static int ADMINISTRATIVE_ASSISTANT_ID2 = 1234;
+	private static String PASSWORD2 = "administrativeAssistant";
+	private static int PHONE2 = 123000000;
+	private static String EMAIL2 = "administrativeAssistant@repairsystem.com";
 	
 	
 	@BeforeEach
 	public void setMockOutput()
 	{
 		lenient().when(administrativeAssistantDao.findByName(anyString())).thenAnswer( (InvocationOnMock invocation) -> {
-			AdministrativeAssistant administrativeAssistant = new AdministrativeAssistant();
+			List<AdministrativeAssistant> administrativeAssistants = new ArrayList<AdministrativeAssistant>();
 			if(invocation.getArgument(0).equals(ADMINISTRATIVE_ASSISTANT_KEY)) {
-				administrativeAssistant.setName(ADMINISTRATIVE_ASSISTANT_KEY);
-				administrativeAssistant.setEmail(EMAIL);
-				administrativeAssistant.setId(ADMINISTRATIVE_ASSISTANT_ID);
-				administrativeAssistant.setPassword(PASSWORD);
-				administrativeAssistant.setPhone(PHONE);
-				return administrativeAssistant;
+				AdministrativeAssistant admin = new AdministrativeAssistant();
+				admin.setName(ADMINISTRATIVE_ASSISTANT_KEY);
+				admin.setEmail(EMAIL);
+				admin.setId(ADMINISTRATIVE_ASSISTANT_ID);
+				admin.setPassword(PASSWORD);
+				admin.setPhone(PHONE);
+				administrativeAssistants.add(admin);
+				return administrativeAssistants;
 			} else {
 				return null;
 			}
@@ -104,6 +111,27 @@ public class TestAdministrativeAssistantService {
 			} else {
 				return null;
 			}
+		});
+		
+		lenient().when(administrativeAssistantDao.findAll()).thenAnswer((InvocationOnMock invocation) -> {
+			List<AdministrativeAssistant> administrativeAssistants = new ArrayList<AdministrativeAssistant>();
+			AdministrativeAssistant administrativeAssistant = new AdministrativeAssistant();
+			administrativeAssistant.setName(ADMINISTRATIVE_ASSISTANT_KEY);
+			administrativeAssistant.setEmail(EMAIL);
+			administrativeAssistant.setId(ADMINISTRATIVE_ASSISTANT_ID);
+			administrativeAssistant.setPassword(PASSWORD);
+			administrativeAssistant.setPhone(PHONE);
+			
+			AdministrativeAssistant administrativeAssistant2 = new AdministrativeAssistant();
+			administrativeAssistant2.setName(ADMINISTRATIVE_ASSISTANT_KEY2);
+			administrativeAssistant2.setEmail(EMAIL2);
+			administrativeAssistant2.setId(ADMINISTRATIVE_ASSISTANT_ID2);
+			administrativeAssistant2.setPassword(PASSWORD2);
+			administrativeAssistant2.setPhone(PHONE2);
+			
+			administrativeAssistants.add(administrativeAssistant);
+			administrativeAssistants.add(administrativeAssistant2);
+			return administrativeAssistants;
 		});
 
 		Answer<?> returnParameterAsAnswer = (InvocationOnMock invocation) -> {
@@ -233,6 +261,195 @@ public class TestAdministrativeAssistantService {
 		}
 		assertNull(administrativeAssistant);
 		assertEquals("Administrative assistant email cannot be empty!", error);
+	}
+	
+	@Test
+	public void testEdit() {
+		String name = "Oscar";
+		String aPassword = "123412";
+		int aPhone = 123456789;
+		String aEmail = "hello";
+		AdministrativeAssistant administrativeAssistant = administrativeAssistantService.createAdmin(name, aPassword, aPhone, aEmail);
+		String newName = "David";
+		String newPassword = "poopy";
+		int newPhone = 4321;
+		String newEmail = "goodbye";
+		String error = null;
+		int id = newEmail.hashCode();
+		try {
+			administrativeAssistant = administrativeAssistantService.editAdmin(administrativeAssistant, newName, newPassword, newPhone, newEmail);
+		} catch (IllegalArgumentException e) {
+			error = e.getMessage();
+		}
+		assertNotNull(administrativeAssistant);
+		assertEquals(administrativeAssistant.getEmail(), newEmail);
+		assertEquals(administrativeAssistant.getPhone(), newPhone);
+		assertEquals(administrativeAssistant.getName(), newName);
+		assertEquals(administrativeAssistant.getPassword(), newPassword);
+		assertEquals(administrativeAssistant.getId(), id);
+	}
+	
+	@Test
+	public void testGetAdminById() {
+		String name = "Oscar";
+		String aPassword = "123412";
+		int aPhone = 123456789;
+		String aEmail = "hello";
+		AdministrativeAssistant administrativeAssistant = administrativeAssistantService.createAdmin(name, aPassword, aPhone, aEmail);
+		int id = aEmail.hashCode();
+		String error = null;
+		
+		ADMINISTRATIVE_ASSISTANT_KEY = name;
+		ADMINISTRATIVE_ASSISTANT_ID = id;
+		PASSWORD = aPassword;
+		PHONE = aPhone;
+		EMAIL = aEmail;
+		try {
+			administrativeAssistant = administrativeAssistantService.getAdminById(id);
+		} catch (IllegalArgumentException e) {
+			error = e.getMessage();
+		}
+		assertNotNull(administrativeAssistant);
+		assertEquals(administrativeAssistant.getEmail(), aEmail);
+		assertEquals(administrativeAssistant.getPhone(), aPhone);
+		assertEquals(administrativeAssistant.getName(), name);
+		assertEquals(administrativeAssistant.getPassword(), aPassword);
+		assertEquals(administrativeAssistant.getId(), id);
+	}
+	
+	@Test
+	public void testGetAdminByEmail() {
+		String name = "Oscar";
+		String aPassword = "123412";
+		int aPhone = 123456789;
+		String aEmail = "hello";
+		AdministrativeAssistant administrativeAssistant = administrativeAssistantService.createAdmin(name, aPassword, aPhone, aEmail);
+		int id = aEmail.hashCode();
+		String error = null;
+		
+		ADMINISTRATIVE_ASSISTANT_KEY = name;
+		ADMINISTRATIVE_ASSISTANT_ID = id;
+		PASSWORD = aPassword;
+		PHONE = aPhone;
+		EMAIL = aEmail;
+		try {
+			administrativeAssistant = administrativeAssistantService.getAdminByEmail(aEmail);
+		} catch (IllegalArgumentException e) {
+			error = e.getMessage();
+		}
+		assertNotNull(administrativeAssistant);
+		assertEquals(administrativeAssistant.getEmail(), aEmail);
+		assertEquals(administrativeAssistant.getPhone(), aPhone);
+		assertEquals(administrativeAssistant.getName(), name);
+		assertEquals(administrativeAssistant.getPassword(), aPassword);
+		assertEquals(administrativeAssistant.getId(), id);
+	}
+	
+	@Test
+	public void testGetAdminByName() {
+		String name = "Oscar";
+		String aPassword = "123412";
+		int aPhone = 123456789;
+		String aEmail = "hello";
+		AdministrativeAssistant administrativeAssistant = administrativeAssistantService.createAdmin(name, aPassword, aPhone, aEmail);
+		List<AdministrativeAssistant> administrativeAssistants = new ArrayList<AdministrativeAssistant>();
+		int id = aEmail.hashCode();
+		String error = null;
+		
+		ADMINISTRATIVE_ASSISTANT_KEY = name;
+		ADMINISTRATIVE_ASSISTANT_ID = id;
+		PASSWORD = aPassword;
+		PHONE = aPhone;
+		EMAIL = aEmail;
+		try {
+			administrativeAssistants = administrativeAssistantService.getAdminsByName(name);
+		} catch (IllegalArgumentException e) {
+			error = e.getMessage();
+		}
+		assertNotNull(administrativeAssistants.get(0));
+		assertEquals(administrativeAssistants.get(0).getEmail(), aEmail);
+		assertEquals(administrativeAssistants.get(0).getPhone(), aPhone);
+		assertEquals(administrativeAssistants.get(0).getName(), name);
+		assertEquals(administrativeAssistants.get(0).getPassword(), aPassword);
+		assertEquals(administrativeAssistants.get(0).getId(), id);
+	}
+	
+	@Test
+	public void testGetAdminByPhone() {
+		String name = "Oscar";
+		String aPassword = "123412";
+		int aPhone = 123456789;
+		String aEmail = "hello";
+		AdministrativeAssistant administrativeAssistant = administrativeAssistantService.createAdmin(name, aPassword, aPhone, aEmail);
+		int id = aEmail.hashCode();
+		String error = null;
+		
+		ADMINISTRATIVE_ASSISTANT_KEY = name;
+		ADMINISTRATIVE_ASSISTANT_ID = id;
+		PASSWORD = aPassword;
+		PHONE = aPhone;
+		EMAIL = aEmail;
+		try {
+			administrativeAssistant = administrativeAssistantService.getAdminByNumber(aPhone);
+		} catch (IllegalArgumentException e) {
+			error = e.getMessage();
+		}
+		assertNotNull(administrativeAssistant);
+		assertEquals(administrativeAssistant.getEmail(), aEmail);
+		assertEquals(administrativeAssistant.getPhone(), aPhone);
+		assertEquals(administrativeAssistant.getName(), name);
+		assertEquals(administrativeAssistant.getPassword(), aPassword);
+		assertEquals(administrativeAssistant.getId(), id);
+	}
+	
+	@Test
+	public void testGetAllAdmins() {
+		String name1 = "Oscar";
+		String password1 = "123412";
+		int phone1 = 123456789;
+		String email1 = "hello";
+		AdministrativeAssistant administrativeAssistant1 = administrativeAssistantService.createAdmin(name1, password1, phone1, email1);
+		int id1 = email1.hashCode();
+		
+		String name2 = "Oscar";
+		String password2 = "123412";
+		int phone2 = 123456789;
+		String email2 = "hello";
+		AdministrativeAssistant administrativeAssistant2 = administrativeAssistantService.createAdmin(name2, password2, phone2, email2);
+		int id2 = email1.hashCode();
+		
+		String error = null;
+		
+		List<AdministrativeAssistant> administrativeAssistants = new ArrayList<AdministrativeAssistant>();
+		
+		ADMINISTRATIVE_ASSISTANT_KEY = name1;
+		ADMINISTRATIVE_ASSISTANT_ID = id1;
+		PASSWORD = password1;
+		PHONE = phone1;
+		EMAIL = email1;
+		
+		ADMINISTRATIVE_ASSISTANT_KEY2 = name2;
+		ADMINISTRATIVE_ASSISTANT_ID2 = id2;
+		PASSWORD2 = password2;
+		PHONE2 = phone2;
+		EMAIL2 = email2;
+		try {
+			administrativeAssistants = administrativeAssistantService.getAllAdmins();
+		} catch (IllegalArgumentException e) {
+			error = e.getMessage();
+		}
+		assertNotNull(administrativeAssistants.get(0));
+		assertEquals(administrativeAssistants.get(0).getEmail(), email1);
+		assertEquals(administrativeAssistants.get(0).getPhone(), phone1);
+		assertEquals(administrativeAssistants.get(0).getName(), name1);
+		assertEquals(administrativeAssistants.get(0).getPassword(), password1);
+		assertEquals(administrativeAssistants.get(0).getId(), id1);
+		assertNotNull(administrativeAssistants.get(1));
+		assertEquals(administrativeAssistants.get(1).getEmail(), email2);
+		assertEquals(administrativeAssistants.get(1).getPhone(), phone2);
+		assertEquals(administrativeAssistants.get(1).getName(), name2);
+		assertEquals(administrativeAssistants.get(1).getPassword(), password2);
+		assertEquals(administrativeAssistants.get(1).getId(), id2);
 	}
 	
 	

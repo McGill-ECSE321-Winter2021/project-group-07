@@ -34,8 +34,8 @@ public class AdministrativeAssistantService {
 		return admin;
 	}
 	
-	public AdministrativeAssistant editAdmin(String oldEmail, String name, String password, int phone, String email) {
-		AdministrativeAssistant admin = administrativeAssistantRepository.findByEmail(oldEmail);
+	@Transactional
+	public AdministrativeAssistant editAdmin(AdministrativeAssistant admin, String name, String password, int phone, String email) {
 		admin.setEmail(email);
 		admin.setId(email.hashCode());
 		admin.setName(name);
