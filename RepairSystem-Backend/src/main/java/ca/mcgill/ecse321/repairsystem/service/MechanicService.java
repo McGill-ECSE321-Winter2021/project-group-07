@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 import ca.mcgill.ecse321.repairsystem.model.*;
+import ca.mcgill.ecse321.repairsystem.model.Service.ServiceType;
+
 import java.util.ArrayList;
 import java.util.List;
 import ca.mcgill.ecse321.repairsystem.dao.MechanicRepository;
@@ -57,6 +59,20 @@ public class MechanicService {
 	@Transactional 
 	public Mechanic getMechanicByEmail(String email) {
 		Mechanic mechanic = mechanicRepository.findByEmail(email);
+		return mechanic;
+	}
+	
+	@Transactional 
+	public Mechanic addService(ca.mcgill.ecse321.repairsystem.model.Service service, Mechanic mechanic) {
+		mechanic.addService(service);
+		mechanicRepository.save(mechanic);
+		return mechanic;
+	}
+	
+	@Transactional 
+	public Mechanic removeService(ca.mcgill.ecse321.repairsystem.model.Service service, Mechanic mechanic) {
+		mechanic.removeService(service);
+		mechanicRepository.save(mechanic);
 		return mechanic;
 	}
 	

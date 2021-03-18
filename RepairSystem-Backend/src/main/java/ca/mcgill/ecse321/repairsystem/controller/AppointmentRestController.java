@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ca.mcgill.ecse321.repairsystem.dto.*;
 import ca.mcgill.ecse321.repairsystem.model.*;
 import ca.mcgill.ecse321.repairsystem.model.Appointment.AppointmentStatus;
+import ca.mcgill.ecse321.repairsystem.model.Service.ServiceType;
 import ca.mcgill.ecse321.repairsystem.service.*;
 
 @CrossOrigin(origins = "*")
@@ -23,13 +24,31 @@ public class AppointmentRestController {
 
 	@Autowired
 	private AppointmentService appointmentService;
+	@Autowired
 	private CustomerService customerService;
+	@Autowired
 	private TimeSlotService timeSlotService;
+	@Autowired
 	private CarService carService;
+	@Autowired
+	private MechanicService mechanicService;
+	@Autowired
+	private ImageService imageService;
+	@Autowired
+	private ServiceService serviceService;
 	
 	@GetMapping(value = { "/appointment/{id}", "/appointment/{id}/"})
-	public AppointmentDto getAppointmentById(int id) {
-		return Converter.convertToDto(appointmentService.getAppointmentById(id));
+	public AppointmentDto getAppointmentById(@PathVariable("id") String id) {
+		return Converter.convertToDto(appointmentService.getAppointmentById(Integer.parseInt(id)));
+	}
+	
+	@GetMapping(value = { "/appointment", "/appointment/"})
+	public List<AppointmentDto> getAllAppointments() {
+		List<Appointment> appointments = appointmentService.getAllAppointments();
+		List<AppointmentDto> appointmentsDto = new ArrayList<AppointmentDto>();
+		for(Appointment appointment: appointments) {
+			appointmentsDto.add(Converter.convertToDto(appointment));		}
+		return appointmentsDto;
 	}
 
 	@PostMapping(value = { "/appointment/{customerId}", "/appointment/{customerId}/"})
@@ -42,7 +61,7 @@ public class AppointmentRestController {
 	}
 	
 	@PutMapping(value = { "/appointment/{customerId}", "/appointment/{customerId}/"})
-	public AppointmentDto editAppointment(@PathVariable("customer") String customerId, @RequestParam String timeSlotOldId, @RequestParam String timeSlotNewId,String carId,  @RequestParam String note) throws IllegalArgumentException {
+	public AppointmentDto editAppointment(@PathVariable("customerId") String customerId, @RequestParam String timeSlotOldId, @RequestParam String timeSlotNewId, String carId, @RequestParam String note) throws IllegalArgumentException {
 		TimeSlot oldTimeSlot = timeSlotService.getTimeSlotById(Integer.parseInt(timeSlotOldId));
 		Customer customer = customerService.getCustomerById(Integer.parseInt(customerId));
 		TimeSlot timeslot = timeSlotService.getTimeSlotById(Integer.parseInt(timeSlotNewId));		
@@ -56,6 +75,36 @@ public class AppointmentRestController {
 		appointment.setTimeSlot(timeslot);
 		return Converter.convertToDto(appointment);
 	}
+	
+	@PutMapping(value = { "/appointment/{mechanicId}", "/appointment/{mechanicId}/"})
+	public AppointmentDto addMechanic(@PathVariable("mechanicId") String mechanicId, @RequestParam String timeSlotId, @RequestParam String customerId) throws IllegalArgumentException {
+		TimeSlot timeSlot = timeSlotService.getTimeSlotById(Integer.parseInt(timeSlotId));
+		Customer customer = customerService.getCustomerById(Integer.parseInt(customerId));		
+		Appointment appointment = appointmentService.getAppointmentById(customer.hashCode()*timeSlot.hashCode());	
+		Mechanic mechanic = mechanicService.getMechanicById(Integer.parseInt(mechanicId));
+		appointmentService.addMechanic(appointment, mechanic);
+		return Converter.convertToDto(appointment);
+	}
+	
+	@PutMapping(value = { "/appointment/{imageUrl}", "/appointment/{imageUrl}/"})
+	public AppointmentDto addImage(@PathVariable("imageUrl") String imageUrl, @RequestParam String timeSlotId, @RequestParam String customerId) throws IllegalArgumentException {
+		TimeSlot timeSlot = timeSlotService.getTimeSlotById(Integer.parseInt(timeSlotId));
+		Customer customer = customerService.getCustomerById(Integer.parseInt(customerId));		
+		Appointment appointment = appointmentService.getAppointmentById(customer.hashCode()*timeSlot.hashCode());	
+		Image image = imageService.getImageByUrl(imageUrl);
+		appointmentService.addImage(appointment, image);
+		return Converter.convertToDto(appointment);
+	}
+	
+	@PutMapping(value = { "/appointment/{serviceType}", "/appointment/{serviceType}/"})
+	public AppointmentDto addService(@PathVariable("serviceType") String serviceType, @RequestParam String timeSlotId, @RequestParam String customerId) throws IllegalArgumentException {
+		TimeSlot timeSlot = timeSlotService.getTimeSlotById(Integer.parseInt(timeSlotId));
+		Customer customer = customerService.getCustomerById(Integer.parseInt(customerId));		
+		Appointment appointment = appointmentService.getAppointmentById(customer.hashCode()*timeSlot.hashCode());	
+		Service service = serviceService.getServiceByServiceType(ServiceType.valueOf(serviceType));
+		appointmentService.addService(appointment, service);
+		return Converter.convertToDto(appointment);
+	}	
 
 }
 

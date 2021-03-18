@@ -18,6 +18,7 @@ public class ImageRestController {
 
 	@Autowired
 	private AppointmentService appointmentService;
+	@Autowired
 	private ImageService imageService;
 	
 	@GetMapping(value = { "/image/{url}", "/image/{url}/"})
@@ -26,8 +27,8 @@ public class ImageRestController {
 	}
 
 	@PostMapping(value = { "/image/{url}", "/Mechanics/{url}/" })
-	public ImageDto createImage(@PathVariable("url") String url, @RequestParam AppointmentDto appointmentDto) throws IllegalArgumentException {
-		Appointment appointment = appointmentService.getAppointmentById(appointmentDto.getId());
+	public ImageDto createImage(@PathVariable("url") String url, @RequestParam String appointmentId) throws IllegalArgumentException {
+		Appointment appointment = appointmentService.getAppointmentById(Integer.parseInt(appointmentId));
 		Image image = imageService.createImage(url, appointment);
 		return Converter.convertToDto(image);
 	}

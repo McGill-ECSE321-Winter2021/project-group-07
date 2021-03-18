@@ -43,4 +43,28 @@ public class ServiceService {
 		return serviceRepository.findAll();
 	}
 	
+	@Transactional
+	public void addMechanic(Mechanic mechanic, ca.mcgill.ecse321.repairsystem.model.Service service) {
+		service.addMechanic(mechanic);
+		serviceRepository.save(service);
+	}
+	
+	@Transactional
+	public void addAppointment(Appointment appointment, ca.mcgill.ecse321.repairsystem.model.Service service) {
+		service.addAppointment(appointment);
+		serviceRepository.save(service);
+	}
+	
+	@Transactional
+	public void removeMechanic(Mechanic mechanic, ca.mcgill.ecse321.repairsystem.model.Service service) {
+		service.removeMechanic(mechanic);
+		serviceRepository.save(service);
+	}
+	
+	@Transactional
+	public void removeAppointment(Appointment appointment, ca.mcgill.ecse321.repairsystem.model.Service service) {
+		service.removeAppointment(appointment);
+		serviceRepository.save(service);
+	}
+	
 }

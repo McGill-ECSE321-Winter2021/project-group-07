@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,7 +23,9 @@ public class ServiceRestController {
 
 	@Autowired
 	private ServiceService serviceService;
+	@Autowired
 	private MechanicService mechanicService;
+	@Autowired
 	private AppointmentService appointmentService;
 	
 	@GetMapping(value = { "/services", "/services/"})
@@ -36,21 +39,37 @@ public class ServiceRestController {
 	}
 	
 	@GetMapping(value = { "/services/{serviceType}", "/services/{serviceType}/"})
-	public ServiceDto getServiceByServiceType(ServiceType serviceType) {
-		return Converter.convertToDto(serviceService.getServiceByServiceType(serviceType));
+	public ServiceDto getServiceByServiceType(String serviceType) {
+		return Converter.convertToDto(serviceService.getServiceByServiceType(ServiceType.valueOf(serviceType)));
 	}
 
 	@PostMapping(value = { "/services/{serviceType}", "/services/{serviceType}/" })
-	public ServiceDto createService(@PathVariable("serviceType") ServiceType serviceType, @RequestParam int price, @RequestParam List<MechanicDto> mechanicsDto, @RequestParam List<AppointmentDto> appointmentsDto) throws IllegalArgumentException {
-		List<Mechanic> mechanics = new ArrayList<Mechanic>();
-		List<Appointment> appointments = new ArrayList<Appointment>();
-		for(MechanicDto mechanic: mechanicsDto) {
-			mechanics.add(mechanicService.getMechanicById(mechanic.getId()));
+	public ServiceDto createService(@PathVariable("serviceType") String serviceType, @RequestParam String price) throws IllegalArgumentException {
+		Service service = serviceService.createService(ServiceType.valueOf(serviceType), Integer.parseInt(price), new ArrayList<Mechanic>(), new ArrayList<Appointment>());
+		return Converter.convertToDto(service);
+	}
+	
+	@PutMapping(value = { "/services/{mechanicId}", "/services/{mechanicId}/" })
+	public ServiceDto editMechanic(@PathVariable("mechanicId") String mechanicId, @RequestParam String serviceType, @RequestParam String addRemove) throws IllegalArgumentException {
+		Service service = serviceService.getServiceByServiceType(ServiceType.valueOf(serviceType));
+		Mechanic mechanic = mechanicService.getMechanicById(Integer.parseInt(mechanicId));
+		if(addRemove.equals("add")) {
+			serviceService.addMechanic(mechanic, service);
+		} else if(addRemove.equals("remove")){
+			serviceService.removeMechanic(mechanic, service);
 		}
-		for(AppointmentDto appointment: appointmentsDto) {
-			appointments.add(appointmentService.getAppointmentById(appointment.getId()));
+		return Converter.convertToDto(service);
+	}
+	
+	@PutMapping(value = { "/services/{appointmentId}", "/services/{appointmentId}/" })
+	public ServiceDto editAppointment(@PathVariable("appointmentId") String appointmentId, @RequestParam String serviceType, @RequestParam String addRemove) throws IllegalArgumentException {
+		Service service = serviceService.getServiceByServiceType(ServiceType.valueOf(serviceType));
+		Appointment appointment = appointmentService.getAppointmentById(Integer.parseInt(appointmentId));
+		if(addRemove.equals("add")) {
+			serviceService.addAppointment(appointment, service);
+		} else if(addRemove.equals("remove")){
+			serviceService.removeAppointment(appointment, service);
 		}
-		Service service = serviceService.createService(serviceType, price, mechanics, appointments);
 		return Converter.convertToDto(service);
 	}
 	

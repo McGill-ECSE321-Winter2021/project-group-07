@@ -26,13 +26,13 @@ public class AdministrativeAssistantRestController {
 	}
 	
 	@PutMapping(value = { "/admin/{oldEmail}", "/admin/{oldEmail}/" })
-	public AdministrativeAssistantDto editAdmin(@PathVariable("oldEmail") String oldEmail, @RequestParam String name, @RequestParam String password, @RequestParam int phone, @RequestParam String email) throws IllegalArgumentException {
+	public AdministrativeAssistantDto editAdmin(@PathVariable("oldEmail") String oldEmail, @RequestParam String name, @RequestParam String password, @RequestParam String phone, @RequestParam String email) throws IllegalArgumentException {
 		AdministrativeAssistant admin = adminService.getAdminByEmail(oldEmail);
 		admin.setEmail(email);
 		admin.setId(name.hashCode()*password.hashCode());
 		admin.setName(name);
 		admin.setPassword(password);
-		admin.setPhone(phone);
+		admin.setPhone(Integer.parseInt(phone));
 		return Converter.convertToDto(admin);
 	}
 

@@ -92,6 +92,10 @@ public class Car
   public void setAppointments(List<Appointment> appointmentList){
     appointments = appointmentList;
   }
+  
+  public void addAppointment(Appointment appointment) {
+	  appointments.add(appointment);
+  }
 
 }
   

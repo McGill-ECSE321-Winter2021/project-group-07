@@ -1,12 +1,10 @@
 package ca.mcgill.ecse321.repairsystem.controller;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -39,8 +37,8 @@ public class CustomerRestController {
 	}
 	
 	@GetMapping(value = { "/customer/{id}", "/customer/{id}/"})
-	public CustomerDto getCustomerById(@PathVariable("id") int id) {
-		return Converter.convertToDto(customerService.getCustomerById(id));
+	public CustomerDto getCustomerById(@PathVariable("id") String id) {
+		return Converter.convertToDto(customerService.getCustomerById(Integer.parseInt(id)));
 	}
 
 	@PostMapping(value = { "/customer/{name}", "/customer/{name}/" })
@@ -50,13 +48,16 @@ public class CustomerRestController {
 	}
 	
 	@PutMapping(value = { "/customer/{oldEmail}", "/customer/{oldEmail}/" })
-	public CustomerDto editCustomer(@PathVariable("oldEmail") String oldEmail, @RequestParam String email, @RequestParam String password, @RequestParam int phone, @RequestParam String name, @RequestParam Calendar lastActive, @RequestParam String credit, @RequestParam String debit, @RequestParam String address) throws IllegalArgumentException {
+	public CustomerDto editCustomer(@PathVariable("oldEmail") String oldEmail, @RequestParam String email, @RequestParam String password, @RequestParam String phone, @RequestParam String name, @RequestParam String credit, @RequestParam String debit, @RequestParam String address) throws IllegalArgumentException {
 		Customer customer = customerService.getCustomerByEmail(oldEmail);
 		customer.setName(name);
 		customer.setPassword(password);
-		customer.setPhone(phone);
+		customer.setPhone(Integer.parseInt(phone));
 		customer.setEmail(email);
-		customer.setLastActive(lastActive);
+		LocalDateTime time = LocalDateTime.now();
+		Calendar c = Calendar.getInstance();
+		c.set(time.getYear(), time.getMonthValue(), time.getDayOfMonth());
+		customer.setLastActive(c);
 		customer.setCreditHash(credit);
 		customer.setDebitHash(debit);
 		customer.setAddress(address);

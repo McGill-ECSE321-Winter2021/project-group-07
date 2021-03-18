@@ -5,6 +5,9 @@ import javax.persistence.Id;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
@@ -81,6 +84,22 @@ public class TimeSlot{
 	}
 	public void setRepairSystem(RepairSystem repairSystem) {
 		this.repairSystem = repairSystem;
+	}
+	
+	public void addMechanic(Mechanic mechanic) {
+		mechanics.add(mechanic);
+	}
+	
+	public void addAppointment(Appointment appointment) {
+		appointments.add(appointment);
+	}
+	
+	public void removeMechanic(Mechanic mechanic) {
+		mechanics.remove(mechanic);
+	}
+	
+	public void removeAppointment(Appointment appointment) {
+		appointments.remove(appointment);
 	}
 	
 	

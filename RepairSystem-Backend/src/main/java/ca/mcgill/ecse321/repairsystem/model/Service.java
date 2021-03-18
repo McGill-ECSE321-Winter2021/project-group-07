@@ -58,5 +58,21 @@ public class Service{
 		this.mechanics = mechanics;
 	}
 	
+	public void addAppointment(Appointment appointment) {
+		appointments.add(appointment);
+	}
+	
+	public void addMechanic(Mechanic mechanic) {
+		mechanics.add(mechanic);
+	}
+	
+	public void removeAppointment(Appointment appointment) {
+		appointments.remove(appointment);
+	}
+	
+	public void removeMechanic(Mechanic mechanic) {
+		mechanics.remove(mechanic);
+	}
+	
 
 }

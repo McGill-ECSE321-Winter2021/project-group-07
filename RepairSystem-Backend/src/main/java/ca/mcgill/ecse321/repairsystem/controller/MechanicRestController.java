@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ca.mcgill.ecse321.repairsystem.dto.*;
 import ca.mcgill.ecse321.repairsystem.model.*;
+import ca.mcgill.ecse321.repairsystem.model.Service.ServiceType;
 import ca.mcgill.ecse321.repairsystem.service.*;
 
 @CrossOrigin(origins = "*")
@@ -22,6 +23,7 @@ public class MechanicRestController {
 
 	@Autowired
 	private ServiceService serviceService;
+	@Autowired
 	private MechanicService mechanicService;
 	
 	@GetMapping(value = { "/mechanics", "/mechanics/"})
@@ -35,35 +37,41 @@ public class MechanicRestController {
 	}
 	
 	@GetMapping(value = { "/mechanics/{id}", "/Mechanics/{id}/"})
-	public MechanicDto getMechanicById(int id) {
-		return Converter.convertToDto(mechanicService.getMechanicById(id));
+	public MechanicDto getMechanicById(String id) {
+		return Converter.convertToDto(mechanicService.getMechanicById(Integer.parseInt(id)));
 	}
 
 	@PostMapping(value = { "/mechanics/{name}", "/Mechanics/{name}/" })
-	public MechanicDto createMechanic(@PathVariable("name") String name, @RequestParam String password, @RequestParam int phone, @RequestParam String email, @RequestParam List<ServiceDto> servicesDto) throws IllegalArgumentException {
-		List<Service> services = new ArrayList<Service>();
-		for(ServiceDto service: servicesDto) {
-			services.add(serviceService.getServiceByServiceType(service.getServiceType()));
-		}
-		Mechanic mechanic = mechanicService.createMechanic(name, password, phone, email, services);
+	public MechanicDto createMechanic(@PathVariable("name") String name, @RequestParam String password, @RequestParam String phone, @RequestParam String email) throws IllegalArgumentException {
+		Mechanic mechanic = mechanicService.createMechanic(name, password, Integer.parseInt(phone), email, new ArrayList<Service>());
 		return Converter.convertToDto(mechanic);
 	}
 	
 	@PutMapping(value = { "/mechanic/{oldEmail}", "/mechanic/{oldEmail}/" })
-	public MechanicDto editMechanic(@PathVariable("oldEmail") String oldEmail, @RequestParam String name, @RequestParam String password, @RequestParam int phone, @RequestParam String email, @RequestParam List<ServiceDto> servicesDto) throws IllegalArgumentException {
+	public MechanicDto editMechanic(@PathVariable("oldEmail") String oldEmail, @RequestParam String name, @RequestParam String password, @RequestParam String phone, @RequestParam String email) throws IllegalArgumentException {
 		Mechanic mechanic = mechanicService.getMechanicByEmail(oldEmail);
-		List<Service> services = new ArrayList<Service>();
-		for(ServiceDto service: servicesDto) {
-			services.add(serviceService.getServiceByServiceType(service.getServiceType()));
-		}
 		mechanic.setName(name);
 		mechanic.setId(name.hashCode()*password.hashCode());
 		mechanic.setPassword(password);
-		mechanic.setPhone(phone);
+		mechanic.setPhone(Integer.parseInt(phone));
 		mechanic.setEmail(email);
-		mechanic.setServices(services);
 		return Converter.convertToDto(mechanic);
 	}
+	
+	@PutMapping(value = { "/mechanic/{serviceType}", "/mechanic/{serviceType}/" })
+	public MechanicDto editService(@PathVariable("serviceType") String serviceType, @RequestParam String addRemove, @RequestParam String oldEmail) throws IllegalArgumentException {
+		Mechanic mechanic = mechanicService.getMechanicByEmail(oldEmail);
+		ServiceType service = ServiceType.valueOf(serviceType);
+		Service s = serviceService.getServiceByServiceType(service);
+		if(addRemove.equals("add")) {
+			mechanicService.addService(s, mechanic);
+		} else if(addRemove.equals("remove")) {
+			mechanicService.removeService(s, mechanic);
+		}
+		return Converter.convertToDto(mechanic);
+	}
+	
+	
 
 }
 

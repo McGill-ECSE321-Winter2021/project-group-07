@@ -52,5 +52,13 @@ public class Mechanic extends Person{
   public void setAppointments(List<Appointment> appointment) {
 	  this.appointments=appointment;
   }
+  
+  public void addService(Service service) {
+	  services.add(service);
+  }
+  
+  public void removeService(Service service) {
+	  services.remove(service);
+  }
 
 }

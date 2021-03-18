@@ -98,4 +98,8 @@ public class Customer extends Person
 		this.lastActive = last;
 	}
 	
+	public void addAppointment(Appointment appointment) {
+		appointments.add(appointment);
+	}
+	
 }

@@ -56,6 +56,30 @@ public class TimeSlotService {
 		return toList(timeSlotRepository.findAll());
 	}
 	
+	@Transactional
+	public void addMechanic(Mechanic mechanic, TimeSlot timeslot) {
+		timeslot.addMechanic(mechanic);
+		timeSlotRepository.save(timeslot);
+	}
+	
+	@Transactional
+	public void addAppointment(Appointment appointment, TimeSlot timeslot) {
+		timeslot.addAppointment(appointment);
+		timeSlotRepository.save(timeslot);
+	}
+	
+	@Transactional
+	public void removeMechanic(Mechanic mechanic, TimeSlot timeslot) {
+		timeslot.removeMechanic(mechanic);
+		timeSlotRepository.save(timeslot);
+	}
+	
+	@Transactional
+	public void removeAppointment(Appointment appointment, TimeSlot timeslot) {
+		timeslot.removeAppointment(appointment);
+		timeSlotRepository.save(timeslot);
+	}
+	
 	/* 
 	 * helper method
 	 */

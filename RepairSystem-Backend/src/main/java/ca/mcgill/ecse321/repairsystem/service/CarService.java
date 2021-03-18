@@ -15,6 +15,8 @@ public class CarService {
 
 	@Autowired 
 	private CarRepository carRepository;
+	@Autowired 
+	private CustomerRepository customerRepository;
 
 	//////////////////// SERVICE CAR METHODS //////////////////// 
 
@@ -33,7 +35,10 @@ public class CarService {
 		}
 		int id = (Integer.toString(numOfKm)).hashCode() * customer.hashCode();
 		Car c = new Car(id, type, winterTires, numOfKm, appointments, customer);
+		//customerRepository.delete(customer);
+		customer.addCar(c);
 		carRepository.save(c);
+		customerRepository.save(customer);
 		return c;
 	}
 

@@ -15,6 +15,12 @@ public class AppointmentService {
 	////////////////////SERVICE APPOINTMENT METHODS //////////////////// 
 	@Autowired
 	private AppointmentRepository appointmentRepository;
+	@Autowired
+	private CustomerRepository customerRepository;
+	@Autowired
+	private TimeSlotRepository timeslotRepository;
+	@Autowired
+	private CarRepository carRepository;
 	
 	@Transactional 
 	public Appointment createApp(Customer customer, TimeSlot time, Car car,String note) {
@@ -32,7 +38,13 @@ public class AppointmentService {
 		
 		int id = customer.hashCode() * time.hashCode();
 		Appointment app = new Appointment(customer, id, time,  car, note );
+		customer.addAppointment(app);
+		time.addAppointment(app);
+		car.addAppointment(app);
 		appointmentRepository.save(app);
+		customerRepository.save(customer);
+		timeslotRepository.save(time);
+		carRepository.save(car);
 		return app;
 	}
 
@@ -75,18 +87,21 @@ public class AppointmentService {
 	public void addMechanic(Appointment appointment, Mechanic mechanic)
 	{
 		appointment.addMechanic(mechanic);
+		appointmentRepository.save(appointment);
 	}
 	
 	@Transactional 
 	public void addService(Appointment appointment, ca.mcgill.ecse321.repairsystem.model.Service service)
 	{
 		appointment.addService(service);
+		appointmentRepository.save(appointment);
 	}
 	
 	@Transactional
 	public void addImage(Appointment appointment, Image image)
 	{
 		appointment.addImage(image);
+		appointmentRepository.save(appointment);
 	}
 	/* 
 	 * helper method
