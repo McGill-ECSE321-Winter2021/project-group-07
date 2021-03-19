@@ -96,6 +96,10 @@ public class Car
   public void addAppointment(Appointment appointment) {
 	  appointments.add(appointment);
   }
+  
+  public void removeAppointment(Appointment appointment) {
+	  appointments.remove(appointment);
+  }
 
 }
   
