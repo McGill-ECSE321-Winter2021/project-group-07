@@ -36,10 +36,10 @@ have access and book a variety of services (towing, oil change, tire changes, re
  | Team Member | Roles / Tasks | Time Spent (Hours)|
  | ------------|---------------| ------------------|
  |Annabelle Dion|      RESTful Service Class, Unit Testing, QA Plan        |                   |
- |Sia Ham       |   RESTful API, Documentation, Unit Testing, QA Plan           |                   |
- |Thomas Jarvis|     RESTful Service Class           |                  |
- |Norman Kong |     RESTful Service Class            |                  |
- |Catherine Van Gheluwe| RESTful API, Unit Testing, QA Plan   |                  |
+ |Sia Ham       |   RESTful API, Documentation, Unit Testing, QA Plan, Bug fixing             |                   |
+ |Thomas Jarvis|     RESTful Service Class, Unit Testing, Integration Testing, Bug fixing        |                  |
+ |Norman Kong |     RESTful Service Class, Unit Testing, Integration Testing, Bug fixing              |                  |
+ |Catherine Van Gheluwe| RESTful API, Unit Testing, QA Plan,  Bug fixing      |                  |
  
  ## Sprint 3 
 
