@@ -89,12 +89,16 @@ public class TimeSlotService {
 		timeSlotRepository.save(timeslot);
 		return timeslot;
 	}
+	/**
+	 * Add mechanics to a timeslot an save timeslot in database
+	 * @param mechanic
+	 * @param timeslot
+	 */
 	@Transactional
 	public void addMechanic(Mechanic mechanic, TimeSlot timeslot) {
 		timeslot.addMechanic(mechanic);
 		timeSlotRepository.save(timeslot);
 	}
-	
 	/**
 	 * add appointment to a time slot and save time slot in database
 	 * @param appointment
