@@ -17,6 +17,14 @@ public class ImageService {
 	private AppointmentRepository appointmentRepository;
 
 	////////////////////SERVICE IMAGE METHODS //////////////////// 
+	
+	
+	/**
+	 * Creating service object
+	 * @param url
+	 * @param a
+	 * @return
+	 */
 	@Transactional
 	public Image createImage(String url, Appointment a) {
 		if(url == null || url.trim().length() == 0) throw new IllegalArgumentException("Image url cannot be empty!");
@@ -29,17 +37,31 @@ public class ImageService {
 		appointmentRepository.save(a);
 		return i;
 	}
-
+	
+	/**
+	 * Obtain all images associated to an appointment
+	 * @param Appointment a
+	 * @return List of images
+	 */
 	@Transactional List<Image> getImagesByAppointment(Appointment a) {
 		List<Image> i = toList(imageRepository.findByAppointment(a));
 		return i;
 	}
 
+	/**
+	 * Obtain all images in the database
+	 * @return list of images
+	 */
 	@Transactional
 	public List<Image> getAllImages() {
 		return toList(imageRepository.findAll());
 	}
 	
+	/**
+	 * Obtain an images by searching by url 
+	 * @param url
+	 * @return image object
+	 */
 	@Transactional
 	public Image getImageByUrl(String url) {
 		return imageRepository.findByUrl(url);

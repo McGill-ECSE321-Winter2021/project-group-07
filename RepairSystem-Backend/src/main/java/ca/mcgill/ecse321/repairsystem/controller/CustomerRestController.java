@@ -23,7 +23,9 @@ public class CustomerRestController {
 
 	@Autowired
 	private CustomerService customerService;
-	
+	/**
+	 *restful controller fot getting all customers
+	 * */
 	@GetMapping(value = { "/customer", "/customer/"})
 	public List<CustomerDto> getAllCustomers() {
 		List<Customer> customers = customerService.getAllCustomers();
@@ -33,18 +35,24 @@ public class CustomerRestController {
 		}
 		return customersDto;
 	}
-	
+	/**
+	 *restful controller for getting customer by id
+	 * */
 	@GetMapping(value = { "/customer/{id}", "/customer/{id}/"})
 	public CustomerDto getCustomerById(@PathVariable("id") String id) {
 		return Converter.convertToDto(customerService.getCustomerById(Integer.parseInt(id)));
 	}
-
+	/**
+	 *restful controller for creating customer by
+	 * */
 	@PostMapping(value = { "/customer/{name}", "/customer/{name}/" })
 	public CustomerDto createCustomer(@PathVariable("name") String name, @RequestParam String password, @RequestParam String phone, @RequestParam String email, @RequestParam String credit, @RequestParam String debit, @RequestParam String address) throws IllegalArgumentException, ParseException {
 		Customer customer = customerService.createCustomer(name, password, Integer.parseInt(phone), email, credit, debit, address);
 		return Converter.convertToDto(customer);
 	}
-
+	/**
+	 *restful controller for editing all customer credentials
+	 * */
 	@PutMapping(value = { "/customer/editAllCustomerCredentials/{oldEmail}", "/customer/{oldEmail}/" })
 	public CustomerDto editAllCustomerCredentials(@PathVariable("oldEmail") String oldEmail, @RequestParam String newPassword, @RequestParam String newPhone,  @RequestParam String newCredit, @RequestParam String newDebit, @RequestParam String newAddress) throws IllegalArgumentException {
 		Customer customer = customerService.getCustomerByEmail(oldEmail); 

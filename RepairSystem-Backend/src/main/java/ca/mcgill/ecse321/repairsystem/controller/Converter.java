@@ -12,11 +12,15 @@ import ca.mcgill.ecse321.repairsystem.model.*;
  *
  */
 public class Converter {
-	
+	/**
+	 *convert admin dao to dto
+	 * */
 	public static AdministrativeAssistantDto convertToDto(AdministrativeAssistant administrativeAssistant) {
 		return new AdministrativeAssistantDto(administrativeAssistant.getName(), administrativeAssistant.getId(), administrativeAssistant.getPassword(), administrativeAssistant.getPhone(), administrativeAssistant.getEmail());
 	}
-	
+	/**
+	 *convert appointment dao to dto
+	 * */
 	public static AppointmentDto convertToDto(Appointment appointment) {		
 		if(appointment == null)
 		{
@@ -36,7 +40,9 @@ public class Converter {
 		}
 		return new AppointmentDto(new CustomerDto(appointment.getCustomer().getId()), appointment.getId(), new TimeSlotDto(appointment.getTimeSlot().getId()), mechanicsDto, new CarDto(appointment.getCar().getId()), imagesDto, servicesDto, appointment.getNote(), appointment.getStatus());
 	}
-	
+	/**
+	 *convert car dao to dto
+	 * */
 	public static CarDto convertToDto(Car car) {
 		if( car == null)
 		{
@@ -48,7 +54,9 @@ public class Converter {
 		}
 		return new CarDto(car.getId(), car.getCarType(), car.getWinterTires(), car.getNumOfKilometers(), appointmentsDto, new CustomerDto(car.getCustomer().getId()));
 	}
-	
+	/**
+	 *convert customer dao to dto
+	 * */
 	public static CustomerDto convertToDto(Customer customer) {
 		if(customer == null)
 		{
@@ -67,7 +75,9 @@ public class Converter {
 		customerDto.setCars(carsDto);
 		return customerDto;
 	}
-	
+	/**
+	 *convert image dao to dto
+	 * */
 	public static ImageDto convertToDto(Image image) {
 		if(image == null)
 		{
@@ -99,6 +109,9 @@ public class Converter {
 		return mechanicDto;
 	}
 	
+	/**
+	 *convert service dao to dto
+	 * */
 	public static ServiceDto convertToDto(Service service) {
 		if(service == null)
 		{
@@ -115,6 +128,9 @@ public class Converter {
 		return new ServiceDto(service.getServiceType(), service.getPrice(), mechanicsDto, appointmentsDto);
 	}
 	
+	/**
+	 *convert timeslot dao to dto
+	 * */
 	public static TimeSlotDto convertToDto(TimeSlot timeslot) {
 		if(timeslot == null)
 		{

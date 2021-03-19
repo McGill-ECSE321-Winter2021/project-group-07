@@ -28,6 +28,14 @@ public class AppointmentService {
 	@Autowired
 	private ImageRepository imageRepository;
 
+	/**
+	 * Creating an appointment given a customer, time, car, note
+	 * @param customer
+	 * @param time
+	 * @param car
+	 * @param note
+	 * @return
+	 */
 	@Transactional 
 	public Appointment createApp(Customer customer, TimeSlot time, Car car,String note) {
 		//input validation
@@ -78,41 +86,75 @@ public class AppointmentService {
 		return appointment;
 	}
 
+	/**
+	 * Getter methods to obtain a customer's list of appointments
+	 * @param customer
+	 * @return
+	 */
 	@Transactional
 	public List<Appointment> getAppointmentsByCustomer(Customer customer) {
 		List<Appointment> appointments = toList(appointmentRepository.findByCustomer(customer));
 		return appointments;
 	}
 
+	/**
+	 * Getter methods to obtain a customer's list of car
+	 * @param car
+	 * @return the list of appointments
+	 */
 	@Transactional
 	public List<Appointment> getAppointmentsByCar(Car car) {
 		List<Appointment> appointments = toList(appointmentRepository.findByCar(car));
 		return appointments;
 	}
 
+	/**
+	 * Getter methods to obtain a customer's list of appointments by searching by appointment status
+	 * @param status
+	 * @return the list of appointments
+	 */
 	@Transactional
 	public List<Appointment> getAppointmentsByStatus(AppointmentStatus status) {
 		List<Appointment> appointments = toList(appointmentRepository.findByStatus(status));
 		return appointments;
 	}
 
+	/**
+	 * Getter methods to obtain a customer's list of appointments by searching by timeslot
+	 * @param time
+	 * @return the list of appointmnets
+	 */
 	@Transactional
 	public List<Appointment> getAppointmentsByTimeSlot(TimeSlot time) {
 		List<Appointment> appointments = toList(appointmentRepository.findByTimeSlot(time));
 		return appointments;
 	}
 
+	/**
+	 * Getter methods to obtain a list of a customer's  appointment by searching by id
+	 * @param id
+	 * @return appointment
+	 */
 	@Transactional
 	public Appointment getAppointmentById(int id) {
 		Appointment appointment = appointmentRepository.findById(id);
 		return appointment;
 	}
 
+	/**
+	 * Getter method to obtain all the appointments in the database
+	 * @return list of appointments
+	 */
 	@Transactional
 	public List<Appointment> getAllAppointments() {
 		return toList(appointmentRepository.findAll());
 	}
-
+	
+	/**
+	 * Adding a mechanic to an appointment 
+	 * @param appointment
+	 * @param mechanic
+	 */
 	@Transactional
 	public void addMechanic(Appointment appointment, Mechanic mechanic)
 	{
@@ -122,6 +164,11 @@ public class AppointmentService {
 		mechanicRepository.save(mechanic);
 	}
 
+	/**
+	 * Adding a service to an appointment
+	 * @param appointment
+	 * @param service
+	 */
 	@Transactional 
 	public void addService(Appointment appointment, ca.mcgill.ecse321.repairsystem.model.Service service)
 	{
@@ -131,6 +178,11 @@ public class AppointmentService {
 		serviceRepository.save(service);
 	}
 
+	/**
+	 * Adding an image to an appointment
+	 * @param appointment
+	 * @param image
+	 */
 	@Transactional
 	public void addImage(Appointment appointment, Image image)
 	{

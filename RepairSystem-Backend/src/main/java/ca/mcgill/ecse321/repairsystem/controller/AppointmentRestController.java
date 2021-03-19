@@ -33,12 +33,16 @@ public class AppointmentRestController {
 	private MechanicService mechanicService;
 	@Autowired
 	private ServiceService serviceService;
-	
+	/**
+	 *Rest controller for getting appointment by id
+	 * */
 	@GetMapping(value = { "/appointment/{id}", "/appointment/{id}/"})
 	public AppointmentDto getAppointmentById(@PathVariable("id") String id) {
 		return Converter.convertToDto(appointmentService.getAppointmentById(Integer.parseInt(id)));
 	}
-	
+	/**
+	 *Rest controller for getting all appointments
+	 * */
 	@GetMapping(value = { "/appointment", "/appointment/"})
 	public List<AppointmentDto> getAllAppointments() {
 		List<Appointment> appointments = appointmentService.getAllAppointments();
@@ -47,7 +51,9 @@ public class AppointmentRestController {
 			appointmentsDto.add(Converter.convertToDto(appointment));		}
 		return appointmentsDto;
 	}
-
+	/**
+	 *Rest controller for creating appointment
+	 * */
 	@PostMapping(value = { "/appointment/{customerId}", "/appointment/{customerId}/"})
 	public AppointmentDto createAppointment(@PathVariable("customerId") String customerId, @RequestParam String timeSlotId,  @RequestParam String carId,  @RequestParam(defaultValue = "") String note) throws IllegalArgumentException {
 		Customer customer = customerService.getCustomerById(Integer.parseInt(customerId));
@@ -56,17 +62,21 @@ public class AppointmentRestController {
 		Appointment appointment = appointmentService.createApp(customer, timeslot, car, note);
 		return Converter.convertToDto(appointment);
 	}
-	
-	@PutMapping(value = { "/appointment/{customerId}", "/appointment/{customerId}/"})
-	public AppointmentDto editAppointment(@PathVariable("customerId") String customerId, @RequestParam String timeSlotId, String carId, @RequestParam String note) throws IllegalArgumentException {
+	/**
+	 *Rest controller for editing appointment
+	 * */
+	@PutMapping(value = { "/appointment/editAppointment/{customerId}", "/appointment/editAppointment/{customerId}/"})
+	public AppointmentDto editAppointment(@PathVariable("customerId") String customerId, @RequestParam String timeSlotId, @RequestParam String carId, @RequestParam String note) throws IllegalArgumentException {
 		TimeSlot timeSlot = timeSlotService.getTimeSlotById(Integer.parseInt(timeSlotId));
 		Customer customer = customerService.getCustomerById(Integer.parseInt(customerId));
 		Car car = carService.getCarById(Integer.parseInt(carId));
 		Appointment appointment = appointmentService.editApp(customer, timeSlot, car, note);
 		return Converter.convertToDto(appointment);
 	}
-	
-	@PutMapping(value = { "/appointment/{mechanicId}", "/appointment/{mechanicId}/"})
+	/**
+	 *Rest controller for adding mechanic
+	 * */
+	@PutMapping(value = { "/appointment/addMechanic/{mechanicId}", "/appointment/addMechanic/{mechanicId}/"})
 	public AppointmentDto addMechanic(@PathVariable("mechanicId") String mechanicId, @RequestParam String timeSlotId, @RequestParam String customerId) throws IllegalArgumentException {
 		TimeSlot timeSlot = timeSlotService.getTimeSlotById(Integer.parseInt(timeSlotId));
 		Customer customer = customerService.getCustomerById(Integer.parseInt(customerId));		
@@ -76,7 +86,10 @@ public class AppointmentRestController {
 		return Converter.convertToDto(appointment);
 	}
 
-	@PutMapping(value = { "/appointment/{serviceType}", "/appointment/{serviceType}/"})
+	/**
+	 *Rest controller for adding service
+	 * */
+	@PutMapping(value = { "/appointment/addService/{serviceType}", "/appointment/addService/{serviceType}/"})
 	public AppointmentDto addService(@PathVariable("serviceType") String serviceType, @RequestParam String timeSlotId, @RequestParam String customerId) throws IllegalArgumentException {
 		TimeSlot timeSlot = timeSlotService.getTimeSlotById(Integer.parseInt(timeSlotId));
 		Customer customer = customerService.getCustomerById(Integer.parseInt(customerId));		

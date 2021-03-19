@@ -432,7 +432,7 @@ public class TestCustomerService {
 		String debit = "0987766";
 		String address = "123 avenue street";
 		String newPassword = "newPassword";
-		String error = null;
+		String error = "";
 		Customer customer = customerService.createCustomer(name, aPassword, aPhone, aEmail, credit, debit, address);	
 	
 		int customerId = aEmail.hashCode();
@@ -496,7 +496,7 @@ public class TestCustomerService {
 	public void testGetCustomersByName()
 	{
 		String error = null;
-		Customer customer = new Customer();
+
 		String name = "Oscar";
 		String aPassword = "123412";
 		int aPhone = 123456789;

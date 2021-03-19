@@ -74,6 +74,11 @@ public class CustomerService {
 		return customer;
 	}
 
+	/**
+	 * Getter method to obtain a customer by searching by id
+	 * @param id
+	 * @return
+	 */
 	@Transactional 
 	public Customer getCustomerById(int id) 
 	{
@@ -81,30 +86,55 @@ public class CustomerService {
 		return customer;
 	}
 
+	/**
+	 * Getter method to obtain all customers  who have the same name
+	 * @param name
+	 * @return list of customers
+	 */
 	@Transactional 
 	public List<Customer> getCustomersByName(String name) {
 		List<Customer> customers = toList(customerRepository.findByName(name));
 		return customers;
 	}
 
+	
+	/**
+	 * Getter methods to obtain a customer give a phone number
+	 * @param number
+	 * @return
+	 */
 	@Transactional 
 	public Customer getCustomerByNumber(int number) {
 		Customer customer = customerRepository.findByPhone(number);
 		return customer;
 	}
 
+	/**
+	 * Getter methods to obtain a customer by searching by email
+	 * @param email
+	 * @return
+	 */
 	@Transactional 
 	public Customer getCustomerByEmail(String email) {
 		Customer customer = customerRepository.findByEmail(email);
 		return customer;
 	}
 
+	/**
+	 * Getter methods to obtain a list of customers who have the same address
+	 * @param address
+	 * @return list of customers
+	 */
 	@Transactional 
 	public List<Customer> getCustomersByAddress(String address) {
 		List<Customer> customers = toList(customerRepository.findByAddress(address));
 		return customers;
 	}
-
+	
+	/**
+	 * Getter methods to obtain a list of customers
+	 * @return list of customers
+	 */
 	@Transactional
 	public List<Customer> getAllCustomers() {
 		return toList(customerRepository.findAll());

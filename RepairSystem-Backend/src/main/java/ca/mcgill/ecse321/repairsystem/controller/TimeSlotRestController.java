@@ -27,7 +27,9 @@ public class TimeSlotRestController {
 	private MechanicService mechanicService;
 	@Autowired
 	private AppointmentService appointmentService;
-	
+	/**
+	 *restful controller for getting all timeslots
+	 * */	
 	@GetMapping(value = { "/timeslots", "/timeslots/"})
 	public List<TimeSlotDto> getAllTimeSlot() {
 		List<TimeSlot> timeslots = timeSlotService.getAllTimeSlots();
@@ -37,11 +39,16 @@ public class TimeSlotRestController {
 		}
 		return timeslotsDto;
 	}
-	
+	/**
+	 *restful controller for getting timeslot by id
+	 * */	
 	@GetMapping(value = { "/timeslot/{id}", "/timeslot/{id}/"})
 	public TimeSlotDto getTimeSlotById(@PathVariable("id") String id) {
 		return Converter.convertToDto(timeSlotService.getTimeSlotById(Integer.parseInt(id)));
 	}
+	/**
+	 *restful controller for creating timeslot
+	 * */	
 
 	@PostMapping(value = { "/timeslot/{startTime}", "/timeslot/{startTime}/" })
 	public TimeSlotDto createTimeSlot(@PathVariable("startTime") String startTime, @RequestParam String endTime) throws IllegalArgumentException {
@@ -51,6 +58,9 @@ public class TimeSlotRestController {
 		TimeSlot timeslot = timeSlotService.createTimeSlot(start, end);
 		return Converter.convertToDto(timeslot);
 	}
+	/**
+	 *restful controller for editing timeslot
+	 * */	
 	
 	@PutMapping(value = { "/timeslot/{mechanicId}", "/timeslot/{mechanicId}/" })
 	public TimeSlotDto editMechanic(@PathVariable("mechanicId") String mechanicId, @RequestParam String startTime, @RequestParam String endTime, @RequestParam String addRemove) throws IllegalArgumentException {
@@ -66,6 +76,9 @@ public class TimeSlotRestController {
 		}
 		return Converter.convertToDto(timeslot);
 	}
+	/**
+	 *restful controller for editing apointment
+	 *	 * */	
 	
 	@PutMapping(value = { "/timeslot/{appointmentId}", "/timeslot/{appointmentId}/" })
 	public TimeSlotDto editAppointment(@PathVariable("appointmentId") String appointmentId, @RequestParam String startTime, @RequestParam String endTime, @RequestParam String addRemove) throws IllegalArgumentException {
