@@ -22,7 +22,7 @@ public class ImageRestController {
 	private ImageService imageService;
 	
 	@GetMapping(value = { "/image/{url}", "/image/{url}/"})
-	public ImageDto getImageByUrl(String url) {
+	public ImageDto getImageByUrl(@PathVariable("url") String url) {
 		return Converter.convertToDto(imageService.getImageByUrl(url));
 	}
 
