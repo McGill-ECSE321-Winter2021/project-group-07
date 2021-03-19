@@ -68,13 +68,6 @@ public class CustomerService {
 		{
 			throw new IllegalArgumentException("Email is already taken!");
 		}
-		if(customerRepository.findByPhone(aPhone) != null)
-		{
-			throw new IllegalArgumentException("Phone number is already taken!");
-		}
-		if (customerRepository.findByName(aName) != null && customerRepository.findByAddress(add) != null && customerRepository.findByEmail(aEmail) != null ) {
-			throw new IllegalArgumentException("a user with the same credentials already exists!");
-		}
 		int id = aEmail.hashCode() ;
 		Customer customer = new Customer(aName, id, aPassword, aPhone, aEmail,credit, debit, add);
 		customerRepository.save(customer);
@@ -308,6 +301,21 @@ public class CustomerService {
 		customer.setPassword(newPassword);
 		customerRepository.save(customer);
 		
+	}
+	
+	
+	@Transactional
+	public Customer editCustomer(Customer customer, String name, String password, int phone, String email, String credit, String debit, String address) {
+		customer.setCreditHash(credit);
+		customer.setDebitHash(debit);
+		customer.setAddress(address);
+		customer.setName(name);
+		customer.setEmail(email);
+		customer.setId(email.hashCode());
+		customer.setName(name);
+		customer.setPassword(password);
+		customer.setPhone(phone);
+		return customer;
 	}
 	/**
 	 * Deletes the customer object as well as its attributes and associations
