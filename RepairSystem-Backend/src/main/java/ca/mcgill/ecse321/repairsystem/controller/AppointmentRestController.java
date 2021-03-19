@@ -60,7 +60,7 @@ public class AppointmentRestController {
 		return Converter.convertToDto(appointment);
 	}
 	
-	@PutMapping(value = { "/appointment/{customerId}", "/appointment/{customerId}/"})
+	@PutMapping(value = { "/appointment/editAppointment/{customerId}", "/appointment/editAppointment/{customerId}/"})
 	public AppointmentDto editAppointment(@PathVariable("customerId") String customerId, @RequestParam String timeSlotId, String carId, @RequestParam String note) throws IllegalArgumentException {
 		TimeSlot timeSlot = timeSlotService.getTimeSlotById(Integer.parseInt(timeSlotId));
 		Customer customer = customerService.getCustomerById(Integer.parseInt(customerId));
@@ -69,7 +69,7 @@ public class AppointmentRestController {
 		return Converter.convertToDto(appointment);
 	}
 	
-	@PutMapping(value = { "/appointment/{mechanicId}", "/appointment/{mechanicId}/"})
+	@PutMapping(value = { "/appointment/addMechanic/{mechanicId}", "/appointment/addMechanic/{mechanicId}/"})
 	public AppointmentDto addMechanic(@PathVariable("mechanicId") String mechanicId, @RequestParam String timeSlotId, @RequestParam String customerId) throws IllegalArgumentException {
 		TimeSlot timeSlot = timeSlotService.getTimeSlotById(Integer.parseInt(timeSlotId));
 		Customer customer = customerService.getCustomerById(Integer.parseInt(customerId));		
@@ -79,7 +79,7 @@ public class AppointmentRestController {
 		return Converter.convertToDto(appointment);
 	}
 
-	@PutMapping(value = { "/appointment/{serviceType}", "/appointment/{serviceType}/"})
+	@PutMapping(value = { "/appointment/addService/{serviceType}", "/appointment/addService/{serviceType}/"})
 	public AppointmentDto addService(@PathVariable("serviceType") String serviceType, @RequestParam String timeSlotId, @RequestParam String customerId) throws IllegalArgumentException {
 		TimeSlot timeSlot = timeSlotService.getTimeSlotById(Integer.parseInt(timeSlotId));
 		Customer customer = customerService.getCustomerById(Integer.parseInt(customerId));		
