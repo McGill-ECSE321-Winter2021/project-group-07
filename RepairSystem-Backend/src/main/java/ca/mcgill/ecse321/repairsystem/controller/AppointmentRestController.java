@@ -61,18 +61,11 @@ public class AppointmentRestController {
 	}
 	
 	@PutMapping(value = { "/appointment/{customerId}", "/appointment/{customerId}/"})
-	public AppointmentDto editAppointment(@PathVariable("customerId") String customerId, @RequestParam String timeSlotOldId, @RequestParam String timeSlotNewId, String carId, @RequestParam String note) throws IllegalArgumentException {
-		TimeSlot oldTimeSlot = timeSlotService.getTimeSlotById(Integer.parseInt(timeSlotOldId));
+	public AppointmentDto editAppointment(@PathVariable("customerId") String customerId, @RequestParam String timeSlotId, String carId, @RequestParam String note) throws IllegalArgumentException {
+		TimeSlot timeSlot = timeSlotService.getTimeSlotById(Integer.parseInt(timeSlotId));
 		Customer customer = customerService.getCustomerById(Integer.parseInt(customerId));
-		TimeSlot timeslot = timeSlotService.getTimeSlotById(Integer.parseInt(timeSlotNewId));		
-		Appointment appointment = appointmentService.getAppointmentById(customer.hashCode()*oldTimeSlot.hashCode());	
-		Car car = carService.getCarById(Integer.parseInt(carId));	
-		appointment.setCar(car);
-		appointment.setMechanics(new ArrayList<Mechanic>());
-		appointment.setId(customer.hashCode()*timeslot.hashCode());
-		appointment.setNote(note);
-		appointment.setStatus(AppointmentStatus.AppointmentBooked);
-		appointment.setTimeSlot(timeslot);
+		Car car = carService.getCarById(Integer.parseInt(carId));
+		Appointment appointment = appointmentService.editApp(customer, timeSlot, car, note);
 		return Converter.convertToDto(appointment);
 	}
 	
