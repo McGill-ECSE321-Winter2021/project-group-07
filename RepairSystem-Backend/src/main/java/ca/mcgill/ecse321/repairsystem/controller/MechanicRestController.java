@@ -36,12 +36,12 @@ public class MechanicRestController {
 		return mechanicsDto;
 	}
 	
-	@GetMapping(value = { "/mechanics/{id}", "/Mechanics/{id}/"})
+	@GetMapping(value = { "/mechanic/{id}", "/mechanic/{id}/"})
 	public MechanicDto getMechanicById(String id) {
 		return Converter.convertToDto(mechanicService.getMechanicById(Integer.parseInt(id)));
 	}
 
-	@PostMapping(value = { "/mechanics/{name}", "/mechanics/{name}/" })
+	@PostMapping(value = { "/mechanic/{name}", "/mechanic/{name}/" })
 	public MechanicDto createMechanic(@PathVariable("name") String name, @RequestParam String password, @RequestParam String phone, @RequestParam String email) throws IllegalArgumentException {
 		Mechanic mechanic = mechanicService.createMechanic(name, password, Integer.parseInt(phone), email, new ArrayList<Service>());
 		return Converter.convertToDto(mechanic);
@@ -58,7 +58,7 @@ public class MechanicRestController {
 		return Converter.convertToDto(mechanic);
 	}
 	
-	@PutMapping(value = { "/mechanic/{serviceType}", "/mechanic/{serviceType}/" })
+	@PutMapping(value = { "/mechanic/editService/{serviceType}", "/mechanic/editService/{serviceType}/" })
 	public MechanicDto editService(@PathVariable("serviceType") String serviceType, @RequestParam String addRemove, @RequestParam String oldEmail) throws IllegalArgumentException {
 		Mechanic mechanic = mechanicService.getMechanicByEmail(oldEmail);
 		ServiceType service = ServiceType.valueOf(serviceType);

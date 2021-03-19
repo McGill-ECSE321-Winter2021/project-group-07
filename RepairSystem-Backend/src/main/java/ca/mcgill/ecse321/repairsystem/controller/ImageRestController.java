@@ -22,14 +22,15 @@ public class ImageRestController {
 	private ImageService imageService;
 	
 	@GetMapping(value = { "/image/{url}", "/image/{url}/"})
-	public ImageDto getImageByUrl(String url) {
+	public ImageDto getImageByUrl(@PathVariable("url") String url) {
 		return Converter.convertToDto(imageService.getImageByUrl(url));
 	}
 
-	@PostMapping(value = { "/image/{url}", "/Mechanics/{url}/" })
+	@PostMapping(value = { "/image/{url}", "/image/{url}/" })
 	public ImageDto createImage(@PathVariable("url") String url, @RequestParam String appointmentId) throws IllegalArgumentException {
 		Appointment appointment = appointmentService.getAppointmentById(Integer.parseInt(appointmentId));
 		Image image = imageService.createImage(url, appointment);
+		appointment.addImage(image);
 		return Converter.convertToDto(image);
 	}
 
