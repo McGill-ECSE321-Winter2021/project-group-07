@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ca.mcgill.ecse321.repairsystem.dto.*;
 import ca.mcgill.ecse321.repairsystem.model.*;
-import ca.mcgill.ecse321.repairsystem.model.Appointment.AppointmentStatus;
 import ca.mcgill.ecse321.repairsystem.model.Service.ServiceType;
 import ca.mcgill.ecse321.repairsystem.service.*;
 
@@ -32,8 +31,6 @@ public class AppointmentRestController {
 	private CarService carService;
 	@Autowired
 	private MechanicService mechanicService;
-	@Autowired
-	private ImageService imageService;
 	@Autowired
 	private ServiceService serviceService;
 	

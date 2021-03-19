@@ -48,13 +48,8 @@ public class MechanicRestController {
 	}
 	
 	@PutMapping(value = { "/mechanic/{oldEmail}", "/mechanic/{oldEmail}/" })
-	public MechanicDto editMechanic(@PathVariable("oldEmail") String oldEmail, @RequestParam String name, @RequestParam String password, @RequestParam String phone, @RequestParam String email) throws IllegalArgumentException {
-		Mechanic mechanic = mechanicService.getMechanicByEmail(oldEmail);
-		mechanic.setName(name);
-		mechanic.setId(email.hashCode());
-		mechanic.setPassword(password);
-		mechanic.setPhone(Integer.parseInt(phone));
-		mechanic.setEmail(email);
+	public MechanicDto editMechanic(@PathVariable("oldEmail") String oldEmail, @RequestParam String name, @RequestParam String password, @RequestParam String phone) throws IllegalArgumentException {
+		Mechanic mechanic = mechanicService.editMechanic(oldEmail, name, password, phone);
 		return Converter.convertToDto(mechanic);
 	}
 	

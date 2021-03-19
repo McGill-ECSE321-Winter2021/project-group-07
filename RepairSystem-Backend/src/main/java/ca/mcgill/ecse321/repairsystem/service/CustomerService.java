@@ -110,9 +110,8 @@ public class CustomerService {
 		return toList(customerRepository.findAll());
 	}
 	
-   public void updateAllCredentials(Customer customer, String newEmail, String newPassword, String newPhone, String newCredit, String newDebit, String newAddress )
+   public void updateAllCredentials(Customer customer, String newPassword, String newPhone, String newCredit, String newDebit, String newAddress )
    {
-	   updateCustomerEmail(customer, newEmail);
 	   resetPassword(customer, newPassword);
 	   updatePhoneNumber(customer, newPhone);
 	   updateCredit(customer, newCredit);
@@ -254,30 +253,6 @@ public class CustomerService {
 		customer.setPhone(Integer.parseInt(newPhoneNumber));
 		customerRepository.save(customer);
 	}
-	/**
-	 * Updates the customer email
-	 * @param customerId
-	 * @param newEmail
-	 */
-	public void updateCustomerEmail(Customer customer, String newEmail)
-	{
-		if(newEmail == null || newEmail.trim().length() == 0)
-		{
-			throw new IllegalArgumentException("email cannot be empty or null");
-		}
-		
-		if(customer == null)
-		{
-			throw new IllegalArgumentException("Customer cannot be null");
-		}
-		if(newEmail.matches(customer.getEmail()))
-		{
-			throw new IllegalArgumentException("New email cannot be the same as the old one");
-		}
-		
-		customer.setEmail(newEmail);
-		customerRepository.save(customer);
-	}
 	
 	/**
 	 * Edit Profile : Resetting or modifying the password
@@ -303,20 +278,6 @@ public class CustomerService {
 		
 	}
 	
-	
-	@Transactional
-	public Customer editCustomer(Customer customer, String name, String password, int phone, String email, String credit, String debit, String address) {
-		customer.setCreditHash(credit);
-		customer.setDebitHash(debit);
-		customer.setAddress(address);
-		customer.setName(name);
-		customer.setEmail(email);
-		customer.setId(email.hashCode());
-		customer.setName(name);
-		customer.setPassword(password);
-		customer.setPhone(phone);
-		return customer;
-	}
 	/**
 	 * Deletes the customer object as well as its attributes and associations
 	 * @param customerId

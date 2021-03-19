@@ -559,25 +559,21 @@ public class TestMechanicService {
 
 		String newName = "Oscar2";
 		String newPassword = "1234122";
-		int newPhone = 123459789;
+		String newPhone = "123459789";
 		String newEmail = "email2@repairsystem.com";
 		List<Service> newAllCapabilities = new ArrayList<Service>();
 		int mechanicId = newEmail.hashCode();
 
 		try {
-			mechanic = mechanicService.editMachanic(mechanic, newName, newPassword, newPhone, newEmail, newAllCapabilities); 
+			mechanic = mechanicService.editMechanic(aEmail, newName, newPassword, newPhone); 
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
 		assertNotNull(mechanic);
-		assertEquals(mechanic.getEmail(), newEmail);
 		assertEquals(mechanic.getPhone(), newPhone);
 		assertEquals(mechanic.getName(), newName);
 		assertEquals(mechanic.getPassword(), newPassword);
 		assertEquals(mechanic.getId(), mechanicId);
-		assertEquals(mechanic.getAppointments(), appointments);
-		assertEquals(mechanic.getServices(), newAllCapabilities);
-		assertEquals(mechanic.getTimeSlots(), timeSlots);
 	}
 
 

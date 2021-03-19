@@ -271,7 +271,7 @@ public class TestAdministrativeAssistantService {
 		String error = null;
 		int id = newEmail.hashCode();
 		try {
-			administrativeAssistant = administrativeAssistantService.editAdmin(administrativeAssistant, newName, newPassword, newPhone, newEmail);
+			administrativeAssistant = administrativeAssistantService.editAdmin(administrativeAssistant, newName, newPassword, newPhone);
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
@@ -345,7 +345,7 @@ public class TestAdministrativeAssistantService {
 		String aPassword = "123412";
 		int aPhone = 123456789;
 		String aEmail = "hello";
-		AdministrativeAssistant administrativeAssistant = administrativeAssistantService.createAdmin(name, aPassword, aPhone, aEmail);
+		administrativeAssistantService.createAdmin(name, aPassword, aPhone, aEmail);
 		List<AdministrativeAssistant> administrativeAssistants = new ArrayList<AdministrativeAssistant>();
 		int id = aEmail.hashCode();
 		String error = null;
@@ -402,14 +402,14 @@ public class TestAdministrativeAssistantService {
 		String password1 = "123412";
 		int phone1 = 123456789;
 		String email1 = "hello";
-		AdministrativeAssistant administrativeAssistant1 = administrativeAssistantService.createAdmin(name1, password1, phone1, email1);
+		administrativeAssistantService.createAdmin(name1, password1, phone1, email1);
 		int id1 = email1.hashCode();
 		
 		String name2 = "Oscar";
 		String password2 = "123412";
 		int phone2 = 123456789;
 		String email2 = "hello";
-		AdministrativeAssistant administrativeAssistant2 = administrativeAssistantService.createAdmin(name2, password2, phone2, email2);
+		administrativeAssistantService.createAdmin(name2, password2, phone2, email2);
 		int id2 = email1.hashCode();
 		
 		String error = null;

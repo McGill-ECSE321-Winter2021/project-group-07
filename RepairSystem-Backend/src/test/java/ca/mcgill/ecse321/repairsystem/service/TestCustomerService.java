@@ -472,13 +472,12 @@ public class TestCustomerService {
 		
 		String newName = "David";
 		String newPassword = "poopy";
-		int newPhone = 4321;
+		String newPhone = "4321";
 		String newEmail = "goodbye";
 		String newCredit ="0987766";
 		String newDebit = "1234566";
-		int id = customer.hashCode();
 		try {
-			customer = customerService.editCustomer(customer, newName, newPassword, newPhone, newEmail, newCredit, newDebit, address);
+			customerService.updateAllCredentials(customer, newPassword, newPhone, newCredit, newDebit, address);
 		}catch(IllegalArgumentException e)
 		{
 			error = e.getMessage();

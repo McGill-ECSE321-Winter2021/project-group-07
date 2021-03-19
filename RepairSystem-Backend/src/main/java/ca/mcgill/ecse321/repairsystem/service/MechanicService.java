@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 import ca.mcgill.ecse321.repairsystem.model.*;
-import ca.mcgill.ecse321.repairsystem.model.Service.ServiceType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -90,13 +89,12 @@ public class MechanicService {
 
 
 	@Transactional
-	public Mechanic editMachanic(Mechanic mechanic, String name, String password, int phone, String email, List<ca.mcgill.ecse321.repairsystem.model.Service> service) { 
+	public Mechanic editMechanic(String email, String name, String password, String phone) { 
+		Mechanic mechanic = mechanicRepository.findByEmail(email);
 		mechanic.setName(name);
-		mechanic.setId(email.hashCode());
 		mechanic.setPassword(password);
-		mechanic.setPhone(phone);
-		mechanic.setEmail(email);
-		mechanic.setServices(service);
+		mechanic.setPhone(Integer.parseInt(phone));
+		mechanicRepository.save(mechanic);
 		return mechanic;
 	}
 	/* 

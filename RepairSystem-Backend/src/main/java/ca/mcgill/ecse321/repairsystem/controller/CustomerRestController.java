@@ -1,9 +1,7 @@
 package ca.mcgill.ecse321.repairsystem.controller;
 
 import java.text.ParseException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,31 +46,11 @@ public class CustomerRestController {
 	}
 
 	@PutMapping(value = { "/customer/editAllCustomerCredentials/{oldEmail}", "/customer/{oldEmail}/" })
-	public CustomerDto editAllCustomerCredentials(@PathVariable("oldEmail") String oldEmail, @RequestParam String newEmail, @RequestParam String newPassword, @RequestParam String newPhone,  @RequestParam String newCredit, @RequestParam String newDebit, @RequestParam String newAddress) throws IllegalArgumentException {
+	public CustomerDto editAllCustomerCredentials(@PathVariable("oldEmail") String oldEmail, @RequestParam String newPassword, @RequestParam String newPhone,  @RequestParam String newCredit, @RequestParam String newDebit, @RequestParam String newAddress) throws IllegalArgumentException {
 		Customer customer = customerService.getCustomerByEmail(oldEmail); 
-		customerService.updateAllCredentials(customer, newEmail, newPassword, newPhone, newCredit, newDebit, newAddress);
+		customerService.updateAllCredentials(customer, newPassword, newPhone, newCredit, newDebit, newAddress);
 		return  Converter.convertToDto(customer);
 	}
-	
-	@PutMapping(value = {"/customer/editCar/{carId}" , "/customer/{carId}/"})
-	public CustomerDto editCars(@PathVariable("carId") String carId, @RequestParam String customerEmail, @RequestParam String addRemove)
-	{
-		Customer customer = customerService.getCustomerByEmail(customerEmail); 
-		customerService.editCars(String.valueOf(customer.getId()), carId, addRemove);
-		return  Converter.convertToDto(customer);
-	}
-	
-	@PutMapping(value= {"/customer/editAppointment/{appointmentId}" , "/customer/{appointmentId}/"})
-	public CustomerDto editAppointments(@PathVariable("appointmentId") String appointmentId, @RequestParam String customerId, @RequestParam String addRemove)
-	{
-		Customer customer = customerService.getCustomerById(Integer.parseInt(customerId));
-		customerService.editAppointments(customerId, appointmentId, addRemove);
-		return Converter.convertToDto(customer);
-	}
-	
-
-	
-
 
 }
 

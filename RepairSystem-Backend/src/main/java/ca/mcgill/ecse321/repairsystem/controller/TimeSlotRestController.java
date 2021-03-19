@@ -52,20 +52,6 @@ public class TimeSlotRestController {
 		return Converter.convertToDto(timeslot);
 	}
 	
-	@PutMapping(value = { "/timeslot/{oldStartTime}", "/timeslot/{oldStartTime}/" })
-	public TimeSlotDto editTimeSlot(@PathVariable("oldStartTime") String oldStartTime, @RequestParam String oldEndTime, @RequestParam String startTime, @RequestParam String endTime) throws IllegalArgumentException {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH:mm");
-		LocalDateTime oldStart = LocalDateTime.parse(oldStartTime, formatter);
-		LocalDateTime oldEnd = LocalDateTime.parse(oldEndTime, formatter);
-		LocalDateTime newStart = LocalDateTime.parse(startTime, formatter);
-		LocalDateTime newEnd = LocalDateTime.parse(endTime, formatter);
-		TimeSlot timeslot = timeSlotService.getTimeSlotById(oldStart.hashCode()*oldEnd.hashCode());
-		timeslot.setStartTime(newStart);
-		timeslot.setEndTime(newEnd);
-		timeslot.setId(newStart.hashCode()*newEnd.hashCode());
-		return Converter.convertToDto(timeslot);
-	}
-	
 	@PutMapping(value = { "/timeslot/{mechanicId}", "/timeslot/{mechanicId}/" })
 	public TimeSlotDto editMechanic(@PathVariable("mechanicId") String mechanicId, @RequestParam String startTime, @RequestParam String endTime, @RequestParam String addRemove) throws IllegalArgumentException {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH:mm");

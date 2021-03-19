@@ -52,13 +52,6 @@ public class TimeSlotService {
 	}
 	
 	@Transactional
-	public TimeSlot editTimeSlot(TimeSlot timeslot, LocalDateTime startTime, LocalDateTime endTime) {
-		timeslot.setStartTime(startTime);
-		timeslot.setEndTime(endTime);
-		timeSlotRepository.save(timeslot);
-		return timeslot;
-	}
-	@Transactional
 	public void addMechanic(Mechanic mechanic, TimeSlot timeslot) {
 		timeslot.addMechanic(mechanic);
 		timeSlotRepository.save(timeslot);
