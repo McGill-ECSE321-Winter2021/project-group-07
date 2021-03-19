@@ -39,7 +39,7 @@ public class ServiceRestController {
 	}
 	
 	@GetMapping(value = { "/services/{serviceType}", "/services/{serviceType}/"})
-	public ServiceDto getServiceByServiceType(String serviceType) {
+	public ServiceDto getServiceByServiceType(@PathVariable("serviceType") String serviceType) {
 		return Converter.convertToDto(serviceService.getServiceByServiceType(ServiceType.valueOf(serviceType)));
 	}
 
