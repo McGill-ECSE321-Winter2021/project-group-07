@@ -890,8 +890,16 @@ public class TestAppointmentService {
 		String dummyNote2 = "dummy Note2";
 		Appointment appointment = service.createApp(customer, time, car, dummyNote);
 
+		
+		APPOINTMENT_ID = customer.hashCode()*time.hashCode();;
+		APPOINTMENT_STATUS= AppointmentStatus.AppointmentBooked;
+		APPOINTMENT_NOTE = dummyNote;
+		CUSTOMER = customer;
+		TIME_SLOT = time;
+		CAR = car2;
+		
 		try {
-			appointment = service.editApp(customer, time, car, dummyNote2);
+			appointment = service.editApp(customer, time, car2, dummyNote2);
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 			

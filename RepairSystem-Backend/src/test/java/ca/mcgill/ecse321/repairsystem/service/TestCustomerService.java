@@ -468,7 +468,8 @@ public class TestCustomerService {
 		String debit = "0987766";
 		String address = "123 avenue street";
 		String error = null;
-		Customer customer = customerService.createCustomer(name, aPassword, aPhone, aEmail, credit, debit, address);	
+		Customer customer = customerService.createCustomer(name, aPassword, aPhone, aEmail, credit, debit, address);
+		int id = aEmail.hashCode();
 		
 		String newName = "David";
 		String newPassword = "poopy";
@@ -476,6 +477,18 @@ public class TestCustomerService {
 		String newEmail = "goodbye";
 		String newCredit ="0987766";
 		String newDebit = "1234566";
+		
+		CUSTOMER_KEY = name;
+		CUSTOMER_ID = id;
+		PASSWORD = aPassword;
+		PHONE = aPhone;
+		EMAIL = aEmail;
+		LAST_DATE = Calendar.getInstance();
+		DEBIT = debit;
+		CREDIT = credit;
+		ADD = address;
+		
+		
 		try {
 			customerService.updateAllCredentials(customer, newPassword, newPhone, newCredit, newDebit, address);
 		}catch(IllegalArgumentException e)
@@ -484,9 +497,8 @@ public class TestCustomerService {
 		}
 		
 		assertNotNull(customer);
-		assertEquals(customer.getName(), newName);
 		assertEquals(customer.getPassword(), newPassword);
-		assertEquals(customer.getEmail(), newEmail);
+		assertEquals(customer.getPhone(), Integer.parseInt(newPhone));
 		assertEquals(customer.getDebitHash(), newDebit);
 		assertEquals(customer.getCreditHash(), newCredit);
 		assertEquals(customer.getAddress(), address);

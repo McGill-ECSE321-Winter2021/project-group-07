@@ -269,14 +269,13 @@ public class TestAdministrativeAssistantService {
 		int newPhone = 4321;
 		String newEmail = "goodbye";
 		String error = null;
-		int id = newEmail.hashCode();
+		int id = aEmail.hashCode();
 		try {
 			administrativeAssistant = administrativeAssistantService.editAdmin(administrativeAssistant, newName, newPassword, newPhone);
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
 		assertNotNull(administrativeAssistant);
-		assertEquals(administrativeAssistant.getEmail(), newEmail);
 		assertEquals(administrativeAssistant.getPhone(), newPhone);
 		assertEquals(administrativeAssistant.getName(), newName);
 		assertEquals(administrativeAssistant.getPassword(), newPassword);

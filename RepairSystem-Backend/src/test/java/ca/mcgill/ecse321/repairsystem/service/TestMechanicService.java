@@ -551,18 +551,22 @@ public class TestMechanicService {
 		int aPhone = 123456789;
 		String aEmail = "email@repairsystem.com";
 		List<Service> allCapabilities = new ArrayList<Service>();
-		List<TimeSlot> timeSlots = new ArrayList<TimeSlot>();
-		List<Appointment> appointments = new ArrayList<Appointment>();
 		String error = null;
 		Mechanic mechanic = mechanicService.createMechanic(name, aPassword, aPhone, aEmail, allCapabilities);
-
+		int mechanicId = aEmail.hashCode();
+		
+		MECHANIC_KEY = name;
+		MECHANIC_ID = mechanicId;
+		PASSWORD = aPassword;
+		PHONE = aPhone;
+		EMAIL = aEmail;
+		ALL_CAPABILITIES = allCapabilities;
 
 		String newName = "Oscar2";
 		String newPassword = "1234122";
 		String newPhone = "123459789";
 		String newEmail = "email2@repairsystem.com";
-		List<Service> newAllCapabilities = new ArrayList<Service>();
-		int mechanicId = newEmail.hashCode();
+		
 
 		try {
 			mechanic = mechanicService.editMechanic(aEmail, newName, newPassword, newPhone); 
@@ -570,7 +574,7 @@ public class TestMechanicService {
 			error = e.getMessage();
 		}
 		assertNotNull(mechanic);
-		assertEquals(mechanic.getPhone(), newPhone);
+		assertEquals(mechanic.getPhone(), Integer.parseInt(newPhone));
 		assertEquals(mechanic.getName(), newName);
 		assertEquals(mechanic.getPassword(), newPassword);
 		assertEquals(mechanic.getId(), mechanicId);
