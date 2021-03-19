@@ -30,6 +30,7 @@ public class ImageRestController {
 	public ImageDto createImage(@PathVariable("url") String url, @RequestParam String appointmentId) throws IllegalArgumentException {
 		Appointment appointment = appointmentService.getAppointmentById(Integer.parseInt(appointmentId));
 		Image image = imageService.createImage(url, appointment);
+		appointment.addImage(image);
 		return Converter.convertToDto(image);
 	}
 
