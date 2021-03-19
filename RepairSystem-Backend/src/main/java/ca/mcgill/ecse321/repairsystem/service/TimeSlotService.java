@@ -52,6 +52,13 @@ public class TimeSlotService {
 	}
 	
 	@Transactional
+	public void upadteTimeSlot(int id, LocalDateTime startTime, LocalDateTime endTime) {
+		TimeSlot timeslot = timeSlotRepository.findById(id);
+		timeslot.setStartTime(startTime);
+		timeslot.setEndTime(endTime);
+		timeSlotRepository.save(timeslot);
+	}
+	@Transactional
 	public void addMechanic(Mechanic mechanic, TimeSlot timeslot) {
 		timeslot.addMechanic(mechanic);
 		timeSlotRepository.save(timeslot);

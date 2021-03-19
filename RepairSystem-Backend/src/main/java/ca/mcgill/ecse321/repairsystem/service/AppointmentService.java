@@ -27,7 +27,7 @@ public class AppointmentService {
 	private ServiceRepository serviceRepository;
 	@Autowired
 	private ImageRepository imageRepository;
-	
+
 	@Transactional 
 	public Appointment createApp(Customer customer, TimeSlot time, Car car,String note) {
 		//input validation
@@ -41,7 +41,7 @@ public class AppointmentService {
 		{
 			throw new IllegalArgumentException("Car cannot be null");
 		}
-		
+
 		int id = customer.hashCode() * time.hashCode();
 		Appointment app = new Appointment(customer, id, time,  car, note );
 		customer.addAppointment(app);
@@ -88,7 +88,7 @@ public class AppointmentService {
 	public List<Appointment> getAllAppointments() {
 		return toList(appointmentRepository.findAll());
 	}
-	
+
 	@Transactional
 	public void addMechanic(Appointment appointment, Mechanic mechanic)
 	{
@@ -97,7 +97,7 @@ public class AppointmentService {
 		appointmentRepository.save(appointment);
 		mechanicRepository.save(mechanic);
 	}
-	
+
 	@Transactional 
 	public void addService(Appointment appointment, ca.mcgill.ecse321.repairsystem.model.Service service)
 	{
@@ -106,7 +106,7 @@ public class AppointmentService {
 		appointmentRepository.save(appointment);
 		serviceRepository.save(service);
 	}
-	
+
 	@Transactional
 	public void addImage(Appointment appointment, Image image)
 	{
@@ -114,6 +114,26 @@ public class AppointmentService {
 		image.setAppointment(appointment);
 		appointmentRepository.save(appointment);
 		imageRepository.save(image);
+	}
+
+	@Transactional
+	public void editAppointment(int id, Car car, Customer customer, List<Image> imagelist,
+			List<Mechanic> mechaniclist, String note, List<ca.mcgill.ecse321.repairsystem.model.Service> serviceList, AppointmentStatus appointmentStatus, TimeSlot timeSlot) { 
+		Appointment appointment = appointmentRepository.findById(id);
+		appointment.setCar(car);
+		appointment.setCustomer(customer);
+		appointment.setImages(imagelist);
+		appointment.setMechanics(mechaniclist);
+		appointment.setNote(note);
+		appointment.setServices(serviceList);
+		appointment.setStatus(appointmentStatus);
+		appointment.setTimeSlot(timeSlot);
+		appointmentRepository.save(appointment);
+		imageRepository.saveAll(imagelist);
+		customerRepository.save(customer);
+		timeslotRepository.save(timeSlot);
+		carRepository.save(car);
+
 	}
 	/* 
 	 * helper method

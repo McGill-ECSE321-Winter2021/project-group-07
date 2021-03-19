@@ -19,14 +19,14 @@ public class MechanicService {
 	@Autowired
 	private ServiceRepository serviceRepository;
 	////////////////////SERVICE MECHANIC METHODS //////////////////// 
-	
+
 	@Transactional
 	public Mechanic createMechanic(String aName, String aPassword, int aPhone, String aEmail, List<ca.mcgill.ecse321.repairsystem.model.Service> allCapabilities) {
-		
+
 		if(aName == null || aName.trim().length() == 0)
 		{
 			throw new IllegalArgumentException("Mechanic name cannot be empty!");
-				
+
 		}else if (aPassword == null || aPassword.trim().length() == 0)
 		{
 			throw new IllegalArgumentException("Mechanic password cannot be empty!");
@@ -39,32 +39,32 @@ public class MechanicService {
 		mechanicRepository.save(mechanic);
 		return mechanic;
 	}
-	
+
 	@Transactional 
 	public Mechanic getMechanicById(int id) {
 		Mechanic mechanic = mechanicRepository.findById(id);
 		return mechanic;
 	}
-	
+
 	@Transactional 
 	public List<Mechanic> getMechanicsByName(String name) {
 		List<Mechanic> mechanics = toList(mechanicRepository.findByName(name));
 		return mechanics;
 	}
-	
+
 	@Transactional 
 	public Mechanic getMechanicByNumber(int aPhone) {
 		Mechanic mechanic = mechanicRepository.findByPhone(aPhone);
 		return mechanic;
 	}
-	
-	
+
+
 	@Transactional 
 	public Mechanic getMechanicByEmail(String email) {
 		Mechanic mechanic = mechanicRepository.findByEmail(email);
 		return mechanic;
 	}
-	
+
 	@Transactional 
 	public Mechanic addService(ca.mcgill.ecse321.repairsystem.model.Service service, Mechanic mechanic) {
 		mechanic.addService(service);
@@ -73,7 +73,7 @@ public class MechanicService {
 		serviceRepository.save(service);
 		return mechanic;
 	}
-	
+
 	@Transactional 
 	public Mechanic removeService(ca.mcgill.ecse321.repairsystem.model.Service service, Mechanic mechanic) {
 		mechanic.removeService(service);
@@ -82,12 +82,25 @@ public class MechanicService {
 		serviceRepository.save(service);
 		return mechanic;
 	}
-	
+
 	@Transactional
 	public List<Mechanic> getAllMechanics() {
 		return toList(mechanicRepository.findAll());
 	}
-	
+
+
+	@Transactional
+	public void editMachanic(String oldEmail, String name, String password, String phone, String email, List<ca.mcgill.ecse321.repairsystem.model.Service> service) { 
+		Mechanic mechanic = mechanicRepository.findByEmail(oldEmail);
+		mechanic.setName(name);
+		mechanic.setId(email.hashCode());
+		mechanic.setPassword(password);
+		mechanic.setPhone(Integer.parseInt(phone));
+		mechanic.setEmail(email);
+		mechanic.setServices(service);
+		mechanicRepository.save(mechanic);
+		serviceRepository.saveAll(service);
+	}
 	/* 
 	 * helper method
 	 */
