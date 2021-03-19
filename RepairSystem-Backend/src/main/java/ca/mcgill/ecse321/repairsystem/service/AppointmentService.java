@@ -117,9 +117,8 @@ public class AppointmentService {
 	}
 
 	@Transactional
-	public void editAppointment(int id, Car car, Customer customer, List<Image> imagelist,
+	public Appointment editAppointment(Appointment appointment, Car car, Customer customer, List<Image> imagelist,
 			List<Mechanic> mechaniclist, String note, List<ca.mcgill.ecse321.repairsystem.model.Service> serviceList, AppointmentStatus appointmentStatus, TimeSlot timeSlot) { 
-		Appointment appointment = appointmentRepository.findById(id);
 		appointment.setCar(car);
 		appointment.setCustomer(customer);
 		appointment.setImages(imagelist);
@@ -133,7 +132,7 @@ public class AppointmentService {
 		customerRepository.save(customer);
 		timeslotRepository.save(timeSlot);
 		carRepository.save(car);
-
+		return appointment;
 	}
 	/* 
 	 * helper method

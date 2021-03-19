@@ -355,6 +355,32 @@ public class TestTimeSlotService {
 		assertEquals(timeSlots.get(1).getStartTime(), startTime2);
 
 	}
-
+	
+	
+	@Test
+	public void testEditTimeSlot() {
+		LocalDateTime startTime = LocalDateTime.now();
+		LocalDateTime endTime = LocalDateTime.of(2021, 3,14,12,00);
+		List<Mechanic> mechanics = new ArrayList<Mechanic>();
+		List<Appointment> appointments = new ArrayList<Appointment>();
+		int timeId =startTime.hashCode() * endTime.hashCode();
+		List<TimeSlot> timeSlots = new ArrayList<TimeSlot>();
+		String error = null;
+		TimeSlot time = timeSlotService.createTimeSlot(startTime, endTime);
+		LocalDateTime newStartTime = LocalDateTime.of(2022, 3,11,12,00);
+		LocalDateTime newEndTime = LocalDateTime.of(2022, 3,14,12,00);
+		
+		try {
+			time = timeSlotService.editTimeSlot(time, newStartTime, newEndTime);
+		} catch (IllegalArgumentException e) {
+			error = e.getMessage();
+		}
+		assertNotNull(time);
+		assertEquals(time.getAppointments(), appointments);
+		assertEquals(time.getStartTime(), newStartTime);
+		assertEquals(time.getEndTime(), newEndTime);
+		assertEquals(time.getMechanics(), mechanics);
+		assertEquals(time.getId(), timeId);
+	}
 
 }

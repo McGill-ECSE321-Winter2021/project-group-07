@@ -32,6 +32,8 @@ public class ServiceService {
 		return service;
 	}
 	
+	
+	
 	@Transactional
 	public ca.mcgill.ecse321.repairsystem.model.Service getServiceByServiceType(ServiceType type) {
 		return serviceRepository.findByServiceType(type);

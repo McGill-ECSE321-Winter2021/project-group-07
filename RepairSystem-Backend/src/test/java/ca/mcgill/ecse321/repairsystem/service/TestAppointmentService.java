@@ -875,4 +875,49 @@ public class TestAppointmentService {
 		assertEquals(appointment.getId(), id);
 	}
 	
+	@Test
+	public void testEditAppointment() {
+		String error = null;
+		Customer customer  = new Customer("Marcus", 012123, "password", 6789876, "Marcus@gmail.com","123456", "678954", "123 avenue street");
+		TimeSlot time =  new TimeSlot(LocalDateTime.of(2021, Month.MARCH,21,14,12,00),LocalDateTime.of(2021, Month.MARCH,21, 20, 00,00), 240);
+		Service s = new Service();
+		s.setAppointments(new ArrayList<Appointment>());
+		Car car = new Car();
+		car.setId(100);
+		car.setAppointments(new ArrayList<Appointment>());
+		car.setCustomer(customer);
+		String dummyNote = "dummy Note";
+		int id = customer.hashCode()*time.hashCode();
+
+		Customer customer2  = new Customer("Marcus2", 012123, "password", 6789876, "Marcus@gmail.com","123456", "678954", "123 avenue street");
+		TimeSlot time2 =  new TimeSlot(LocalDateTime.of(2021, Month.MARCH,22,14,12,00),LocalDateTime.of(2021, Month.MARCH,21, 20, 00,00), 240);
+		Service s2 = new Service();
+		s2.setAppointments(new ArrayList<Appointment>());
+		Car car2 = new Car();
+		car2.setId(100);
+		car2.setAppointments(new ArrayList<Appointment>());
+		car2.setCustomer(customer);
+		String dummyNote2 = "dummy Note2";
+		Appointment appointment = service.createApp(customer, time, car, dummyNote);
+		List<Image> image = new ArrayList<Image>();
+		List<Mechanic> mechanic = new ArrayList<Mechanic>();
+		List<Service> servicelist = new ArrayList<Service>();
+		AppointmentStatus apopintmentstat= AppointmentStatus.InRepair;
+
+		try {
+			appointment = service.editAppointment(appointment, car2, customer2, image, mechanic,dummyNote2,servicelist, apopintmentstat, time2);
+		} catch (IllegalArgumentException e) {
+			error = e.getMessage();
+			
+			
+		}
+		assertNotNull(appointment);
+		assertEquals(appointment.getCar(), car2);
+		assertEquals(appointment.getCustomer(), customer2);
+		assertEquals(appointment.getId(), id);
+		assertEquals(appointment.getTimeSlot(), time2);
+		assertEquals(appointment.getNote(), dummyNote2);
+	}
+
+	
 }

@@ -90,16 +90,14 @@ public class MechanicService {
 
 
 	@Transactional
-	public void editMachanic(String oldEmail, String name, String password, String phone, String email, List<ca.mcgill.ecse321.repairsystem.model.Service> service) { 
-		Mechanic mechanic = mechanicRepository.findByEmail(oldEmail);
+	public Mechanic editMachanic(Mechanic mechanic, String name, String password, int phone, String email, List<ca.mcgill.ecse321.repairsystem.model.Service> service) { 
 		mechanic.setName(name);
 		mechanic.setId(email.hashCode());
 		mechanic.setPassword(password);
-		mechanic.setPhone(Integer.parseInt(phone));
+		mechanic.setPhone(phone);
 		mechanic.setEmail(email);
 		mechanic.setServices(service);
-		mechanicRepository.save(mechanic);
-		serviceRepository.saveAll(service);
+		return mechanic;
 	}
 	/* 
 	 * helper method
