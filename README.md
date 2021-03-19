@@ -1,5 +1,5 @@
 
-# Welcome to Group 14's Project - ECSE321 Car Application
+# Welcome to Group 07's Project - ECSE321 Car Application
 
 ### Project Description
 The project aims to develop an interactive and functional web and android application for a local automobile repair shop. The application will allow customers to
@@ -39,7 +39,7 @@ have access and book a variety of services (towing, oil change, tire changes, re
  |Sia Ham       |   RESTful API, Documentation, Unit Testing, QA Plan, Bug fixing             |       17            |
  |Thomas Jarvis|     RESTful Service Class, Unit Testing, Integration Testing, Bug fixing        |                  |
  |Norman Kong |     RESTful Service Class, Unit Testing, Integration Testing, Bug fixing              |                  |
- |Catherine Van Gheluwe| RESTful API, Unit Testing, QA Plan,  Bug fixing      |           15       |
+ |Catherine Van Gheluwe| RESTful API, Unit Testing, QA Plan,  Bug fixing      |           12      |
  
  ## Sprint 3 
 
