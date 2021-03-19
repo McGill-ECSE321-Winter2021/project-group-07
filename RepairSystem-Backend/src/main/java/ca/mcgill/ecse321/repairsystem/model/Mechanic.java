@@ -11,6 +11,9 @@ public class Mechanic extends Person{
 	public Mechanic(String aName, int id, String aPassword, int aPhone, String aEmail, List<Service> allCapabilities)
 	{
 	  super(aName, id, aPassword, aPhone, aEmail);    
+	  services = allCapabilities;
+	  appointments = new ArrayList<Appointment>();
+	  timeSlots = new ArrayList<TimeSlot>();
 	}
 	
 	public Mechanic() {
@@ -51,6 +54,18 @@ public class Mechanic extends Person{
   
   public void setAppointments(List<Appointment> appointment) {
 	  this.appointments=appointment;
+  }
+  
+  public void addService(Service service) {
+	  services.add(service);
+  }
+  
+  public void removeService(Service service) {
+	  services.remove(service);
+  }
+  
+  public void addAppointment(Appointment appointment) {
+	  appointments.add(appointment);
   }
 
 }

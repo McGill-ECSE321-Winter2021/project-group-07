@@ -14,6 +14,7 @@ import ca.mcgill.ecse321.repairsystem.model.*;
 import ca.mcgill.ecse321.repairsystem.dto.*;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @CrossOrigin(origins = "*")
@@ -22,9 +23,13 @@ public class TimeSlotRestController {
 
 	@Autowired
 	private TimeSlotService timeSlotService;
+	@Autowired
 	private MechanicService mechanicService;
+	@Autowired
 	private AppointmentService appointmentService;
-	
+	/**
+	 *restful controller for getting all timeslots
+	 * */	
 	@GetMapping(value = { "/timeslots", "/timeslots/"})
 	public List<TimeSlotDto> getAllTimeSlot() {
 		List<TimeSlot> timeslots = timeSlotService.getAllTimeSlots();
@@ -34,42 +39,59 @@ public class TimeSlotRestController {
 		}
 		return timeslotsDto;
 	}
-	
-	@GetMapping(value = { "/timeslot/{startTime}", "/timeslot/{startTime}/"})
-	public TimeSlotDto getTimeSlotById(int id) {
-		return Converter.convertToDto(timeSlotService.getTimeSlotById(id));
+	/**
+	 *restful controller for getting timeslot by id
+	 * */	
+	@GetMapping(value = { "/timeslot/{id}", "/timeslot/{id}/"})
+	public TimeSlotDto getTimeSlotById(@PathVariable("id") String id) {
+		return Converter.convertToDto(timeSlotService.getTimeSlotById(Integer.parseInt(id)));
 	}
+	/**
+	 *restful controller for creating timeslot
+	 * */	
 
 	@PostMapping(value = { "/timeslot/{startTime}", "/timeslot/{startTime}/" })
-	public TimeSlotDto createTimeSlot(@PathVariable("startTime") LocalDateTime startTime, @RequestParam LocalDateTime endTime, @RequestParam List<MechanicDto> mechanicsDto, @RequestParam List<AppointmentDto> appointmentsDto) throws IllegalArgumentException {
-		List<Mechanic> mechanics = new ArrayList<Mechanic>();
-		List<Appointment> appointments = new ArrayList<Appointment>();
-		for(MechanicDto mechanic: mechanicsDto) {
-			mechanics.add(mechanicService.getMechanicById(mechanic.getId()));
-		}
-		for(AppointmentDto appointment: appointmentsDto) {
-			appointments.add(appointmentService.getAppointmentById(appointment.getId()));
-		}
-		TimeSlot timeslot = timeSlotService.createTimeSlot(startTime, endTime, mechanics, appointments);
+	public TimeSlotDto createTimeSlot(@PathVariable("startTime") String startTime, @RequestParam String endTime) throws IllegalArgumentException {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH:mm");
+		LocalDateTime start = LocalDateTime.parse(startTime, formatter);
+		LocalDateTime end = LocalDateTime.parse(endTime, formatter);
+		TimeSlot timeslot = timeSlotService.createTimeSlot(start, end);
 		return Converter.convertToDto(timeslot);
 	}
+	/**
+	 *restful controller for editing timeslot
+	 * */	
 	
-	@PutMapping(value = { "/timeslot/{oldStartTime}", "/timeslot/{oldStartTime}/" })
-	public TimeSlotDto editTimeSlot(@PathVariable("oldStartTime") LocalDateTime oldStartTime, @RequestParam LocalDateTime oldEndTime, @RequestParam LocalDateTime startTime, @RequestParam LocalDateTime endTime, @RequestParam List<MechanicDto> mechanicsDto, @RequestParam List<AppointmentDto> appointmentsDto) throws IllegalArgumentException {
-		List<Mechanic> mechanics = new ArrayList<Mechanic>();
-		List<Appointment> appointments = new ArrayList<Appointment>();
-		for(MechanicDto mechanic: mechanicsDto) {
-			mechanics.add(mechanicService.getMechanicById(mechanic.getId()));
+	@PutMapping(value = { "/timeslot/{mechanicId}", "/timeslot/{mechanicId}/" })
+	public TimeSlotDto editMechanic(@PathVariable("mechanicId") String mechanicId, @RequestParam String startTime, @RequestParam String endTime, @RequestParam String addRemove) throws IllegalArgumentException {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH:mm");
+		LocalDateTime start = LocalDateTime.parse(startTime, formatter);
+		LocalDateTime end = LocalDateTime.parse(endTime, formatter);
+		TimeSlot timeslot = timeSlotService.getTimeSlotById(start.hashCode()*end.hashCode());
+		Mechanic mechanic = mechanicService.getMechanicById(Integer.parseInt(mechanicId));
+		if(addRemove.equals("add")) {
+			timeSlotService.addMechanic(mechanic, timeslot);
+		} else if(addRemove.equals("remove")){
+			timeSlotService.removeMechanic(mechanic, timeslot);
 		}
-		for(AppointmentDto appointment: appointmentsDto) {
-			appointments.add(appointmentService.getAppointmentById(appointment.getId()));
+		return Converter.convertToDto(timeslot);
+	}
+	/**
+	 *restful controller for editing apointment
+	 *	 * */	
+	
+	@PutMapping(value = { "/timeslot/{appointmentId}", "/timeslot/{appointmentId}/" })
+	public TimeSlotDto editAppointment(@PathVariable("appointmentId") String appointmentId, @RequestParam String startTime, @RequestParam String endTime, @RequestParam String addRemove) throws IllegalArgumentException {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH:mm");
+		LocalDateTime start = LocalDateTime.parse(startTime, formatter);
+		LocalDateTime end = LocalDateTime.parse(endTime, formatter);
+		TimeSlot timeslot = timeSlotService.getTimeSlotById(start.hashCode()*end.hashCode());
+		Appointment appointment = appointmentService.getAppointmentById(Integer.parseInt(appointmentId));
+		if(addRemove.equals("add")) {
+			timeSlotService.addAppointment(appointment, timeslot);
+		} else if(addRemove.equals("remove")){
+			timeSlotService.removeAppointment(appointment, timeslot);
 		}
-		TimeSlot timeslot = timeSlotService.getTimeSlotById(oldStartTime.hashCode()*oldEndTime.hashCode());
-		timeslot.setStartTime(startTime);
-		timeslot.setEndTime(endTime);
-		timeslot.setAppointments(appointments);
-		timeslot.setMechanics(mechanics);
-		timeslot.setId(startTime.hashCode()*endTime.hashCode());
 		return Converter.convertToDto(timeslot);
 	}
 

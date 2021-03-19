@@ -20,27 +20,28 @@ import ca.mcgill.ecse321.repairsystem.service.*;
 public class CarRestController {
 
 	@Autowired
-	private AppointmentService appointmentService;
 	private CarService carService;
+	@Autowired
 	private CustomerService customerService;
-	
-	@GetMapping(value = { "/cars/{customer}", "/cars/{customer}/"})
-	public List<CarDto> getCarsByCustomer(CustomerDto customerDto) {
-		Customer customer = customerService.getCustomerById(customerDto.getId());
+	/**
+	 *Rest controller for getting car by customer
+	 * */
+	@GetMapping(value = { "/cars/{customerId}", "/cars/{customerId}/"})
+	public List<CarDto> getCarsByCustomer(@PathVariable("customerId") String customerId) {
+		Customer customer = customerService.getCustomerById(Integer.parseInt(customerId));
 		List<CarDto> carsDto = new ArrayList<CarDto>();
 		for(Car car: carService.getCarsByCustomer(customer)) {
 			carsDto.add(Converter.convertToDto(car));
 		}
 		return carsDto;
 	}
-
-	@PostMapping(value = { "/car/{customer}", "/car/{customer}/" })
-	public CarDto createCar(@PathVariable("customer") Customer customer, @RequestParam CarType type, @RequestParam boolean winterTires, @RequestParam int numOfKilometers, @RequestParam List<AppointmentDto> appointmentsDto) throws IllegalArgumentException {
-		List<Appointment> appointments = new ArrayList<Appointment>();
-		for(AppointmentDto appointment: appointmentsDto) {
-			appointments.add(appointmentService.getAppointmentById(appointment.getId()));
-		}
-		Car car = carService.createCar(type, winterTires, numOfKilometers, appointments, customer);
+	/**
+	 *Rest controller for creating car
+	 * */
+	@PostMapping(value = { "/car/{customerId}", "/car/{customerId}/" })
+	public CarDto createCar(@PathVariable("customerId") String customerId, @RequestParam String carType, @RequestParam String winterTires, @RequestParam String numOfKilometers) throws IllegalArgumentException {
+		Customer customer = customerService.getCustomerById(Integer.parseInt(customerId));
+		Car car = carService.createCar(CarType.valueOf(carType), Boolean.valueOf(winterTires), Integer.parseInt(numOfKilometers),  customer);
 		return Converter.convertToDto(car);
 	}
 	

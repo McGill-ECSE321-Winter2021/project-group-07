@@ -17,8 +17,8 @@ public class RepairSystemRepository {
 	EntityManager entityManager;
 
 	@Transactional
-	public Customer createCustomer(String aName, int id, String aPassword, int aPhone, String aEmail,Calendar lastActive, String credit, String debit, String address) {
-		Customer c = new Customer(aName, id,aPassword, aPhone, aEmail, lastActive, credit, debit, address);
+	public Customer createCustomer(String aName, int id, String aPassword, int aPhone, String aEmail, String credit, String debit, String address) {
+		Customer c = new Customer(aName, id,aPassword, aPhone, aEmail, credit, debit, address);
 		entityManager.persist(c);
 		return c;
 	}

@@ -1,7 +1,7 @@
 package ca.mcgill.ecse321.repairsystem.controller;
 
+import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,9 @@ public class CustomerRestController {
 
 	@Autowired
 	private CustomerService customerService;
-	
+	/**
+	 *restful controller fot getting all customers
+	 * */
 	@GetMapping(value = { "/customer", "/customer/"})
 	public List<CustomerDto> getAllCustomers() {
 		List<Customer> customers = customerService.getAllCustomers();
@@ -33,31 +35,29 @@ public class CustomerRestController {
 		}
 		return customersDto;
 	}
-	
+	/**
+	 *restful controller for getting customer by id
+	 * */
 	@GetMapping(value = { "/customer/{id}", "/customer/{id}/"})
-	public CustomerDto getCustomerById(int id) {
-		return Converter.convertToDto(customerService.getCustomerById(id));
+	public CustomerDto getCustomerById(@PathVariable("id") String id) {
+		return Converter.convertToDto(customerService.getCustomerById(Integer.parseInt(id)));
 	}
-
+	/**
+	 *restful controller for creating customer by
+	 * */
 	@PostMapping(value = { "/customer/{name}", "/customer/{name}/" })
-	public CustomerDto createCustomer(@PathVariable("name") String name, @RequestParam String password, @RequestParam int phone, @RequestParam String email, @RequestParam Calendar lastActive, @RequestParam String credit, @RequestParam String debit, @RequestParam String address) throws IllegalArgumentException {
-		Customer customer = customerService.createCustomer(name, password, phone, email, lastActive, credit, debit, address);
+	public CustomerDto createCustomer(@PathVariable("name") String name, @RequestParam String password, @RequestParam String phone, @RequestParam String email, @RequestParam String credit, @RequestParam String debit, @RequestParam String address) throws IllegalArgumentException, ParseException {
+		Customer customer = customerService.createCustomer(name, password, Integer.parseInt(phone), email, credit, debit, address);
 		return Converter.convertToDto(customer);
 	}
-	
-	@PutMapping(value = { "/customer/{oldEmail}", "/customer/{oldEmail}/" })
-	public CustomerDto editCustomer(@PathVariable("oldEmail") String oldEmail, @RequestParam String email, @RequestParam String password, @RequestParam int phone, @RequestParam String name, @RequestParam Calendar lastActive, @RequestParam String credit, @RequestParam String debit, @RequestParam String address) throws IllegalArgumentException {
-		Customer customer = customerService.getCustomerByEmail(oldEmail);
-		customer.setName(name);
-		customer.setPassword(password);
-		customer.setPhone(phone);
-		customer.setEmail(email);
-		customer.setLastActive(lastActive);
-		customer.setCreditHash(credit);
-		customer.setDebitHash(debit);
-		customer.setAddress(address);
-		customer.setId(name.hashCode()*password.hashCode());
-		return Converter.convertToDto(customer);
+	/**
+	 *restful controller for editing all customer credentials
+	 * */
+	@PutMapping(value = { "/customer/editAllCustomerCredentials/{oldEmail}", "/customer/{oldEmail}/" })
+	public CustomerDto editAllCustomerCredentials(@PathVariable("oldEmail") String oldEmail, @RequestParam String newPassword, @RequestParam String newPhone,  @RequestParam String newCredit, @RequestParam String newDebit, @RequestParam String newAddress) throws IllegalArgumentException {
+		Customer customer = customerService.getCustomerByEmail(oldEmail); 
+		customerService.updateAllCredentials(customer, newPassword, newPhone, newCredit, newDebit, newAddress);
+		return  Converter.convertToDto(customer);
 	}
 
 }

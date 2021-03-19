@@ -9,11 +9,11 @@ public class Service{
 
 	public enum ServiceType { CarRepair, OilChange, RegularCheckup, CarWash, TireChange, RoadsideAssistance, Towing, CarInspection, Other }
 
-	public Service(ServiceType aType, int aPrice, List<Mechanic> mechanics, List<Appointment> a){
+	public Service(ServiceType aType, int aPrice){
 		this.serviceType = aType;
 		this.price = aPrice;
-		this.mechanics = mechanics;
-		this.appointments = a;
+		this.mechanics = new ArrayList<Mechanic>();
+		this.appointments = new ArrayList<Appointment>();
 	}
 	
 	public Service() {
@@ -56,6 +56,22 @@ public class Service{
 	}
 	public void setMechanics(List<Mechanic> mechanics){
 		this.mechanics = mechanics;
+	}
+	
+	public void addAppointment(Appointment appointment) {
+		appointments.add(appointment);
+	}
+	
+	public void addMechanic(Mechanic mechanic) {
+		mechanics.add(mechanic);
+	}
+	
+	public void removeAppointment(Appointment appointment) {
+		appointments.remove(appointment);
+	}
+	
+	public void removeMechanic(Mechanic mechanic) {
+		mechanics.remove(mechanic);
 	}
 	
 

@@ -28,12 +28,34 @@ public class AdministrativeAssistantService {
 		{
 			throw new IllegalArgumentException("Administrative assistant email cannot be empty!");
 		}
-		int id = aName.hashCode() * aPassword.hashCode();
+		int id = aEmail.hashCode();
 		AdministrativeAssistant admin = new AdministrativeAssistant(aName, id, aPassword, aPhone, aEmail);
 		administrativeAssistantRepository.save(admin);
 		return admin;
 	}
+	
+	/**
+	 * Edits the name, password, phone and email  of an administrator
+	 * @param admin
+	 * @param name
+	 * @param password
+	 * @param phone
+	 * @param email
+	 * @return
+	 */
+	@Transactional
+	public AdministrativeAssistant editAdmin(AdministrativeAssistant admin, String name, String password, int phone) {
+		admin.setName(name);
+		admin.setPassword(password);
+		admin.setPhone(phone);
+		return admin;
+	}
 
+	/**
+	 * Getter method to get the administrator given the id
+	 * @param id
+	 * @return
+	 */
 	@Transactional 
 	public AdministrativeAssistant getAdminById(int id) {
 		AdministrativeAssistant admin = administrativeAssistantRepository.findById(id);
@@ -46,18 +68,32 @@ public class AdministrativeAssistantService {
 		return admins;
 	}
 
+	/**
+	 * Getter method to get the administrator object given a phone number
+	 * @param number
+	 * @return
+	 */
 	@Transactional 
 	public AdministrativeAssistant getAdminByNumber(int number) {
 		AdministrativeAssistant admin = administrativeAssistantRepository.findByPhone(number);
 		return admin;
 	}
 
+	/**
+	 * Getter method to get the administrator object given the email
+	 * @param email
+	 * @return
+	 */
 	@Transactional 
 	public AdministrativeAssistant getAdminByEmail(String email) {
 		AdministrativeAssistant admin = administrativeAssistantRepository.findByEmail(email);
 		return admin;
 	}
 
+	/**
+	 * Getter method to get all the administrators in the database
+	 * @return
+	 */
 	@Transactional
 	public List<AdministrativeAssistant> getAllAdmins() {
 		return toList(administrativeAssistantRepository.findAll());

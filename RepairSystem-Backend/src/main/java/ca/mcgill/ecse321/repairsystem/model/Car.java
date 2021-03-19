@@ -10,12 +10,12 @@ import javax.persistence.Entity;
 public class Car
 {
   
-  public Car(int id, CarType type, boolean winterTires, int numOfKm, List<Appointment> appointments, Customer customer) {
+  public Car(int id, CarType type, boolean winterTires, int numOfKm, Customer customer) {
 	 carId = id;
 	 this.carType = type;
 	 this.winterTires = winterTires;
 	 numOfKilometers = numOfKm;
-	 this.appointments = appointments;
+	 this.appointments = new ArrayList<Appointment>();
 	 this.customer = customer;
   }
   
@@ -91,6 +91,14 @@ public class Car
   
   public void setAppointments(List<Appointment> appointmentList){
     appointments = appointmentList;
+  }
+  
+  public void addAppointment(Appointment appointment) {
+	  appointments.add(appointment);
+  }
+  
+  public void removeAppointment(Appointment appointment) {
+	  appointments.remove(appointment);
   }
 
 }

@@ -18,21 +18,21 @@ public class AdministrativeAssistantRestController {
 
 	@Autowired
 	private AdministrativeAssistantService adminService;
-
+	/**
+	 *Rest controller for creating admin assistant
+	 * */
 	@PostMapping(value = { "/admin/{name}", "/admin/{name}/" })
-	public AdministrativeAssistantDto createAdmin(@PathVariable("name") String name, @RequestParam String password, @RequestParam int phone, @RequestParam String email) throws IllegalArgumentException {
-		AdministrativeAssistant admin = adminService.createAdmin(name, password, phone, email);
+	public AdministrativeAssistantDto createAdmin(@PathVariable("name") String name, @RequestParam String password, @RequestParam String phone, @RequestParam String email) throws IllegalArgumentException {
+		AdministrativeAssistant admin = adminService.createAdmin(name, password, Integer.parseInt(phone), email);
 		return Converter.convertToDto(admin);
 	}
-	
+	/**
+	 *Rest controller for editing admin assistant
+	 * */
 	@PutMapping(value = { "/admin/{oldEmail}", "/admin/{oldEmail}/" })
-	public AdministrativeAssistantDto editAdmin(@PathVariable("oldEmail") String oldEmail, @RequestParam String name, @RequestParam String password, @RequestParam int phone, @RequestParam String email) throws IllegalArgumentException {
+	public AdministrativeAssistantDto editAdmin(@PathVariable("oldEmail") String oldEmail, @RequestParam String name, @RequestParam String password, @RequestParam String phone) throws IllegalArgumentException {
 		AdministrativeAssistant admin = adminService.getAdminByEmail(oldEmail);
-		admin.setEmail(email);
-		admin.setId(name.hashCode()*password.hashCode());
-		admin.setName(name);
-		admin.setPassword(password);
-		admin.setPhone(phone);
+		admin = adminService.editAdmin(admin, name, password, Integer.parseInt(phone));
 		return Converter.convertToDto(admin);
 	}
 
