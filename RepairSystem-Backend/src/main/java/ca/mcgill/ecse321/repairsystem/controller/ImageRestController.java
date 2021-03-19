@@ -26,7 +26,7 @@ public class ImageRestController {
 		return Converter.convertToDto(imageService.getImageByUrl(url));
 	}
 
-	@PostMapping(value = { "/image/{url}", "/Mechanics/{url}/" })
+	@PostMapping(value = { "/image/{url}", "/image/{url}/" })
 	public ImageDto createImage(@PathVariable("url") String url, @RequestParam String appointmentId) throws IllegalArgumentException {
 		Appointment appointment = appointmentService.getAppointmentById(Integer.parseInt(appointmentId));
 		Image image = imageService.createImage(url, appointment);
