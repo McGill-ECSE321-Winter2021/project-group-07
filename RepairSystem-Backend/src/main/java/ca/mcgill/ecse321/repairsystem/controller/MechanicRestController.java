@@ -41,7 +41,7 @@ public class MechanicRestController {
 		return Converter.convertToDto(mechanicService.getMechanicById(Integer.parseInt(id)));
 	}
 
-	@PostMapping(value = { "/mechanics/{name}", "/Mechanics/{name}/" })
+	@PostMapping(value = { "/mechanics/{name}", "/mechanics/{name}/" })
 	public MechanicDto createMechanic(@PathVariable("name") String name, @RequestParam String password, @RequestParam String phone, @RequestParam String email) throws IllegalArgumentException {
 		Mechanic mechanic = mechanicService.createMechanic(name, password, Integer.parseInt(phone), email, new ArrayList<Service>());
 		return Converter.convertToDto(mechanic);
