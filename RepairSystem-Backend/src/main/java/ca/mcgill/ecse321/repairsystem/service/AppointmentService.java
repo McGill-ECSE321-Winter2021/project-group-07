@@ -27,7 +27,7 @@ public class AppointmentService {
 	private ServiceRepository serviceRepository;
 	@Autowired
 	private ImageRepository imageRepository;
-	
+
 	/**
 	 * Creating an appointment given a customer, time, car, note
 	 * @param customer
@@ -49,7 +49,7 @@ public class AppointmentService {
 		{
 			throw new IllegalArgumentException("Car cannot be null");
 		}
-		
+
 		int id = customer.hashCode() * time.hashCode();
 		Appointment app = new Appointment(customer, id, time,  car, note );
 		customer.addAppointment(app);
@@ -139,6 +139,7 @@ public class AppointmentService {
 		appointmentRepository.save(appointment);
 		mechanicRepository.save(mechanic);
 	}
+
 	/**
 	 * Adding a service to an appointment
 	 * @param appointment
@@ -152,7 +153,7 @@ public class AppointmentService {
 		appointmentRepository.save(appointment);
 		serviceRepository.save(service);
 	}
-	
+
 	/**
 	 * Adding an image to an appointment
 	 * @param appointment
@@ -165,6 +166,25 @@ public class AppointmentService {
 		image.setAppointment(appointment);
 		appointmentRepository.save(appointment);
 		imageRepository.save(image);
+	}
+
+	@Transactional
+	public Appointment editAppointment(Appointment appointment, Car car, Customer customer, List<Image> imagelist,
+			List<Mechanic> mechaniclist, String note, List<ca.mcgill.ecse321.repairsystem.model.Service> serviceList, AppointmentStatus appointmentStatus, TimeSlot timeSlot) { 
+		appointment.setCar(car);
+		appointment.setCustomer(customer);
+		appointment.setImages(imagelist);
+		appointment.setMechanics(mechaniclist);
+		appointment.setNote(note);
+		appointment.setServices(serviceList);
+		appointment.setStatus(appointmentStatus);
+		appointment.setTimeSlot(timeSlot);
+		appointmentRepository.save(appointment);
+		imageRepository.saveAll(imagelist);
+		customerRepository.save(customer);
+		timeslotRepository.save(timeSlot);
+		carRepository.save(car);
+		return appointment;
 	}
 	/* 
 	 * helper method

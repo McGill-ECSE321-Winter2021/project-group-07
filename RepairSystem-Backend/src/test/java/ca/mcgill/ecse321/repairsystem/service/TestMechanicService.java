@@ -318,7 +318,7 @@ public class TestMechanicService {
 		assertEquals("Mechanic email cannot be empty!", error);
 	}
 
-	
+
 	@Test
 	public void testGetMechanicByName() {
 		Mechanic mechanic = new Mechanic();
@@ -342,7 +342,7 @@ public class TestMechanicService {
 		ALL_CAPABILITIES = allCapabilities;
 		TIME_SLOTS = timeSlots;
 		APPOINTMENTS = appointments;
-		
+
 		try {
 			mechanics = mechanicService.getMechanicsByName(name);
 		} catch (IllegalArgumentException e) {
@@ -358,8 +358,8 @@ public class TestMechanicService {
 		assertEquals(mechanics.get(0).getServices(), allCapabilities);
 		assertEquals(mechanics.get(0).getTimeSlots(), timeSlots);
 	}
-	
-	
+
+
 	@Test
 	public void testGetMechanicByPhone() {
 		Mechanic mechanic = new Mechanic();
@@ -381,7 +381,7 @@ public class TestMechanicService {
 		ALL_CAPABILITIES = allCapabilities;
 		TIME_SLOTS = timeSlots;
 		APPOINTMENTS = appointments;
-		
+
 		try {
 			mechanic = mechanicService.getMechanicByNumber(aPhone);
 		} catch (IllegalArgumentException e) {
@@ -397,7 +397,7 @@ public class TestMechanicService {
 		assertEquals(mechanic.getServices(), allCapabilities);
 		assertEquals(mechanic.getTimeSlots(), timeSlots);
 	}
-	
+
 
 	@Test
 	public void testGetAllMechanics() {
@@ -434,7 +434,7 @@ public class TestMechanicService {
 		TIME_SLOTS = timeSlots;
 		APPOINTMENTS = appointments;
 
-		
+
 		MECHANIC_KEY2 = name2;
 		MECHANIC_ID2 = mechanicId2;
 		PASSWORD2 = aPassword2;
@@ -458,7 +458,7 @@ public class TestMechanicService {
 		assertEquals(mechanics.get(0).getServices(), allCapabilities);
 		assertEquals(mechanics.get(0).getAppointments(), appointments);
 
-		
+
 		assertNotNull(mechanics.get(1));
 		assertEquals(mechanics.get(1).getEmail(), aEmail2);
 		assertEquals(mechanics.get(1).getPhone(), aPhone2);
@@ -469,7 +469,7 @@ public class TestMechanicService {
 		assertEquals(mechanics.get(1).getAppointments(), appointments2);
 
 	}
-	
+
 	@Test
 	public void testGetMechanicById() {
 		Mechanic mechanic = new Mechanic();
@@ -506,7 +506,7 @@ public class TestMechanicService {
 		assertEquals(mechanic.getServices(), allCapabilities);
 		assertEquals(mechanic.getTimeSlots(), timeSlots);
 	}
-	
+
 	@Test
 	public void testGetMechanicByEmail() {
 		Mechanic mechanic = new Mechanic();
@@ -543,5 +543,42 @@ public class TestMechanicService {
 		assertEquals(mechanic.getServices(), allCapabilities);
 		assertEquals(mechanic.getTimeSlots(), timeSlots);
 	}
-	
+
+	@Test
+	public void testEditMechanic() {
+		String name = "Oscar";
+		String aPassword = "123412";
+		int aPhone = 123456789;
+		String aEmail = "email@repairsystem.com";
+		List<Service> allCapabilities = new ArrayList<Service>();
+		List<TimeSlot> timeSlots = new ArrayList<TimeSlot>();
+		List<Appointment> appointments = new ArrayList<Appointment>();
+		String error = null;
+		Mechanic mechanic = mechanicService.createMechanic(name, aPassword, aPhone, aEmail, allCapabilities);
+
+
+		String newName = "Oscar2";
+		String newPassword = "1234122";
+		int newPhone = 123459789;
+		String newEmail = "email2@repairsystem.com";
+		List<Service> newAllCapabilities = new ArrayList<Service>();
+		int mechanicId = newEmail.hashCode();
+
+		try {
+			mechanic = mechanicService.editMachanic(mechanic, newName, newPassword, newPhone, newEmail, newAllCapabilities); 
+		} catch (IllegalArgumentException e) {
+			error = e.getMessage();
+		}
+		assertNotNull(mechanic);
+		assertEquals(mechanic.getEmail(), newEmail);
+		assertEquals(mechanic.getPhone(), newPhone);
+		assertEquals(mechanic.getName(), newName);
+		assertEquals(mechanic.getPassword(), newPassword);
+		assertEquals(mechanic.getId(), mechanicId);
+		assertEquals(mechanic.getAppointments(), appointments);
+		assertEquals(mechanic.getServices(), newAllCapabilities);
+		assertEquals(mechanic.getTimeSlots(), timeSlots);
+	}
+
+
 }

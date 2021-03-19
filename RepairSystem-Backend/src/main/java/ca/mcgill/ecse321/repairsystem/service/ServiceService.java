@@ -38,6 +38,7 @@ public class ServiceService {
 		return service;
 	}
 	
+
 	/**
 	 * Get a service by a type
 	 * @param type
