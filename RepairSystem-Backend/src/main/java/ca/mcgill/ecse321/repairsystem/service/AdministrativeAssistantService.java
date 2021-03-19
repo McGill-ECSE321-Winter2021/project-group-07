@@ -35,9 +35,7 @@ public class AdministrativeAssistantService {
 	}
 	
 	@Transactional
-	public AdministrativeAssistant editAdmin(AdministrativeAssistant admin, String name, String password, int phone, String email) {
-		admin.setEmail(email);
-		admin.setId(email.hashCode());
+	public AdministrativeAssistant editAdmin(AdministrativeAssistant admin, String name, String password, int phone) {
 		admin.setName(name);
 		admin.setPassword(password);
 		admin.setPhone(phone);

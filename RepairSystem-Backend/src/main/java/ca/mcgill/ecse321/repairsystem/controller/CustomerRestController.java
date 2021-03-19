@@ -47,14 +47,14 @@ public class CustomerRestController {
 		return Converter.convertToDto(customer);
 	}
 
-	@PutMapping(value = { "/customer/{oldEmail}", "/customer/{oldEmail}/" })
+	@PutMapping(value = { "/customer/editAllCustomerCredentials/{oldEmail}", "/customer/{oldEmail}/" })
 	public CustomerDto editAllCustomerCredentials(@PathVariable("oldEmail") String oldEmail, @RequestParam String newEmail, @RequestParam String newPassword, @RequestParam String newPhone,  @RequestParam String newCredit, @RequestParam String newDebit, @RequestParam String newAddress) throws IllegalArgumentException {
 		Customer customer = customerService.getCustomerByEmail(oldEmail); 
 		customerService.updateAllCredentials(customer, newEmail, newPassword, newPhone, newCredit, newDebit, newAddress);
 		return  Converter.convertToDto(customer);
 	}
 	
-	@PutMapping(value = {"/customer/{carId}" , "/customer/{carId}/"})
+	@PutMapping(value = {"/customer/editCar/{carId}" , "/customer/{carId}/"})
 	public CustomerDto editCars(@PathVariable("carId") String carId, @RequestParam String customerEmail, @RequestParam String addRemove)
 	{
 		Customer customer = customerService.getCustomerByEmail(customerEmail); 
@@ -62,7 +62,7 @@ public class CustomerRestController {
 		return  Converter.convertToDto(customer);
 	}
 	
-	@PutMapping(value= {"/customer/{appointmentId}" , "/customer/{appointmentId}/"})
+	@PutMapping(value= {"/customer/editAppointment/{appointmentId}" , "/customer/{appointmentId}/"})
 	public CustomerDto editAppointments(@PathVariable("appointmentId") String appointmentId, @RequestParam String customerId, @RequestParam String addRemove)
 	{
 		Customer customer = customerService.getCustomerById(Integer.parseInt(customerId));
