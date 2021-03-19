@@ -23,7 +23,9 @@ public class CarRestController {
 	private CarService carService;
 	@Autowired
 	private CustomerService customerService;
-	
+	/**
+	 *Rest controller for getting car by customer
+	 * */
 	@GetMapping(value = { "/cars/{customerId}", "/cars/{customerId}/"})
 	public List<CarDto> getCarsByCustomer(@PathVariable("customerId") String customerId) {
 		Customer customer = customerService.getCustomerById(Integer.parseInt(customerId));
@@ -33,7 +35,9 @@ public class CarRestController {
 		}
 		return carsDto;
 	}
-
+	/**
+	 *Rest controller for creating car
+	 * */
 	@PostMapping(value = { "/car/{customerId}", "/car/{customerId}/" })
 	public CarDto createCar(@PathVariable("customerId") String customerId, @RequestParam String carType, @RequestParam String winterTires, @RequestParam String numOfKilometers) throws IllegalArgumentException {
 		Customer customer = customerService.getCustomerById(Integer.parseInt(customerId));

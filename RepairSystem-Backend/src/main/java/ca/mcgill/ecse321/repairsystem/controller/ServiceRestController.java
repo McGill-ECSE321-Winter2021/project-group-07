@@ -27,7 +27,9 @@ public class ServiceRestController {
 	private MechanicService mechanicService;
 	@Autowired
 	private AppointmentService appointmentService;
-	
+	/**
+	 *restful controller for all services
+	 * */
 	@GetMapping(value = { "/services", "/services/"})
 	public List<ServiceDto> getAllServices() {
 		List<Service> services = serviceService.getAllServices();
@@ -37,18 +39,24 @@ public class ServiceRestController {
 		}
 		return servicesDto;
 	}
-	
+	/**
+	 *restful controller for getting service by its type
+	 * */	
 	@GetMapping(value = { "/services/{serviceType}", "/services/{serviceType}/"})
 	public ServiceDto getServiceByServiceType(@PathVariable("serviceType") String serviceType) {
 		return Converter.convertToDto(serviceService.getServiceByServiceType(ServiceType.valueOf(serviceType)));
 	}
-
+	/**
+	 *restful controller for creating service
+	 * */	
 	@PostMapping(value = { "/services/{serviceType}", "/services/{serviceType}/" })
 	public ServiceDto createService(@PathVariable("serviceType") String serviceType, @RequestParam String price) throws IllegalArgumentException {
 		Service service = serviceService.createService(ServiceType.valueOf(serviceType), Integer.parseInt(price));
 		return Converter.convertToDto(service);
 	}
-	
+	/**
+	 *restful controller for editing mechanic
+	 * */	
 	@PutMapping(value = { "/services/{mechanicId}", "/services/{mechanicId}/" })
 	public ServiceDto editMechanic(@PathVariable("mechanicId") String mechanicId, @RequestParam String serviceType, @RequestParam String addRemove) throws IllegalArgumentException {
 		Service service = serviceService.getServiceByServiceType(ServiceType.valueOf(serviceType));
@@ -60,7 +68,9 @@ public class ServiceRestController {
 		}
 		return Converter.convertToDto(service);
 	}
-	
+	/**
+	 *restful controller for editing appointment
+	 * */	
 	@PutMapping(value = { "/services/{appointmentId}", "/services/{appointmentId}/" })
 	public ServiceDto editAppointment(@PathVariable("appointmentId") String appointmentId, @RequestParam String serviceType, @RequestParam String addRemove) throws IllegalArgumentException {
 		Service service = serviceService.getServiceByServiceType(ServiceType.valueOf(serviceType));

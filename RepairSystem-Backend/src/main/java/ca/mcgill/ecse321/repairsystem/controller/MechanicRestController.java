@@ -25,7 +25,9 @@ public class MechanicRestController {
 	private ServiceService serviceService;
 	@Autowired
 	private MechanicService mechanicService;
-	
+	/**
+	 *restful controller for getting mechanic
+	 * */
 	@GetMapping(value = { "/mechanics", "/mechanics/"})
 	public List<MechanicDto> getAllMechanics() {
 		List<Mechanic> mechanics = mechanicService.getAllMechanics();
@@ -36,17 +38,24 @@ public class MechanicRestController {
 		return mechanicsDto;
 	}
 	
+	/**
+	 *restful controller for getting id
+	 * */
 	@GetMapping(value = { "/mechanic/{id}", "/mechanic/{id}/"})
 	public MechanicDto getMechanicById(String id) {
 		return Converter.convertToDto(mechanicService.getMechanicById(Integer.parseInt(id)));
 	}
-
+	/**
+	 *restful controller for creating mechanic
+	 * */
 	@PostMapping(value = { "/mechanic/{name}", "/mechanic/{name}/" })
 	public MechanicDto createMechanic(@PathVariable("name") String name, @RequestParam String password, @RequestParam String phone, @RequestParam String email) throws IllegalArgumentException {
 		Mechanic mechanic = mechanicService.createMechanic(name, password, Integer.parseInt(phone), email, new ArrayList<Service>());
 		return Converter.convertToDto(mechanic);
 	}
-	
+	/**
+	 *restful controller for editing mechanic
+	 * */
 	@PutMapping(value = { "/mechanic/{oldEmail}", "/mechanic/{oldEmail}/" })
 	public MechanicDto editMechanic(@PathVariable("oldEmail") String oldEmail, @RequestParam String name, @RequestParam String password, @RequestParam String phone, @RequestParam String email) throws IllegalArgumentException {
 		Mechanic mechanic = mechanicService.getMechanicByEmail(oldEmail);
@@ -57,7 +66,9 @@ public class MechanicRestController {
 		mechanic.setEmail(email);
 		return Converter.convertToDto(mechanic);
 	}
-	
+	/**
+	 *restful controller for editing service
+	 * */
 	@PutMapping(value = { "/mechanic/editService/{serviceType}", "/mechanic/editService/{serviceType}/" })
 	public MechanicDto editService(@PathVariable("serviceType") String serviceType, @RequestParam String addRemove, @RequestParam String oldEmail) throws IllegalArgumentException {
 		Mechanic mechanic = mechanicService.getMechanicByEmail(oldEmail);
