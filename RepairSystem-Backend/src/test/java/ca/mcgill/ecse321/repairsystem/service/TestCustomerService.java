@@ -359,7 +359,7 @@ public class TestCustomerService {
 		CREDIT = credit;
 		ADD = address;
 		try {
-			customer = customerService.createCustomer(name, aPassword, aPhone, aEmail, credit, debit, address);	
+			customer = customerService.createCustomer(name, aPassword, aPhone, aEmail, credit, debit, address);
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}

@@ -140,6 +140,16 @@ public class CustomerService {
 		return toList(customerRepository.findAll());
 	}
 	
+	/**
+	 * To update  all the credentials associated to a customer
+	 * @param customer
+	 * @param newEmail
+	 * @param newPassword
+	 * @param newPhone
+	 * @param newCredit
+	 * @param newDebit
+	 * @param newAddress
+	 */
    public void updateAllCredentials(Customer customer, String newPassword, String newPhone, String newCredit, String newDebit, String newAddress )
    {
 	   resetPassword(customer, newPassword);
@@ -148,6 +158,7 @@ public class CustomerService {
 	   updateDebit(customer, newDebit);
 	   updateAddress(customer, newAddress);
    }
+ 
 	/**
 	 * Updates the address of the customer
 	 * @param customerId
