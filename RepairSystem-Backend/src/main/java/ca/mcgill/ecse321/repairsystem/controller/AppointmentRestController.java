@@ -66,7 +66,7 @@ public class AppointmentRestController {
 	 *Rest controller for editing appointment
 	 * */
 	@PutMapping(value = { "/appointment/editAppointment/{customerId}", "/appointment/editAppointment/{customerId}/"})
-	public AppointmentDto editAppointment(@PathVariable("customerId") String customerId, @RequestParam String timeSlotId, @RequestParam String carId, @RequestParam String note) throws IllegalArgumentException {
+	public AppointmentDto editAppointment(@PathVariable("customerId") @RequestParam String customerId, @RequestParam String timeSlotId, @RequestParam String carId, @RequestParam String note) throws IllegalArgumentException {
 		TimeSlot timeSlot = timeSlotService.getTimeSlotById(Integer.parseInt(timeSlotId));
 		Customer customer = customerService.getCustomerById(Integer.parseInt(customerId));
 		Car car = carService.getCarById(Integer.parseInt(carId));
