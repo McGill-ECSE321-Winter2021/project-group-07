@@ -85,17 +85,7 @@ public class AppointmentRestController {
 		appointmentService.addMechanic(appointment, mechanic);
 		return Converter.convertToDto(appointment);
 	}
-	
-	@PutMapping(value = { "/appointment/{imageUrl}", "/appointment/{imageUrl}/"})
-	public AppointmentDto addImage(@PathVariable("imageUrl") String imageUrl, @RequestParam String timeSlotId, @RequestParam String customerId) throws IllegalArgumentException {
-		TimeSlot timeSlot = timeSlotService.getTimeSlotById(Integer.parseInt(timeSlotId));
-		Customer customer = customerService.getCustomerById(Integer.parseInt(customerId));		
-		Appointment appointment = appointmentService.getAppointmentById(customer.hashCode()*timeSlot.hashCode());	
-		Image image = imageService.getImageByUrl(imageUrl);
-		appointmentService.addImage(appointment, image);
-		return Converter.convertToDto(appointment);
-	}
-	
+
 	@PutMapping(value = { "/appointment/{serviceType}", "/appointment/{serviceType}/"})
 	public AppointmentDto addService(@PathVariable("serviceType") String serviceType, @RequestParam String timeSlotId, @RequestParam String customerId) throws IllegalArgumentException {
 		TimeSlot timeSlot = timeSlotService.getTimeSlotById(Integer.parseInt(timeSlotId));
