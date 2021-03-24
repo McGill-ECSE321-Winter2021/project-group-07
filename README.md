@@ -42,8 +42,8 @@ have access and book a variety of services (towing, oil change, tire changes, re
  |Catherine Van Gheluwe| RESTful API, Unit Testing, QA Plan,  Bug fixing      |           17   |
  
  ## Sprint 3 
--[Figma](https://www.figma.com/file/WGQveChTZA6qFVNFDvxh8g/Untitled?node-id=0%3A1)
--[Project Report #3](https://github.com/McGill-ECSE321-Winter2021/project-group-07/wiki/Project-Report-(Sprint-3))
+- [Figma](https://www.figma.com/file/WGQveChTZA6qFVNFDvxh8g/Untitled?node-id=0%3A1)
+- [Project Report #3](https://github.com/McGill-ECSE321-Winter2021/project-group-07/wiki/Project-Report-(Sprint-3))
   ### Member Roles & Time Spent
  | Team Member | Roles / Tasks | Time Spent (Hours)|
  | ------------|---------------| ------------------|
