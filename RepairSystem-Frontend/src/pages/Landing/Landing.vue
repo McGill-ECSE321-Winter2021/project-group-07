@@ -46,6 +46,7 @@ mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla 
 		</div>
 	</div>
 
+	
 	<!-- About Us -->
 	<div> 
 		<div class="float-left">
@@ -56,75 +57,115 @@ mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla 
 			<h1 id="title-about"> <b> About Us </b> </h1>
 			<h3 id="body-about"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus 
 mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. </h3>
+			
+			
 			</div>
 		</div>
 	</div>
 
 	<!-- Service -->
 	<div> 
-		<!--<div class="float-right">
+		<div class="float-right">
 			<img class="img-services" src="../../assets/towing.png"/>
-		</div> -->
+		</div> 
 		<div class="float-left">
+			
 			<div class="left-centered-service">
 			    <h1 id="title-about"> <b> Services  </b> </h1>
 			    <h3 id="body-services">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus  </h3>
-		       <h3 id="body-services"> mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. </h3>
+		    	<!--	<div class="row">
+				<div class="col-md-2">
+					<img class="service-images" src="../../assets/landingPage/car-repairService.png"/>
+					<p> Repairs </p>
+				</div>
+				<div class="col">
+					<img class="service-images" src="../../assets/landingPage/car-wash.png"/>
+				</div>
+				<div class="col">
+					<img class="service-images" src="../../assets/landingPage/inspection.png"/>
+				</div>
+				<div class="col">
+					<img class="service-images" src="../../assets/landingPage/oil.png"/>
+				</div>
+				<div class="col">
+					<img class="service-images" src="../../assets/landingPage/roadsideAssistance.png"/>
+				</div>
+				<div class="col">
+					<img class="service-images" src="../../assets/landingPage/tire.png"/>
+				</div>
+				<div class="col">
+					<img class="service-images" src="../../assets/landingPage/tow-truck.png"/>
+				</div>
+			</div> -->
 		    </div>
+		</div>	
+	</div>
+
+	<div >
+		<div>
+		<img  class= "rectangle" src="../../assets/landingPage/Rectangle.png"/>
+		</div>
+		<div class="footer">
+			<div class = "float-right">
+				<table class="table table-bordered">
+  
+  				<tbody>
+    				<tr>
+     					 <th scope="row">Monday</th>
+     					 <td> 9:00AM- 9:00 PM</td>
+   					</tr>
+					<tr>
+     					 <th scope="row">Tuesday</th>
+     					 <td> 9:00AM- 9:00 PM</td>
+   					</tr>
+					<tr>
+     					 <th scope="row">Wednesday</th>
+     					 <td> 9:00AM- 9:00 PM</td>
+   					</tr>
+					<tr>
+     					 <th scope="row">Thursdayy</th>
+     					 <td> 9:00AM- 9:00 PM</td>
+   					</tr>
+					<tr>
+     					 <th scope="row">Friday</th>
+     					 <td> 9:00AM- 9:00 PM</td>
+   					</tr>
+					<tr>
+     					 <th scope="row">Saturdayy</th>
+     					 <td> 9:00AM- 9:00 PM</td>
+   					</tr>
+ 					<tr>
+     					 <th scope="row">Sunday</th>
+     					 <td> 9:00AM- 9:00 PM</td>
+   					</tr>   
+    
+ 				 </tbody>
+			</table>
+			</div>
+		</div>
+	</div>
+	<!-- Opening Hours 
+	<div> 
+		<div class="float-left">
+			<img class="img-hours" src="../../assets/landingPage/openingHours.png"/>		
 		</div>
 		<div class="float-right">
-			<img class="img-services"  src="../../assets/towing.png"/>
-		</div>
-	</div>
-
-
-
-
-
-
-	<!--<div class="welcome">
-		<img class ="img-welcome" src="../../assets/landing-hero.png" />
-		<div class="left-centered">
-				<h1 id="title-welcome"> <b>Repair Shop Name</b> </h1>
-				<h3 id="body-welcome"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus 
-mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. </h3>
-			</div>
-	
-	 LANDING PAGE WELCOME MESSAGE -->
-	<!--<div class="container-1">
-		<img class ="img-welcome" src="../../assets/landing-hero.png" />
-			<div class="left-centered">
-				<h1 id="title"> <b>Repair Shop Name</b> </h1>
-				<h3 id="body"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus 
-mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. </h3>
-			</div>
+			<div class="right-centered-hours">
+			<h1 id="title-hours"> <b> Opening Hours</b> </h1>
+		
 			
-	</div>-->
-	
-	<!--</div>
-	<div class="about">
-		<img src="../../assets/paint job.jpg"/> 
-		<div class="a-container">
-			<div class="right-centered-welcome">
-			<h1 id="about-title"> About Us </h1>
-			<h3> body </h3>
+			
 			</div>
-			<img src="../../assets/paint job.jpg"/>
 		</div>
-	</div>
-	<div>
-		<h1> Services </h1>
-	</div>
-	<div>
-		<h1> Opening Hours </h1>
-	</div>
-	<div>
-		<h1> Contact Us </h1>
-	</div>
-	<div>
-		<h1> Footer </h1>
 	</div>
 -->
+
+
+
+
+
+	
+	
 
 	
 </div>
@@ -276,6 +317,44 @@ export default {
 		color: rgba(80, 95, 152, 1)
 	}
 
+	.service-images{
+		max-height:30px;
+	}
 
+
+	/* ///////////////////////// */
+	/** Opening Hours  CSS */
+	/* ///////////////////////// */
+	.rectangle{
 	
+ 	
+		width:100%;
+		background-repeat: repeat;
+		transform:translateY(1000px) 
+	}
+	.img-hours{
+		max-height: 500px;
+		transform: translate(100px, 1000px);
+	}
+
+	.right-centered-hours{
+		position: absolute;
+		float:right;
+  		top: 50%;
+  		left: 50%;
+		transform: translateY(1500px);
+		text-align:  center;
+	}
+	#title-hours{
+		margin-bottom:10px;
+		color:rgb(51 41 134);
+		font-size:36px;
+		font-family:Roboto;
+	}
+	
+	.footer{
+		height: 500px;
+		background-color: rgb(231,236,255);
+		transform:translateY(800px);
+	}
 </style>
