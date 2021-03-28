@@ -1,6 +1,6 @@
 <template>
-    <div class="customerDashboard">
-        <CustomerSidebar/>
+    <div class="mechanicDashboard">
+        <MechanicSidebar/>
         <div class="content">
             <router-view/>
         </div>
@@ -8,18 +8,18 @@
 </template>
 
 <script>
-import CustomerSidebar from '../../components/CustomerSidebar'
+import MechanicSidebar from '../../components/MechanicSidebar'
 export default {
     name: 'home',
 
     components: {
-        CustomerSidebar
+        MechanicSidebar
     }
 }
 </script>
 
 <style>
-.customerDashboard {
+.mechanicDashboard {
     display: grid;
     grid-template-columns: 1fr 5fr;
     background-color: rgb(51 41 134);

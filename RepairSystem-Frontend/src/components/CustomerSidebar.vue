@@ -1,7 +1,7 @@
 <template>
     <div class="sidebar">
         <div class="title">
-         <router-link to="/"><center><img src="../assets/landing-hero.png" width = "250px" length = "180px" ></center></router-link>
+         &nbsp; <router-link to="/"><img src="../assets/admin.png" width = "50px" length = "50px"></router-link>
 
         </div>
         <div class="menu-items">
