@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Landing from '../pages/Landing/Landing.vue'
 import customerDashboard from '../pages/Welcome/CustomerDashboard'
 import mechanicDashboard from '../pages/Welcome/MechanicDashboard'
+import adminDashboard from '../pages/Welcome/AdminDashboard'
 
 Vue.use(VueRouter)
 
@@ -42,6 +43,49 @@ const routes = [
         path: '/mechanicDashboard/myAccount',
         component: () => import('../pages/Welcome/MechanicEditProfile.vue')
       }
+    ]
+  },
+  {
+    path: '/adminDashboard',
+    component: adminDashboard,
+    children: [
+      {
+        path: '',
+        component: () => import( '../pages/Welcome/AdminOverview.vue')
+      },
+      {
+        path: '/adminDashboard/myAccount',
+        component: () => import('../pages/Welcome/AdminEditProfile.vue')
+      },
+      {
+        path: '/adminDashboard/addCutomerOrMechanic',
+        component: () => import('../pages/Welcome/AdminAddCustomerOrMechanic.vue')
+      },
+      {
+        path: '/adminDashboard/editCustomerOrMechanic',
+        component: () => import('../pages/Welcome/AdminEditCustomerOrMechanic.vue')
+      },
+      {
+        path: '/adminDashboard/viewCustomerOrMechanic',
+        component: () => import('../pages/Welcome/AdminViewAllCustomerOrMechanic.vue')
+      },
+      {
+        path: '/adminDashboard/addAppointment',
+        component: () => import('../pages/Welcome/AdminAddAppointment.vue')
+      },
+      {
+        path: '/adminDashboard/editAppointment',
+        component: () => import('../pages/Welcome/AdminEditAppointment.vue')
+      },
+      {
+        path: '/adminDashboard/addTimeSlot',
+        component: () => import('../pages/Welcome/AdminAddTimeSlot.vue')
+      },
+      {
+        path: '/adminDashboard/editTimeSlot',
+        component: () => import('../pages/Welcome/AdminEditTimeSlot.vue')
+      }
+      
     ]
   }
 ]
