@@ -4,6 +4,8 @@ import Landing from '../pages/Landing/Landing.vue'
 import customerDashboard from '../pages/Welcome/CustomerDashboard'
 import mechanicDashboard from '../pages/Welcome/MechanicDashboard'
 import adminDashboard from '../pages/Welcome/AdminDashboard'
+import LogIn from '../pages/LogInAndSignUp/LogIn'
+import SignUp from '../pages/LogInAndSignUp/SignUp'
 
 Vue.use(VueRouter)
 
@@ -12,6 +14,26 @@ const routes = [
     path: '/',
     name: '',
     component: Landing
+  },
+  {
+    path: '/login',
+    component: LogIn,
+    children: [
+      {
+        path: '',
+        component: () => import( '../pages/LogInAndSignUp/LogIn.vue')
+      },
+    ]
+  },
+  {
+    path: '/signup',
+    component: SignUp,
+    children: [
+      {
+        path: '',
+        component: () => import( '../pages/LogInAndSignUp/SignUp.vue')
+      },
+    ]
   },
   {
     path: '/customerDashboard',

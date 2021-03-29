@@ -42,6 +42,18 @@ public class CustomerRestController {
 	public CustomerDto getCustomerById(@PathVariable("id") String id) {
 		return Converter.convertToDto(customerService.getCustomerById(Integer.parseInt(id)));
 	}
+	
+	/**
+	 *restful controller for getting customer by id
+	 * */
+	@GetMapping(value = { "/customer/login/{email}", "/customer/login/{email}/"})
+	public CustomerDto getCustomerFromLogin(@PathVariable("email") String email, @RequestParam String password) {
+		Customer c = customerService.getCustomerByEmail(email);
+		if(c != null && password.equals(c.getPassword())) {
+			return Converter.convertToDto(c);
+		}
+		return null;
+	}
 	/**
 	 *restful controller for creating customer by
 	 * */

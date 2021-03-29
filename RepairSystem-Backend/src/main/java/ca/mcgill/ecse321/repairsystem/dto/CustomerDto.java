@@ -3,8 +3,8 @@ package ca.mcgill.ecse321.repairsystem.dto;
 import java.util.*;
 
 public class CustomerDto extends PersonDto{
-	private String creditHash; 
-	private String debitHash; 
+	private String creditHash;
+	private String debitHash;
 	private String address;
 	private List<AppointmentDto> appointments;
 	private List<CarDto> cars;

@@ -24,7 +24,13 @@
 
 		<ul class="navbar-nav justify-content-end">
 				<li class="nav-item">
-					<b class="btn btn-primary nav-btn"> Log In </b>
+					<a class="btn btn-primary nav-btn" href="/login"><b> Log In </b></a>
+				</li>
+		</ul>
+
+		<ul class="navbar-nav justify-content-end">
+				<li class="nav-item">
+					<a class="btn btn-secondary nav-btn" href="/signup"><b> Sign Up </b></a>
 				</li>
 		</ul>
 
@@ -193,12 +199,24 @@ export default {
 		font-size:14px;
 		font-family: Roboto;
 		text-align:top;
-		width:80px;
-		height:25px;
+	
+	}
+	.btn-secondary{
+		background-color:rgb(51 41 134) !important;
+		border-color: rgb(51 41 134);
+		color:white;
+		font-size:14px;
+		font-family: Roboto;
+		text-align:top;
 	
 	}
 	
 	.btn btn-primary nav-btn, .btn .btn-sucess nav-btn{
+		float:right;
+		font-family: Roboto;
+		font-size: 14px;
+	}
+	.btn btn-secondary nav-btn, .btn .btn-sucess nav-btn{
 		float:right;
 		font-family: Roboto;
 		font-size: 14px;
