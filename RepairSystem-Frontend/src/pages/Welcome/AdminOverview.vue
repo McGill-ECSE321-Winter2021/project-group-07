@@ -142,7 +142,8 @@ export default {
     position: absolute;
     content: "";
     top: 50px;
-    left: 70px
+    left: 70px;
+    width: 600px;
 }
 
 .left-bottom{
@@ -151,7 +152,7 @@ export default {
     content: "";
     left:70px;
     top: 450px;
+    width: 600px;
 }
-
 
 </style>
