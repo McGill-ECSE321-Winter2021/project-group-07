@@ -7,6 +7,8 @@
             Admin Name
             </div>
             <div class="ellipse">
+                <img src="../../assets/profile-default.png"   width = "60px" length = "60px" >
+
             </div>
         </div>
 
@@ -119,7 +121,6 @@ color: #37447E;
     height: 65px;
     left: 19px;
     top: 9px;
-    background: #C4C4C4;
 }
 .container{
 position: absolute;

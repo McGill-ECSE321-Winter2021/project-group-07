@@ -7,6 +7,8 @@
             Customer Name
             </div>
             <div class="ellipse">
+                            <img src="../../assets/profile-default.png"   width = "60px" length = "60px" >
+
             </div>
         </div>
 
@@ -57,7 +59,7 @@
                     <div class = "top"> 
                         <center><img src="../../assets/profile-default.png"   width = "100px" length = "100px" ></center>
                         <br>
-                        <center> <b style = "color: rgb(51 41 134); font-size: 20px;"> cutomer name </b> </center>
+                        <center> <b style = "color: rgb(51 41 134); font-size: 20px;"> customer name </b> </center>
                     </div>
                 </div>
 
@@ -126,7 +128,6 @@ color: #37447E;
     height: 65px;
     left: 19px;
     top: 9px;
-    background: #C4C4C4;
 }
 .container{
 position: absolute;

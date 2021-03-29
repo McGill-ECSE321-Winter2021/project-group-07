@@ -7,6 +7,7 @@
             Mechanic Name
             </div>
             <div class="ellipse">
+                <img src="../../assets/profile-default.png"   width = "60px" length = "60px" >
             </div>
         </div>
 
@@ -41,10 +42,6 @@
         <div class="container3">
                 <font class = "button" align = "right"> Edit Information</font>
         </div>
-
-
-        
-
     </div> 
         </div>
         
@@ -54,7 +51,7 @@
                     <div class = "top"> 
                         <center><img src="../../assets/profile-default.png"   width = "100px" length = "100px" ></center>
                         <br>
-                        <center> <b style = "color: rgb(51 41 134); font-size: 20px;"> medhanic name </b> </center>
+                        <center> <b style = "color: rgb(51 41 134); font-size: 20px;"> mechanic name </b> </center>
                     </div>
                 </div>
 
@@ -123,7 +120,6 @@ color: #37447E;
     height: 65px;
     left: 19px;
     top: 9px;
-    background: #C4C4C4;
 }
 .container{
 position: absolute;
