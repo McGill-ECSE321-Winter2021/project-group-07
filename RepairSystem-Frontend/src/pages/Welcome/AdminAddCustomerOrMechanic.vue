@@ -14,7 +14,7 @@
                         title="Add New Team Member"
                         @show="resetModal"
                         @hidden="resetModal"
-                        @ok="handleOk"
+                        @ok="createMechanic(name,password,phone,email,address,allCapabilities)"
                         >
                         <b-form ref="form" @submit.stop.prevent="handleSubmit">
 
@@ -91,7 +91,7 @@
 
                         </b-form>
                          <label class="typo__label"> Capabilities </label>
-  <multiselect v-model="value":state="capabilitiesState" :options="options" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Pick some" label="name" track-by="name" :preselect-first="true">
+  <multiselect v-model="allCapabilities" :state="capabilitiesState" :options="options" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Pick some" label="name" track-by="name" :preselect-first="true">
     <template slot="selection" slot-scope="{ values, search, isOpen }"><span class="multiselect__single" v-if="capacities.length &amp;&amp; !isOpen">{{ values.length }} options selected</span></template>
   </multiselect>
                         </b-modal>

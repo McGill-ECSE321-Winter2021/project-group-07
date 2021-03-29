@@ -2,6 +2,7 @@ package ca.mcgill.ecse321.repairsystem.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -18,6 +19,19 @@ public class AdministrativeAssistantRestController {
 
 	@Autowired
 	private AdministrativeAssistantService adminService;
+	
+	/**
+	 *restful controller for getting customer by id
+	 * */
+	@GetMapping(value = { "/admin/login/{email}", "/admin/login/{email}/"})
+	public AdministrativeAssistantDto getAdminFromLogin(@PathVariable("email") String email, @RequestParam String password) {
+		AdministrativeAssistant a = adminService.getAdminByEmail(email);
+		if(a != null && password.equals(a.getPassword())) {
+			return Converter.convertToDto(a);
+		}
+		return null;
+	}
+	
 	/**
 	 *Rest controller for creating admin assistant
 	 * */

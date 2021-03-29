@@ -45,6 +45,19 @@ public class MechanicRestController {
 	public MechanicDto getMechanicById(String id) {
 		return Converter.convertToDto(mechanicService.getMechanicById(Integer.parseInt(id)));
 	}
+	
+	/**
+	 *restful controller for getting customer by id
+	 * */
+	@GetMapping(value = { "/mechanic/login/{email}", "/mechanic/login/{email}/"})
+	public MechanicDto getMechanicFromLogin(@PathVariable("email") String email, @RequestParam String password) {
+		Mechanic m = mechanicService.getMechanicByEmail(email);
+		if(m != null && password.equals(m.getPassword())) {
+			return Converter.convertToDto(m);
+		}
+		return null;
+	}
+	
 	/**
 	 *restful controller for creating mechanic
 	 * */

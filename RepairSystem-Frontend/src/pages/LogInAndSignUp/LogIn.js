@@ -27,7 +27,9 @@ export default {
   name: "LogIn",
   data () {
     return {
-	  customer: "",
+    customer: "",
+    mechanic: "",
+    admin: "",
 	  error: ""
     }
   },
@@ -39,7 +41,37 @@ export default {
       	// JSON responses are automatically parsed.
       this.customer = response.data;
       if(this.customer == ""){
-        this.error = "cannot find customer with given credentials";
+
+        AXIOS.get('/mechanic/login/'.concat(email + "?password=" + password), {}, 
+	      {})
+		    .then(response => {
+      	    // JSON responses are automatically parsed.
+          this.mechanic = response.data;
+          if(this.mechanic == ""){
+
+            AXIOS.get('/admin/login/'.concat(email + "?password=" + password), {}, 
+	          {})
+		        .then(response => {
+      	        // JSON responses are automatically parsed.
+              this.admin = response.data;
+              if(this.admin == ""){
+                this.error = "cannot find person with given credentials"
+              } else {
+                location.replace(frontendUrl+"/adminDashboard?id="+this.admin.id);
+              }
+    	        })
+    	        .catch(e => {
+      		      this.error = e
+            })
+            
+          } else {
+            location.replace(frontendUrl+"/mechanicDashboard?id="+this.mechanic.id);
+          }
+    	    })
+    	    .catch(e => {
+      		  this.error = e
+        })
+        
       } else {
         location.replace(frontendUrl+"/customerDashboard?id="+this.customer.id);
       }

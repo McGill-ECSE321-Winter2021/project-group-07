@@ -3,3 +3,4 @@
 **/.DS_Store
 /bin
 .gradle
+RepairSystem-Frontend/package-lock.json
