@@ -30,7 +30,7 @@
 
 		<ul class="navbar-nav justify-content-end">
 				<li class="nav-item">
-					<a class="btn btn-secondary nav-btn" href="/signup"><b> Sign Up </b></a>
+					&nbsp; &nbsp; <a class="btn btn-secondary nav-btn" href="/signup"><b> Sign Up </b></a>
 				</li>
 		</ul>
 

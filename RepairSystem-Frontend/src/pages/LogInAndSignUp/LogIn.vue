@@ -1,5 +1,9 @@
 <template>
+          
+
     <div class="main">
+          <div style = "position: absolute; left: 5px; top: 10px"> &nbsp; <router-link to="/"><img src="../../assets/admin.png" width = "50px" length = "50px"></router-link>
+          </div>
         Log In
         <div class="leftCar">
             <img src="../../assets/LogInCarLeft.svg" alt="Left Car" width="600" height="430">
@@ -17,12 +21,12 @@
 
         <div class="textBox">
             <form>
-                <label for="email">Email: </label>
+                &nbsp;&nbsp;<label for="email">Email: </label>
                 <input type="text" v-model="customerEmail" value=""><br>
-                <label for="password">Password: </label>
+                &nbsp;&nbsp;<label for="password">Password: </label>
                 <input type="text" v-model="customerPassword" value=""><br>
             </form>
-            <button @click="logIn(customerEmail, customerPassword)">Log In</button>
+           &nbsp;&nbsp; <button class = "button1" @click="logIn(customerEmail, customerPassword)">Log In</button>
         </div>
 
         <h2>{{error}}</h2>
@@ -53,7 +57,7 @@
 
 .textBox {
   position: absolute;
-  top: 250px;
+  top: 300px;;
   width: 800px;
   height: 200px;
 }
@@ -80,5 +84,12 @@ label {
   padding: 8px;
 }
 
-
+.button1 {
+  background: rgb(51 41 134);
+  width: 80px;
+  height: 30px;
+  color: white;
+  padding: 2px;
+  border-radius: 8px;
+}
 </style>
