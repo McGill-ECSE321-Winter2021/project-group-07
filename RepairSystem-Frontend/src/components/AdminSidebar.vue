@@ -17,12 +17,12 @@
             </router-link>
             <router-link to="/adminDashboard/addCutomerOrMechanic" active-class="active" tag="button" exact class="side-btn">
                 <div class="link-container">
-                    Add Customer/Mechanic
+                    Team Members
                 </div>
             </router-link>
             <router-link to="/adminDashboard/editCustomerOrMechanic" active-class="active" tag="button" exact class="side-btn">
                 <div class="link-container">
-                    Edit Customer/Mechanic Profile
+                   Customers
                 </div>
             </router-link>
             <router-link to="/adminDashboard/viewCustomerOrMechanic" active-class="active" tag="button" exact class="side-btn">

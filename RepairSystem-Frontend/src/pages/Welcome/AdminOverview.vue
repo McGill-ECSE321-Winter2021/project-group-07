@@ -32,7 +32,7 @@
                     <div class = "top"> 
                         <center><img src="../../assets/profile-default.png"   width = "100px" length = "100px" ></center>
                         <br>
-                        <center> <b style = "color: rgb(51 41 134); font-size: 20px;"> admin name </b> </center>
+                        <center> <b style = "font-family: Roboto; color: rgb(51 41 134); font-size: 20px;"> admin name </b> </center>
                     </div>
                 </div>
 
@@ -44,7 +44,7 @@
                 <div class = "row no-gutters" >
                     <div class = "bottom"> 
                         <div>
-                        <b style = "color: #F3BE35; font-size: 20px;"> &nbsp; Reminder </b>
+                        <b style = "font-family: Roboto; color: #F3BE35; font-size: 20px;"> &nbsp; Reminder </b>
                         </div>
                         <div class = "rcorners2">
                             <b>reminder</b>
