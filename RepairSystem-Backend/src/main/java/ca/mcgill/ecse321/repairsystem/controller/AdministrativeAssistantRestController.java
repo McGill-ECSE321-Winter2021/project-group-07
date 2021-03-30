@@ -1,5 +1,8 @@
 package ca.mcgill.ecse321.repairsystem.controller;
 
+import java.util.List;
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,6 +33,19 @@ public class AdministrativeAssistantRestController {
 			return Converter.convertToDto(a);
 		}
 		return null;
+	}
+	
+	/**
+	 *restful controller for getting customer by id
+	 * */
+	@GetMapping(value = { "/admins", "/admins/"})
+	public List<AdministrativeAssistantDto> getAllAdmins() {
+		List<AdministrativeAssistant> listA = adminService.getAllAdmins();
+		List<AdministrativeAssistantDto> listADto = new ArrayList<AdministrativeAssistantDto>();
+		for(AdministrativeAssistant a: listA) {
+			listADto.add(Converter.convertToDto(a));
+		}
+		return listADto;
 	}
 	
 	/**

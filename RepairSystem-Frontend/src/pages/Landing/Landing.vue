@@ -178,10 +178,7 @@ mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla 
 </template>
 
 
-<script>
-export default {
-	name:'landing',
-}
+<script src="./Landing.js">
 </script>
 
 <style scoped>
