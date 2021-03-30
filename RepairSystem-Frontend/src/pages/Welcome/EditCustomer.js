@@ -33,11 +33,14 @@ export default {
     },
     methods: {
         editCustomer: function (oldEmail, password, phone, creditHash, debitHash, address){
-            AXIOS.put('/customer/editAllCustomerCredentials/'.concat(oldEmail), {},
-            
+            AXIOS.post('/customer/editAllCustomerCredentials/'.concat(oldEmail), {},
 	  {})
       .then(response => {
         // JSON responses are automatically parsed.
+        this.showAlert = true;
+        this.requestAlert = "Your details have been updated!";
+        localStorage.removeItem('newPhone');
+        localStorage.setItem('nePhone', phone);
         this.customer = response.data
       })
       .catch(e => {
