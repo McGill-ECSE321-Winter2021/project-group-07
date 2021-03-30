@@ -4,7 +4,7 @@
         <div class="profile">
         <div class="name">
              <div class="text">
-            Customer Name
+             {{customer.name}}
             </div>
             <div class="ellipse">
                             <img src="../../assets/profile-default.png"   width = "60px" length = "60px" >
@@ -48,8 +48,6 @@
                 <button class="button" @click="editCustomer(email, password, phone, credit, debit, address)" align = "right">Edit Profile</button>
         </div>
 
-        
-
     </div> 
         </div>
         
@@ -59,7 +57,7 @@
                     <div class = "top"> 
                         <center><img src="../../assets/profile-default.png"   width = "100px" length = "100px" ></center>
                         <br>
-                        <center> <b style = "color: rgb(51 41 134); font-size: 20px;"> customer name </b> </center>
+                        <center> <b style = "color: rgb(51 41 134); font-size: 20px;"> {{customer.name}} </b> </center>
                     </div>
                 </div>
 
