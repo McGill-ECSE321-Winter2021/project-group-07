@@ -1,11 +1,13 @@
 <template>
     <div class="profile">
-        This is a add appointment page
+         <date-pick v-model="date" :hasInputElement="false"></date-pick>
     </div>
 </template>
-
 <script>
+import DatePick from 'vue-date-pick';
+import 'vue-date-pick/dist/vueDatePick.css';
     export default {
+        components: {DatePick},
         
     }
 </script>
