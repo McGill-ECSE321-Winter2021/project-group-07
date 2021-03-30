@@ -24,27 +24,51 @@ function CustomerDto(email, password, name, phone, address, credit, debit) {
 }
 
 export default {
-    name: 'editCustomer',
     data () {
       return {
+          name: '',
+          password: '',
+          phone: '',
+          email: '',
+          address: '',
+          creditHash: '',
+          debitHash: '',
           customer: "",
+          customers: [],
           error: "",
       }
     },
-    methods: {
-        editCustomer: function (oldEmail, password, phone, creditHash, debitHash, address){
-            AXIOS.post('/customer/editAllCustomerCredentials/'.concat(oldEmail + "?password=" + password + "?phone=" + phone + "?creditHash=" + creditHash + "?debitHash=" + debitHash + "?address=" + address), {},
-	  {})
+    created: function () {
+      // Initializing persons from backend
+      AXIOS.get('/customer')
       .then(response => {
         // JSON responses are automatically parsed.
-        this.customer = response.data
-        console.log(response.data)
+        this.customers = response.data
       })
       .catch(e => {
         this.error = e
       })
-  
-
-        }
+      },
+    methods: {
+      editCustomer : function(email, name, password, phone, address, creditHash, debitHash)
+        {
+          AXIOS.put('/customer/editAllCustomerCredentials/'.concat(email),{},
+          {
+            params:{
+              name: name,
+              email: email,
+              password: password,
+              phone: phone,
+              address: address,
+              creditHash: creditHash,
+              debitHash: debitHash,
+            }
+          }).then(response => {
+            this.response = response.data;
+            location.reload();
+          }).catch(e => {
+            this.error = e;
+          })
+        },
     }
   }
