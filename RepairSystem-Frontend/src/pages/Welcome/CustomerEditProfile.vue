@@ -16,15 +16,15 @@
         <div class="row">
         <div class="col">Residence</div>
         <div class="w-100"></div>
-        <input type="address" value="address" disabled></input>
+        <input type="text" v-model="address" value=""><br>
         <div class="w-100"></div>
         <div class="col">Email</div>
         <div class="w-100"></div>
-        <input type="email" value="email" disabled></input>
+        <input type="text" v-model="email" value="" disabled><br>
         <div class="w-100"></div>
         <div class="col">Telephone</div>
         <div class="w-100"></div>
-        <input type="telephone" value="phone number" disabled></input>
+        <input type="text" v-model="phone" value=""><br>
         </div>
         </div>
 
@@ -32,20 +32,20 @@
         <div class="row">
         <div class="col">Password</div>
         <div class="w-100"></div>
-        <input type="password" value="password" disabled> </input>
+        <input type="password" v-model="password" value=""><br>
         <div class="w-100"></div>
         <div class="col">Credit Card Number</div>
         <div class="w-100"></div>
-        <input type="password" value="credit card number" disabled></input>
+        <input type="password" v-model="credit" value=""><br>
         <div class="w-100"></div>
         <div class="col">Debit Card Number</div>
         <div class="w-100"></div>
-        <input type="password" value="debit card number"disabled></input>
+        <input type="password" v-model="debit" value=""><br>
         </div>
         </div>
 
         <div class="container3">
-                <font class = "button" align = "right"> Edit Profile</font>
+                <button class="button" @click="editCustomer(email, password, phone, credit, debit, address)" align = "right">Edit Profile</button>
         </div>
 
         
@@ -81,11 +81,11 @@
 <script>
 import DatePick from 'vue-date-pick';
 import 'vue-date-pick/dist/vueDatePick.css';
-
 export default {
     components: {DatePick},
 };
 </script>
+<script>src="./EditCustomer.js";</script>
 
 <style scoped>
 .profile {
@@ -118,7 +118,6 @@ font-style: normal;
 font-weight: 900;
 font-size: 26px;
 line-height: 38px;
-
 color: #37447E;
 }
 .ellipse{
@@ -140,7 +139,6 @@ font-size: 15px;
 line-height: 38px;
 color: #37447E;
 }
-
 .container2{
 position: absolute;
 left: 305px;
@@ -152,7 +150,6 @@ font-size: 15px;
 line-height: 38px;
 color: #37447E;
 }
-
 .container3 {
     position: absolute;
     left: 500px;
@@ -172,7 +169,6 @@ color: #37447E;
     color: rgb(167, 167, 167);
     font-weight: 600;
 }
-
 .rightside{
     height: 98.5vh;
     width: 70%;
@@ -181,7 +177,6 @@ color: #37447E;
     right: 0px;
     background: white
 }
-
 .top{
     height: 50%;
     width: 100%;
@@ -189,7 +184,6 @@ color: #37447E;
     content: "";
     top: 20px;
 }
-
 .rcorners {
   border-radius: 25px;
   background: white;
@@ -206,7 +200,6 @@ color: #37447E;
     left:20px;
     top: 200px;
 }
-
 .bottom{
     height: 30%;
     width: 80%;
@@ -217,19 +210,15 @@ color: #37447E;
 }
 
 .left-top{
-
     position: absolute;
     content: "";
     top: 50px;
     left: 70px
 }
-
 .left-bottom{
-
     position: absolute;
     content: "";
     left:70px;
     top: 250px;
 }
-
 </style>
