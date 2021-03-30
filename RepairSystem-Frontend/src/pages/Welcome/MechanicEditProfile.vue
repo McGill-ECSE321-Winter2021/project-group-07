@@ -15,15 +15,15 @@
         <div class="row">
         <div class="col">Residence</div>
         <div class="w-100"></div>
-        <input type="address" value="address" disabled></input>
+        <input type="text" v-model="address" value=""><br>
         <div class="w-100"></div>
         <div class="col">Email</div>
         <div class="w-100"></div>
-        <input type="email" value="email" disabled></input>
+        <input type="text" v-model="email" value="" disabled><br>
         <div class="w-100"></div>
         <div class="col">Telephone</div>
         <div class="w-100"></div>
-        <input type="telephone" value="phone number" disabled></input>
+        <input type="text" v-model="phone" value=""><br>
         </div>
         </div>
 
@@ -31,7 +31,7 @@
         <div class="row">
         <div class="col">Password</div>
         <div class="w-100"></div>
-        <input type="password" value="password" disabled> </input>
+        <input type="password" v-model="password" value=""><br>
         <div class="w-100"></div>
         <div class="col">Services</div>
         <div class="w-100"></div>

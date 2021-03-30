@@ -4,7 +4,7 @@
         <div class="profile">
         <div class="name">
              <div class="text" v-model="name">
-             {{admin.name}}
+             Admin Name
             </div>
             <div class="ellipse">
                 <img src="../../assets/profile-default.png"   width = "60px" length = "60px" >
@@ -52,7 +52,7 @@
                     <div class = "top"> 
                         <center><img src="../../assets/profile-default.png"   width = "100px" length = "100px" ></center>
                         <br>
-                        <center> <b style = "color: rgb(51 41 134); font-size: 20px;"> {{admin.name}} </b> </center>
+                        <center> <b style = "color: rgb(51 41 134); font-size: 20px;"> Admin Name </b> </center>
                     </div>
                 </div>
 
@@ -72,14 +72,14 @@
 </template>
 
 <script>
-import DatePick from 'vue-date-pick';
+/*import DatePick from 'vue-date-pick';
 import 'vue-date-pick/dist/vueDatePick.css';
 
 export default {
     components: {DatePick},
-};
+};*/
+src="./EditAdmin.js";
 </script>
-<script>src="./EditAdmin.js";</script>
 
 <style scoped>
 .profile {
