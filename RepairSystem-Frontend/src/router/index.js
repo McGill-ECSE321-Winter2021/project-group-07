@@ -49,7 +49,7 @@ const routes = [
       },
       {
         path: '/customerDashboard/bookAppointment',
-        component: () => import('../pages/CustomerBookAppointment.vue')
+        component: () => import('../pages/Booking/CustomerBookAppointment.vue')
       }
     ]
   },
