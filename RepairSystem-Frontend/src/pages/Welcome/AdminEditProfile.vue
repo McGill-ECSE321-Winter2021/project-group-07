@@ -3,8 +3,8 @@
         <div class = "col no-gutters">
         <div class="profile">
         <div class="name">
-             <div class="text">
-            Admin Name
+             <div class="text" v-model="name">
+             {{admin.name}}
             </div>
             <div class="ellipse">
                 <img src="../../assets/profile-default.png"   width = "60px" length = "60px" >
@@ -16,15 +16,15 @@
         <div class="row">
         <div class="col">Residence</div>
         <div class="w-100"></div>
-        <input type="address" value="address" disabled></input>
+        <input type="text" v-model="address" value=""><br>
         <div class="w-100"></div>
         <div class="col">Email</div>
         <div class="w-100"></div>
-        <input type="email" value="email" disabled></input>
+        <input type="text" v-model="email" value="" disabled><br>
         <div class="w-100"></div>
         <div class="col">Telephone</div>
         <div class="w-100"></div>
-        <input type="telephone" value="phone number" disabled></input>
+       <input type="text" v-model="phone" value=""><br>
         </div>
         </div>
 
@@ -32,13 +32,13 @@
         <div class="row">
         <div class="col">Password</div>
         <div class="w-100"></div>
-        <input type="password" value="password" disabled> </input>
+        <input type="password" v-model="password" value=""><br>
         <div class="w-100"></div>
         </div>
         </div>
 
         <div class="container3">
-                <font class = "button" align = "right"> Edit Profile</font>
+                <button class="button" @click="editAdmin(email, name, password, phone)" align = "right">Edit Profile</button>
         </div>
 
         
@@ -52,7 +52,7 @@
                     <div class = "top"> 
                         <center><img src="../../assets/profile-default.png"   width = "100px" length = "100px" ></center>
                         <br>
-                        <center> <b style = "color: rgb(51 41 134); font-size: 20px;"> admin name </b> </center>
+                        <center> <b style = "color: rgb(51 41 134); font-size: 20px;"> {{admin.name}} </b> </center>
                     </div>
                 </div>
 
@@ -79,6 +79,7 @@ export default {
     components: {DatePick},
 };
 </script>
+<script>src="./EditAdmin.js";</script>
 
 <style scoped>
 .profile {
