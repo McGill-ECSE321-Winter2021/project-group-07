@@ -2,7 +2,6 @@
     <div class="sidebar">
         <div class="title">
          &nbsp; <router-link to="/"><img src="../assets/admin.png" width = "50px" length = "50px"></router-link>
-
         </div>
         <div class="menu-items">
              <router-link to="/customerDashboard" active-class="active" tag="button" exact class="side-btn">
@@ -32,7 +31,11 @@
 
 <script>
 export default {
-    
+    computed: {
+        userId(){
+            return this.$route.params.userId
+        }
+    }   
 }
 </script>
 

@@ -6,7 +6,7 @@
                         <div class = "rcorners">
                             &nbsp; &nbsp; &nbsp; 
                             <b style = "color: rgb(51 41 134); font-size: 30px; position: absolute; top: 25px; left: 65px"> Hello, </b>
-                            <b style = "color: #F3BE35; font-size: 30px; position: absolute; top: 25px; left: 150px "> Mechanic Name </b>
+                            <b style = "color: #F3BE35; font-size: 30px; position: absolute; top: 25px; left: 150px "> {{userId}} </b>
                             <img src="../../assets/welcome-car.png" width = "300px" height = "150px"  style = "position: absolute; right: 25px">
                         </div>
                     </div>
@@ -14,6 +14,8 @@
                 
                 <div class = "row no-gutters" >
                     <div class = "left-bottom"> 
+                                <h1> userid: {{userId}} </h1>
+
                         <img src="../../assets/appointment.png" width = "50px" >
                         My Appointments
 
@@ -27,7 +29,7 @@
                     <div class = "top"> 
                         <center><img src="../../assets/profile-default.png"   width = "100px" length = "100px" ></center>
                         <br>
-                        <center> <b style = "color: rgb(51 41 134); font-size: 20px;"> mechanic name </b> </center>
+                        <center> <b style = "color: rgb(51 41 134); font-size: 20px;"> <h1> userid: {{userId}} </h1> </b> </center>
                     </div>
                 </div>
 
@@ -57,6 +59,11 @@ import 'vue-date-pick/dist/vueDatePick.css';
 
 export default {
     components: {DatePick},
+    computed: {
+        userId(){
+            return this.$route.params.userId
+        }
+    }   
 };
 </script>
 

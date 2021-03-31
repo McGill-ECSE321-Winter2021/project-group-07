@@ -4,7 +4,7 @@
         <div class="profile">
         <div class="name">
              <div class="text">
-            Mechanic Name
+                                <h1> userid: {{userId}} </h1>
             </div>
             <div class="ellipse">
                 <img src="../../assets/profile-default.png"   width = "60px" length = "60px" >
@@ -15,15 +15,15 @@
         <div class="row">
         <div class="col">Residence</div>
         <div class="w-100"></div>
-        <input type="address" value="address" disabled></input>
+        <input type="text" v-model="address" value=""><br>
         <div class="w-100"></div>
         <div class="col">Email</div>
         <div class="w-100"></div>
-        <input type="email" value="email" disabled></input>
+        <input type="text" v-model="email" value="" disabled><br>
         <div class="w-100"></div>
         <div class="col">Telephone</div>
         <div class="w-100"></div>
-        <input type="telephone" value="phone number" disabled></input>
+        <input type="text" v-model="phone" value=""><br>
         </div>
         </div>
 
@@ -31,7 +31,7 @@
         <div class="row">
         <div class="col">Password</div>
         <div class="w-100"></div>
-        <input type="password" value="password" disabled> </input>
+        <input type="password" v-model="password" value=""><br>
         <div class="w-100"></div>
         <div class="col">Services</div>
         <div class="w-100"></div>
@@ -51,7 +51,7 @@
                     <div class = "top"> 
                         <center><img src="../../assets/profile-default.png"   width = "100px" length = "100px" ></center>
                         <br>
-                        <center> <b style = "color: rgb(51 41 134); font-size: 20px;"> mechanic name </b> </center>
+                        <center> <b style = "color: rgb(51 41 134); font-size: 20px;">                                 <h1> userid: {{userId}} </h1> </b> </center>
                     </div>
                 </div>
 
@@ -76,6 +76,11 @@ import 'vue-date-pick/dist/vueDatePick.css';
 
 export default {
     components: {DatePick},
+    computed: {
+        userId(){
+            return this.$route.params.userId
+        }
+    }  
 };
 </script>
 

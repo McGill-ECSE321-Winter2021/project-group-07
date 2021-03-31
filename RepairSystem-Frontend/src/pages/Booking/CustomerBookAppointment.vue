@@ -5,11 +5,9 @@
             v-model="date"
             :hasInputElement="false"
             :pickTime="true"
-            :format="'YYYY-MM-DD HH:mm'"
+            :format="'YYYY-MM-DD-HH:mm'"
             :displayFormat="'YYYY.MM.DD H:mm A'"
         ></date-pick>
-
-        <h2>Thomas is KING.</h2>
 
         <h2>{{date}}</h2>
 
@@ -17,7 +15,8 @@
             <label> Service </label>
             <input type="text" v-model="service" value="">
         </form>
-        <button class="Book Appointment" @click="createTimeSlot(date, service)">
+
+        <button class="Book Appointment" @click="createTimeSlot(date)">
         Book Appointment
         </button>
 
@@ -48,7 +47,8 @@ export default {
     data: () => ({
         date: '',
         timeslot: "",
-        errorTimeSlot:""
+        errorTimeSlot:"",
+        services:['oil change', 'maintenance']
     }),
 
         methods: {
@@ -56,25 +56,20 @@ export default {
             return date < new Date()
         },
         createTimeSlot: function(date) {
+        
+            var date_array = date.split("-");
+            var min_sec_array = date_array[3].split(":");
+            var hours = min_sec_array[0];
+            hours++;
 
-            console.log("Starting function")
-
-            var minute = date.getMinutes();
-            console.log(minute)
-            var hour = date.prototype.getHours();
-            var day = date.prototype.getDay();
-            var month = date.prototype.getMonth();
-            var year = date.prototype.getYear();
-            hour++;
             var newDate = new Date();
+            newDate.setMinutes(min_sec_array[1]);
+            newDate.setHours(hours);
+            newDate.setDate(date_array[2]);
+            newDate.setMonth(date_array[1]);
+            newDate.setYear(date_array[0]);
 
-            console.log(newDate)
-
-            newDate.prototype.setMinutes(minute);
-            newDate.prototype.setHours(hour);
-            newDate.prototype.setDay(day);
-            newDate.prototype.setMonth(month);
-            newDate.prototype.setYear(year);
+            console.log(newDate);
 
             AXIOS.post('/timeSlot/'.concat(date + "?endTime="+newDate), {}, {})
             .then(response => {
@@ -87,6 +82,8 @@ export default {
                 console.log(errorMsg)
                 this.errorTimeSlot = errorMsg
             })
+
+            console.log("FINISHED METHOD");
         }
     }
 
