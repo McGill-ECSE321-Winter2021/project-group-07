@@ -5,7 +5,7 @@
         <div class="profile">
         <div class="name">
              <div class="text">
-                                <h1> userid: {{userId}} </h1>
+                                <h1> {{customer.name}} </h1>
             </div>
             <div class="ellipse">
                 <img src="../../assets/profile-default.png"   width = "60px" length = "60px" >
@@ -58,7 +58,7 @@
                     <div class = "top"> 
                         <center><img src="../../assets/profile-default.png"   width = "100px" length = "100px" ></center>
                         <br>
-                        <center> <b style = "color: rgb(51 41 134); font-size: 20px;">                                 <h1> userid: {{userId}} </h1> </b> </center>
+                        <center> <b style = "color: rgb(51 41 134); font-size: 20px;">                                 <h1> {{customer.name}} </h1> </b> </center>
                     </div>
                 </div>
 
@@ -78,17 +78,37 @@
 </template>
 
 <script>
-import DatePick from 'vue-date-pick';
-import 'vue-date-pick/dist/vueDatePick.css';
+import axios from 'axios'
+var config = require('../../../config')
+
+var frontendUrl = 'http://' + config.dev.host + ':' + config.dev.port
+var backendUrl = 'http://' + config.dev.backendHost + ':' + config.dev.backendPort
+
+var AXIOS = axios.create({
+  baseURL: backendUrl,
+  headers: { 'Access-Control-Allow-Origin': frontendUrl }
+})
 
 export default {
-    components: {DatePick},
-    computed: {
-        userId(){
-            return this.$route.params.userId
-        }
-    }  
-};
+    data () {
+    return {
+	  customer: "",
+	  error: ""
+    }
+    },
+    created: function () {
+        var id = this.$route.params.userId
+        AXIOS.get('/customer/'.concat(id))
+        .then(response => {
+        // JSON responses are automatically parsed.
+        this.customer = response.data
+    })
+    .catch(e => {
+        this.error = e
+        console.log(e)
+    })
+    }
+}
 </script>
 
 <style scoped>

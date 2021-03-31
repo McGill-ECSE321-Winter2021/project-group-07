@@ -44,7 +44,7 @@ export default {
 		.then(response => {
       	// JSON responses are automatically parsed.
 		  this.customer = response.data;
-		  location.replace(frontendUrl+"/customerDashboard/Overview/id="+this.customer.id);
+		  location.replace(frontendUrl+"/customerDashboard/Overview/"+this.customer.id);
     	})
     	.catch(e => {
       		this.error = e

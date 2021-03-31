@@ -3,21 +3,21 @@
         <div class="sidebar">
         <div class="title">
          &nbsp; <router-link to="/"><img src="../../assets/admin.png" width = "50px" length = "50px"></router-link>
-        <h1> {{userId}} </h1>
+        <h1> {{customer.name}} </h1>
 
         </div>
         <div class="menu-items">
-             <router-link :to="'/customerDashboard/Overview/' + this.userId" active-class="active" tag="button" exact class="side-btn">
+             <router-link :to="'/customerDashboard/Overview/' + this.customer.id" active-class="active" tag="button" exact class="side-btn">
                 <div class="link-container">
                     Overview
                 </div>
             </router-link>
-            <router-link :to="'/customerDashboard/myAccount/' + this.userId" active-class="active" tag="button" exact class="side-btn">
+            <router-link :to="'/customerDashboard/myAccount/' + this.customer.id" active-class="active" tag="button" exact class="side-btn">
                 <div class="link-container">
                     My Account
                 </div>
             </router-link>
-            <router-link :to="'/customerDashboard/bookAppointment/' + this.userId" active-class="active" tag="button" exact class="side-btn">
+            <router-link :to="'/customerDashboard/bookAppointment/' + this.customer.id" active-class="active" tag="button" exact class="side-btn">
                 <div class="link-container">
                     Book Appointment
                 </div>
@@ -36,12 +36,36 @@
 </template>
 
 <script>
+import axios from 'axios'
+var config = require('../../../config')
+
+var frontendUrl = 'http://' + config.dev.host + ':' + config.dev.port
+var backendUrl = 'http://' + config.dev.backendHost + ':' + config.dev.backendPort
+
+var AXIOS = axios.create({
+  baseURL: backendUrl,
+  headers: { 'Access-Control-Allow-Origin': frontendUrl }
+})
+
 export default {
-    computed: {
-        userId(){
-            return this.$route.params.userId
-        }
-    }   
+    data () {
+    return {
+	  customer: "",
+	  error: ""
+    }
+    },
+    created: function () {
+        var id = this.$route.params.userId
+        AXIOS.get('/customer/'.concat(id))
+        .then(response => {
+        // JSON responses are automatically parsed.
+        this.customer = response.data
+    })
+    .catch(e => {
+        this.error = e
+        console.log(e)
+    })
+    }
 }
 </script>
 

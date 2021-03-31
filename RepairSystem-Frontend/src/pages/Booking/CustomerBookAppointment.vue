@@ -1,5 +1,6 @@
 <template>
     <div id="booking-calendar">
+        <h1>{{customer.name}}</h1>
         <h2>Booking an Appointment</h2>
         <date-pick 
             v-model="date"
@@ -48,8 +49,22 @@ export default {
         date: '',
         timeslot: "",
         errorTimeSlot:"",
-        services:['oil change', 'maintenance']
+        services:['oil change', 'maintenance'],
+        customer: "",
+	    error: ""
     }),
+    created: function () {
+        var id = this.$route.params.userId
+        AXIOS.get('/customer/'.concat(id))
+        .then(response => {
+        // JSON responses are automatically parsed.
+        this.customer = response.data
+    })
+    .catch(e => {
+        this.error = e
+        console.log(e)
+    })
+    },
 
         methods: {
         isPastDate: function (date) {

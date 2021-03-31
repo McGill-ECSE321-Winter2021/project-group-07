@@ -92,9 +92,6 @@ export default {
 }
 </script>
 
-
-</script>
-
 <style scoped>
 .overview {
     display: flex;

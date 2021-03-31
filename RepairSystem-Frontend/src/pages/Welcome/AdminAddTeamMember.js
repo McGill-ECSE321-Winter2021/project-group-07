@@ -28,6 +28,7 @@ function MechanicDto(name, password, phone, emai){
         phone:'',
         password:'',
         address:'',
+        admin: "",
         mechanic:"",
         mechanics: [],
         capacities:[],
@@ -65,6 +66,16 @@ function MechanicDto(name, password, phone, emai){
     },
     methods: {
         createMechanic: function (name,password,phone,email){
+        var id = this.$route.params.userId
+        AXIOS.get('/admin/'.concat(id))
+        .then(response => {
+          // JSON responses are automatically parsed.
+          this.admin = response.data
+        })
+        .catch(e => {
+          this.error = e
+          console.log(e)
+        })
         AXIOS.post('/mechanic/'.concat(name), {},
         {
             params:{
