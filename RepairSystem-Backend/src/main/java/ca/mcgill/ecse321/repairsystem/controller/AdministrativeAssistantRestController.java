@@ -38,6 +38,15 @@ public class AdministrativeAssistantRestController {
 	/**
 	 *restful controller for getting customer by id
 	 * */
+	@GetMapping(value = { "/admin/{id}", "/admin/{id}/"})
+	public AdministrativeAssistantDto getAdminById(@PathVariable("id") String id) {
+		AdministrativeAssistant a = adminService.getAdminById(Integer.parseInt(id));
+		return Converter.convertToDto(a);
+	}
+	
+	/**
+	 *restful controller for getting customer by id
+	 * */
 	@GetMapping(value = { "/admins", "/admins/"})
 	public List<AdministrativeAssistantDto> getAllAdmins() {
 		List<AdministrativeAssistant> listA = adminService.getAllAdmins();
