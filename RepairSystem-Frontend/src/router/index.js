@@ -36,60 +36,60 @@ const routes = [
     ]
   },
   {
-    path: '/customerDashboard',
+    path: '/customerDashboard/Overview/:userId',
     component: customerDashboard,
     children: [
       {
-        path: '',
+        path: '/customerDashboard/Overview/:userId',
         component: () => import( '../pages/Welcome/CustomerOverview.vue')
       },
       {
-        path: '/customerDashboard/myAccount',
+        path: '/customerDashboard/myAccount/:userId',
         component: () => import('../pages/Welcome/CustomerEditProfile.vue')
       },
       {
-        path: '/customerDashboard/bookAppointment',
+        path: '/customerDashboard/bookAppointment/:userId',
         component: () => import('../pages/Booking/CustomerBookAppointment.vue')
       }
     ]
   },
   {
-    path: '/mechanicDashboard',
+    path: '/mechanicDashboard/Overview/:userId',
     component: mechanicDashboard,
     children: [
       {
-        path: '',
+        path:'/mechanicDashboard/Overview/:userId',
         component: () => import( '../pages/Welcome/MechanicOverview.vue')
       },
       {
-        path: '/mechanicDashboard/myAccount',
+        path: '/mechanicDashboard/myAccount/:userId',
         component: () => import('../pages/Welcome/MechanicEditProfile.vue')
       }
     ]
   },
   {
-    path: '/adminDashboard',
+    path: '/adminDashboard/Overview/:userId',
     component: adminDashboard,
     children: [
       {
-        path: '',
+        path: '/adminDashboard/Overview/:userId',
         component: () => import( '../pages/Welcome/AdminOverview.vue')
       },
       {
-        path: '/adminDashboard/myAccount',
+        path: '/adminDashboard/myAccount/:userId',
         component: () => import('../pages/Welcome/AdminEditProfile.vue')
       },
       {
-        path: '/adminDashboard/addCutomerOrMechanic',
-        component: () => import('../pages/Welcome/AdminAddCustomerOrMechanic.vue')
+        path: '/adminDashboard/TeamMembers/:userId',
+        component: () => import('../pages/Welcome/AdminTeamMebmers.vue')
       },
       {
-        path: '/adminDashboard/editCustomerOrMechanic',
-        component: () => import('../pages/Welcome/AdminEditCustomerOrMechanic.vue')
+        path: '/adminDashboard/Customers/:userId',
+        component: () => import('../pages/Welcome/AdminCustomer.vue')
       },
       {
-        path: '/adminDashboard/viewCustomerOrMechanic',
-        component: () => import('../pages/Welcome/AdminViewAllCustomerOrMechanic.vue')
+        path: '/adminDashboard/ViewAllCustomersOrMechanics/:userId',
+        component: () => import('../pages/Welcome/AdminViewAllCustomersOrMechanics.vue')
       },
       {
         path: '/adminDashboard/addAppointment',

@@ -1,16 +1,18 @@
+
 <template>
     <div class = "row no-gutters">
         <div class = "col no-gutters">
         <div class="profile">
         <div class="name">
              <div class="text">
-             {{customer.name}}
+                                <h1> userid: {{userId}} </h1>
             </div>
             <div class="ellipse">
-                            <img src="../../assets/profile-default.png"   width = "60px" length = "60px" >
-
+                <img src="../../assets/profile-default.png"   width = "60px" length = "60px" >
             </div>
         </div>
+
+
 
         <div class="container">
         <div class="row">
@@ -46,8 +48,7 @@
 
         <div class="container3">
                 <button class="button" @click="editCustomer(email, password, phone, credit, debit, address)" align = "right">Edit Profile</button>
-        </div>
-
+        </div>>
     </div> 
         </div>
         
@@ -57,7 +58,7 @@
                     <div class = "top"> 
                         <center><img src="../../assets/profile-default.png"   width = "100px" length = "100px" ></center>
                         <br>
-                        <center> <b style = "color: rgb(51 41 134); font-size: 20px;"> {{customer.name}} </b> </center>
+                        <center> <b style = "color: rgb(51 41 134); font-size: 20px;">                                 <h1> userid: {{userId}} </h1> </b> </center>
                     </div>
                 </div>
 
@@ -77,7 +78,17 @@
 </template>
 
 <script>
-src="./EditCustomer.js";
+import DatePick from 'vue-date-pick';
+import 'vue-date-pick/dist/vueDatePick.css';
+
+export default {
+    components: {DatePick},
+    computed: {
+        userId(){
+            return this.$route.params.userId
+        }
+    }  
+};
 </script>
 
 <style scoped>
@@ -111,6 +122,7 @@ font-style: normal;
 font-weight: 900;
 font-size: 26px;
 line-height: 38px;
+
 color: #37447E;
 }
 .ellipse{
@@ -132,6 +144,7 @@ font-size: 15px;
 line-height: 38px;
 color: #37447E;
 }
+
 .container2{
 position: absolute;
 left: 305px;
@@ -143,6 +156,7 @@ font-size: 15px;
 line-height: 38px;
 color: #37447E;
 }
+
 .container3 {
     position: absolute;
     left: 500px;
@@ -162,6 +176,7 @@ color: #37447E;
     color: rgb(167, 167, 167);
     font-weight: 600;
 }
+
 .rightside{
     height: 98.5vh;
     width: 70%;
@@ -170,6 +185,7 @@ color: #37447E;
     right: 0px;
     background: white
 }
+
 .top{
     height: 50%;
     width: 100%;
@@ -177,6 +193,7 @@ color: #37447E;
     content: "";
     top: 20px;
 }
+
 .rcorners {
   border-radius: 25px;
   background: white;
@@ -193,6 +210,7 @@ color: #37447E;
     left:20px;
     top: 200px;
 }
+
 .bottom{
     height: 30%;
     width: 80%;
@@ -203,15 +221,19 @@ color: #37447E;
 }
 
 .left-top{
+
     position: absolute;
     content: "";
     top: 50px;
     left: 70px
 }
+
 .left-bottom{
+
     position: absolute;
     content: "";
     left:70px;
     top: 250px;
 }
+
 </style>

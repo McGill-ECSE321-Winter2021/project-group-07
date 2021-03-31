@@ -5,6 +5,8 @@
         <div class="name">
              <div class="text" v-model="name">
              Admin Name
+                     <h1> user id: {{userId}} </h1>
+
             </div>
             <div class="ellipse">
                 <img src="../../assets/profile-default.png"   width = "60px" length = "60px" >
@@ -72,13 +74,17 @@
 </template>
 
 <script>
-/*import DatePick from 'vue-date-pick';
+import DatePick from 'vue-date-pick';
 import 'vue-date-pick/dist/vueDatePick.css';
 
 export default {
     components: {DatePick},
-};*/
-src="./EditAdmin.js";
+    computed: {
+        userId(){
+            return this.$route.params.userId
+        }
+    } 
+};
 </script>
 
 <style scoped>

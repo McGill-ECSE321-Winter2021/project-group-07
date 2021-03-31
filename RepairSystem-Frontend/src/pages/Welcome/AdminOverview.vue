@@ -3,13 +3,15 @@
         <div class = "col no-gutters">
                 <div class = "row no-gutters" >
                     <div class = "left-top">
+                         <h1> user id: {{userId}} </h1>
+
                         <img src="../../assets/appointment.png" width = "50px" >
-                            Upcoming Appointments 
+                            Upcoming Appointments         
+
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
                             <router-link to="adminDashboard/addAppointment"><font class = "button1" align = "right"> Add Appointment</font></router-link>
                             <router-link to="adminDashboard/editAppointment"><font class = "button1" align = "right"> Edit Appointment</font></router-link>
-
                     </div>
                 </div>
                 
@@ -62,7 +64,14 @@ import 'vue-date-pick/dist/vueDatePick.css';
 
 export default {
     components: {DatePick},
+    computed: {
+        userId(){
+            return this.$route.params.userId
+        }
+    }   
 };
+
+
 </script>
 
 <style scoped>

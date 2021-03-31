@@ -57,7 +57,7 @@ export default {
               if(this.admin == ""){
                 this.error = "cannot find person with given credentials"
               } else {
-                location.replace(frontendUrl+"/adminDashboard?id="+this.admin.id);
+                location.replace(frontendUrl+"/adminDashboard/Overview/"+this.admin.id);
               }
     	        })
     	        .catch(e => {
@@ -65,7 +65,7 @@ export default {
             })
             
           } else {
-            location.replace(frontendUrl+"/mechanicDashboard?id="+this.mechanic.id);
+            location.replace(frontendUrl+"/mechanicDashboard/Overview/"+this.mechanic.id);
           }
     	    })
     	    .catch(e => {
@@ -73,7 +73,7 @@ export default {
         })
         
       } else {
-        location.replace(frontendUrl+"/customerDashboard?id="+this.customer.id);
+        location.replace(frontendUrl+"/customerDashboard/Overview/"+this.customer.id);
       }
     	})
     	.catch(e => {

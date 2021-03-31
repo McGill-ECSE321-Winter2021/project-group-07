@@ -4,7 +4,7 @@
         <div class="profile">
         <div class="name">
              <div class="text">
-            Mechanic Name
+                                <h1> userid: {{userId}} </h1>
             </div>
             <div class="ellipse">
                 <img src="../../assets/profile-default.png"   width = "60px" length = "60px" >
@@ -51,7 +51,7 @@
                     <div class = "top"> 
                         <center><img src="../../assets/profile-default.png"   width = "100px" length = "100px" ></center>
                         <br>
-                        <center> <b style = "color: rgb(51 41 134); font-size: 20px;"> mechanic name </b> </center>
+                        <center> <b style = "color: rgb(51 41 134); font-size: 20px;">                                 <h1> userid: {{userId}} </h1> </b> </center>
                     </div>
                 </div>
 
@@ -76,6 +76,11 @@ import 'vue-date-pick/dist/vueDatePick.css';
 
 export default {
     components: {DatePick},
+    computed: {
+        userId(){
+            return this.$route.params.userId
+        }
+    }  
 };
 </script>
 
