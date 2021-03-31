@@ -3,31 +3,31 @@
         <div class="sidebar">
         <div class="title">
          &nbsp; <router-link to="/"><img src="../../assets/admin.png" width = "50px" length = "50px"></router-link>
-        <h1> user id: {{userId}} </h1>
+        <h1> user id: {{admin.name}} </h1>
         </div>
         <div class="menu-items">
-             <router-link :to="'/adminDashboard/Overview/' + this.userId" active-class="active" tag="button" exact class="side-btn">
+             <router-link :to="'/adminDashboard/Overview/' + this.admin.id" active-class="active" tag="button" exact class="side-btn">
                 <div class="link-container">
                     Overview
                 </div>
 
             </router-link>
-            <router-link :to="'/adminDashboard/myAccount/' + this.userId"  active-class="active" tag="button" exact class="side-btn">
+            <router-link :to="'/adminDashboard/myAccount/' + this.admin.id"  active-class="active" tag="button" exact class="side-btn">
                 <div class="link-container">
                     My Account
                 </div>
             </router-link>
-            <router-link :to="'/adminDashboard/TeamMembers/' + this.userId"active-class="active" tag="button" exact class="side-btn">
+            <router-link :to="'/adminDashboard/TeamMembers/' + this.admin.id"active-class="active" tag="button" exact class="side-btn">
                 <div class="link-container">
                     Team Members
                 </div>
             </router-link>
-            <router-link :to="'/adminDashboard/Customers/' + this.userId" active-class="active" tag="button" exact class="side-btn">
+            <router-link :to="'/adminDashboard/Customers/' + this.admin.id" active-class="active" tag="button" exact class="side-btn">
                 <div class="link-container">
                    Customers
                 </div>
             </router-link>
-            <router-link :to="'/adminDashboard/ViewAllCustomersOrMechanics/' + this.userId" active-class="active" tag="button" exact class="side-btn">
+            <router-link :to="'/adminDashboard/ViewAllCustomersOrMechanics/' + this.admin.id" active-class="active" tag="button" exact class="side-btn">
                 <div class="link-container">
                     View All Customer/Mechanic
                 </div>
@@ -47,12 +47,36 @@
 </template>
 
 <script>
+import axios from 'axios'
+var config = require('../../../config')
+
+var frontendUrl = 'http://' + config.dev.host + ':' + config.dev.port
+var backendUrl = 'http://' + config.dev.backendHost + ':' + config.dev.backendPort
+
+var AXIOS = axios.create({
+  baseURL: backendUrl,
+  headers: { 'Access-Control-Allow-Origin': frontendUrl }
+})
+
 export default {
-    computed: {
-        userId(){
-            return this.$route.params.userId
-        }
-    }   
+    data () {
+    return {
+	  admin: "",
+	  error: ""
+    }
+    },
+    created: function () {
+        var id = this.$route.params.userId
+        AXIOS.get('/admin/'.concat(id))
+        .then(response => {
+        // JSON responses are automatically parsed.
+        this.admin = response.data
+    })
+    .catch(e => {
+        this.error = e
+        console.log(e)
+    })
+    }
 }
 </script>
 

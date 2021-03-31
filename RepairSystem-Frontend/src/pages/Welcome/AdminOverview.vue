@@ -3,7 +3,7 @@
         <div class = "col no-gutters">
                 <div class = "row no-gutters" >
                     <div class = "left-top">
-                         <h1> user id: {{userId}} </h1>
+                         <h1> {{admin.name}} </h1>
 
                         <img src="../../assets/appointment.png" width = "50px" >
                             Upcoming Appointments         
@@ -34,7 +34,7 @@
                     <div class = "top"> 
                         <center><img src="../../assets/profile-default.png"   width = "100px" length = "100px" ></center>
                         <br>
-                        <center> <b style = "font-family: Roboto; color: rgb(51 41 134); font-size: 20px;"> admin name </b> </center>
+                        <center> <b style = "font-family: Roboto; color: rgb(51 41 134); font-size: 20px;"> {{admin.name}} </b> </center>
                     </div>
                 </div>
 
@@ -59,17 +59,38 @@
 </template>
 
 <script>
-import DatePick from 'vue-date-pick';
-import 'vue-date-pick/dist/vueDatePick.css';
+import axios from 'axios'
+var config = require('../../../config')
+
+var frontendUrl = 'http://' + config.dev.host + ':' + config.dev.port
+var backendUrl = 'http://' + config.dev.backendHost + ':' + config.dev.backendPort
+
+var AXIOS = axios.create({
+  baseURL: backendUrl,
+  headers: { 'Access-Control-Allow-Origin': frontendUrl }
+})
 
 export default {
-    components: {DatePick},
-    computed: {
-        userId(){
-            return this.$route.params.userId
-        }
-    }   
-};
+    data () {
+    return {
+	  admin: "",
+	  error: ""
+    }
+    },
+    created: function () {
+        var id = this.$route.params.userId
+        AXIOS.get('/admin/'.concat(id))
+        .then(response => {
+        // JSON responses are automatically parsed.
+        this.admin = response.data
+    })
+    .catch(e => {
+        this.error = e
+        console.log(e)
+    })
+    }
+}
+</script>
 
 
 </script>
