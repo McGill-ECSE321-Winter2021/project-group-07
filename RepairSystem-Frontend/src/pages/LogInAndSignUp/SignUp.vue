@@ -23,9 +23,9 @@
                &nbsp;&nbsp; <label for="email">Email: </label>
                 <input type="text" v-model="newEmail" value=""><br>
                &nbsp;&nbsp; <label for="password">Password:</label>
-                <input type="text" v-model="newPassword" value=""><br>
+                <input type="password" v-model="newPassword" value=""><br>
                &nbsp;&nbsp; <label for="repeat-password">Repeat Password:</label>
-                <input type="text" v-model="newRepeatPassword" value=""><br>
+                <input type="password" v-model="newRepeatPassword" value=""><br>
                &nbsp;&nbsp; <label for="name">Name:</label>
                 <input type="text" v-model="newName" value=""><br>
                &nbsp;&nbsp; <label for="number">Phone Number:</label>
@@ -33,9 +33,9 @@
                &nbsp;&nbsp; <label for="address">Address:</label>
                 <input type="text" v-model="newAddress" value=""><br>
                &nbsp;&nbsp; <label for="credit">Credit:</label>
-                <input type="text" v-model="newCredit" value=""><br>
+                <input type="password" v-model="newCredit" value=""><br>
                &nbsp;&nbsp; <label for="debit">Debit:</label>
-                <input type="text" v-model="newDebit" value=""><br>
+                <input type="password" v-model="newDebit" value=""><br>
             </form>
              &nbsp;&nbsp;  <button class = "button1" @click="createCustomer(newEmail, newPassword, newName, newNumber, newAddress, newCredit, newDebit)">Sign Up</button>
         </div>

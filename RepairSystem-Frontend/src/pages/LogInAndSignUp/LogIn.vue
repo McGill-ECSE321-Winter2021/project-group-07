@@ -24,7 +24,8 @@
                 &nbsp;&nbsp;<label for="email">Email: </label>
                 <input type="text" v-model="customerEmail" value=""><br>
                 &nbsp;&nbsp;<label for="password">Password: </label>
-                <input type="text" v-model="customerPassword" value=""><br>
+                <input type="password" v-model="customerPassword" value=""><br>
+
             </form>
            &nbsp;&nbsp; <button class = "button1" @click="logIn(customerEmail, customerPassword)">Log In</button>
         </div>
