@@ -58,7 +58,7 @@
                     <div class = "top"> 
                         <center><img src="../../assets/profile-default.png"   width = "100px" length = "100px" ></center>
                         <br>
-                        <center> <b style = "color: rgb(51 41 134); font-size: 20px;"> {{customer.name}} <br> {{customer.id}}  </b> </center>
+                        <center> <b style = "color: rgb(51 41 134); font-size: 20px;"> {{customer.name}} <br> id: {{customer.id}}  </b> </center>
                     </div>
                 </div>
 

@@ -4,9 +4,7 @@
         <div class="profile">
         <div class="name">
              <div class="text" v-model="name">
-             Admin Name
-                     <h1> {{admin.name}}</h1>
-
+                <h1> {{admin.name}} </h1>
             </div>
             <div class="ellipse">
                 <img src="../../assets/profile-default.png"   width = "60px" length = "60px" >
@@ -40,7 +38,7 @@
         </div>
 
         <div class="container3">
-                <button class="button" @click="editAdmin(email, name, password, phone)" align = "right">Edit Profile</button>
+                <button class="button1" @click="editAdmin(email, name, password, phone)" align = "right">Edit Profile</button>
         </div>
 
         
@@ -54,18 +52,18 @@
                     <div class = "top"> 
                         <center><img src="../../assets/profile-default.png"   width = "100px" length = "100px" ></center>
                         <br>
-                        <center> <b style = "color: rgb(51 41 134); font-size: 20px;"> {{admin.name}} </b> </center>
+                        <center> <b style = "color: rgb(51 41 134); font-size: 20px;"> {{admin.name}} <br> id: {{admin.id}}  </b> </center>
                     </div>
                 </div>
 
                 <div class = "row no-gutters" >
                     <div class = "middle"> 
-                            <date-pick v-model="date" :hasInputElement="false"></date-pick>
+                            <br> <date-pick v-model="date" :hasInputElement="false"></date-pick>
                     </div>
                 </div>
                 <div class = "row no-gutters" >
                     <div class = "bottom"> 
-                        <img src="../../assets/paint job 1.jpg" width = "400px" length = "400px">
+                        <br> <img src="../../assets/paint job 1.jpg" width = "400px" length = "400px">
                     </div>
                 </div>
             </div>
@@ -74,7 +72,9 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from 'axios';
+import DatePick from 'vue-date-pick';
+import 'vue-date-pick/dist/vueDatePick.css';
 var config = require('../../../config')
 
 var frontendUrl = 'http://' + config.dev.host + ':' + config.dev.port
@@ -86,6 +86,7 @@ var AXIOS = axios.create({
 })
 
 export default {
+    components: {DatePick},
     data () {
     return {
 	  admin: "",
@@ -200,6 +201,14 @@ color: #37447E;
     content: "";
     right: 0px;
     background: white
+}
+
+.button1 {
+  background: rgb(51 41 134);
+  width: 100px;
+  height: 30px;
+  color: white;
+  border-radius: 8px;
 }
 
 .top{

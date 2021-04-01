@@ -3,7 +3,6 @@
         <div class="sidebar">
         <div class="title">
          &nbsp; <router-link to="/"><img src="../../assets/admin.png" width = "50px" length = "50px"></router-link>
-        <h1> user id: {{admin.name}} </h1>
         </div>
         <div class="menu-items">
              <router-link :to="'/adminDashboard/Overview/' + this.admin.id" active-class="active" tag="button" exact class="side-btn">

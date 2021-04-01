@@ -3,7 +3,6 @@
         <div class = "col no-gutters">
                 <div class = "row no-gutters" >
                     <div class = "left-top">
-                         <h1> {{admin.name}} </h1>
 
                         <img src="../../assets/appointment.png" width = "50px" >
                             Upcoming Appointments         
@@ -34,18 +33,20 @@
                     <div class = "top"> 
                         <center><img src="../../assets/profile-default.png"   width = "100px" length = "100px" ></center>
                         <br>
-                        <center> <b style = "font-family: Roboto; color: rgb(51 41 134); font-size: 20px;"> {{admin.name}} </b> </center>
+                        <center> <b style = "color: rgb(51 41 134); font-size: 20px;"> {{admin.name}} <br> id: {{admin.id}}  </b> </center>
                     </div>
                 </div>
 
                 <div class = "row no-gutters" >
+                    <br>
                     <div class = "middle"> 
-                            <date-pick v-model="date" :hasInputElement="false"></date-pick>
+                          <br>  <date-pick v-model="date" :hasInputElement="false"></date-pick>
                     </div>
                 </div>
                 <div class = "row no-gutters" >
                     <div class = "bottom"> 
                         <div>
+                            <br>
                         <b style = "font-family: Roboto; color: #F3BE35; font-size: 20px;"> &nbsp; Reminder </b>
                         </div>
                         <div class = "rcorners2">
@@ -60,6 +61,8 @@
 
 <script>
 import axios from 'axios'
+import DatePick from 'vue-date-pick';
+import 'vue-date-pick/dist/vueDatePick.css';
 var config = require('../../../config')
 
 var frontendUrl = 'http://' + config.dev.host + ':' + config.dev.port
@@ -71,6 +74,7 @@ var AXIOS = axios.create({
 })
 
 export default {
+    components: {DatePick},
     data () {
     return {
 	  admin: "",
