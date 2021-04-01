@@ -1,8 +1,9 @@
 <template>
-    <div id="booking-calendar">
+    <div id="booking-calendar" style = "position: relative; left: 20px; top: 20px;">
         <h1>{{customer.name}}</h1>
-        <h2>Booking an Appointment</h2>
-        <date-pick 
+          <h2>Booking an Appointment</h2>
+          <br>
+        <date-pick style = "width: 90%"
             v-model="date"
             :hasInputElement="false"
             :pickTime="true"
@@ -11,13 +12,13 @@
         ></date-pick>
 
         <h2>{{date}}</h2>
-
+            <br>
         <form>
             <label> Service </label>
             <input type="text" v-model="service" value="">
         </form>
-
-        <button class="Book Appointment" @click="createTimeSlot(date)">
+        <br> 
+        <button class="button1" @click="createTimeSlot(date)">
         Book Appointment
         </button>
 
@@ -115,5 +116,13 @@ export default {
     font-size: 40px;
     color: rgb(167, 167, 167);
     font-weight: 600;
+}
+
+.button1 {
+  background: rgb(51 41 134);
+  width: 200px;
+  height: 30px;
+  color: white;
+  border-radius: 8px;
 }
 </style>

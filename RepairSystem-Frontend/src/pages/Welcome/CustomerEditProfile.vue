@@ -5,7 +5,7 @@
         <div class="profile">
         <div class="name">
              <div class="text">
-                                <h1> {{customer.name}} </h1>
+                <h1> {{customer.name}} </h1>
             </div>
             <div class="ellipse">
                 <img src="../../assets/profile-default.png"   width = "60px" length = "60px" >
@@ -47,8 +47,8 @@
         </div>
 
         <div class="container3">
-                <button class="button" @click="editCustomer(email, password, phone, credit, debit, address)" align = "right">Edit Profile</button>
-        </div>>
+                <button class="button1" @click="editCustomer(email, password, phone, credit, debit, address)" align = "right">Edit Profile</button>
+        </div>
     </div> 
         </div>
         
@@ -58,18 +58,18 @@
                     <div class = "top"> 
                         <center><img src="../../assets/profile-default.png"   width = "100px" length = "100px" ></center>
                         <br>
-                        <center> <b style = "color: rgb(51 41 134); font-size: 20px;">                                 <h1> {{customer.name}} </h1> </b> </center>
+                        <center> <b style = "color: rgb(51 41 134); font-size: 20px;"> {{customer.name}} <br> {{customer.id}}  </b> </center>
                     </div>
                 </div>
 
                 <div class = "row no-gutters" >
                     <div class = "middle"> 
-                            <date-pick v-model="date" :hasInputElement="false"></date-pick>
+                            <br>  <date-pick v-model="date" :hasInputElement="false"></date-pick>
                     </div>
                 </div>
                 <div class = "row no-gutters" >
                     <div class = "bottom"> 
-                        <img src="../../assets/paint job 1.jpg" width = "400px" length = "400px">
+                        <br>  <img src="../../assets/paint job 1.jpg" width = "400px" length = "400px">
                     </div>
                 </div>
             </div>
@@ -79,6 +79,8 @@
 
 <script>
 import axios from 'axios'
+import DatePick from 'vue-date-pick';
+import 'vue-date-pick/dist/vueDatePick.css';
 var config = require('../../../config')
 
 var frontendUrl = 'http://' + config.dev.host + ':' + config.dev.port
@@ -90,11 +92,12 @@ var AXIOS = axios.create({
 })
 
 export default {
+    components: {DatePick},
     data () {
     return {
 	  customer: "",
 	  error: ""
-    }
+}
     },
     created: function () {
         var id = this.$route.params.userId
@@ -221,6 +224,13 @@ color: #37447E;
   height: 150px;
 }
 
+.button1 {
+  background: rgb(51 41 134);
+  width: 100px;
+  height: 30px;
+  color: white;
+  border-radius: 8px;
+}
 
 .middle{
     height: 30%;
