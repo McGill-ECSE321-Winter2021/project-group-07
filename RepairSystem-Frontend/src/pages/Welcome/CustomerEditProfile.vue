@@ -18,15 +18,15 @@
         <div class="row">
         <div class="col">Residence</div>
         <div class="w-100"></div>
-        <input type="text" v-model="address" value=""><br>
+        <input type="text" v-model="newAddress"><br>
         <div class="w-100"></div>
         <div class="col">Email</div>
         <div class="w-100"></div>
-        <input type="text" v-model="email" value="" disabled><br>
+        <input type="text" v-model="oldEmail" placeholder="enter your current email"><br>
         <div class="w-100"></div>
         <div class="col">Telephone</div>
         <div class="w-100"></div>
-        <input type="text" v-model="phone" value=""><br>
+        <input type="text" v-model="newPhone"><br>
         </div>
         </div>
 
@@ -34,20 +34,20 @@
         <div class="row">
         <div class="col">Password</div>
         <div class="w-100"></div>
-        <input type="password" v-model="password" value=""><br>
+        <input type="password" v-model="newPassword"><br>
         <div class="w-100"></div>
         <div class="col">Credit Card Number</div>
         <div class="w-100"></div>
-        <input type="password" v-model="credit" value=""><br>
+        <input type="password" v-model="newCredit"><br>
         <div class="w-100"></div>
         <div class="col">Debit Card Number</div>
         <div class="w-100"></div>
-        <input type="password" v-model="debit" value=""><br>
+        <input type="password" v-model="newDebit"><br>
         </div>
         </div>
 
         <div class="container3">
-                <button class="button1" @click="editCustomer(email, password, phone, credit, debit, address)" align = "right">Edit Profile</button>
+                <button class="button1" @click="editCustomer(oldEmail, newPassword, newPhone, newCredit, newDebit, newAddress)" align = "right">Edit Profile</button>
         </div>
     </div> 
         </div>
@@ -91,12 +91,34 @@ var AXIOS = axios.create({
   headers: { 'Access-Control-Allow-Origin': frontendUrl }
 })
 
+function CustomerDto(email, password, name, phone, address, credit, debit) {
+	this.name = name;
+	this.password = password;
+	this.phone = phone;
+	this.email = email;
+	this.address = address;
+	this.creditHash = credit;
+	this.debitHash = debit;
+	this.appointments = "";
+	this.id = "";
+	this.cars = "";
+	this.lastActive = "";
+}
+
 export default {
     components: {DatePick},
     data () {
     return {
-	  customer: "",
-	  error: ""
+	  name: '',
+          password: '',
+          phone: '',
+          email: '',
+          address: '',
+          creditHash: '',
+          debitHash: '',
+          customer: "",
+          customers: [],
+          error: "",
 }
     },
     created: function () {
@@ -110,6 +132,19 @@ export default {
         this.error = e
         console.log(e)
     })
+    },
+        methods: {
+      editCustomer : function(oldEmail, newPassword, newPhone, newCredit, newDebit, newAddress)
+        {
+         AXIOS.put('/customer/editAllCustomerCredentials/'.concat(oldEmail + "?newPassword=" + newPassword + "?newPhone=" + newPhone + "?newCredit=" + newCredit + "?newDebit=" + newDebit + "?newAddress=" + newAddress), {}, 
+         {})
+          .then(response => {
+            this.response = response.data;
+            location.reload();
+          }).catch(e => {
+            this.error = e;
+          })
+        }
     }
 }
 </script>
