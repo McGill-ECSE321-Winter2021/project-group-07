@@ -42,9 +42,12 @@ public class MechanicRestController {
 	 *restful controller for getting id
 	 * */
 	@GetMapping(value = { "/mechanic/{id}", "/mechanic/{id}/"})
-	public MechanicDto getMechanicById(String id) {
+	public MechanicDto getMechanicById(@PathVariable("id") String id) {
 		return Converter.convertToDto(mechanicService.getMechanicById(Integer.parseInt(id)));
 	}
+	
+	
+
 	
 	/**
 	 *restful controller for getting customer by id

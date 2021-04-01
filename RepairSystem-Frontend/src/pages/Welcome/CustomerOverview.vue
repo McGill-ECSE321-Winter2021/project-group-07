@@ -6,7 +6,7 @@
                         <div class = "rcorners">
                             &nbsp; &nbsp; &nbsp; 
                             <b style = "color: rgb(51 41 134); font-size: 30px; position: absolute; top: 25px; left: 65px"> Hello, </b>
-                            <b style = "color: #F3BE35; font-size: 30px; position: absolute; top: 25px; left: 150px "> &nbsp; {{customer.name}} </b>
+                            <b style = "color: #F3BE35; font-size: 30px; position: absolute; top: 25px; left: 150px "> {{customer.name}} </b>
                             <img src="../../assets/welcome-car.png" width = "300px" height = "150px"  style = "position: absolute; right: 25px">
                         </div>
                     </div>

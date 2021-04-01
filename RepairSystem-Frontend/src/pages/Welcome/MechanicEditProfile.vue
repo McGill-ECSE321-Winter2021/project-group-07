@@ -4,7 +4,7 @@
         <div class="profile">
         <div class="name">
              <div class="text">
-                                <h1> userid: {{userId}} </h1>
+                <h1> {{mechanic.name}} </h1>
             </div>
             <div class="ellipse">
                 <img src="../../assets/profile-default.png"   width = "60px" length = "60px" >
@@ -40,7 +40,7 @@
         </div>
 
         <div class="container3">
-                <font class = "button" align = "right"> Edit Information</font>
+                <button class="button1" @click="editMechanic(email, password, phone, credit, debit, address)" align = "right">Edit Profile</button>
         </div>
     </div> 
         </div>
@@ -51,18 +51,19 @@
                     <div class = "top"> 
                         <center><img src="../../assets/profile-default.png"   width = "100px" length = "100px" ></center>
                         <br>
-                        <center> <b style = "color: rgb(51 41 134); font-size: 20px;">                                 <h1> userid: {{userId}} </h1> </b> </center>
+                        <center> <b style = "color: rgb(51 41 134); font-size: 20px;"> {{mechanic.name}} <br> id: {{mechanic.id}}  </b> </center>
+
                     </div>
                 </div>
 
                 <div class = "row no-gutters" >
                     <div class = "middle"> 
-                            <date-pick v-model="date" :hasInputElement="false"></date-pick>
+                        <br>     <date-pick v-model="date" :hasInputElement="false"></date-pick>
                     </div>
                 </div>
                 <div class = "row no-gutters" >
                     <div class = "bottom"> 
-                        <img src="../../assets/paint job 1.jpg" width = "400px" length = "400px">
+                    <br>    <img src="../../assets/paint job 1.jpg" width = "400px" length = "400px">
                     </div>
                 </div>
             </div>
@@ -71,8 +72,18 @@
 </template>
 
 <script>
+import axios from 'axios';
 import DatePick from 'vue-date-pick';
 import 'vue-date-pick/dist/vueDatePick.css';
+var config = require('../../../config')
+
+var frontendUrl = 'http://' + config.dev.host + ':' + config.dev.port
+var backendUrl = 'http://' + config.dev.backendHost + ':' + config.dev.backendPort
+
+var AXIOS = axios.create({
+  baseURL: backendUrl,
+  headers: { 'Access-Control-Allow-Origin': frontendUrl }
+})
 
 export default {
     components: {DatePick},
@@ -80,8 +91,26 @@ export default {
         userId(){
             return this.$route.params.userId
         }
-    }  
-};
+    },   
+    data () {
+    return {
+	  mechanic: "",
+	  error: ""
+    }
+    },
+    created: function () {
+        var id = this.$route.params.userId
+        AXIOS.get('/mechanic/'.concat(id))
+        .then(response => {
+        // JSON responses are automatically parsed.
+        this.mechanic = response.data
+    })
+    .catch(e => {
+        this.error = e
+        console.log(e)
+    })
+    }
+}
 </script>
 
 <style scoped>
@@ -96,6 +125,13 @@ export default {
     border: 3px solid;
     border-color: #D3D2E1;
     padding: 25px;
+}
+.button1 {
+  background: rgb(51 41 134);
+  width: 100px;
+  height: 30px;
+  color: white;
+  border-radius: 8px;
 }
 .name{
 position: absolute;
