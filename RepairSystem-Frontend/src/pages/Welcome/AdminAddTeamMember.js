@@ -103,15 +103,16 @@ function MechanicDto(name, password, phone, email){
         /** To Save the Edits in Edit Profile */
         editMechanic : function(email, name, password, phone)
         {
+          
+          AXIOS.put('/mechanic/'.concat(email+"?name="+name+"&password="+password+"&phone="+phone),{},{})
+          console.log("hello")
           console.log("calling editMechanic")
           console.log("email is:" + email)
           console.log("name: " + name)
           console.log("password: " + password)
           console.log("phone: " + phone)
-          AXIOS.put('/mechanic/'.concat(email+"?name="+name+"&password="+password+"&phone="+phone),{},{})
           .then(response => {
             this.mechanic = response.data;
-            console.log("credentials edited")
             location.reload();
           }).catch(e => {
             this.error = e;
