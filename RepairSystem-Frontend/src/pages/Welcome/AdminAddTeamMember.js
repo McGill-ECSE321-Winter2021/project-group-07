@@ -10,7 +10,10 @@ var AXIOS = axios.create({
   headers: { 'Access-Control-Allow-Origin': frontendUrl }
 })
 
-function MechanicDto(name, password, phone, emai){
+ /**For edit profile  */
+
+
+function MechanicDto(name, password, phone, email){
     this.name = name;
     this.password=password;
     this.phone = phone;
@@ -18,11 +21,14 @@ function MechanicDto(name, password, phone, emai){
     this.id =""
 }
     export default {
+
      components: {
             Multiselect
-        },
+      },
+
       data() {
       return {
+        modalShow:false,
         name: '',
         email:'',
         phone:'',
@@ -51,8 +57,15 @@ function MechanicDto(name, password, phone, emai){
         addressState:null,
         capabilitiesState:null,
         error: "",
+
+        editName : "",
+        editEmail : " ",
+        editPhone : " ",
+        editPassword : " ", 
       }
     },
+
+
     created: function () {
     // Initializing persons from backend
     AXIOS.get('/mechanics')
@@ -64,7 +77,13 @@ function MechanicDto(name, password, phone, emai){
       this.error = e
     })
     },
+
+
     methods: {
+
+        /**
+         * To Create a Mechanic 
+         */
         createMechanic: function (name,password,phone,email){
         var id = this.$route.params.userId
         AXIOS.get('/admin/'.concat(id))
@@ -92,6 +111,48 @@ function MechanicDto(name, password, phone, emai){
 
         },
         
+        /** To Save the Edits in Edit Profile */
+        editMechanic : function(email, name, password, phone)
+        {
+          console.log("calling editMechanic")
+          console.log("email is:" + email)
+          console.log("name: " + name)
+          console.log("password: " + password)
+          console.log("phone: " + phone)
+          AXIOS.put('/mechanic/'.concat(email+"?name="+name+"&password="+password+"&phone="+phone),{},{})
+          .then(response => {
+            this.mechanic = response.data;
+            console.log("credentials edited")
+            location.reload();
+          }).catch(e => {
+            this.error = e;
+          })
+        },
+
+        /** To AutoComplete the Edit Profile Modal */
+        fillCredentials : function(row)
+        {
+            
+          this.editName = row.name;
+          this.editEmail = row.email;
+          this.editPhone = row.phone;
+          this.editPassword = row.password;
+         
+        },
+        removeMechanic: function(id){
+          console.log("entered removeMechanic function")
+          console.log("id: "+ id)
+          AXIOS.delete('/mechanic/'.concat(id), {}, {})
+            .then(response => {
+              console.log("entered promise")
+              console.log(response)
+              location.reload();
+            })
+            .catch(e => {
+              this.error = e;
+            })
+        },
+
         searchForMechanics: function(search){
             AXIOS.get('/mechanics')
             .then(response => {
@@ -100,7 +161,6 @@ function MechanicDto(name, password, phone, emai){
                 } else {
                     this.mechanics = [];
                     var i;
-                    console.log(response.data.length)
                     for(i = 0; i < response.data.length; i++){
                         var mechanic = response.data[i];
                         console.log(mechanic);
