@@ -15,7 +15,7 @@
                     My Account
                 </div>
             </router-link>
-            <router-link to="/adminDashboard/addCutomerOrMechanic" active-class="active" tag="button" exact class="side-btn">
+            <router-link to="/adminDashboard/TeamMembers" active-class="active" tag="button" exact class="side-btn">
                 <div class="link-container">
                     Team Members
                 </div>
@@ -23,11 +23,6 @@
             <router-link to="/adminDashboard/editCustomerOrMechanic" active-class="active" tag="button" exact class="side-btn">
                 <div class="link-container">
                    Customers
-                </div>
-            </router-link>
-            <router-link to="/adminDashboard/viewCustomerOrMechanic" active-class="active" tag="button" exact class="side-btn">
-                <div class="link-container">
-                    View All Customer/Mechanic
                 </div>
             </router-link>
 

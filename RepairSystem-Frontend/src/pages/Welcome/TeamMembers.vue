@@ -5,8 +5,13 @@
        <nav class="navbar">
             <span class="navbar-brand mb-0 h1">
                 <div class="row">
-                    <h3 class="title-header"> <b> Team Members </b> </h3>
-                    <b-button v-b-modal.modal-prevent-closing class="btn btn-primary"> Add New Member <img class="img-add" src="../../assets/Admin/plus.png"/> </b-button>
+                      <form>
+                        <input type="text" v-model="s" value="" class="search-input" placeholder="  Search">
+                    </form>
+
+                  <button class="search-btn" @click="searchForMechanics(s)"> <img class="img-add" src="../../assets/Admin/search.png"/> </button> 
+                  
+                  <b-button v-b-modal.modal-prevent-closing class="btn-primary"> Add New Member <img class="img-add" src="../../assets/Admin/plus.png"/> </b-button>
 
                         <b-modal
                         id="modal-prevent-closing"
@@ -95,25 +100,19 @@
     <template slot="selection" slot-scope="{ values, search, isOpen }"><span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen">{{ values.length }} options selected</span></template>
   </multiselect>
                         </b-modal>
-                    <form>
-                        <input type="text" v-model="s" value="" class="search-input">
-                    </form>
-                   <button class="search-btn" @click="searchForMechanics(s)"> <img class="img-add" src="../../assets/Admin/search.png"/> </button> 
-                
+                    
                 </div>
             </span>
         </nav>
 
     
      
-  <div class="line">
-  </div>
   <!--
-        The Table containing all the mechanic information --> 
-        <div class="container mt-3 mb-3">
+        The Table containing all the mechanic information#D3D2E1 --> 
+        <div class="container mt-3 mb-3" style="background-color:white; border-radius:30px;">
           <table class = "table table-striped tabled-bordered mydatatable" style="width: 100">
               <thead>
-                    <tr style="text-align:center">
+                    <tr style="text-align:center;  border-radius:30px;">
                         <th> ID </th>
                         <th> Name </th>
                         <th>Email</th>
@@ -130,8 +129,8 @@
                         <td>{{ mechanic.phone }}</td>
                         <td>{{ mechanic.services }}</td>
                         <td> 
-                        <b-button class="btn btn-primary" @click=" modalShow =!modalShow; fillCredentials(mechanic)"> <img  class="img-add" src="../../assets/Admin/edit.png"/>  </b-button>
-                       <b-button class="btn btn-primary" @click="removeMechanic(mechanic.id)"> <img  class="img-add" src="../../assets/Admin/delete.png"/>  </b-button> 
+                        <button class="btn-edit" @click=" modalShow =!modalShow; fillCredentials(mechanic)"> <img  class="img-add" src="../../assets/Admin/edit.png"/>  </button>
+                       <button class="btn-remove" @click="removeMechanic(mechanic.id)"> <img  class="img-add" src="../../assets/Admin/delete.png"/>  </button> 
                         
                         <b-modal
                         v-model="modalShow"
@@ -219,9 +218,7 @@
                     </tr>
                 </tbody>
                 <tfoot>
-                    <tr style="text-align:center">
-                      Footer
-                    </tr>
+                    <h1 style="color:white"> Footer </h1>
                 </tfoot>
             </table>
         </div>
@@ -241,10 +238,14 @@
     width: 100%;
     font-family: Roboto;
     /**color: rgb(167, 167, 167);   */
-    color:rgb(51 41 134)
+    color:rgb(51 41 134);
+    background: linear-gradient(90deg, rgba(213,204,221,1) 0%, rgba(241,240,251,1) 84%)
    
 }
 
+.navbar{
+    color:rgb(51 41 134)
+}
 .title-header{
     margin-left: 40px;
     margin-right:20px;  
@@ -253,26 +254,43 @@
 .btn-primary{
     border-radius: 10px;
     margin-right:20px;  
-    background-color:  #F3BE35;
-    border-color:  #D3D2E1;
     transform: translateY(-5px);
     
 }
 
+.btn-edit{
+    background-color: #D3D2E1;
+    border-color:transparent;
+    border-radius:10px;
+}
 .btn-secondary
 {
     border-radius: 10px;
     border-width: 2px;
-    background: rgb(51 41 134);
-    border-color:  rgb(51 41 134);
-    border-color: #F3BE35; 
+    background: #5430be;
+    border-color: transparent;
     transform: translateY(-5px);
 }
 
+.search-input {
+    margin-left: 80px;
+    border-radius: 20px;
+    background-color: white;
+    width: 400px;
+    border-color: transparent;
+}
 .search-btn{
-    border-radius: 10px;
-    background-color: #F3BE35;
-    transform: translateY(-3px);
+    border-radius: 20px;
+    border-color: transparent;
+    background-color: transparent;
+    transform: translate(-35px,-1px);
+}
+
+.btn-remove{
+    border-color: #5430be;
+    background-color: transparent;
+    border-radius:10px;
+    border-width:2px;
 
 }
 .line
@@ -284,4 +302,12 @@
     max-height:20px;
     transform: translateY(-1px);
 }
+
+.table
+{
+    border-radius: 30px;
+    color:#111B47;
+
+}
+
 </style>

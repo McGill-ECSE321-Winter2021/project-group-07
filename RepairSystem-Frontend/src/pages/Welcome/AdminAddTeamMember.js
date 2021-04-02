@@ -10,7 +10,6 @@ var AXIOS = axios.create({
   headers: { 'Access-Control-Allow-Origin': frontendUrl }
 })
 
- /**For edit profile  */
 
 
 function MechanicDto(name, password, phone, email){
@@ -103,14 +102,7 @@ function MechanicDto(name, password, phone, email){
         /** To Save the Edits in Edit Profile */
         editMechanic : function(email, name, password, phone)
         {
-          
           AXIOS.put('/mechanic/'.concat(email+"?name="+name+"&password="+password+"&phone="+phone),{},{})
-          console.log("hello")
-          console.log("calling editMechanic")
-          console.log("email is:" + email)
-          console.log("name: " + name)
-          console.log("password: " + password)
-          console.log("phone: " + phone)
           .then(response => {
             this.mechanic = response.data;
             location.reload();
@@ -134,7 +126,6 @@ function MechanicDto(name, password, phone, email){
           console.log("id: "+ id)
           AXIOS.delete('/mechanic/'.concat(id), {}, {})
             .then(response => {
-              console.log("entered promise")
               console.log(response)
               location.reload();
             })

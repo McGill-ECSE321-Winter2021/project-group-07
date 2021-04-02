@@ -80,8 +80,8 @@ const routes = [
         component: () => import('../pages/Welcome/AdminEditProfile.vue')
       },
       {
-        path: '/adminDashboard/addCutomerOrMechanic',
-        component: () => import('../pages/Welcome/AdminAddCustomerOrMechanic.vue')
+        path: '/adminDashboard/TeamMembers',
+        component: () => import('../pages/Welcome/TeamMembers.vue')
       },
       {
         path: '/adminDashboard/editCustomerOrMechanic',
