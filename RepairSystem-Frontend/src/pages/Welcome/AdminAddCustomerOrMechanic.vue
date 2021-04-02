@@ -131,7 +131,8 @@
                         <td>{{ mechanic.services }}</td>
                         <td> 
                         <b-button class="btn btn-primary" @click=" modalShow =!modalShow; fillCredentials(mechanic)"> <img  class="img-add" src="../../assets/Admin/edit.png"/>  </b-button>
-
+                        <b-button class="btn btn-primary" @click="removeMechanic(mechanic.id)"> <img  class="img-add" src="../../assets/Admin/delete.png"/>  </b-button>
+                        
                         <b-modal
                         v-model="modalShow"
                         title="Edit Profile"
@@ -205,20 +206,16 @@
    
                             </b-form>
                             
-                            <template #modal-footer="{Save , Cancel}">
+                            <template #modal-footer="{editMechanic , cancel}">
       
                                 <!-- Emulate built in modal footer ok and cancel button actions -->
                                 <b-button size="sm" variant="success" @click="editMechanic(editEmail, editName, editPassword, editPhone)"> Save </b-button>
-                                <b-button size="sm" variant="danger" @click="removeMechanic(mechanic.id)">Cancel</b-button>
+                                <b-button size="sm" variant="danger" @click="modalShow =!modalShow">Cancel</b-button> 
       
                             </template>
                         </b-modal> 
 
-   
-    
-                    
-
-                            <button class="btn btn-sucess"> <img class="img-add" src="../../assets/Admin/delete.png" @click=removeMechanic(id)> </button> 
+                             
                         </td>
                     </tr>
                 </tbody>

@@ -103,16 +103,15 @@ function MechanicDto(name, password, phone, email){
         /** To Save the Edits in Edit Profile */
         editMechanic : function(email, name, password, phone)
         {
-          AXIOS.put('/mechanic'.concat(email),{},
-          {
-            params:{
-              name: name,
-              email: email,
-              password: password,
-              phone: phone,
-            }
-          }).then(response => {
-            this.response = response.data;
+          console.log("calling editMechanic")
+          console.log("email is:" + email)
+          console.log("name: " + name)
+          console.log("password: " + password)
+          console.log("phone: " + phone)
+          AXIOS.put('/mechanic/'.concat(email+"?name="+name+"&password="+password+"&phone="+phone),{},{})
+          .then(response => {
+            this.mechanic = response.data;
+            console.log("credentials edited")
             location.reload();
           }).catch(e => {
             this.error = e;
@@ -130,9 +129,12 @@ function MechanicDto(name, password, phone, email){
          
         },
         removeMechanic: function(id){
-          AXIOS.post('/mechanic/deleteById', {}, {})
+          console.log("entered removeMechanic function")
+          console.log("id: "+ id)
+          AXIOS.delete('/mechanic/'.concat(id), {}, {})
             .then(response => {
-              response = response.data;
+              console.log("entered promise")
+              console.log(response)
               location.reload();
             })
             .catch(e => {
