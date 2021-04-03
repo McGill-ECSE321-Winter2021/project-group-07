@@ -384,28 +384,6 @@ export default {
         handleOk(bvModalEvt) {
             bvModalEvt.preventDefault()
             this.handleSubmit()
-        },
-        resetModal() {
-            this.modalShow: false,
-            this.startTime: '',
-            this.endTime: '',
-            this.id: '',
-            this.timeslots: [],
-            this.mechanics: [],
-            this.appointments: [],
-            //this.admin: ''
-            this.startTimeState: null,
-            this.endTimeState: null,
-            this.error: "",
-        },
-        handleSubmit() {
-            if (!this.checkFormValidity()) {
-                return
-            }
-
-            this.$nextTick(() => {
-                this.$bvModal.hide('modal-prevent-closing')
-            })
         }
     }
 
