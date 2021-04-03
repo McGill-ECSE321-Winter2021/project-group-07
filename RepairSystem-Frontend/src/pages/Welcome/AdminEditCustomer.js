@@ -161,6 +161,7 @@ function CustomerDto(name, password, phone, email, credit, debit, address){
             })
         },
 
+     
         searchForCustomers: function(search){
             AXIOS.get('/customer')
             .then(response => {
@@ -195,6 +196,7 @@ function CustomerDto(name, password, phone, email, credit, debit, address){
                 this.error = e
             })
         },
+
 
       checkFormValidity() {
         const valid = this.$refs.form.checkValidity()
