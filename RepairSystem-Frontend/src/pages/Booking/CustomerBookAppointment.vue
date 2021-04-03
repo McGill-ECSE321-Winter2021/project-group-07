@@ -67,27 +67,25 @@ export default {
     })
     },
 
-        methods: {
+    methods: {
         isPastDate: function (date) {
             return date < new Date()
         },
-        createTimeSlot: function(date) {
+        createTimeSlot: function(startDate) {
         
-            var date_array = date.split("-");
-            var min_sec_array = date_array[3].split(":");
+            var endDate = startDate.split("-");
+            var min_sec_array = endDate[3].split(":");
             var hours = min_sec_array[0];
             hours++;
+            min_sec_array[0] = hours;
+            min_sec_array = min_sec_array.join(':');
+			endDate[3] = min_sec_array;
+			endDate = endDate.join('-');
 
-            var newDate = new Date();
-            newDate.setMinutes(min_sec_array[1]);
-            newDate.setHours(hours);
-            newDate.setDate(date_array[2]);
-            newDate.setMonth(date_array[1]);
-            newDate.setYear(date_array[0]);
+            console.log("Old date: " + startDate);
+            console.log("New date: " + endDate);
 
-            console.log(newDate);
-
-            AXIOS.post('/timeSlot/'.concat(date + "?endTime="+newDate), {}, {})
+            AXIOS.post('/timeslot/'.concat(startDate + "?endTime="+endDate), {}, {})
             .then(response => {
             // JSON responses are automatically parsed.
                 this.timeslot  = response.data
@@ -98,8 +96,6 @@ export default {
                 console.log(errorMsg)
                 this.errorTimeSlot = errorMsg
             })
-
-            console.log("FINISHED METHOD");
         }
     }
 
