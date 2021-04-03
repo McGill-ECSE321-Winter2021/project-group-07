@@ -15,9 +15,9 @@
         <br>
         	<form>
         	    <label class="typo__label"> Service </label>
-            	<multiselect v-model="service" :state="serviceState" :options="availableServices" :multiple="false" :close-on-select="true" :clear-on-select="false" :preserve-search="true" placeholder="Pick a Service" label="name" track-by="name" :preselect-first="true">
-                	<template slot="selection" slot-scope="{ services, search, isOpen }">
-                    	<span class="multiselect__single" v-if="services.length &amp;&amp; !isOpen">{{ services.length }} options selected</span>
+            	<multiselect v-model="service" :state="serviceState" :options="availableServices" :multiple="false" :close-on-select="true" :clear-on-select="false" :preserve-search="true" placeholder="Pick a Service" label="serviceType" track-by="serviceType" :preselect-first="true">
+                	<template slot="selection" slot-scope="{ values, search, isOpen }">
+                    	<span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen">{{ values.length }} options selected</span>
                     </template>
                 </multiselect>
         	</form>
@@ -27,7 +27,7 @@
         	</form>
         	<form>
         	    <label class="typo__label"> Mechanic </label>
-            	<multiselect v-model="value" :state="mechanicState" :options="availableMechanics" :multiple="false" :close-on-select="true" :clear-on-select="false" :preserve-search="true" placeholder="Pick a Mechanic" label="name" track-by="name" :preselect-first="true">
+            	<multiselect v-model="mechanic" :state="mechanicState" :options="availableMechanics" :multiple="false" :close-on-select="true" :clear-on-select="false" :preserve-search="true" placeholder="Pick a Mechanic" label="name" track-by="name" :preselect-first="true">
                 	<template slot="selection" slot-scope="{ values, search, isOpen }">
                     	<span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen">{{ values.length }} options selected</span>
                     </template>
@@ -127,8 +127,8 @@ export default {
 	    error: "",
 	    car: '',
 	    availableMechanics: [],
-	    value: [],
-	    service: []
+	    mechanic: '',
+	    service: ''
     }),
     created: function () {
         var id = this.$route.params.userId
@@ -145,18 +145,19 @@ export default {
     AXIOS.get('/mechanics')
         .then(response => {
             this.availableMechanics = response.data;
+            
+            AXIOS.get('/services')
+        		.then(response => {
+            		this.availableServices = response.data;
+        		})
+        		.catch(e => {
+            		this.error = e
+        		})
         })
         .catch(e => {
             this.error = e
         })
             
-    AXIOS.get('/services')
-        .then(response => {
-            this.availableServices = response.data;
-        })
-        .catch(e => {
-            this.error = e
-        })
     },
 
     methods: {
@@ -175,8 +176,9 @@ export default {
 			endDate[3] = min_sec_array;
 			endDate = endDate.join('-');
 
-            //console.log("Old date: " + startDate);
-            //console.log("New date: " + endDate);
+            console.log("Old date: " + startDate);
+            console.log("New date: " + endDate);
+            console.log('/timeslot/'.concat(startDate + "?endTime="+endDate))
 
             AXIOS.post('/timeslot/'.concat(startDate + "?endTime="+endDate), {}, {})
             .then(response => {
@@ -190,7 +192,8 @@ export default {
                 this.errorTimeSlot = errorMsg
             })
             
-            AXIOS.post('/appointment/'.concat(this.customer.id + "?timeSlotId="+this.timeslot.id + "?carId="+this.car.id, + "?services="+service + "?note="+note), {}, {})
+            console.log('/appointment/'.concat(this.customer.id + "?timeSlotId="+this.timeslot.id + "&carId="+this.car.id + "&services="+this.service.serviceType + "&note="+this.note))
+            AXIOS.post('/appointment/'.concat(this.customer.id + "?timeSlotId="+this.timeslot.id + "&carId="+this.car.id + "&services="+this.service.serviceType + "&note="+this.note), {}, {})
         	.then(response => {
             	// JSON responses are automatically parsed.
             })
