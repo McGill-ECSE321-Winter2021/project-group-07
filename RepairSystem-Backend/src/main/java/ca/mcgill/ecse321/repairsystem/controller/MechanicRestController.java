@@ -75,6 +75,7 @@ public class MechanicRestController {
 		Mechanic mechanic = mechanicService.editMechanic(oldEmail, name, password, phone);
 		return Converter.convertToDto(mechanic);
 	}
+	
 	/**
 	 *restful controller for editing service
 	 * */

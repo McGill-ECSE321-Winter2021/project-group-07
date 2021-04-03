@@ -19,7 +19,7 @@
                         title="Add New Team Member"
                         @show="resetModal"
                         @hidden="resetModal"
-                        @ok="createMechanic(name,password,phone,email)"
+                        @ok="createMechanic(name,password,phone,email,value)"
                         >
                         <b-form ref="form" @submit.stop.prevent="handleSubmit">
 
@@ -96,9 +96,11 @@
 
                         </b-form>
                          <label class="typo__label"> Capabilities </label>
-  <multiselect v-model="value" :state="capabilitiesState" :options="options" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Pick some" label="name" track-by="name" :preselect-first="true">
-    <template slot="selection" slot-scope="{ values, search, isOpen }"><span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen">{{ values.length }} options selected</span></template>
-  </multiselect>
+                            <multiselect v-model="value" :state="capabilitiesState" :options="options" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Pick some" label="name" track-by="name" :preselect-first="true">
+                                <template slot="selection" slot-scope="{ values, search, isOpen }">
+                                    <span class="multiselect__single" v-if="values .length &amp;&amp; !isOpen">{{ values.length }} options selected</span>
+                                </template>
+                            </multiselect>
                         </b-modal>
                     
                 </div>
@@ -207,7 +209,7 @@
                             <template #modal-footer="{save , cancel}">
                               
                                 <!-- Emulate built in modal footer ok and cancel button actions -->
-                                <b-button size="sm" variant="success" @click="editMechanic(editEmail, editName, editPassword, editPhone)"> Save </b-button>
+                                <b-button size="sm" variant="success" @click="editMechanic(editEmail, editName, editPassword, editPhone, value)"> Save </b-button>
                                 <b-button size="sm" variant="danger" @click="modalShow =!modalShow">Cancel</b-button> 
       
                             </template>

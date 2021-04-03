@@ -35,7 +35,7 @@ function MechanicDto(name, password, phone, email){
         address:'',
         mechanic:"",
         mechanics: [],
-        capacities:[],
+        value:[],
         options: [
             {name: "CarRepair"},
             {name: "Oil Change"},
@@ -82,9 +82,8 @@ function MechanicDto(name, password, phone, email){
         /**
          * To Create a Mechanic 
          */
-        createMechanic: function (name,password,phone,email){
-        AXIOS.post('/mechanic/'.concat(name), {},
-        {
+        createMechanic: function (name,password,phone,email,value){
+          AXIOS.post('/mechanic/'.concat(name), {},{
             params:{
                 name: name,
                 phone: phone,
@@ -95,8 +94,21 @@ function MechanicDto(name, password, phone, email){
             })
             .catch(e => {
                 this.error = e
+          })
+          for(var i = 0; i < value.length; i++){
+            var specificService = value[i];
+            AXIOS.put('/mechanic/editService/'.concat(specificService + "?addRemove=add&oldEmail=" + email), {},{})
+              .then(response => {
+                console.log(response.data)
+                this.mechanic = response.data
+              })
+              .catch(e => {
+                this.error = e
             })
+          }
+          
 
+            
         },
         
         /** To Save the Edits in Edit Profile */
@@ -109,6 +121,7 @@ function MechanicDto(name, password, phone, email){
           }).catch(e => {
             this.error = e;
           })
+          
         },
 
         /** To AutoComplete the Edit Profile Modal */
@@ -122,8 +135,6 @@ function MechanicDto(name, password, phone, email){
          
         },
         removeMechanic: function(id){
-          console.log("entered removeMechanic function")
-          console.log("id: "+ id)
           AXIOS.delete('/mechanic/'.concat(id), {}, {})
             .then(response => {
               console.log(response)
