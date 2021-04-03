@@ -100,17 +100,29 @@ function MechanicDto(name, password, phone, email){
         },
         
         /** To Save the Edits in Edit Profile */
-        editMechanic : function(name, password, phone, services)
+        editMechanic : function(email, name, password, phone, services)
         {
-          AXIOS.put('/mechanic/'.concat(email+"?name="+name+"&password="+password+"&phone="+phone + "&"),{},{})
+          AXIOS.put('/mechanic/'.concat(email+"?name="+name+"&password="+password+"&phone="+phone),{},{})
           .then(response => {
-            for(var i = 0; i < this.mechanics.length; i++){
-              if(this.mechanics[i].id == response.data.id){
-                this.mechanics[i] = response.data
-                this.mechanics.push(response.data)
-                this.mechanics.pop(response.data)
-              }
+            var request = ""
+            for(var i = 0; i < services.length-1; i++){
+              request = request.concat(services[i].name + ",")
             }
+            request = request.concat(services[services.length-1].name)
+            console.log(request)
+            AXIOS.put("/mechanic/updateServices/".concat(email + "?services=" + request), {},{})
+                    .then(response => {
+                      for(var i = 0; i < this.mechanics.length; i++){
+                        if(this.mechanics[i].id == response.data.id){
+                          this.mechanics[i] = response.data
+                          this.mechanics.push(response.data)
+                          this.mechanics.pop(response.data)
+                        }
+                      }
+                    })
+                    .catch(e => {
+                      this.error = e
+                    })
           }).catch(e => {
             this.error = e;
           })

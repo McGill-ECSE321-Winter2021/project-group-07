@@ -38,7 +38,6 @@
                                     <td>{{ appointment.status }}</td>
                                     <td>{{ appointment.timeslot }}</td>
                                     <td>{{ appointment.mechanics }}</td>
-
                                 </tr>
                             </tbody>
                             <tfoot>
@@ -173,8 +172,8 @@
 </div>
 </template>
 
-<script src="./AdminOverview.js">
 
+<script src="./AdminOverview.js">
 </script>
 
 <style scoped>

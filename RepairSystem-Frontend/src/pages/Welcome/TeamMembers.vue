@@ -22,6 +22,7 @@
                         @ok="createMechanic(name,password,phone,email,value)"
                         >
 
+                        <!-- Personal Information part of the form -->
                         <label> <b>Personal Information  </b> </label>
                         <b-form ref="form" @submit.stop.prevent="handleSubmit">
 
@@ -93,7 +94,7 @@
                                 :state="addressState"
                                 required
                             ></b-form-input>
-                            </b-form-group> 
+                           </b-form-group> 
 
                             <!-- For WorkHours --> 
                             <label> <b> Work Hours </b> </label> 
@@ -296,7 +297,12 @@
                         </td>
                         <td> 
                         <button class="btn-edit" @click="modalShow =!modalShow; fillCredentials(mechanic)"> <img  class="img-add" src="../../assets/Admin/edit.png"/>  </button>
+<<<<<<< HEAD
                        <button class="btn-remove" @click="removeMechanic(mechanic.id)"> <img  class="img-add" src="../../assets/Admin/delete.png"/>  </button> 
+=======
+                        <button class="btn-remove" @click="removeMechanic(mechanic.id)"> <img  class="img-add" src="../../assets/Admin/delete.png"/>  </button> 
+                        
+>>>>>>> 28fba2b9fe0cc31864a9be053f9f2c6a84e11226
                         <b-modal
                         v-model="modalShow"
                         title="Edit Profile"
@@ -362,7 +368,7 @@
                             <template #modal-footer="{Save, Cancel}">
                               
                                 <!-- Emulate built in modal footer ok and cancel button actions -->
-                                <b-button size="sm" variant="success" @click="editMechanic(editName, editPassword, editPhone, editCapabilities); modalShow =!modalShow"> Save </b-button>
+                                <b-button size="sm" variant="success" @click="editMechanic(mechanic.email, editName, editPassword, editPhone, value); modalShow =!modalShow"> Save </b-button>
                                 <b-button size="sm" variant="danger" @click="modalShow =!modalShow">Cancel</b-button> 
       
                             </template>

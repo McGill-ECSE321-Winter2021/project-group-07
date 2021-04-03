@@ -1,55 +1,82 @@
 <template>
-    <div class = "row no-gutters">
-        <div class = "col no-gutters">
-                <div class = "row no-gutters" >
-                    <div class = "left-top">
-                        <div class = "rcorners">
-                            &nbsp; &nbsp; &nbsp; 
-                            <b style = "color: rgb(51 41 134); font-size: 30px; position: absolute; top: 25px; left: 65px"> Hello, </b>
-                            <b style = "color: #F3BE35; font-size: 30px; position: absolute; top: 25px; left: 150px "> {{customer.name}} </b>
-                            <img src="../../assets/welcome-car.png" width = "300px" height = "150px"  style = "position: absolute; right: 25px">
-                        </div>
-                    </div>
+<div class="row no-gutters">
+    <div class="col no-gutters">
+        <div class="row no-gutters">
+            <div class="left-top">
+                <div class="rcorners">
+                    &nbsp; &nbsp; &nbsp;
+                    <b style="color: rgb(51 41 134); font-size: 30px; position: absolute; top: 25px; left: 65px"> Hello, </b>
+                    <b style="color: #F3BE35; font-size: 30px; position: absolute; top: 25px; left: 150px "> {{customer.name}} </b>
+                    <img src="../../assets/welcome-car.png" width="300px" height="150px" style="position: absolute; right: 25px">
                 </div>
-                
-                <div class = "row no-gutters" >
-                    <div class = "left-bottom"> 
-
-                        <img src="../../assets/appointment.png" width = "50px" >
-                        My Appointments
-
-                    </div>
-                </div>
+            </div>
         </div>
-        
-        <div class = "col no-gutters">
-            <div class = "rightside">
-                <div class = "row no-gutters">
-                    <div class = "top"> 
-                        <center><img src="../../assets/profile-default.png"   width = "100px" length = "100px" ></center>
-                        <br>
-                        <center> <b style = "color: rgb(51 41 134); font-size: 20px;"> {{customer.name}} <br> id: {{customer.id}}  </b> </center>
-                    </div>
-                </div>
 
-                <div class = "row no-gutters" >
-                    <div class = "middle"> 
-                          <br>    <date-pick v-model="date" :hasInputElement="false"></date-pick>
-                    </div>
+        <div class="row no-gutters">
+            <div class="left-bottom">
+
+                <img src="../../assets/appointment.png" width="50px">
+                My Appointments
+
+                <!-- Appointment 
+                <div class="container mt-3 mb-3" style="background-color:white; border-radius:30px;">
+                    <table class="table table-striped tabled-bordered mydatatable" style="width: 100">
+                        <thead>
+                            <tr style="text-align:center;  border-radius:30px;">
+                                <th> Appointment Id </th>
+                                <th> Mechanic </th>
+                                <th> Status </th>
+                                <th> Time Slot</th>
+                                <th> Services </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="appointment in appointments" style="text-align:center">
+                                <td> {{appointment.id}} </td>
+                                <td>{{ appointment.mechanic }}</td>
+                                <td>{{ appointment.status }}</td>
+                                <td>{{ appointment.timeslot }}</td>
+                                <td>{{ appointment.services }}</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <h1 style="color:white"> Footer </h1>
+                        </tfoot>
+                    </table>
+                </div> -->
+            </div>
+        </div>
+    </div>
+
+    <div class="col no-gutters">
+        <div class="rightside">
+            <div class="row no-gutters">
+                <div class="top">
+                    <center><img src="../../assets/profile-default.png" width="100px" length="100px"></center>
+                    <br>
+                    <center> <b style="color: rgb(51 41 134); font-size: 20px;"> {{customer.name}} <br> id: {{customer.id}} </b> </center>
                 </div>
-                <div class = "row no-gutters" >
-                    <div class = "bottom"> 
-                        <div>
-                         <br> <b style = "color: #F3BE35; font-size: 20px;"> &nbsp; Up Next... </b>
-                        </div>
-                        <div class = "rcorners2">
-                             <b>next appointment info</b>
-                        </div>                                
+            </div>
+
+            <div class="row no-gutters">
+                <div class="middle">
+                    <br>
+                    <date-pick v-model="date" :hasInputElement="false"></date-pick>
+                </div>
+            </div>
+            <div class="row no-gutters">
+                <div class="bottom">
+                    <div>
+                        <br> <b style="color: #F3BE35; font-size: 20px;"> &nbsp; Up Next... </b>
+                    </div>
+                    <div class="rcorners2">
+                        <b>next appointment info</b>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </template>
 
 <script>
@@ -63,29 +90,41 @@ var frontendUrl = 'http://' + config.dev.host + ':' + config.dev.port
 var backendUrl = 'http://' + config.dev.backendHost + ':' + config.dev.backendPort
 
 var AXIOS = axios.create({
-  baseURL: backendUrl,
-  headers: { 'Access-Control-Allow-Origin': frontendUrl }
+    baseURL: backendUrl,
+    headers: {
+        'Access-Control-Allow-Origin': frontendUrl
+    }
 })
 
 export default {
-    components: {DatePick},
-    data () {
-    return {
-	  customer: "",
-	  error: ""
-    }
+    components: {
+        DatePick
+    },
+    data() {
+        return {
+            customer: "",
+            error: ""
+        }
     },
     created: function () {
         var id = this.$route.params.userId
         AXIOS.get('/customer/'.concat(id))
-        .then(response => {
-        // JSON responses are automatically parsed.
-        this.customer = response.data
-    })
-    .catch(e => {
-        this.error = e
-        console.log(e)
-    })
+            .then(response => {
+                // JSON responses are automatically parsed.
+                this.customer = response.data
+                /*I'm commenting this our cuz i am not connected to database
+                AXIOS.get('/appointment/'.concat(this.customer)).
+                    then(response => {
+                        this.appointments = response.data
+                    }).catch(e => {
+                    this.error = e
+                    console.log(e)
+                })*/
+            })
+            .catch(e => {
+                this.error = e
+                console.log(e)
+            })
     }
 }
 </script>
@@ -102,7 +141,7 @@ export default {
     font-weight: 600;
 }
 
-.rightside{
+.rightside {
     height: 98.5vh;
     width: 70%;
     position: absolute;
@@ -111,7 +150,7 @@ export default {
     background: white
 }
 
-.top{
+.top {
     height: 50%;
     width: 100%;
     position: absolute;
@@ -120,42 +159,41 @@ export default {
 }
 
 .rcorners {
-  border-radius: 25px;
-  background: white;
-  width: 750px;
-  height: 150px;
+    border-radius: 25px;
+    background: white;
+    width: 750px;
+    height: 150px;
 }
 
 .rcorners2 {
-  border-radius: 25px;
-  background: white;
-  width: 400px;
-  height: 300px;
-  border: 3px solid;
-  border-color: #D3D2E1;
-  padding: 25px;
+    border-radius: 25px;
+    background: white;
+    width: 400px;
+    height: 300px;
+    border: 3px solid;
+    border-color: #D3D2E1;
+    padding: 25px;
 }
 
-
-.middle{
+.middle {
     height: 30%;
     width: 90%;
     position: absolute;
     content: "";
-    left:20px;
+    left: 20px;
     top: 200px;
 }
 
-.bottom{
+.bottom {
     height: 30%;
     width: 80%;
     position: absolute;
     content: "";
-    left:20px;
+    left: 20px;
     top: 500px;
 }
 
-.left-top{
+.left-top {
 
     position: absolute;
     content: "";
@@ -163,12 +201,11 @@ export default {
     left: 70px
 }
 
-.left-bottom{
+.left-bottom {
 
     position: absolute;
     content: "";
-    left:70px;
+    left: 70px;
     top: 250px;
 }
-
 </style>
