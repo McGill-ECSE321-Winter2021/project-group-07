@@ -80,19 +80,18 @@ function MechanicDto(name, password, phone, email){
                 password: password,
                 email: email,
             }}).then(response => {
-                this.mechanics.push(response.data);
-                for(var i = 0; i < value.length; i++){
+              this.mechanics.push(response.data)
+              let promises = []
+              for(var i = 0; i < value.length; i++){
                 var specificService = value[i];
-                console.log(specificService.name)
-                AXIOS.put('/mechanic/editService/'.concat(specificService.name + "?addRemove=add&oldEmail=" +email), {},{})
-                .then(response => {
-                  console.log(response.data)
-                  this.mechanic = response.data
+                promises.push(AXIOS.put('/mechanic/editService/'.concat(specificService.name + "?addRemove=add&oldEmail=" +email), {},{})
+                .then(response => { 
                 })
                 .catch(e => {
                   this.error = e
-                })
+                }))
               }
+              Promise.all(promises).then(() => location.reload())
             })
             .catch(e => {
                 this.error = e

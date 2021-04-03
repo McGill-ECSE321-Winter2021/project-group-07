@@ -103,10 +103,12 @@ public class MechanicService {
 	 */
 	@Transactional 
 	public Mechanic addService(ca.mcgill.ecse321.repairsystem.model.Service service, Mechanic mechanic) {
-		mechanic.addService(service);
-		service.addMechanic(mechanic);
-		mechanicRepository.save(mechanic);
-		serviceRepository.save(service);
+		if(!mechanic.getServices().contains(service)) {
+			mechanic.addService(service);
+			service.addMechanic(mechanic);
+			mechanicRepository.save(mechanic);
+			serviceRepository.save(service);
+		}
 		return mechanic;
 	}
 
@@ -118,10 +120,12 @@ public class MechanicService {
 	 */
 	@Transactional 
 	public Mechanic removeService(ca.mcgill.ecse321.repairsystem.model.Service service, Mechanic mechanic) {
-		mechanic.removeService(service);
-		service.removeMechanic(mechanic);
-		mechanicRepository.save(mechanic);
-		serviceRepository.save(service);
+		if(mechanic.getServices().contains(service)) {
+			mechanic.removeService(service);
+			service.removeMechanic(mechanic);
+			mechanicRepository.save(mechanic);
+			serviceRepository.save(service);
+		}
 		return mechanic;
 	}
 
@@ -152,8 +156,12 @@ public class MechanicService {
 		{
 			throw new IllegalArgumentException("No mechanic with id: " + id + "exists");
 		}
-		
-		mechanicRepository.delete(mechanicRepository.findById(id));
+		Mechanic m = mechanicRepository.findById(id);
+		for(ca.mcgill.ecse321.repairsystem.model.Service service: m.getServices()) {
+			service.removeMechanic(m);
+			serviceRepository.save(service);
+		}
+		mechanicRepository.delete(m);
 	}
 	
 	
