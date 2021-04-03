@@ -37,7 +37,7 @@ public class AppointmentService {
 	 * @return
 	 */
 	@Transactional 
-	public Appointment createApp(Customer customer, TimeSlot time, Car car,String note) {
+	public Appointment createApp(Customer customer, TimeSlot time, Car car, List<ca.mcgill.ecse321.repairsystem.model.Service> services, String note) {
 		//input validation
 		if(customer == null)
 		{
@@ -52,6 +52,11 @@ public class AppointmentService {
 
 		int id = customer.hashCode() * time.hashCode();
 		Appointment app = new Appointment(customer, id, time,  car, note );
+		app.setServices(services);
+		for(ca.mcgill.ecse321.repairsystem.model.Service service: services) {
+			service.addAppointment(app);
+			serviceRepository.save(service);
+		}
 		customer.addAppointment(app);
 		time.addAppointment(app);
 		car.addAppointment(app);
