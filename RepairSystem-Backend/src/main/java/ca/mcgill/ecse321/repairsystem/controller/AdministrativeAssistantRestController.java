@@ -70,8 +70,7 @@ public class AdministrativeAssistantRestController {
 	 * */
 	@PutMapping(value = { "/admin/{oldEmail}", "/admin/{oldEmail}/" })
 	public AdministrativeAssistantDto editAdmin(@PathVariable("oldEmail") String oldEmail, @RequestParam String name, @RequestParam String password, @RequestParam String phone) throws IllegalArgumentException {
-		AdministrativeAssistant admin = adminService.getAdminByEmail(oldEmail);
-		admin = adminService.editAdmin(admin, name, password, Long.parseLong(phone));
+		AdministrativeAssistant admin = adminService.editAdmin(oldEmail, name, password, Long.parseLong(phone));
 		return Converter.convertToDto(admin);
 	}
 
