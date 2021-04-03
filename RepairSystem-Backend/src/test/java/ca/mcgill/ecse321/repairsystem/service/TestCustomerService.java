@@ -490,7 +490,7 @@ public class TestCustomerService {
 		
 		
 		try {
-			customerService.updateAllCredentials(customer, newPassword, newPhone, newCredit, newDebit, address);
+			customerService.updateAllCredentials(aEmail, newName, newPassword, newPhone, newCredit, newDebit, address);
 		}catch(IllegalArgumentException e)
 		{
 			error = e.getMessage();

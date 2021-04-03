@@ -40,7 +40,7 @@ public class CustomerService {
 	 * @return
 	 */
 	@Transactional
-	public Customer createCustomer(String aName, String aPassword, int aPhone, String aEmail, String credit, String debit, String add) {
+	public Customer createCustomer(String aName, String aPassword, long aPhone, String aEmail, String credit, String debit, String add) {
 		
 		if(aName == null || aName.trim().length() == 0)
 		{
@@ -104,7 +104,7 @@ public class CustomerService {
 	 * @return
 	 */
 	@Transactional 
-	public Customer getCustomerByNumber(int number) {
+	public Customer getCustomerByNumber(long number) {
 		Customer customer = customerRepository.findByPhone(number);
 		return customer;
 	}
@@ -140,6 +140,8 @@ public class CustomerService {
 		return toList(customerRepository.findAll());
 	}
 	
+	
+	
 	/**
 	 * To update  all the credentials associated to a customer
 	 * @param customer
@@ -150,13 +152,18 @@ public class CustomerService {
 	 * @param newDebit
 	 * @param newAddress
 	 */
-   public void updateAllCredentials(Customer customer, String newPassword, String newPhone, String newCredit, String newDebit, String newAddress )
+	@Transactional
+   public Customer updateAllCredentials(String email, String name,String newPassword, String newPhone, String newCredit, String newDebit, String newAddress )
    {
-	   resetPassword(customer, newPassword);
-	   updatePhoneNumber(customer, newPhone);
-	   updateCredit(customer, newCredit);
-	   updateDebit(customer, newDebit);
-	   updateAddress(customer, newAddress);
+	   Customer customer = customerRepository.findByEmail(email);
+	   customer.setName(name);
+	   customer.setPassword(newPassword);
+	   customer.setPhone(Long.parseLong(newPhone));
+	   customer.setCreditHash(newCredit);
+	   customer.setDebitHash(newDebit);
+	   customer.setAddress(newAddress);
+	   customerRepository.save(customer);
+	   return customer;
    }
  
 	/**
@@ -291,7 +298,7 @@ public class CustomerService {
 			throw new IllegalArgumentException("New phone number cannot be the same as the old one");
 		};
 		
-		customer.setPhone(Integer.parseInt(newPhoneNumber));
+		customer.setPhone(Long.parseLong(newPhoneNumber));
 		customerRepository.save(customer);
 	}
 	
@@ -333,19 +340,24 @@ public class CustomerService {
 		}
 	
 		List<Appointment> appointments = appointmentRepository.findByCustomer(customer);
-		for(Appointment a : appointments)
-		{
-			a.setCustomer(null);
-			appointmentRepository.delete(a);
-		}
-		List<Car> cars = carRepository.findByCustomer(customer);
-		for(Car c : cars)
-		{
-			c.setCustomer(null);
-			carRepository.delete(c);
+		if(appointments != null || appointments.size() > 0) {
+			for(Appointment a : appointments)
+			{
+				a.setCustomer(null);
+				appointmentRepository.delete(a);
+			}
 		}
 		
-		customerRepository.deleteById(String.valueOf(customerId));
+		List<Car> cars = carRepository.findByCustomer(customer);
+		if(cars != null || cars.size() > 0) {
+			for(Car c : cars)
+			{
+				c.setCustomer(null);
+				carRepository.delete(c);
+			}
+		}
+		
+		customerRepository.delete(customer);
 		return true;
 	}
 

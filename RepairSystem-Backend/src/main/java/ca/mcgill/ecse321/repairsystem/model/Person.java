@@ -11,10 +11,10 @@ public abstract class Person{
 	private String name;
 	private String password;
 	private int userId;
-	private int phone;
+	private long phone;
 	private String email;
 	
-	public Person(String aName, int id,String aPassword, int aPhone, String aEmail)
+	public Person(String aName, int id,String aPassword, long aPhone, String aEmail)
 	{
 		name = aName;
 		password = aPassword;
@@ -60,12 +60,12 @@ public abstract class Person{
 	}
 	
 
-	public int getPhone()
+	public long getPhone()
 	{
 		return phone;
 	}
 
-	public void setPhone(int aPhone)
+	public void setPhone(long aPhone)
 	{
 		phone = aPhone;
 

@@ -8,7 +8,7 @@ public class MechanicDto extends PersonDto{
 	private List<ServiceDto> services;
 	private List<AppointmentDto> appointments;
 
-	public MechanicDto(String aName, int id, String aPassword, int aPhone, String aEmail, List<ServiceDto> allCapabilities) {
+	public MechanicDto(String aName, int id, String aPassword, long aPhone, String aEmail, List<ServiceDto> allCapabilities) {
 		super(aName, id, aPassword, aPhone, aEmail);    
 	}
 	

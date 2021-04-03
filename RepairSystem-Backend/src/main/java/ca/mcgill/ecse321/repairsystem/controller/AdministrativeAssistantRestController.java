@@ -62,7 +62,7 @@ public class AdministrativeAssistantRestController {
 	 * */
 	@PostMapping(value = { "/admin/{name}", "/admin/{name}/" })
 	public AdministrativeAssistantDto createAdmin(@PathVariable("name") String name, @RequestParam String password, @RequestParam String phone, @RequestParam String email) throws IllegalArgumentException {
-		AdministrativeAssistant admin = adminService.createAdmin(name, password, Integer.parseInt(phone), email);
+		AdministrativeAssistant admin = adminService.createAdmin(name, password, Long.parseLong(phone), email);
 		return Converter.convertToDto(admin);
 	}
 	/**
@@ -71,7 +71,7 @@ public class AdministrativeAssistantRestController {
 	@PutMapping(value = { "/admin/{oldEmail}", "/admin/{oldEmail}/" })
 	public AdministrativeAssistantDto editAdmin(@PathVariable("oldEmail") String oldEmail, @RequestParam String name, @RequestParam String password, @RequestParam String phone) throws IllegalArgumentException {
 		AdministrativeAssistant admin = adminService.getAdminByEmail(oldEmail);
-		admin = adminService.editAdmin(admin, name, password, Integer.parseInt(phone));
+		admin = adminService.editAdmin(admin, name, password, Long.parseLong(phone));
 		return Converter.convertToDto(admin);
 	}
 

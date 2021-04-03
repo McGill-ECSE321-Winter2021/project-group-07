@@ -5,10 +5,10 @@ public class PersonDto {
 	private String name;
 	private String password;
 	private int userId;
-	private int phone;
+	private long phone;
 	private String email;
 
-	public PersonDto(String aName, int id,String aPassword, int aPhone, String aEmail)
+	public PersonDto(String aName, int id,String aPassword, long aPhone, String aEmail)
 	{
 		name = aName;
 		password = aPassword;
@@ -37,7 +37,7 @@ public class PersonDto {
 		return password;
 	}
 	
-	public int getPhone() {
+	public long getPhone() {
 		return phone;
 	}
 	

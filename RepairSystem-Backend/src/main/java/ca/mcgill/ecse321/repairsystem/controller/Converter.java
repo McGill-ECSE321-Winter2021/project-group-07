@@ -96,6 +96,7 @@ public class Converter {
 		MechanicDto mechanicDto = new MechanicDto(mechanic.getName(), mechanic.getId(), mechanic.getPassword(), mechanic.getPhone(), mechanic.getEmail(), servicesDto);
 		mechanicDto.setAppointments(appointmentsDto);
 		mechanicDto.setTimeSlots(timeslotsDto);
+		mechanicDto.setServices(servicesDto);
 		return mechanicDto;
 	}
 	

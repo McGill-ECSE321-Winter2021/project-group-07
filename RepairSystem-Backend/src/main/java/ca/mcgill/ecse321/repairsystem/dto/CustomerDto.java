@@ -10,7 +10,7 @@ public class CustomerDto extends PersonDto{
 	private List<CarDto> cars;
 	private Calendar lastActive;
 
-	public CustomerDto(String aName,  int id, String aPassword, int aPhone, String aEmail, Calendar lastDate, String credit, String debit, String add) {
+	public CustomerDto(String aName,  int id, String aPassword, long aPhone, String aEmail, Calendar lastDate, String credit, String debit, String add) {
 		super(aName, id, aPassword, aPhone, aEmail);
 		creditHash = credit;
 		debitHash = debit;

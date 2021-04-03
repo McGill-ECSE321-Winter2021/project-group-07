@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -60,19 +61,26 @@ public class CustomerRestController {
 	 * */
 	@PostMapping(value = { "/customer/{name}", "/customer/{name}/" })
 	public CustomerDto createCustomer(@PathVariable("name") String name, @RequestParam String password, @RequestParam String phone, @RequestParam String email, @RequestParam String credit, @RequestParam String debit, @RequestParam String address) throws IllegalArgumentException, ParseException {
-		Customer customer = customerService.createCustomer(name, password, Integer.parseInt(phone), email, credit, debit, address);
+		Customer customer = customerService.createCustomer(name, password, Long.parseLong(phone), email, credit, debit, address);
 		return Converter.convertToDto(customer);
 	}
 	/**
 	 *restful controller for editing all customer credentials
 	 * */
-	@PutMapping(value = { "/customer/editAllCustomerCredentials/{oldEmail}", "/customer/{oldEmail}/" })
-	public CustomerDto editAllCustomerCredentials(@PathVariable("oldEmail") String oldEmail, @RequestParam String newPassword, @RequestParam String newPhone,  @RequestParam String newCredit, @RequestParam String newDebit, @RequestParam String newAddress) throws IllegalArgumentException {
-		Customer customer = customerService.getCustomerByEmail(oldEmail); 
-		customerService.updateAllCredentials(customer, newPassword, newPhone, newCredit, newDebit, newAddress);
-		return  Converter.convertToDto(customer);
+	@PutMapping(value = { "/customer/{oldEmail}", "/customer/{oldEmail}/" })
+	public CustomerDto editCustomer(@PathVariable("oldEmail") String oldEmail, @RequestParam String newName, @RequestParam String newPassword, @RequestParam String newPhone,  @RequestParam String newCredit, @RequestParam String newDebit, @RequestParam String newAddress) throws IllegalArgumentException {
+		Customer customer = customerService.updateAllCredentials(oldEmail, newName, newPassword, newPhone, newCredit, newDebit, newAddress);
+		return Converter.convertToDto(customer);
 	}
 
+	/**
+	 * Restful controller for deleting a customer from the database
+	 */
+	@DeleteMapping(value= {"/customer/{id}", "customer/{id}/"})
+	public boolean removeCustomer(@PathVariable("id") String id) {
+		customerService.deleteCustomer(Integer.parseInt(id));
+		return true;
+	}
 }
 
 

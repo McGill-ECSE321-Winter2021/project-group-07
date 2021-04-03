@@ -10,7 +10,9 @@ var AXIOS = axios.create({
   headers: { 'Access-Control-Allow-Origin': frontendUrl }
 })
 
-function MechanicDto(name, password, phone, emai){
+
+
+function MechanicDto(name, password, phone, email){
     this.name = name;
     this.password=password;
     this.phone = phone;
@@ -31,7 +33,7 @@ function MechanicDto(name, password, phone, emai){
         admin: "",
         mechanic:"",
         mechanics: [],
-        capacities:[],
+        value:[],
         options: [
             {name: "CarRepair"},
             {name: "Oil Change"},
@@ -65,19 +67,12 @@ function MechanicDto(name, password, phone, emai){
     })
     },
     methods: {
-        createMechanic: function (name,password,phone,email){
-        var id = this.$route.params.userId
-        AXIOS.get('/admin/'.concat(id))
-        .then(response => {
-          // JSON responses are automatically parsed.
-          this.admin = response.data
-        })
-        .catch(e => {
-          this.error = e
-          console.log(e)
-        })
-        AXIOS.post('/mechanic/'.concat(name), {},
-        {
+
+        /**
+         * To Create a Mechanic 
+         */
+        createMechanic: function (name,password,phone,email,value){
+          AXIOS.post('/mechanic/'.concat(name), {},{
             params:{
                 name: name,
                 phone: phone,
@@ -88,27 +83,34 @@ function MechanicDto(name, password, phone, emai){
             })
             .catch(e => {
                 this.error = e
+          })
+          for(var i = 0; i < value.length; i++){
+            var specificService = value[i];
+            AXIOS.put('/mechanic/editService/'.concat(specificService + "?addRemove=add&oldEmail=" + email), {},{})
+              .then(response => {
+                console.log(response.data)
+                this.mechanic = response.data
+              })
+              .catch(e => {
+                this.error = e
             })
+          }
+          
 
+            
         },
         
         /** To Save the Edits in Edit Profile */
         editMechanic : function(email, name, password, phone)
         {
-          AXIOS.put('/mechanic'.concat(email),{},
-          {
-            params:{
-              name: name,
-              email: email,
-              password: password,
-              phone: phone,
-            }
-          }).then(response => {
-            this.response = response.data;
+          AXIOS.put('/mechanic/'.concat(email+"?name="+name+"&password="+password+"&phone="+phone),{},{})
+          .then(response => {
+            this.mechanic = response.data;
             location.reload();
           }).catch(e => {
             this.error = e;
           })
+          
         },
 
         /** To AutoComplete the Edit Profile Modal */
@@ -122,9 +124,9 @@ function MechanicDto(name, password, phone, emai){
          
         },
         removeMechanic: function(id){
-          AXIOS.post('/mechanic/deleteById', {}, {})
+          AXIOS.delete('/mechanic/'.concat(id), {}, {})
             .then(response => {
-              response = response.data;
+              console.log(response)
               location.reload();
             })
             .catch(e => {

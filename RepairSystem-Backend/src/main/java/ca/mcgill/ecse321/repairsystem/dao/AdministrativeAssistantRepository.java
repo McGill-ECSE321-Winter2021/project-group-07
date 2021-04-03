@@ -11,7 +11,7 @@ public interface AdministrativeAssistantRepository extends CrudRepository<Admini
 	
 	AdministrativeAssistant findById(int id);
 	List<AdministrativeAssistant> findByName(String name);
-	AdministrativeAssistant findByPhone(int phone);
+	AdministrativeAssistant findByPhone(long phone);
 	AdministrativeAssistant findByEmail(String email);
 	List<AdministrativeAssistant> findAll();
 

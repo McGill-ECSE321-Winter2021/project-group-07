@@ -9,16 +9,17 @@
                         <input type="text" v-model="s" value="" class="search-input" placeholder="  Search">
                     </form>
 
-                  <button class="search-btn" @click="searchForCustomers(s)"> <img class="img-add" src="../../assets/Admin/search.png"/> </button>          
-                  <b-button v-b-modal.modal-prevent-closing class="btn-primary"> Add Customer <img class="img-add" src="../../assets/Admin/plus.png"/> </b-button>
+                  <button class="search-btn" @click="searchForMechanics(s)"> <img class="img-add" src="../../assets/Admin/search.png"/> </button> 
+                  
+                  <b-button v-b-modal.modal-prevent-closing class="btn-primary"> Add New Member <img class="img-add" src="../../assets/Admin/plus.png"/> </b-button>
 
                         <b-modal
                         id="modal-prevent-closing"
                         ref="modal"
-                        title="Add New Customer"
+                        title="Add New Team Member"
                         @show="resetModal"
                         @hidden="resetModal"
-                        @ok="createCustomer(name,password,phone,email,credit,debit, address)"
+                        @ok="createMechanic(name,password,phone,email,value)"
                         >
                         <b-form ref="form" @submit.stop.prevent="handleSubmit">
 
@@ -91,30 +92,15 @@
                                 required
                             ></b-form-input>
                             </b-form-group>  
+                           
 
-                             <b-form-group
-                            label="Credit Card"
-                            label-for="CreditCard"
-                            >
-                            <b-form-input
-                                id="credit-input"
-                                v-model="credit"
-                                :state="creditState"
-                            ></b-form-input>
-                            </b-form-group>  
-
-                             <b-form-group
-                            label="Debit Card"
-                            label-for="DebitCard"
-                            >
-                            <b-form-input
-                                id="debit-input"
-                                v-model="debit"
-                                :state="debitState"
-                            ></b-form-input>
-                            </b-form-group>  
                         </b-form>
-                        
+                         <label class="typo__label"> Capabilities </label>
+                            <multiselect v-model="value" :state="capabilitiesState" :options="options" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Pick some" label="name" track-by="name" :preselect-first="true">
+                                <template slot="selection" slot-scope="{ values, search, isOpen }">
+                                    <span class="multiselect__single" v-if="values .length &amp;&amp; !isOpen">{{ values.length }} options selected</span>
+                                </template>
+                            </multiselect>
                         </b-modal>
                     
                 </div>
@@ -133,24 +119,20 @@
                         <th> Name </th>
                         <th>Email</th>
                         <th>Phone Number</th>
-                        <th>Address</th>
-                   <!--     <th> Credit Card </th>
-                        <th> Debit Card </th>-->
+                        <th>Capabilities</th>
                         <th> Actions </th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="customer in customers" style="text-align:center">
-                        <td> {{customer.id}} </td>
-                        <td>{{ customer.name }}</td>
-                        <td>{{ customer.email }}</td>
-                        <td>{{customer.phone }}</td>
-                        <td>{{ customer.address  }}</td>
-                   <!--     <td>{{ customer.creditHash}} </td>
-                        <td>{{ customer.debitHash}} </td>-->
+                    <tr v-for="mechanic in mechanics" style="text-align:center">
+                        <td> {{mechanic.id}} </td>
+                        <td>{{ mechanic.name }}</td>
+                        <td>{{ mechanic.email }}</td>
+                        <td>{{ mechanic.phone }}</td>
+                        <td>{{ mechanic.services }}</td>
                         <td> 
-                        <button class="btn-edit" @click=" modalShow =!modalShow; fillCredentials(customer)"> <img  class="img-add" src="../../assets/Admin/edit.png"/>  </button>
-                       <button class="btn-remove" @click="removeCustomer(customer.id)"> <img  class="img-add" src="../../assets/Admin/delete.png"/>  </button> 
+                        <button class="btn-edit" @click=" modalShow =!modalShow; fillCredentials(mechanic)"> <img  class="img-add" src="../../assets/Admin/edit.png"/>  </button>
+                       <button class="btn-remove" @click="removeMechanic(mechanic.id)"> <img  class="img-add" src="../../assets/Admin/delete.png"/>  </button> 
                         
                         <b-modal
                         v-model="modalShow"
@@ -218,64 +200,16 @@
                                v-model="editPassword"
                                type="text"
                                name="editPassword"
-                               :value="editPassword"
-                            > 
-                            </b-form-input>
-                            </b-form-group>
-
-                            
-                             <b-form-group
-                            label="Residence "
-                            :state="editResidenceState"
-                            >
-                            <b-form-input
-                               id="editPassword"
-                               v-model="editResidence"
-                               type="text"
-                               name="editPassword"
-                               :value="editResidence"
-                            > 
-                            </b-form-input>
-                            </b-form-group>
-
-                            
-                             <b-form-group
-                            label="Credit Card"
-                            label-for="editCredit-input"
-                            invalid-feedback="Credit is required"
-                            :state="editCreditState"
-                            >
-                            <b-form-input
-                               id="editCredit"
-                               v-model="editCredit"
-                               type="text"
-                               name="editCredit"
-                               :value="editCredit"
-                            > 
-                            </b-form-input>
-                            </b-form-group>
-
-                           <b-form-group
-                            label="Debit Card"
-                            label-for="editDebit-input"
-                            invalid-feedback="Debit is required"
-                            :state="editDebitState"
-                            >
-                            <b-form-input
-                               id="editDebit"
-                               v-model="editDebit"
-                               type="text"
-                               name="editDebit"
-                               :value="editDebit"
+                               :value="editPhone"
                             > 
                             </b-form-input>
                             </b-form-group>
    
                             </b-form>
-                            <template #modal-footer="{Save, Cancel}">
+                            <template #modal-footer="{save , cancel}">
                               
                                 <!-- Emulate built in modal footer ok and cancel button actions -->
-                                <b-button size="sm" variant="success" @click=" editCustomer(editEmail, editName, editPassword, editPhone, editCredit, editDebit, editResidence)"> Save </b-button>
+                                <b-button size="sm" variant="success" @click="editMechanic(editEmail, editName, editPassword, editPhone, value)"> Save </b-button>
                                 <b-button size="sm" variant="danger" @click="modalShow =!modalShow">Cancel</b-button> 
       
                             </template>
@@ -294,11 +228,13 @@
     </div>
 </template>
 
-<script src="./AdminEditCustomer.js">
+<script src="./AdminAddTeamMember.js">
 </script>
 
-
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <style scoped>
+
+
 .profile {
     height: 100%;
     width: 100%;

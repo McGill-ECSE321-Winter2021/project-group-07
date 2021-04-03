@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 @Entity
 public class Customer extends Person
 {
-	public Customer(String aName,  int id, String aPassword, int aPhone, String aEmail, String credit, String debit, String add)
+	public Customer(String aName,  int id, String aPassword, long aPhone, String aEmail, String credit, String debit, String add)
 	{
 		super(aName, id, aPassword, aPhone, aEmail);
 		cars = new ArrayList<Car>();
