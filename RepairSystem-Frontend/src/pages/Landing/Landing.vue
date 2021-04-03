@@ -9,7 +9,7 @@
 		</div>
 
 		<div class="collapse navbar-collapse justify-content-center">
-  			<ul class="navbar-nav">
+			<ul class="navbar-nav">
    			 	<li class="nav-item">
    			   		<a class="nav-link" href="#">About</a>
    				</li>
@@ -42,9 +42,12 @@
 	<div>
 		<div class="float-left">
 			<div class="left-centered">
-				<h1 id="title-welcome"> <b>Repair Shop Name</b> </h1>
-				<h3 id="body-welcome"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus 
-mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. </h3>
+				<h1 id="title-welcome"> <b>Prestige Repairs </b> </h1>
+				<h3 id="body-welcome">
+					 When it comes to your car repair requirement our team offers a variety of services that will 
+					 ensure your vehicle is restored as close as possible to manufacturer standards. Handled by 
+					 certified technicians.
+					 </h3>
 			</div>
 		</div>
 		<div class="float-right">
@@ -61,8 +64,13 @@ mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla 
 		<div class="float-right">
 			<div class="right-centered">
 			<h1 id="title-about"> <b> About Us </b> </h1>
-			<h3 id="body-about"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus 
-mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. </h3>
+			<h3 id="body-about">
+				For over 40 years, Prestige Repairs has proudly serviced cars in the Greater Montreal region and surrounding
+				communities. Our auto repair shop is locally owned and operated, and we are proud of our role in our community. 
+				Our business was founded on the principle of building up our local neighbordhoods by providing fast,reliable and honest 
+				vehicle care. Our technicians are always looking for ways to improve our service to make a better experience for you.
+				Give us a call today (514)-111-1111 or book online for your next vehicle service!
+			</h3>
 			
 			
 			</div>
@@ -74,38 +82,58 @@ mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla 
 		<div class="float-right">
 			<img class="img-services" src="../../assets/towing.png"/>
 		</div> 
-		<div class="float-left">
-			
+		<div class="float-left">	
 			<div class="left-centered-service">
 			    <h1 id="title-about"> <b> Services  </b> </h1>
-			    <h3 id="body-services">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus  </h3>
-		    	<!--	<div class="row">
-				<div class="col-md-2">
-					<img class="service-images" src="../../assets/landingPage/car-repairService.png"/>
-					<p> Repairs </p>
+			    <h3 id="body-services">
+					 Our ASE Certified mechanics are committed to quality for our community of drivers in Montreal,Quebec. We make sure
+					 to continue providing to-quality services by providing biannual trainings. At Prestige, we offer a variety of services: 
+
+				</h3>
+			
+				<div class="row">
+					<div class="col-3">
+						<div class="Rectangle">
+							<img class="service-images" src="../../assets/landingPage/car-repairService.png"/>
+						</div>
+						<p> Repairs </p>
+					</div>
+					<div class="col-3">
+						<div class="Rectangle">
+							<img class="service-images" src="../../assets/landingPage/car-wash.png"/>
+						</div>
+					</div>
+					<div class="col-3">
+						<div class = "Rectangle">
+							<img class="service-images" src="../../assets/landingPage/inspection.png"/>
+						</div>
+					</div>
+					<div class="col-3">
+						<div class = "Rectangle">
+							<img class="service-images" src="../../assets/landingPage/oil.png"/>
+						</div>
+					</div>
 				</div>
-				<div class="col">
-					<img class="service-images" src="../../assets/landingPage/car-wash.png"/>
+				<div class = "row">
+					<div class="col">
+						<div class = "Rectangle">
+							<img class="service-images" src="../../assets/landingPage/roadsideAssistance.png"/>
+						</div>
+					</div>
+					<div class="col">
+						<div class = "Rectangle">
+							<img class="service-images" src="../../assets/landingPage/tire.png"/>
+						</div>
+					</div>
+					<div class="col">
+						<div class = "Rectangle">
+							<img class="service-images" src="../../assets/landingPage/tow-truck.png"/>
+						</div>
+					</div>
 				</div>
-				<div class="col">
-					<img class="service-images" src="../../assets/landingPage/inspection.png"/>
-				</div>
-				<div class="col">
-					<img class="service-images" src="../../assets/landingPage/oil.png"/>
-				</div>
-				<div class="col">
-					<img class="service-images" src="../../assets/landingPage/roadsideAssistance.png"/>
-				</div>
-				<div class="col">
-					<img class="service-images" src="../../assets/landingPage/tire.png"/>
-				</div>
-				<div class="col">
-					<img class="service-images" src="../../assets/landingPage/tow-truck.png"/>
-				</div>
-			</div> -->
+			</div> 
 		    </div>
 		</div>	
-	</div>
 
 	<div >
 		<div>
@@ -278,7 +306,7 @@ mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla 
 		float:right;
   		top: 50%;
   		left: 50%;
-		transform: translateY(600px);
+		transform: translateY(500px);
 		text-align:  center;
 		  
 	}
@@ -322,6 +350,15 @@ mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla 
 
 	}
 
+	.Rectangle
+	{
+		height:60px;
+		width:60px;
+		border-radius: 20px;
+		background-color: #E6E6FA
+		
+	}
+
 	#body-services
 	{
 		margin-top:10px;
@@ -334,6 +371,7 @@ mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla 
 
 	.service-images{
 		max-height:30px;
+		transform: translateY(10px);
 	}
 
 

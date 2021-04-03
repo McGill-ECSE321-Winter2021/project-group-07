@@ -44,7 +44,8 @@ public class AdministrativeAssistantService {
 	 * @return
 	 */
 	@Transactional
-	public AdministrativeAssistant editAdmin(AdministrativeAssistant admin, String name, String password, long phone) {
+	public AdministrativeAssistant editAdmin(String email , String name, String password, long phone) {
+		AdministrativeAssistant admin = getAdminByEmail(email);
 		admin.setName(name);
 		admin.setPassword(password);
 		admin.setPhone(phone);

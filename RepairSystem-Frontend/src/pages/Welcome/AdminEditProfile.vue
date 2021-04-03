@@ -3,7 +3,7 @@
         <div class = "col no-gutters">
         <div class="profile">
         <div class="name">
-             <div class="text" v-model="name">
+             <div class="text">
                 <h1> {{admin.name}} </h1>
             </div>
             <div class="ellipse">
@@ -13,33 +13,149 @@
         </div>
 
         <div class="container">
-        <div class="row">
-        <div class="col">Residence</div>
-        <div class="w-100"></div>
-        <input type="text" v-model="address" value=""><br>
-        <div class="w-100"></div>
-        <div class="col">Email</div>
-        <div class="w-100"></div>
-        <input type="text" v-model="email" value="" disabled><br>
-        <div class="w-100"></div>
-        <div class="col">Telephone</div>
-        <div class="w-100"></div>
-       <input type="text" v-model="phone" value=""><br>
-        </div>
+            <div class="row">
+                <div class="col-5">
+                    <div class="col"> 
+                        Residence 
+                    </div>
+                    <div class="w-100">
+                    </div>
+                    <b-group>
+                        <b-input type="text" v-model="address" :value="address">
+                        </b-input>
+                        <br>
+                    </b-group>
+                </div>
+                <div class = "col-5">
+                    <div class ="col">
+                        password
+                    </div>
+                    <div class="w-100">
+                    </div>
+                    <b-group>
+                        <b-input type="password" v-model="password" :value="password" >
+                        </b-input>
+                        <br>
+                    </b-group>
+                </div>
+                <div class="w-100">
+                </div>
+                <div class="col">
+                    <div class="row">
+                        <div class="col-5">
+                            <div class="col">
+                            Email
+                            </div>
+                            <div class="w-100">
+                            </div>
+                            <b-group>
+                                <b-input type="text" v-model="email" :value="email" disabled>
+                                </b-input>
+                                <br>
+                            </b-group>
+                        </div>
+                        <div class ="col-5">
+                            <div class="col">
+                                Telephone
+                            </div>
+                            <div class="w-100">
+                            </div>
+                            <b-group>
+                                <b-input type="text" v-model="phone" :value="phone">
+                                </b-input>
+                            </b-group>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button @click="modalShow=!modalShow; fillCredentials() " align ="center">Edit Profile</button>
+
+
+              <b-modal
+                v-model="modalShow"
+                title="Edit Profile"
+                id="modal-scoped"
+            >
+            <b-form ref="form" @submit.stop.prevent="handleSubmit">
+                           
+                <b-form-group
+                label="Name"
+                label-for="editName-input"
+                invalid-feedback="Name is required"
+                :state="editEmailState"
+                >
+                            <b-form-input
+                                id="editName"
+                                type="text"
+                                v-model="editName"
+                                name="editName"
+                                :value="editName"
+                            >
+                            </b-form-input>
+                            </b-form-group>
+
+                              <b-form-group
+                            label="Email"
+                            label-for="editEmail-input"
+                            invalid-feedback="Email is required"
+                            :state="editEmailState"
+                            >
+                            <b-form-input
+                                id="editEmail"
+                                type="text"
+                                v-model="editEmail"
+                                name="editEmail"
+                                :value="editEmail"
+                                disabled
+                            >
+                            </b-form-input>
+                            </b-form-group> 
+
+
+                            <b-form-group
+                            label="Phone"
+                            label-for="editPhone-input"
+                            invalid-feedback="Phone is required"
+                            :state="editPhoneState"
+                            >
+                            <b-form-input
+                               id="editPhone"
+                               v-model="editPhone"
+                               type="text"
+                               name="editPhone"
+                               :value="editPhone"
+                            > 
+                            </b-form-input>
+                            </b-form-group>
+
+                             <b-form-group
+                            label="Password"
+                            label-for="editPassword-input"
+                            invalid-feedback="Password is required"
+                            :state="editPasswordState"
+                            >
+                            <b-form-input
+                               id="editPassword"
+                               v-model="editPassword"
+                               type="text"
+                               name="editPassword"
+                               :value="editPassword"
+                            > 
+                            </b-form-input>
+                            </b-form-group>
+   
+                            </b-form>
+                                <template #modal-footer="{Save,Cancel}">
+                                <!-- Emulate built in modal footer ok and cancel button actions -->
+                                 <b-button size="sm" variant="success" @click="editAdmins(editEmail, editName, editPassword, editPhone)"> Save </b-button>
+                                <b-button size="sm" variant="danger" @click="modalShow =!modalShow">Cancel</b-button> 
+      
+                            </template>
+                        </b-modal> 
         </div>
 
-        <div class="container2">
-        <div class="row">
-        <div class="col">Password</div>
-        <div class="w-100"></div>
-        <input type="password" v-model="password" value=""><br>
-        <div class="w-100"></div>
-        </div>
-        </div>
-
-        <div class="container3">
-                <button class="button1" @click="editAdmin(email, name, password, phone)" align = "right">Edit Profile</button>
-        </div>
+   
+     
 
         
 
@@ -71,43 +187,11 @@
     </div>
 </template>
 
-<script>
-import axios from 'axios';
-import DatePick from 'vue-date-pick';
-import 'vue-date-pick/dist/vueDatePick.css';
-var config = require('../../../config')
+<script src="./AdminEditProfile.js">
 
-var frontendUrl = 'http://' + config.dev.host + ':' + config.dev.port
-var backendUrl = 'http://' + config.dev.backendHost + ':' + config.dev.backendPort
-
-var AXIOS = axios.create({
-  baseURL: backendUrl,
-  headers: { 'Access-Control-Allow-Origin': frontendUrl }
-})
-
-export default {
-    components: {DatePick},
-    data () {
-    return {
-	  admin: "",
-	  error: ""
-    }
-    },
-    created: function () {
-        var id = this.$route.params.userId
-        AXIOS.get('/admin/'.concat(id))
-        .then(response => {
-        // JSON responses are automatically parsed.
-        this.admin = response.data
-    })
-    .catch(e => {
-        this.error = e
-        console.log(e)
-    })
-    }
-}
 </script>
 
+<style src="vue-date-pick/dist/vueDatePick.css"></style>
 <style scoped>
 .profile {
     position: relative;
@@ -139,7 +223,6 @@ font-style: normal;
 font-weight: 900;
 font-size: 26px;
 line-height: 38px;
-
 color: #37447E;
 }
 .ellipse{
@@ -161,7 +244,6 @@ font-size: 15px;
 line-height: 38px;
 color: #37447E;
 }
-
 .container2{
 position: absolute;
 left: 305px;
@@ -173,7 +255,6 @@ font-size: 15px;
 line-height: 38px;
 color: #37447E;
 }
-
 .container3 {
     position: absolute;
     left: 500px;
@@ -193,7 +274,6 @@ color: #37447E;
     color: rgb(167, 167, 167);
     font-weight: 600;
 }
-
 .rightside{
     height: 98.5vh;
     width: 70%;
@@ -202,7 +282,6 @@ color: #37447E;
     right: 0px;
     background: white
 }
-
 .button1 {
   background: rgb(51 41 134);
   width: 100px;
@@ -210,7 +289,6 @@ color: #37447E;
   color: white;
   border-radius: 8px;
 }
-
 .top{
     height: 50%;
     width: 100%;
@@ -218,15 +296,12 @@ color: #37447E;
     content: "";
     top: 20px;
 }
-
 .rcorners {
   border-radius: 25px;
   background: white;
   width: 750px;
   height: 150px;
 }
-
-
 .middle{
     height: 30%;
     width: 90%;
@@ -235,7 +310,6 @@ color: #37447E;
     left:20px;
     top: 200px;
 }
-
 .bottom{
     height: 30%;
     width: 80%;
@@ -244,21 +318,16 @@ color: #37447E;
     left:20px;
     top: 500px;
 }
-
 .left-top{
-
     position: absolute;
     content: "";
     top: 50px;
     left: 70px
 }
-
 .left-bottom{
-
     position: absolute;
     content: "";
     left:70px;
     top: 250px;
 }
-
 </style>

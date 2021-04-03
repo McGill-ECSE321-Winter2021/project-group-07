@@ -56,6 +56,7 @@ function MechanicDto(name, password, phone, email){
         error: "",
       }
     },
+
     created: function () {
     // Initializing persons from backend
     AXIOS.get('/mechanics')
@@ -67,8 +68,8 @@ function MechanicDto(name, password, phone, email){
       this.error = e
     })
     },
-    methods: {
 
+    methods: {
         /**
          * To Create a Mechanic 
          */

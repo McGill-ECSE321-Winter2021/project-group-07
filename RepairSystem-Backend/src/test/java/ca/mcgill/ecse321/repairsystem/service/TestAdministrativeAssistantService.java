@@ -271,7 +271,7 @@ public class TestAdministrativeAssistantService {
 		String error = null;
 		int id = aEmail.hashCode();
 		try {
-			administrativeAssistant = administrativeAssistantService.editAdmin(administrativeAssistant, newName, newPassword, newPhone);
+			administrativeAssistant = administrativeAssistantService.editAdmin(aEmail, newName, newPassword, newPhone);
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
