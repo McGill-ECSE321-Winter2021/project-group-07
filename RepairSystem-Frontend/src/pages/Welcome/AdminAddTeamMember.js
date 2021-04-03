@@ -127,13 +127,12 @@ function MechanicDto(name, password, phone, email){
         },
         
         removeMechanic: function(id){
+		
           AXIOS.delete('/mechanic/'.concat(id), {}, {})
             .then(response => {
               for(var i = 0; i < this.mechanics.length; i++){
-                if(this.mechanics[i].id == response.data.id){
+                if(this.mechanics[i].id == id){
                   this.mechanics.splice(i,1)
-                  this.mechanics.push(response.data)
-                  this.mechanics.pop()
                   break
                 }
               }
