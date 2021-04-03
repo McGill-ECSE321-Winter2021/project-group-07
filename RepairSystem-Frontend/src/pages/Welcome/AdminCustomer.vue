@@ -1,4 +1,4 @@
-<!-- Team Members -->
+<!-- Customers -->
 <template>
   
     <div class="profile">
