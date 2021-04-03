@@ -80,22 +80,23 @@ function MechanicDto(name, password, phone, email){
                 password: password,
                 email: email,
             }}).then(response => {
-              this.mechanics.push(response.data)
-              let promises = []
+              var services = []
               for(var i = 0; i < value.length; i++){
-                var specificService = value[i];
-                promises.push(AXIOS.put('/mechanic/editService/'.concat(specificService.name + "?addRemove=add&oldEmail=" +email), {},{})
-                .then(response => { 
-                })
-                .catch(e => {
-                  this.error = e
-                }))
+                services.push(value[i].name)
               }
-              Promise.all(promises).then(() => location.reload())
+              console.log("/mechanic/updateServices/".concat(email + "?services=" + services))
+              AXIOS.put("/mechanic/updateServices/".concat(email + "?services=" + services), {},{})
+                    .then(response => { 
+                      this.mechanics.push(response.data)
+                    })
+                    .catch(e => {
+                      this.error = e
+                    })
             })
             .catch(e => {
                 this.error = e
           })
+          
         },
         
         /** To Save the Edits in Edit Profile */
@@ -122,6 +123,7 @@ function MechanicDto(name, password, phone, email){
           this.editPassword = row.password;
          
         },
+        
         removeMechanic: function(id){
           AXIOS.delete('/mechanic/'.concat(id), {}, {})
             .then(response => {
@@ -140,11 +142,8 @@ function MechanicDto(name, password, phone, email){
                     this.mechanics = response.data;
                 } else {
                     this.mechanics = [];
-                    var i;
-                    console.log(response.data.length)
-                    for(i = 0; i < response.data.length; i++){
+                    for(var i = 0; i < response.data.length; i++){
                         var mechanic = response.data[i];
-                        console.log(mechanic);
                         if(mechanic.name.includes(search)){
                             this.mechanics.push(mechanic);
                         } else if(mechanic.email.includes(search)){
@@ -154,7 +153,6 @@ function MechanicDto(name, password, phone, email){
                         }
                     }
                 }
-                
             })
             .catch(e => {
                 this.error = e

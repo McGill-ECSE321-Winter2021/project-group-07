@@ -95,6 +95,19 @@ public class MechanicRestController {
 		return Converter.convertToDto(mechanic);
 	}
 	
+	/**
+	 *restful controller for editing service
+	 * */
+	@PutMapping(value = { "/mechanic/updateServices/{oldEmail}", "/mechanic/updateServices/{oldEmail}/" })
+	public MechanicDto editService(@PathVariable("oldEmail") String oldEmail, @RequestParam String[] services) throws IllegalArgumentException {
+		Mechanic mechanic = mechanicService.getMechanicByEmail(oldEmail);
+		mechanic.setServices(new ArrayList<Service>());
+		for(String serviceType: services) {
+			mechanicService.addService(serviceService.getServiceByServiceType(ServiceType.valueOf(serviceType)), mechanic);
+		}
+		return Converter.convertToDto(mechanic);
+	}
+	
 	@DeleteMapping(value= {"/mechanic/{id}", "/mechanic/{id}/"})
 	public boolean removeMechanic(@PathVariable("id") String id)
 	{

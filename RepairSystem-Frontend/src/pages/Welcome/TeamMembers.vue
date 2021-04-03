@@ -5,7 +5,7 @@
        <nav class="navbar">
             <span class="navbar-brand mb-0 h1">
                 <div class="row">
-                      <form>
+                    <form onSubmit="return false;">
                         <input type="text" v-model="s" value="" class="search-input" placeholder="  Search">
                     </form>
 
@@ -131,7 +131,7 @@
                         <td>{{ mechanic.phone }}</td>
                         <td>
                             <span v-for="service in mechanic.services" style="text-align:center">
-                                {{service.serviceType}} 
+                                {{service.serviceType}}
                             </span>
                         </td>
                         <td> 
