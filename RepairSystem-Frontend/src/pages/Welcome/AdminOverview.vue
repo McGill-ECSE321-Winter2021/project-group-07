@@ -1,104 +1,71 @@
 <template>
-    <div class = "row no-gutters">
-        <div class = "col no-gutters">
-                <div class = "row no-gutters" >
-                    <div class = "left-top">
+<div class="row no-gutters">
+    <div class="col no-gutters">
+        <div class="row no-gutters">
+            <div class="left-top">
+                <img src="../../assets/appointment.png" width="50px">
+                Upcoming Appointments
+            </div>
+        </div>
 
-                        <img src="../../assets/appointment.png" width = "50px" >
-                            Upcoming Appointments        
-                    </div>
-                </div>
-                
-                <div class = "row no-gutters" >
-                    <div class = "left-bottom"> 
-                        <img src="../../assets/appointment.png" width = "50px" >
-                        Upcoming Mechanic Schedule 
-                        <div class="profile">
-       <nav class="navbar">
-            <span class="navbar-brand mb-0 h1">
-                <div class="row">
-                  <b-button v-b-modal.modal-prevent-closing class="btn-primary"> Add TimeSlot <img class="img-add" src="../../assets/Admin/plus.png"/> </b-button>
+        <div class="row no-gutters">
+            <div class="left-bottom">
+                <img src="../../assets/appointment.png" width="50px">
+                Upcoming Mechanic Schedule
+                <div class="profile">
+                    <nav class="navbar">
+                        <span class="navbar-brand mb-0 h1">
+                            <div class="row">
+                                <b-button v-b-modal.modal-prevent-closing class="btn-primary"> Add TimeSlot <img class="img-add" src="../../assets/Admin/plus.png" /> </b-button>
+                                <b-modal id="modal-prevent-closing" ref="modal" title="Add New TimeSlot" @show="resetModal" @hidden="resetModal" @ok="createTimeSlot(startTime,endTime)">
 
-                        <b-modal
-                        id="modal-prevent-closing"
-                        ref="modal"
-                        title="Add New TimeSlot"
-                        @show="resetModal"
-                        @hidden="resetModal"
-                        @ok="createTimeSlot(startTime,endTime)"
-                        >	
+                                    <b-form ref="form" @submit.stop.prevent="handleSubmit">
 
-                        <b-form ref="form" @submit.stop.prevent="handleSubmit">
+                                        <b-form-group label="startTime (YYYY-MM-DD-HH:mm)" label-for="startTime-input" invalid-feedback="startTime is required" :state="startTimeState">
+                                            <b-form-input id="startTime-input" v-model="startTime" :state="startTimeState" required></b-form-input>
+                                        </b-form-group>
 
-                            <b-form-group
-                            label="startTime (YYYY-MM-DD-HH:mm)"
-                            label-for="startTime-input"
-                            invalid-feedback="startTime is required"
-                            :state="startTimeState"
-                            >
-                            <b-form-input
-                                id="startTime-input"
-                                v-model="startTime"
-                                :state="startTimeState"
-                                required
-                            ></b-form-input>
-                            </b-form-group>
+                                        <b-form-group label="endTime (YYYY-MM-DD-HH:mm)" label-for="endTime-input" invalid-feedback="endTime is required" :state="endTimeState">
+                                            <b-form-input id="endTime-input" v-model="endTime" :state="endTimeState" required></b-form-input>
+                                        </b-form-group>
+                                    </b-form>
+                                </b-modal>
+                            </div>
+                        </span>
+                    </nav>
 
-                           <b-form-group
-                            label="endTime (YYYY-MM-DD-HH:mm)"
-                            label-for="endTime-input"
-                            invalid-feedback="endTime is required"
-                            :state="endTimeState"
-                            >
-                            <b-form-input
-                                id="endTime-input"
-                                v-model="endTime"
-                                :state="endTimeState"
-                                required
-                            ></b-form-input>
-                            </b-form-group> 
-                        </b-form>
-                        </b-modal>
-                </div>
-            </span>
-        </nav>
+                    <!-- The Table containing all the timeslot information -->
+                    <div class="container mt-3 mb-3" style="background-color:white; border-radius:30px;">
+                        <table class="table table-striped tabled-bordered mydatatable" style="width: 100">
+                            <thead>
+                                <tr style="text-align:center;  border-radius:30px;">
+                                    <th> TimeSlotId </th>
+                                    <th> Start Time </th>
+                                    <th> End Time </th>
+                                    <th> Appointment </th>
+                                    <th> Mechanic</th>
+                                    <th> Actions </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="timeslot in timeslots" style="text-align:center">
+                                    <td> {{timeslot.id}} </td>
+                                    <td>{{ timeslot.startTime }}</td>
+                                    <td>{{ timeslot.endTime }}</td>
+                                    <td>{{ timeslot.appointments }}</td>
+                                    <td>{{ timeslot.mechanics }}</td>
 
-    
-     
-  <!-- The Table containing all the timeslot information --> 
-        <div class="container mt-3 mb-3" style="background-color:white; border-radius:30px;">
-          <table class = "table table-striped tabled-bordered mydatatable" style="width: 100">
-              <thead>
-                    <tr style="text-align:center;  border-radius:30px;">
-                        <th> TimeSlotId </th>
-                        <th> Start Time </th>
-                        <th> End Time </th>
-                        <th> Appointment </th>
-                        <th> Mechanic</th>
-                        <th> Actions </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="timeslot in timeslots" style="text-align:center">
-                        <td> {{timeslot.id}} </td>
-                        <td>{{ timeslot.startTime }}</td>
-                        <td>{{ timeslot.endTime }}</td>
-                        <td>{{ timeslot.appointments }}</td>
-                        <td>{{ timeslot.mechanics }}</td>
-
-
-                    
-                     <!--   <td> 
+                                    <!--   <td> 
                         <button class="btn-edit" @click=" modalShow =!modalShow; fillCredentials(customer)"> <img  class="img-add" src="../../assets/Admin/edit.png"/>  </button>
                        <button class="btn-remove" @click="removeCustomer(customer.id)"> <img  class="img-add" src="../../assets/Admin/delete.png"/>  </button> 
-                        
+
                         <b-modal
                         v-model="modalShow"
                         title="Edit Profile"
                         id="modal-scoped"
                         >
                         <b-form ref="form" @submit.stop.prevent="handleSubmit">
-                           
+
                             <b-form-group
                             label="Name"
                             label-for="editName-input"
@@ -163,7 +130,6 @@
                             </b-form-input>
                             </b-form-group>
 
-                            
                              <b-form-group
                             label="Residence "
                             :state="editResidenceState"
@@ -178,7 +144,6 @@
                             </b-form-input>
                             </b-form-group>
 
-                            
                              <b-form-group
                             label="Credit Card"
                             label-for="editCredit-input"
@@ -210,61 +175,61 @@
                             > 
                             </b-form-input>
                             </b-form-group>
-   
+
                             </b-form>
                             <template #modal-footer="{Save, Cancel}">
-                              
+
                                 <b-button size="sm" variant="success" @click=" editCustomer(editEmail, editName, editPassword, editPhone, editCredit, editDebit, editResidence)"> Save </b-button>
                                 <b-button size="sm" variant="danger" @click="modalShow =!modalShow">Cancel</b-button> 
-      
+
                             </template>
                         </b-modal> 
 
-                             
                         </td> -->
-                    </tr>
-                </tbody>
-                <tfoot>
-                    <h1 style="color:white"> Footer </h1>
-                </tfoot>
-            </table>
-        </div>
-        
-    </div>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <h1 style="color:white"> Footer </h1>
+                            </tfoot>
+                        </table>
                     </div>
-                </div>
-        </div>
-        
-        <div class = "col no-gutters">
-            <div class = "rightside">
-                <div class = "row no-gutters">
-                    <div class = "top"> 
-                        <center><img src="../../assets/profile-default.png"   width = "100px" length = "100px" ></center>
-                        <br>
-                        <center> <b style = "color: rgb(51 41 134); font-size: 20px;"> {{admin.name}} <br> id: {{admin.id}}  </b> </center>
-                    </div>
-                </div>
 
-                <div class = "row no-gutters" >
-                    <br>
-                    <div class = "middle"> 
-                          <br>  <date-pick v-model="date" :hasInputElement="false"></date-pick>
-                    </div>
                 </div>
-                <div class = "row no-gutters" >
-                    <div class = "bottom"> 
-                        <div>
-                            <br>
-                        <b style = "font-family: Roboto; color: #F3BE35; font-size: 20px;"> &nbsp; Reminder </b>
-                        </div>
-                        <div class = "rcorners2">
-                            <b>reminder</b>
-                        </div>                                
+            </div>
+        </div>
+    </div>
+
+    <div class="col no-gutters">
+        <div class="rightside">
+            <div class="row no-gutters">
+                <div class="top">
+                    <center><img src="../../assets/profile-default.png" width="100px" length="100px"></center>
+                    <br>
+                    <center> <b style="color: rgb(51 41 134); font-size: 20px;"> {{admin.name}} <br> id: {{admin.id}} </b> </center>
+                </div>
+            </div>
+
+            <div class="row no-gutters">
+                <br>
+                <div class="middle">
+                    <br>
+                    <date-pick v-model="date" :hasInputElement="false"></date-pick>
+                </div>
+            </div>
+            <div class="row no-gutters">
+                <div class="bottom">
+                    <div>
+                        <br>
+                        <b style="font-family: Roboto; color: #F3BE35; font-size: 20px;"> &nbsp; Reminder </b>
+                    </div>
+                    <div class="rcorners2">
+                        <b>reminder</b>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </template>
 
 <script>
@@ -273,201 +238,178 @@ import Multiselect from 'vue-multiselect'
 import 'vue-date-pick/dist/vueDatePick.css';
 import DatePick from 'vue-date-pick';
 
-
 var config = require('../../../config')
 
 var frontendUrl = 'http://' + config.dev.host + ':' + config.dev.port
 var backendUrl = 'http://' + config.dev.backendHost + ':' + config.dev.backendPort
 
 var AXIOS = axios.create({
-  baseURL: backendUrl,
-  headers: { 'Access-Control-Allow-Origin': frontendUrl }
+    baseURL: backendUrl,
+    headers: {
+        'Access-Control-Allow-Origin': frontendUrl
+    }
 })
 
-function TimeSlotDto(startTime, endTime){
-		this.startTime = endTime;
-		this.endTime = endTime;
-		this.id = "";
-        this.mechanics = [];
-		this.appointments = [];
-	}
+function TimeSlotDto(startTime, endTime) {
+    this.startTime = endTime;
+    this.endTime = endTime;
+    this.id = "";
+    this.mechanics = [];
+    this.appointments = [];
+}
 
-    export default {
+export default {
 
-     components: {
-            Multiselect,
-            DatePick
-      },
-
-      data() {
-      return {
-        admin: "",
-        modalShow:false,
-        startTime: '',
-        endTime: '',
-        id: '',
-       	timeslots: [],
-        mechanics: [],
-        appointments:[],
-        
-        startTimeState: null,
-        endTimeState:null,
-      
-        error: "",
-
-      }
+    components: {
+        Multiselect,
+        DatePick
     },
 
+    data() {
+        return {
+            admin: "",
+            modalShow: false,
+            startTime: '',
+            endTime: '',
+            id: '',
+            timeslots: [],
+            mechanics: [],
+            appointments: [],
+
+            startTimeState: null,
+            endTimeState: null,
+
+            error: "",
+        }
+    },
 
     created: function () {
-    var id = this.$route.params.userId
-    AXIOS.get('/admin/'.concat(id))
-    .then(response => {
-        this.admin = response.data
-        // JSON responses are automatically parsed.
-        AXIOS.get('/timeslots').
-        then(response => {
-            this.timeslots = response.data
-        }).catch(e => {
-        this.error = e
-        console.log(e)
-    })
+        var id = this.$route.params.userId
+        AXIOS.get('/admin/'.concat(id))
+            .then(response => {
+                this.admin = response.data
+                // JSON responses are automatically parsed.
+                AXIOS.get('/timeslots').
+                then(response => {
+                    this.timeslots = response.data
+                }).catch(e => {
+                    this.error = e
+                    console.log(e)
+                })
 
-    })
-    .catch(e => {
-        this.error = e
-        console.log(e)
-    })
+            })
+            .catch(e => {
+                this.error = e
+                console.log(e)
+            })
     },
-
 
     methods: {
 
         /**
-         * Creating a customer and posting it in the backend 
+         * Creating a timeslot and posting it in the backend 
          */
-        createCustomer: function (name,password,phone,email,credit, debit,address,){
-           console.log(credit);
-          AXIOS.post('/customer/'.concat(name+"?="+credit), {},
-            {  
-                params:{
-                  name: name,
-                  phone: phone,
-                  password: password,
-                  email: email,
-                  credit: credit,
-                  debit: debit,
-                  address: address,
-                }
-            }).then(response => {
-                 
-              this.customers.push(response.data);
-            })
-            .catch(e => {
+        createTimeSlot(startTime,endTime) {
+            console.log(credit);
+            AXIOS.post('/timeslot/'.concat(startTime + "?endTime=" + endTime), {}, {
+                    params: {
+                        startTime: startTime,
+                        endTime: endTime,
+                    }
+                }).then(response => {
+                    this.timeslots.push(response.data);
+                })
+                .catch(e => {
                     this.error = e
                 })
 
-            },
-            
-        
-        editCustomer : function(email, name, password, phone, credit, debit, address)
-        {
-          console.log(email);
-          console.log(name);
-          console.log(password);
-          console.log(phone);
-          console.log(credit);
-          console.log(debit);
-          console.log(address);
-          AXIOS.put('/customer/'.concat(email+"?newName="+name+"&newPassword="+password+"&newPhone="+phone+"&newCredit="+credit+"&newDebit="+debit+"&newAddress="+address),{},{})
-          .then(response => {
-            this.customer = response.data;
-            location.reload();
-          }).catch(e => {
-            this.error = e;
-          })
+        },
+
+        editCustomer: function (email, name, password, phone, credit, debit, address) {
+            console.log(email);
+            console.log(name);
+            console.log(password);
+            console.log(phone);
+            console.log(credit);
+            console.log(debit);
+            console.log(address);
+            AXIOS.put('/customer/'.concat(email + "?newName=" + name + "&newPassword=" + password + "&newPhone=" + phone + "&newCredit=" + credit + "&newDebit=" + debit + "&newAddress=" + address), {}, {})
+                .then(response => {
+                    this.customer = response.data;
+                    location.reload();
+                }).catch(e => {
+                    this.error = e;
+                })
         },
 
         /** To AutoComplete the Edit Profile Modal */
-        fillCredentials : function(row)
-        {
-            
-          this.editName = row.name;
-          this.editEmail = row.email;
-          this.editPhone = row.phone;
-          this.editPassword = row.password;
-          this.editResidence = row.address;
-          AXIOS.get('/customer/'.concat(row.id), {}, {})
-          .then(response => {
-            this.customer = response.data;
-            this.editCredit = this.customer.creditHash;
-            console.log(this.customer.debitHash);
-            this.editDebit =this.customer.debitHash;
-          }).
-          catch(e=>{
-            this.error =e;
-          })
-        
-         
+        fillCredentials: function (row) {
+
+            this.editName = row.name;
+            this.editEmail = row.email;
+            this.editPhone = row.phone;
+            this.editPassword = row.password;
+            this.editResidence = row.address;
+            AXIOS.get('/customer/'.concat(row.id), {}, {})
+                .then(response => {
+                    this.customer = response.data;
+                    this.editCredit = this.customer.creditHash;
+                    console.log(this.customer.debitHash);
+                    this.editDebit = this.customer.debitHash;
+                }).
+            catch(e => {
+                this.error = e;
+            })
+
         },
-        removeCustomer: function(id){
-          console.log("entered removeCustomer function")
-          console.log("id: "+ id)
-          AXIOS.delete('/customer/'.concat(id), {}, {})
-            .then(response => {
-              console.log(response)
-              location.reload();
-            })
-            .catch(e => {
-              this.error = e;
-            })
+        removeCustomer: function (id) {
+            console.log("entered removeCustomer function")
+            console.log("id: " + id)
+            AXIOS.delete('/customer/'.concat(id), {}, {})
+                .then(response => {
+                    console.log(response)
+                    location.reload();
+                })
+                .catch(e => {
+                    this.error = e;
+                })
         },
 
+        checkFormValidity() {
+            const valid = this.$refs.form.checkValidity()
+            this.startTimeState = valid
+            this.endTimeState = valid
+            return valid
+        },
+        handleOk(bvModalEvt) {
+            bvModalEvt.preventDefault()
+            this.handleSubmit()
+        },
+        resetModal() {
+            this.modalShow: false,
+            this.startTime: '',
+            this.endTime: '',
+            this.id: '',
+            this.timeslots: [],
+            this.mechanics: [],
+            this.appointments: [],
+            //this.admin: ''
+            this.startTimeState: null,
+            this.endTimeState: null,
+            this.error: "",
+        },
+        handleSubmit() {
+            if (!this.checkFormValidity()) {
+                return
+            }
 
-      checkFormValidity() {
-        const valid = this.$refs.form.checkValidity()
-        this.nameState = valid
-        this.emailState = valid
-        this.phoneState = valid
-        this.passwordState = valid 
-        this.addressState = valid
-        return valid
-      },
-      handleOk(bvModalEvt) {
-        bvModalEvt.preventDefault()
-        this.handleSubmit()
-      },
-       resetModal() {
-        this.name = ''
-        this.email=''
-        this.phone=''
-        this.password=''
-        this.address=''
-        this.customer=""
-        this.credit =" "
-        this.debit = " "
-        this.nameState = null
-        this.emailState =null
-        this.phoneState = null
-        this.passwordState = null
-        this.addressState =null
-        this.creditState = null
-        this.debitState = null
-       
-      },
-      handleSubmit() {
-        if (!this.checkFormValidity()) {
-          return
+            this.$nextTick(() => {
+                this.$bvModal.hide('modal-prevent-closing')
+            })
         }
-        
-        this.$nextTick(() => {
-          this.$bvModal.hide('modal-prevent-closing')
-        })
-      }
     }
-    
-       
-    }
+
+}
 </script>
 
 <style scoped>
@@ -482,7 +424,7 @@ function TimeSlotDto(startTime, endTime){
     font-weight: 600;
 }
 
-.rightside{
+.rightside {
     height: 98.5vh;
     width: 70%;
     position: absolute;
@@ -491,7 +433,7 @@ function TimeSlotDto(startTime, endTime){
     background: white
 }
 
-.top{
+.top {
     height: 50%;
     width: 100%;
     position: absolute;
@@ -499,51 +441,51 @@ function TimeSlotDto(startTime, endTime){
     top: 20px;
 }
 
-
 .rcorners {
-  border-radius: 25px;
-  background: white;
-  width: 750px;
-  height: 150px;
+    border-radius: 25px;
+    background: white;
+    width: 750px;
+    height: 150px;
 }
+
 .button1 {
-  background: rgb(51 41 134);
-  width: 100px;
-  height: 60px;
-  color: white;
-  padding: 6px;
-  border-radius: 8px;
+    background: rgb(51 41 134);
+    width: 100px;
+    height: 60px;
+    color: white;
+    padding: 6px;
+    border-radius: 8px;
 }
 
 .rcorners2 {
-  border-radius: 25px;
-  background: white;
-  width: 400px;
-  height: 300px;
-  border: 3px solid;
-  border-color: #D3D2E1;
-  padding: 25px;
+    border-radius: 25px;
+    background: white;
+    width: 400px;
+    height: 300px;
+    border: 3px solid;
+    border-color: #D3D2E1;
+    padding: 25px;
 }
 
-.middle{
+.middle {
     height: 30%;
     width: 90%;
     position: absolute;
     content: "";
-    left:20px;
+    left: 20px;
     top: 200px;
 }
 
-.bottom{
+.bottom {
     height: 30%;
     width: 80%;
     position: absolute;
     content: "";
-    left:20px;
+    left: 20px;
     top: 500px;
 }
 
-.left-top{
+.left-top {
     position: absolute;
     content: "";
     top: 50px;
@@ -551,11 +493,11 @@ function TimeSlotDto(startTime, endTime){
     width: 80vh;
 }
 
-.left-bottom{
+.left-bottom {
 
     position: absolute;
     content: "";
-    left:70px;
+    left: 70px;
     top: 450px;
     width: 80vh;
 }
@@ -565,32 +507,33 @@ function TimeSlotDto(startTime, endTime){
     width: 100%;
     font-family: Roboto;
     /**color: rgb(167, 167, 167);   */
-    color:rgb(51 41 134);
-    background:  #D3D2E1;
+    color: rgb(51 41 134);
+    background: #D3D2E1;
 }
 
-.navbar{
-    color:rgb(51 41 134)
+.navbar {
+    color: rgb(51 41 134)
 }
-.title-header{
+
+.title-header {
     margin-left: 40px;
-    margin-right:20px;  
+    margin-right: 20px;
 }
 
-.btn-primary{
+.btn-primary {
     border-radius: 10px;
-    margin-right:20px;  
+    margin-right: 20px;
     transform: translateY(-5px);
-    
+
 }
 
-.btn-edit{
+.btn-edit {
     background-color: #D3D2E1;
-    border-color:transparent;
-    border-radius:10px;
+    border-color: transparent;
+    border-radius: 10px;
 }
-.btn-secondary
-{
+
+.btn-secondary {
     border-radius: 10px;
     border-width: 2px;
     background: #5430be;
@@ -605,36 +548,35 @@ function TimeSlotDto(startTime, endTime){
     width: 400px;
     border-color: transparent;
 }
-.search-btn{
+
+.search-btn {
     border-radius: 20px;
     border-color: transparent;
     background-color: transparent;
-    transform: translate(-35px,-1px);
+    transform: translate(-35px, -1px);
 }
 
-.btn-remove{
+.btn-remove {
     border-color: #5430be;
     background-color: transparent;
-    border-radius:10px;
-    border-width:2px;
+    border-radius: 10px;
+    border-width: 2px;
 
 }
-.line
-{
-    height:2px;
-    background-color:rgba(64, 57, 134, 1)
+
+.line {
+    height: 2px;
+    background-color: rgba(64, 57, 134, 1)
 }
-.img-add{
-    max-height:20px;
+
+.img-add {
+    max-height: 20px;
     transform: translateY(-1px);
 }
 
-.table
-{
+.table {
     border-radius: 30px;
-    color:#111B47;
+    color: #111B47;
 
 }
-
-
 </style>
