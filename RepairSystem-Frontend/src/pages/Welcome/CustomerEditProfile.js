@@ -51,9 +51,10 @@ export default {
         editEmail : " ",
         editPhone : " ",
         editPassword : " ", 
-        editResidence: " ",
+        editAddress: " ",
         editCredit: " ",
-        editDebit:" ",
+		editDebit:" ",
+		modalShow: false,
 }
     },
     created: function () {
@@ -61,7 +62,14 @@ export default {
         AXIOS.get('/customer/'.concat(id))
         .then(response => {
         // JSON responses are automatically parsed.
-        this.customer = response.data
+		this.customer = response.data
+		this.name = response.data.name
+		this.email = response.data.email
+		this.credit = response.data.creditHash
+		this.debit = response.data.debitHash
+		this.address = response.data.address
+		this.phone = response.data.phone
+		this.password = response.data.password
     })
     .catch(e => {
         this.error = e
@@ -69,13 +77,19 @@ export default {
     })
     },
         methods: {
-			editCustomers : function(oldEmail, newPassword, newPhone, newCredit, newDebit, newAddress)
+			editCustomers : function(newName, newPassword, newPhone, newCredit, newDebit, newAddress)
 			{
-				AXIOS.put('/customer/editAllCustomerCredentials/'.concat(oldEmail + "?newPassword=" + newPassword + "?newPhone=" + newPhone + "?newCredit=" + newCredit + "?newDebit=" + newDebit + "?newAddress=" + newAddress), {}, 
+				AXIOS.put('/customer/'.concat(this.customer.email + "?newName=" + newName + "&newPassword=" + newPassword + "&newPhone=" + newPhone + "&newCredit=" + newCredit + "&newDebit=" + newDebit + "&newAddress=" + newAddress), {}, 
 				{})
 				.then(response => {
 					this.customer = response.data;
-					location.reload();
+					this.name = response.data.name
+					this.email = response.data.email
+					this.credit = response.data.creditHash
+					this.debit = response.data.debitHash
+					this.address = response.data.address
+					this.phone = response.data.phone
+					this.password = response.data.password
 				}).catch(e => {
 					this.error = e;
 				})
@@ -87,7 +101,10 @@ export default {
 				this.editEmail = this.email;
 				this.editPhone = this.phone;
 				this.editPassword = this.password;
-				this.editResidence = this.address;
+				this.editAddress = this.address;
+				this.editDebit = this.debit;
+				this.editCredit = this.credit;
+
 			}, 
 
 			handleSubmit() {

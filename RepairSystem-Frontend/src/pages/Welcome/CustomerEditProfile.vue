@@ -22,7 +22,7 @@
                     <div class="w-100">
                     </div>
                     <b-group>
-                        <b-input type="text" v-model="address" :value="address" disabled>
+                        <b-input type="text" v-model="address" :value="address" readonly>
                         </b-input>
                         <br>
                     </b-group>
@@ -34,7 +34,7 @@
                     <div class="w-100">
                     </div>
                     <b-group>
-                        <b-input type="password" v-model="password" :value="password" disabled >
+                        <b-input type="password" v-model="password" :value="password" readonly >
                         </b-input>
                         <br>
                     </b-group>
@@ -50,7 +50,7 @@
                             <div class="w-100">
                             </div>
                             <b-group>
-                                <b-input type="text" v-model="email" :value="email" disabled>
+                                <b-input type="text" v-model="email" :value="email" readonly>
                                 </b-input>
                                 <br>
                             </b-group>
@@ -62,7 +62,7 @@
                             <div class="w-100">
                             </div>
                             <b-group>
-                                <b-input type="text" v-model="phone" :value="phone" disabled>
+                                <b-input type="text" v-model="phone" :value="phone" readonly>
                                 </b-input>
                             </b-group>
                         </div> 
@@ -79,7 +79,7 @@
                             <div class="w-100">
                             </div>
                             <b-group>
-                                <b-input type="text" v-model="credit" :value="credit"disabled>
+                                <b-input type="text" v-model="credit" :value="credit"readonly>
                                 </b-input>
                                 <br>
                             </b-group>
@@ -91,7 +91,7 @@
                             <div class="w-100">
                             </div>
                             <b-group>
-                                <b-input type="text" v-model="debit" :value="dedit"disabled>
+                                <b-input type="text" v-model="debit" :value="dedit" readonly>
                                 </b-input>
                                 <br>
                             </b-group>
@@ -106,12 +106,12 @@
             >
             <b-form ref="form" @submit.stop.prevent="handleSubmit">
                            
-                <b-form-group
-                label="Name"
-                label-for="editName-input"
-                invalid-feedback="Name is required"
-                :state="editEmailState"
-                >
+                            <b-form-group
+                            label="Name"
+                            label-for="editName-input"
+                            invalid-feedback="Name is required"
+                            :state="editNameState"
+                            >
                             <b-form-input
                                 id="editName"
                                 type="text"
@@ -122,23 +122,21 @@
                             </b-form-input>
                             </b-form-group>
 
-                              <b-form-group
-                            label="Email"
-                            label-for="editEmail-input"
-                            invalid-feedback="Email is required"
-                            :state="editEmailState"
+                            <b-form-group
+                            label="Address"
+                            label-for="editAddress-input"
+                            invalid-feedback="Address is required"
+                            :state="editAddressState"
                             >
                             <b-form-input
-                                id="editEmail"
+                                id="editAddress"
                                 type="text"
-                                v-model="editEmail"
-                                name="editEmail"
-                                :value="editEmail"
-                                disabled
+                                v-model="editAddress"
+                                name="editAddress"
+                                :value="editAddress"
                             >
                             </b-form-input>
-                            </b-form-group> 
-
+                            </b-form-group>
 
                             <b-form-group
                             label="Phone"
@@ -171,11 +169,43 @@
                             > 
                             </b-form-input>
                             </b-form-group>
+
+                            <b-form-group
+                            label="Credit"
+                            label-for="editCredit-input"
+                            invalid-feedback="Credit is required"
+                            :state="editCreditState"
+                            >
+                            <b-form-input
+                               id="editCredit"
+                               v-model="editCredit"
+                               type="text"
+                               name="editCredit"
+                               :value="editCredit"
+                            > 
+                            </b-form-input>
+                            </b-form-group>
+
+                            <b-form-group
+                            label="Debit"
+                            label-for="editDebit-input"
+                            invalid-feedback="Debit is required"
+                            :state="editDebitState"
+                            >
+                            <b-form-input
+                               id="editDebit"
+                               v-model="editDebit"
+                               type="text"
+                               name="editDebit"
+                               :value="editDebit"
+                            > 
+                            </b-form-input>
+                            </b-form-group>
    
                             </b-form>
                                 <template #modal-footer="{Save,Cancel}">
                                 <!-- Emulate built in modal footer ok and cancel button actions -->
-                                 <b-button size="sm" variant="success" @click="editCustomers(editEmail, editName, editPassword, editPhone)"> Save </b-button>
+                                 <b-button size="sm" variant="success" @click="editCustomers(editName, editPassword, editPhone, editCredit, editDebit, editAddress); modalShow=!modalShow"> Save </b-button>
                                 <b-button size="sm" variant="danger" @click="modalShow =!modalShow">Cancel</b-button> 
       
                             </template>
@@ -217,18 +247,18 @@
     </div>
 </template>
 
-<script src="./CustomerEditProfile.js" src="./AdminEditProfile">
+<script src="./CustomerEditProfile.js">
 
 </script>
 
-<style src="vue-date-pick/dist/vueDatePick.css"></style>="./CustomerEditProfile.js"></style>
-le scoped>
+<style src="vue-date-pick/dist/vueDatePick.css"></style>
+<style scoped>
 .profile {
     position: relative;
     top: 20px;
     right: -20px;
     width: 115%;
-    height: 500px;
+    height: 550px;
     border-radius: 25px;
     background: white;
     border: 3px solid;
@@ -335,7 +365,7 @@ color: #37447E;
 .button1 {
   background: rgb(51 41 134);
   width: 100px;
-  height: 30px;
+  height: 40px;
   color: white;
   border-radius: 8px;
 }

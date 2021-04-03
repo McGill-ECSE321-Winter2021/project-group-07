@@ -21,7 +21,7 @@
                     <div class="w-100">
                     </div>
                     <b-group>
-                        <b-input type="text" v-model="address" :value="address">
+                        <b-input type="text" v-model="address" :value="address" readonly>
                         </b-input>
                         <br>
                     </b-group>
@@ -33,7 +33,7 @@
                     <div class="w-100">
                     </div>
                     <b-group>
-                        <b-input type="password" v-model="password" :value="password" >
+                        <b-input type="password" v-model="password" :value="password" readonly>
                         </b-input>
                         <br>
                     </b-group>
@@ -49,7 +49,7 @@
                             <div class="w-100">
                             </div>
                             <b-group>
-                                <b-input type="text" v-model="email" :value="email" disabled>
+                                <b-input type="text" v-model="email" :value="email" readonly>
                                 </b-input>
                                 <br>
                             </b-group>
@@ -61,7 +61,7 @@
                             <div class="w-100">
                             </div>
                             <b-group>
-                                <b-input type="text" v-model="phone" :value="phone">
+                                <b-input type="text" v-model="phone" :value="phone" readonly>
                                 </b-input>
                             </b-group>
                         </div>
