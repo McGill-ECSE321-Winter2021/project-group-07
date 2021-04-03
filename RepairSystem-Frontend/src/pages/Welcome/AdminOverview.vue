@@ -5,6 +5,47 @@
             <div class="left-top">
                 <img src="../../assets/appointment.png" width="50px">
                 Upcoming Appointments
+                <div class="profile">
+                    <nav class="navbar">
+                        <span class="navbar-brand mb-0 h1">
+                            <div class="row">
+                                <b-button v-b-modal.modal-prevent-closing class="btn-primary"> Add Appointment <img class="img-add" src="../../assets/Admin/plus.png" /> </b-button>
+                                <b-modal id="modal-prevent-closing" ref="modal" title="Add New Apointment" @show="resetModal" @hidden="resetModal" @ok="createAppoiment(customerId,timeSlotId, carId, services, note)">
+
+
+                                </b-modal>
+                            </div>
+                        </span>
+                    </nav>
+
+                    <!-- The Table containing all the timeslot information -->
+                    <div class="container mt-3 mb-3" style="background-color:white; border-radius:30px;">
+                        <table class="table table-striped tabled-bordered mydatatable" style="width: 100">
+                            <thead>
+                                <tr style="text-align:center;  border-radius:30px;">
+                                    <th> Appointment Id </th>
+                                    <th> Cusomter </th>
+                                    <th> Status </th>
+                                    <th> Time Slot</th>
+                                    <th> Mechanics </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="appointment in appointments" style="text-align:center">
+                                    <td> {{appointment.id}} </td>
+                                    <td>{{ appointment.customer }}</td>
+                                    <td>{{ appointment.status }}</td>
+                                    <td>{{ appointment.timeslot }}</td>
+                                    <td>{{ appointment.mechanics }}</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <h1 style="color:white"> Footer </h1>
+                            </tfoot>
+                        </table>
+                    </div>
+
+                </div>
             </div>
         </div>
 
@@ -44,7 +85,6 @@
                                     <th> End Time </th>
                                     <th> Appointment </th>
                                     <th> Mechanic</th>
-                                    <th> Actions </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -54,138 +94,6 @@
                                     <td>{{ timeslot.endTime }}</td>
                                     <td>{{ timeslot.appointments }}</td>
                                     <td>{{ timeslot.mechanics }}</td>
-
-                                    <!--   <td> 
-                        <button class="btn-edit" @click=" modalShow =!modalShow; fillCredentials(customer)"> <img  class="img-add" src="../../assets/Admin/edit.png"/>  </button>
-                       <button class="btn-remove" @click="removeCustomer(customer.id)"> <img  class="img-add" src="../../assets/Admin/delete.png"/>  </button> 
-
-                        <b-modal
-                        v-model="modalShow"
-                        title="Edit Profile"
-                        id="modal-scoped"
-                        >
-                        <b-form ref="form" @submit.stop.prevent="handleSubmit">
-
-                            <b-form-group
-                            label="Name"
-                            label-for="editName-input"
-                            invalid-feedback="Name is required"
-                            :state="editEmailState"
-                            >
-                            <b-form-input
-                                id="editName"
-                                type="text"
-                                v-model="editName"
-                                name="editName"
-                                :value="editName"
-                            >
-                            </b-form-input>
-                            </b-form-group>
-
-                              <b-form-group
-                            label="Email"
-                            label-for="editEmail-input"
-                            invalid-feedback="Email is required"
-                            :state="editEmailState"
-                            >
-                            <b-form-input
-                                id="editEmail"
-                                type="text"
-                                v-model="editEmail"
-                                name="editEmail"
-                                :value="editEmail"
-                            >
-                            </b-form-input>
-                            </b-form-group> 
-
-                            <b-form-group
-                            label="Phone"
-                            label-for="editPhone-input"
-                            invalid-feedback="Phone is required"
-                            :state="editPhoneState"
-                            >
-                            <b-form-input
-                               id="editPhone"
-                               v-model="editPhone"
-                               type="text"
-                               name="editPhone"
-                               :value="editPhone"
-                            > 
-                            </b-form-input>
-                            </b-form-group>
-
-                             <b-form-group
-                            label="Password"
-                            label-for="editPassword-input"
-                            invalid-feedback="Password is required"
-                            :state="editPhoneState"
-                            >
-                            <b-form-input
-                               id="editPassword"
-                               v-model="editPassword"
-                               type="text"
-                               name="editPassword"
-                               :value="editPassword"
-                            > 
-                            </b-form-input>
-                            </b-form-group>
-
-                             <b-form-group
-                            label="Residence "
-                            :state="editResidenceState"
-                            >
-                            <b-form-input
-                               id="editPassword"
-                               v-model="editResidence"
-                               type="text"
-                               name="editPassword"
-                               :value="editResidence"
-                            > 
-                            </b-form-input>
-                            </b-form-group>
-
-                             <b-form-group
-                            label="Credit Card"
-                            label-for="editCredit-input"
-                            invalid-feedback="Credit is required"
-                            :state="editCreditState"
-                            >
-                            <b-form-input
-                               id="editCredit"
-                               v-model="editCredit"
-                               type="text"
-                               name="editCredit"
-                               :value="editCredit"
-                            > 
-                            </b-form-input>
-                            </b-form-group>
-
-                           <b-form-group
-                            label="Debit Card"
-                            label-for="editDebit-input"
-                            invalid-feedback="Debit is required"
-                            :state="editDebitState"
-                            >
-                            <b-form-input
-                               id="editDebit"
-                               v-model="editDebit"
-                               type="text"
-                               name="editDebit"
-                               :value="editDebit"
-                            > 
-                            </b-form-input>
-                            </b-form-group>
-
-                            </b-form>
-                            <template #modal-footer="{Save, Cancel}">
-
-                                <b-button size="sm" variant="success" @click=" editCustomer(editEmail, editName, editPassword, editPhone, editCredit, editDebit, editResidence)"> Save </b-button>
-                                <b-button size="sm" variant="danger" @click="modalShow =!modalShow">Cancel</b-button> 
-
-                            </template>
-                        </b-modal> 
-
-                        </td> -->
                                 </tr>
                             </tbody>
                             <tfoot>
@@ -275,6 +183,7 @@ export default {
             timeslots: [],
             mechanics: [],
             appointments: [],
+            appointment: "",
 
             startTimeState: null,
             endTimeState: null,
@@ -292,6 +201,14 @@ export default {
                 AXIOS.get('/timeslots').
                 then(response => {
                     this.timeslots = response.data
+
+                    AXIOS.get('/appointment').
+                    then(response => {
+                        this.appointments = response.data
+                    }).catch(e => {
+                    this.error = e
+                    console.log(e)
+                })
                 }).catch(e => {
                     this.error = e
                     console.log(e)
@@ -309,14 +226,15 @@ export default {
         /**
          * Creating a timeslot and posting it in the backend 
          */
-        createTimeSlot(startTime,endTime) {
+        createTimeSlot: function (startTime, endTime) {
             console.log(credit);
-            AXIOS.post('/timeslot/'.concat(startTime + "?endTime=" + endTime), {}, {
+            AXIOS.post('/timeslot/'.concat(startTime + "?endTime=" + endTime), {}, {}, {
                     params: {
                         startTime: startTime,
-                        endTime: endTime,
+                        endTime: endTime
                     }
                 }).then(response => {
+
                     this.timeslots.push(response.data);
                 })
                 .catch(e => {
@@ -325,66 +243,6 @@ export default {
 
         },
 
-        editCustomer: function (email, name, password, phone, credit, debit, address) {
-            console.log(email);
-            console.log(name);
-            console.log(password);
-            console.log(phone);
-            console.log(credit);
-            console.log(debit);
-            console.log(address);
-            AXIOS.put('/customer/'.concat(email + "?newName=" + name + "&newPassword=" + password + "&newPhone=" + phone + "&newCredit=" + credit + "&newDebit=" + debit + "&newAddress=" + address), {}, {})
-                .then(response => {
-                    this.customer = response.data;
-                    location.reload();
-                }).catch(e => {
-                    this.error = e;
-                })
-        },
-
-        /** To AutoComplete the Edit Profile Modal */
-        fillCredentials: function (row) {
-
-            this.editName = row.name;
-            this.editEmail = row.email;
-            this.editPhone = row.phone;
-            this.editPassword = row.password;
-            this.editResidence = row.address;
-            AXIOS.get('/customer/'.concat(row.id), {}, {})
-                .then(response => {
-                    this.customer = response.data;
-                    this.editCredit = this.customer.creditHash;
-                    console.log(this.customer.debitHash);
-                    this.editDebit = this.customer.debitHash;
-                }).
-            catch(e => {
-                this.error = e;
-            })
-
-        },
-        removeCustomer: function (id) {
-            console.log("entered removeCustomer function")
-            console.log("id: " + id)
-            AXIOS.delete('/customer/'.concat(id), {}, {})
-                .then(response => {
-                    console.log(response)
-                    location.reload();
-                })
-                .catch(e => {
-                    this.error = e;
-                })
-        },
-
-        checkFormValidity() {
-            const valid = this.$refs.form.checkValidity()
-            this.startTimeState = valid
-            this.endTimeState = valid
-            return valid
-        },
-        handleOk(bvModalEvt) {
-            bvModalEvt.preventDefault()
-            this.handleSubmit()
-        },
         handleSubmit() {
             if (!this.checkFormValidity()) {
                 return

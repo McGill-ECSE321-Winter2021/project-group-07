@@ -92,9 +92,8 @@
                                 required
                             ></b-form-input>
                             </b-form-group>  
-                           
-
                         </b-form>
+                        
                          <label class="typo__label"> Capabilities </label>
                             <multiselect v-model="value" :state="capabilitiesState" :options="options" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Pick some" label="name" track-by="name" :preselect-first="true">
                                 <template slot="selection" slot-scope="{ values, search, isOpen }">
@@ -136,7 +135,7 @@
                         </td>
                         <td> 
                         <button class="btn-edit" @click="modalShow =!modalShow; fillCredentials(mechanic)"> <img  class="img-add" src="../../assets/Admin/edit.png"/>  </button>
-                       <button class="btn-remove" @click="removeMechanic(mechanic.id)"> <img  class="img-add" src="../../assets/Admin/delete.png"/>  </button> 
+                        <button class="btn-remove" @click="removeMechanic(mechanic.id)"> <img  class="img-add" src="../../assets/Admin/delete.png"/>  </button> 
                         
                         <b-modal
                         v-model="modalShow"
