@@ -84,7 +84,6 @@ function MechanicDto(name, password, phone, email){
               for(var i = 0; i < value.length; i++){
                 services.push(value[i].name)
               }
-              console.log("/mechanic/updateServices/".concat(email + "?services=" + services))
               AXIOS.put("/mechanic/updateServices/".concat(email + "?services=" + services), {},{})
                     .then(response => { 
                       this.mechanics.push(response.data)
@@ -102,11 +101,13 @@ function MechanicDto(name, password, phone, email){
         /** To Save the Edits in Edit Profile */
         editMechanic : function(email, name, password, phone)
         {
-          console.log("test")
           AXIOS.put('/mechanic/'.concat(email+"?name="+name+"&password="+password+"&phone="+phone),{},{})
           .then(response => {
-            this.mechanic = response.data;
-            location.reload();
+            for(var i = 0; i < this.mechanics.length; i++){
+              if(this.mechanics[i].id == response.data.id){
+                this.mechanics[i] = response.data
+              }
+            }
           }).catch(e => {
             this.error = e;
           })
@@ -127,8 +128,16 @@ function MechanicDto(name, password, phone, email){
         removeMechanic: function(id){
           AXIOS.delete('/mechanic/'.concat(id), {}, {})
             .then(response => {
-              console.log(response)
-              location.reload();
+              for(var i = 0; i < this.mechanics.length; i++){
+                if(this.mechanics[i].id == response.data.id){
+                  if(i == this.mechanics.length-1){
+                    this.mechanics = this.mechanics.splice(0,i)
+                  } else {
+                    this.mechanics = this.mechanics.splice(0,i).concat(this.mechanics.splice(i+1,this.mechanics.length))
+                  }
+                  break
+                }
+              }
             })
             .catch(e => {
               this.error = e;
