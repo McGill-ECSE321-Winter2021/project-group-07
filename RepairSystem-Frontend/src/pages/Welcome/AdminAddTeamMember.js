@@ -131,11 +131,7 @@ function MechanicDto(name, password, phone, email){
             .then(response => {
               for(var i = 0; i < this.mechanics.length; i++){
                 if(this.mechanics[i].id == response.data.id){
-                  if(i == this.mechanics.length-1){
-                    this.mechanics = this.mechanics.splice(0,i)
-                  } else {
-                    this.mechanics = this.mechanics.splice(0,i).concat(this.mechanics.splice(i+1,this.mechanics.length))
-                  }
+                  this.mechanics.splice(i,1)
                   break
                 }
               }
