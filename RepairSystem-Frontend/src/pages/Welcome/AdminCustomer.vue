@@ -320,7 +320,10 @@ function CustomerDto(name, password, phone, email, credit, debit, address){
     this.debit = debit;
     this.address= address;
     this.lastDate= "";
-    this.id ="";
+    this.appointments = "";
+	  this.id = "";
+	  this.cars = "";
+	  this.lastActive = "";
 }
     export default {
 
@@ -341,7 +344,7 @@ function CustomerDto(name, password, phone, email, credit, debit, address){
         customer:"",
         lastDate:"",
        	customers: [],
-       admin: "",
+        admin: "",
         nameState: null,
         emailState:null,
         phoneState:null,
@@ -416,13 +419,7 @@ function CustomerDto(name, password, phone, email, credit, debit, address){
         
         editCustomer : function(email, name, password, phone, credit, debit, address)
         {
-          console.log(email);
-          console.log(name);
-          console.log(password);
-          console.log(phone);
-          console.log(credit);
-          console.log(debit);
-          console.log(address);
+         
           AXIOS.put('/customer/'.concat(email+"?newName="+name+"&newPassword="+password+"&newPhone="+phone+"&newCredit="+credit+"&newDebit="+debit+"&newAddress="+address),{},{})
           .then(response => {
             this.customer = response.data;
