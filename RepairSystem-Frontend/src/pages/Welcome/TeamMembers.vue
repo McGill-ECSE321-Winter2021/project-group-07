@@ -21,6 +21,8 @@
                         @hidden="resetModal"
                         @ok="createMechanic(name,password,phone,email,value)"
                         >
+
+                        <label> <b>Personal Information  </b> </label>
                         <b-form ref="form" @submit.stop.prevent="handleSubmit">
 
                             <b-form-group
@@ -91,11 +93,156 @@
                                 :state="addressState"
                                 required
                             ></b-form-input>
-                            </b-form-group>  
-                           
+                            </b-form-group> 
 
+                            <!-- For WorkHours --> 
+                            <label> <b> Work Hours </b> </label> 
+
+                            <div class="row">
+                                <p style="margin-left:20px"> Monday </p>
+                                <div class="col">
+                                    <b-form-input
+                                    id="mondayStart"
+                                    type="time"
+                                    class="form-control"
+                                    v-model="mondayStart"  
+                                    placeholder="Monday"   
+                                    > 
+                                    <label for="Monday">Choose your time</label>
+                                    </b-form-input>
+
+                                </div>
+                                <div class="col">
+                                 <b-form-input
+                                    id="mondayEnd"
+                                    type="time"
+                                    class="form-control"
+                                    v-model="mondayEnd"   
+                                > 
+                                </b-form-input>
+                                </div>
+                            </div>
+
+                                <div class="row">
+                                <p style="margin-left:20px">Tuesday</p>
+                                <div class="col">
+                                    <b-form-input
+                                    id="tuesdayStart"
+                                    type="time"
+                                    class="form-control"
+                                    v-model="tuesdayStart"  
+                                    placeholder="Monday"   
+                                    > 
+                                    </b-form-input>
+
+                                </div>
+                                <div class="col">
+                                 <b-form-input
+                                    id="tuesdayEnd"
+                                    type="time"
+                                    class="form-control"
+                                    v-model="tuesdayEnd"   
+                                > 
+                                </b-form-input>
+                                </div>
+                            </div>
+
+                            
+                                <div class="row">
+                                <p style="margin-left:20px">Wednesday</p>
+                                <div class="col">
+                                    <b-form-input
+                                    id="wednesdayStart"
+                                    type="time"
+                                    class="form-control"
+                                    v-model="wednesdayStart"  
+                                    > 
+                                    </b-form-input>
+
+                                </div>
+                                <div class="col">
+                                 <b-form-input
+                                    id="wednesdayEnd"
+                                    type="time"
+                                    class="form-control"
+                                    v-model="wednesdayEnd"   
+                                > 
+                                </b-form-input>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <p style="margin-left:20px">Thursday</p>
+                                <div class="col">
+                                    <b-form-input
+                                    id="thursdayStart"
+                                    type="time"
+                                    class="form-control"
+                                    v-model="thursdayStart"  
+                                    > 
+                                    </b-form-input>
+
+                                </div>
+                                <div class="col">
+                                 <b-form-input
+                                    id="thursdayEnd"
+                                    type="time"
+                                    class="form-control"
+                                    v-model="thursdayEnd"   
+                                > 
+                                </b-form-input>
+                                </div>
+                            </div>
+
+                               <div class="row">
+                                <p style="margin-left:20px">Friday</p>
+                                <div class="col">
+                                    <b-form-input
+                                    id="fridayStart"
+                                    type="time"
+                                    class="form-control"
+                                    v-model="fridayStart"  
+                                    > 
+                                    </b-form-input>
+
+                                </div>
+                                <div class="col">
+                                 <b-form-input
+                                    id="fridayEnd"
+                                    type="time"
+                                    class="form-control"
+                                    v-model="fridayEnd"   
+                                > 
+                                </b-form-input>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <p style="margin-left:20px">Saturday</p>
+                                <div class="col">
+                                    <b-form-input
+                                    id="saturdayStart"
+                                    type="time"
+                                    class="form-control"
+                                    v-model="saturdayStart"  
+                                    > 
+                                    </b-form-input>
+
+                                </div>
+                                <div class="col">
+                                 <b-form-input
+                                    id="saturdayEnd"
+                                    type="time"
+                                    class="form-control"
+                                    v-model="saturdayEnd"   
+                                > 
+                                </b-form-input>
+                                </div>
+                            </div>
                         </b-form>
-                         <label class="typo__label"> Capabilities </label>
+
+                        <!-- Capabilities part of the form -->
+                         <label class="typo__label"> <b> Capabilities </b> </label>
                             <multiselect v-model="value" :state="capabilitiesState" :options="options" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Pick some" label="name" track-by="name" :preselect-first="true">
                                 <template slot="selection" slot-scope="{ values, search, isOpen }">
                                     <span class="multiselect__single" v-if="values .length &amp;&amp; !isOpen">{{ values.length }} options selected</span>
@@ -115,20 +262,33 @@
           <table class = "table table-striped tabled-bordered mydatatable" style="width: 100">
               <thead>
                     <tr style="text-align:center;  border-radius:30px;">
-                        <th> ID </th>
                         <th> Name </th>
                         <th>Email</th>
                         <th>Phone Number</th>
+                        <th> Work Schedule </th>
                         <th>Capabilities</th>
                         <th> Actions </th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr v-for="mechanic in mechanics" style="text-align:center">
-                        <td> {{mechanic.id}} </td>
                         <td>{{ mechanic.name }}</td>
                         <td>{{ mechanic.email }}</td>
                         <td>{{ mechanic.phone }}</td>
+                        <td> 
+                            <table class="table">
+                                <tbody>
+                                    <td> M : </td>
+                                    <td> Tu : </td>
+                                    <td> W: </td>
+                                    <td> Th </td>
+                                    <td> F </td>
+                                    <td> Sat </td>
+                                    <td> Sun </td>
+                                </tbody>
+                            </table>
+
+                        </td>
                         <td>
                             <span v-for="service in mechanic.services" style="text-align:center">
                                 {{service.serviceType}}
@@ -137,7 +297,6 @@
                         <td> 
                         <button class="btn-edit" @click="modalShow =!modalShow; fillCredentials(mechanic)"> <img  class="img-add" src="../../assets/Admin/edit.png"/>  </button>
                        <button class="btn-remove" @click="removeMechanic(mechanic.id)"> <img  class="img-add" src="../../assets/Admin/delete.png"/>  </button> 
-                        
                         <b-modal
                         v-model="modalShow"
                         title="Edit Profile"

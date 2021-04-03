@@ -3,22 +3,23 @@
     <div class="col no-gutters">
         <div class="row no-gutters">
             <div class="left-top">
-                <img src="../../assets/appointment.png" width="50px">
-                Upcoming Appointments
-                <div class="profile">
-                    <nav class="navbar">
-                        <span class="navbar-brand mb-0 h1">
-                            <div class="row">
-                                <b-button v-b-modal.modal-prevent-closing class="btn-primary"> Add Appointment <img class="img-add" src="../../assets/Admin/plus.png" /> </b-button>
-                                <b-modal id="modal-prevent-closing" ref="modal" title="Add New Apointment" @show="resetModal" @hidden="resetModal" @ok="createAppoiment(customerId,timeSlotId, carId, services, note)">
+                 <nav class="navbar">
+                    <span class="navbar-brand mb-0 h1">
+                        <img src="../../assets/appointment.png" width="50px">
+                            Upcoming Appointments
+                        <b-button v-b-modal.modal-prevent-closing class="btn-primary"> Add Appointment <img class="img-add" src="../../assets/Admin/plus.png" /> </b-button>
+                        <b-modal
+                            id="modal-prevent-closing"
+                            ref="modal"
+                            title="Add New Team Member"
+                            @show="resetModal"
+                            @hidden="resetModal"
+                        >
+                        </b-modal>
+                    </span>
+                </nav>
 
-
-                                </b-modal>
-                            </div>
-                        </span>
-                    </nav>
-
-                    <!-- The Table containing all the timeslot information -->
+                  <!--The Table containing all the timeslot information--> 
                     <div class="container mt-3 mb-3" style="background-color:white; border-radius:30px;">
                         <table class="table table-striped tabled-bordered mydatatable" style="width: 100">
                             <thead>
@@ -46,36 +47,65 @@
                         </table>
                     </div>
 
-                </div>
-            </div>
-        </div>
-
         <div class="row no-gutters">
             <div class="left-bottom">
-                <img src="../../assets/appointment.png" width="50px">
-                Upcoming Mechanic Schedule
-                <div class="profile">
-                    <nav class="navbar">
+                   <nav class="navbar">
                         <span class="navbar-brand mb-0 h1">
-                            <div class="row">
-                                <b-button v-b-modal.modal-prevent-closing class="btn-primary"> Add TimeSlot <img class="img-add" src="../../assets/Admin/plus.png" /> </b-button>
-                                <b-modal id="modal-prevent-closing" ref="modal" title="Add New TimeSlot" @show="resetModal" @hidden="resetModal" @ok="createTimeSlot(startTime,endTime)">
-
-                                    <b-form ref="form" @submit.stop.prevent="handleSubmit">
-
-                                        <b-form-group label="startTime (YYYY-MM-DD-HH:mm)" label-for="startTime-input" invalid-feedback="startTime is required" :state="startTimeState">
-                                            <b-form-input id="startTime-input" v-model="startTime" :state="startTimeState" required></b-form-input>
-                                        </b-form-group>
-
-                                        <b-form-group label="endTime (YYYY-MM-DD-HH:mm)" label-for="endTime-input" invalid-feedback="endTime is required" :state="endTimeState">
-                                            <b-form-input id="endTime-input" v-model="endTime" :state="endTimeState" required></b-form-input>
-                                        </b-form-group>
-                                    </b-form>
-                                </b-modal>
-                            </div>
+                            <img src="../../assets/appointment.png" width="50px">
+                            Upcoming Mechanic Schedule
+                            <button class="btn-edit" @click="modalShow =!modalShow"> <img  class="img-add" src="../../assets/Admin/plus.png"/>  </button>
                         </span>
                     </nav>
+                    <div class="profile">
+                            <div class="row">
+                                <b-modal
+                                v-model="modalShow"
+                                title="Add Time Slot"
+                                id="modal-scoped"
+                                >
+                                <b-form ref="form" @submit.stop.prevent="handleSubmit">
+                                
+                                    <b-form-group
+                                    label="Enter Start Time (YYYY-MM-DD-HH:mm)"
+                                    label-for="startTime-input"
+                                    invalid-feedback="Start Time is required"
+                                    :state="editStartTimeState"
+                                    required
+                                    >
+                                    <b-form-input
+                                        id="startTime"
+                                        type="text"
+                                        v-model="startTime"
+                                        name="startTime"
+                                    >
+                                    </b-form-input>
+                                    </b-form-group>
 
+                                    <b-form-group
+                                        label="Enter End Time (YYYY-MM-DD-HH:mm)"
+                                        label-for="endTime-input"
+                                        invalid-feedback=" End Time is required"
+                                        :state="editEndTimeState"
+                                        required
+                                    >
+                                    <b-form-input
+                                        id="endTime"
+                                        type="text"
+                                        v-model="endTime"
+                                        name="endTime"
+                                    >
+                                    </b-form-input>
+                                    </b-form-group>
+                                </b-form> 
+                                <template #modal-footer="{Save, Cancel}">
+                                    <!-- Emulate built in modal footer ok and cancel button actions -->
+                                    <b-button size="sm" variant="success" @click="createTimeSlot(startTime,endTime); modalShow =!modalShow"> Save </b-button>
+                                    <b-button size="sm" variant="danger" @click="modalShow =!modalShow">Cancel</b-button> 
+                
+                                </template>
+                                </b-modal> 
+                            </div>
+                        
                     <!-- The Table containing all the timeslot information -->
                     <div class="container mt-3 mb-3" style="background-color:white; border-radius:30px;">
                         <table class="table table-striped tabled-bordered mydatatable" style="width: 100">
@@ -102,6 +132,8 @@
                             </tfoot>
                         </table>
                     </div>
+</div>
+</div>
 
                 </div>
             </div>
@@ -141,138 +173,8 @@
 </div>
 </template>
 
-<script>
-import axios from 'axios'
-import Multiselect from 'vue-multiselect'
-import 'vue-date-pick/dist/vueDatePick.css';
-import DatePick from 'vue-date-pick';
+<script src="./AdminOverview.js">
 
-var config = require('../../../config')
-
-var frontendUrl = 'http://' + config.dev.host + ':' + config.dev.port
-var backendUrl = 'http://' + config.dev.backendHost + ':' + config.dev.backendPort
-
-var AXIOS = axios.create({
-    baseURL: backendUrl,
-    headers: {
-        'Access-Control-Allow-Origin': frontendUrl
-    }
-})
-
-function TimeSlotDto(startTime, endTime) {
-    this.startTime = endTime;
-    this.endTime = endTime;
-    this.id = "";
-    this.mechanics = [];
-    this.appointments = [];
-}
-
-export default {
-
-    components: {
-        Multiselect,
-        DatePick
-    },
-
-    data() {
-        return {
-            admin: "",
-            modalShow: false,
-            startTime: '',
-            endTime: '',
-            id: '',
-            timeslots: [],
-            mechanics: [],
-            appointments: [],
-            appointment: "",
-
-            startTimeState: null,
-            endTimeState: null,
-
-            error: "",
-        }
-    },
-
-    created: function () {
-        var id = this.$route.params.userId
-        AXIOS.get('/admin/'.concat(id))
-            .then(response => {
-                this.admin = response.data
-                // JSON responses are automatically parsed.
-                AXIOS.get('/timeslots').
-                then(response => {
-                    this.timeslots = response.data
-
-                    AXIOS.get('/appointment').
-                    then(response => {
-                        this.appointments = response.data
-                    }).catch(e => {
-                    this.error = e
-                    console.log(e)
-                })
-
-
-
-
-
-                }).catch(e => {
-                    this.error = e
-                    console.log(e)
-                })
-
-            })
-            .catch(e => {
-                this.error = e
-                console.log(e)
-            })
-    },
-
-    methods: {
-
-        /**
-         * Creating a timeslot and posting it in the backend 
-         */
-        createTimeSlot: function (startTime, endTime) {
-            console.log(credit);
-            AXIOS.post('/timeslot/'.concat(startTime + "?endTime=" + endTime), {}, {}, {
-                    params: {
-                        startTime: startTime,
-                        endTime: endTime
-                    }
-                }).then(response => {
-
-                    this.timeslots.push(response.data);
-                })
-                .catch(e => {
-                    this.error = e
-                })
-
-        },
-
-        handleSubmit() {
-            if (!this.checkFormValidity()) {
-                return
-            }
-
-            this.$nextTick(() => {
-                this.$bvModal.hide('modal-prevent-closing')
-            })
-        },
-        resetModal() {
-            this.modalShow= false
-            this.startTime= ''
-            this.endTime= ''
-            this.id= ''
-            this.timeslots= []
-            this.mechanics= []
-            this.appointments= []
-            this.startTimeState=null
-            this.endTimeState= null
-            this.error= ""
-        }
-    }
-
-}
 </script>
 
 <style scoped>
