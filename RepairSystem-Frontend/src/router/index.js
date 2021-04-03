@@ -81,7 +81,7 @@ const routes = [
       },
       {
         path: '/adminDashboard/TeamMembers/:userId',
-        component: () => import('../pages/Welcome/AdminTeamMebmers.vue')
+        component: () => import('../pages/Welcome/AdminTeamMembers.vue')
       },
       {
         path: '/adminDashboard/Customers/:userId',
