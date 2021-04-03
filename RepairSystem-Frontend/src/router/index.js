@@ -44,7 +44,8 @@ const routes = [
         component: () => import( '../pages/Welcome/CustomerOverview.vue')
       },
       {
-        path: '/customerDashboard/myAccount/:userId',
+       path: '/customerDashboard/myAccount/:userId',
+         /**path: '/customerDashboard/myAccount',*/
         component: () => import('../pages/Welcome/CustomerEditProfile.vue')
       },
       {
