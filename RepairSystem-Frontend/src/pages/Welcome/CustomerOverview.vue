@@ -112,6 +112,14 @@ export default {
             .then(response => {
                 // JSON responses are automatically parsed.
                 this.customer = response.data
+                /*I'm commenting this our cuz i am not connected to database
+                AXIOS.get('/appointment/'.concat(this.customer)).
+                    then(response => {
+                        this.appointments = response.data
+                    }).catch(e => {
+                    this.error = e
+                    console.log(e)
+                })*/
             })
             .catch(e => {
                 this.error = e
