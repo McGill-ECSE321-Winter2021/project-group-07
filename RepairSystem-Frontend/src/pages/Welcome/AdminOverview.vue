@@ -37,7 +37,6 @@
                                     <td>{{ appointment.status }}</td>
                                     <td>{{ appointment.timeslot }}</td>
                                     <td>{{ appointment.mechanics }}</td>
-
                                 </tr>
                             </tbody>
                             <tfoot>
@@ -210,11 +209,6 @@ export default {
                     this.error = e
                     console.log(e)
                 })
-
-
-
-
-
                 }).catch(e => {
                     this.error = e
                     console.log(e)
