@@ -94,41 +94,48 @@
 				<div class="row">
 					<div class="col-3">
 						<div class="Rectangle">
-							<img class="service-images" src="../../assets/landingPage/car-repairService.png"/>
+							<img class="service-images" src="../../assets/landingPage/car-repairService.png"/>	
 						</div>
-						<p> Repairs </p>
+						<p class="service-img-title"> Repairs </p>
+						
 					</div>
 					<div class="col-3">
 						<div class="Rectangle">
 							<img class="service-images" src="../../assets/landingPage/car-wash.png"/>
 						</div>
+						<p class="service-img-title"> Car Wash </p>
 					</div>
 					<div class="col-3">
 						<div class = "Rectangle">
 							<img class="service-images" src="../../assets/landingPage/inspection.png"/>
 						</div>
+						<p class="service-img-title"> Inspection </p>
 					</div>
 					<div class="col-3">
 						<div class = "Rectangle">
 							<img class="service-images" src="../../assets/landingPage/oil.png"/>
 						</div>
+						<p class="Oil-title"> Oil Change </p>
 					</div>
 				</div>
 				<div class = "row">
-					<div class="col">
+					<div class="col-3">
 						<div class = "Rectangle">
 							<img class="service-images" src="../../assets/landingPage/roadsideAssistance.png"/>
 						</div>
+						<p class="Oil-title"> Roadside Assistance </p>
 					</div>
-					<div class="col">
+					<div class="col-3">
 						<div class = "Rectangle">
 							<img class="service-images" src="../../assets/landingPage/tire.png"/>
 						</div>
+						<p class="Oil-title"> Tire Change </p> 
 					</div>
-					<div class="col">
+					<div class="col-3">
 						<div class = "Rectangle">
 							<img class="service-images" src="../../assets/landingPage/tow-truck.png"/>
 						</div>
+						<p class="service-img-title"> Towing </p>
 					</div>
 				</div>
 			</div> 
@@ -137,69 +144,71 @@
 
 	<div >
 		<div>
-		<img  class= "rectangle" src="../../assets/landingPage/Rectangle.png"/>
-		</div>
-		<div class="footer">
+			<div class="float-left">
+				<img src="../../assets/landingPage/hours.png" class="img-hours"/>
+			</div>
 			<div class = "float-right">
-				<table class="table table-bordered">
-  
-  				<tbody>
-    				<tr>
-     					 <th scope="row">Monday</th>
-     					 <td> 9:00AM- 9:00 PM</td>
-   					</tr>
-					<tr>
-     					 <th scope="row">Tuesday</th>
-     					 <td> 9:00AM- 9:00 PM</td>
-   					</tr>
-					<tr>
-     					 <th scope="row">Wednesday</th>
-     					 <td> 9:00AM- 9:00 PM</td>
-   					</tr>
-					<tr>
-     					 <th scope="row">Thursdayy</th>
-     					 <td> 9:00AM- 9:00 PM</td>
-   					</tr>
-					<tr>
-     					 <th scope="row">Friday</th>
-     					 <td> 9:00AM- 9:00 PM</td>
-   					</tr>
-					<tr>
-     					 <th scope="row">Saturdayy</th>
-     					 <td> 9:00AM- 9:00 PM</td>
-   					</tr>
- 					<tr>
-     					 <th scope="row">Sunday</th>
-     					 <td> 9:00AM- 9:00 PM</td>
-   					</tr>   
-    
- 				 </tbody>
-			</table>
+				<div class = "right-centered-hours">
+					<h1 id= "title-about"> <b> Opening Hours </b> </h1>
+					<table class = "table  tabled-bordered mydatatable" style="width:500px">
+						<thead>
+							
+						</thead>
+						<tbody style="text-align:center">
+							<tr>
+								<th scope="row">Monday</th>
+								<td> 9:00AM- 9:00 PM</td>
+							</tr>
+							<tr>
+								<th scope="row">Tuesday</th>
+								<td> 9:00AM- 9:00 PM</td>
+							</tr>
+							<tr>
+								<th scope="row">Wednesday</th>
+								<td> 9:00AM- 9:00 PM</td>
+							</tr>
+							<tr>
+								<th scope="row">Thursdayy</th>
+								<td> 9:00AM- 9:00 PM</td>
+							</tr>
+							<tr>
+								<th scope="row">Friday</th>
+								<td> 9:00AM- 9:00 PM</td>
+							</tr>
+							<tr>
+								<th scope="row">Saturdayy</th>
+								<td> 9:00AM- 9:00 PM</td>
+							</tr>
+							<tr>
+								<th scope="row">Sunday</th>
+								<td> 9:00AM- 9:00 PM</td>
+							</tr>   
+						</tbody>
+						<tfoot>
+							<h1 style="color:white"> Footer </h1>
+						</tfoot>
+					</table>
+				</div>
 			</div>
-		</div>
-	</div>
-	<!-- Opening Hours 
-	<div> 
-		<div class="float-left">
-			<img class="img-hours" src="../../assets/landingPage/openingHours.png"/>		
-		</div>
-		<div class="float-right">
-			<div class="right-centered-hours">
-			<h1 id="title-hours"> <b> Opening Hours</b> </h1>
-		
-			
-			
-			</div>
-		</div>
-	</div>
--->
 
+
+			<!-- Contact Us --> 
+			<div>
+				<img  class= "rectangle" src="../../assets/landingPage/Rectangle.png"/>
+			</div>
+			<div class="footer">
+				<div class = "float-right">
+	
+				</div>
+			</div>
+			
+		</div>
 
 
 
 
 	
-	
+	</div>
 
 	
 </div>
@@ -331,6 +340,8 @@
 	/* ///////////////////////// */
 	/** Service  CSS */
 	/* ///////////////////////// */
+
+
 	.img-services
 	{
 		margin-top:50px;
@@ -359,6 +370,16 @@
 		
 	}
 
+	.service-img-title{
+		text-align: left;
+		color:rgba(80, 95, 152, 1)
+	}
+
+	.Oil-title{
+		text-align: left;
+		color:rgba(80, 95, 152, 1);
+		font-size: 14px;
+	}
 	#body-services
 	{
 		margin-top:10px;
@@ -383,18 +404,19 @@
  	
 		width:100%;
 		background-repeat: repeat;
-		transform:translateY(1000px) 
+		transform:translateY(1000px) ;
+		height:600px;
 	}
 	.img-hours{
 		max-height: 500px;
-		transform: translate(100px, 1000px);
+		transform: translate(100px, 900px);
 	}
 
 	.right-centered-hours{
 		position: absolute;
 		float:right;
   		top: 50%;
-  		left: 50%;
+  		left: 60%;
 		transform: translateY(1500px);
 		text-align:  center;
 	}
@@ -406,7 +428,7 @@
 	}
 	
 	.footer{
-		height: 500px;
+		height: 300px;
 		background-color: rgb(231,236,255);
 		transform:translateY(800px);
 	}
