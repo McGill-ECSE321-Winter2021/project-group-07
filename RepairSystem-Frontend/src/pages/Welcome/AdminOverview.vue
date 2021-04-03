@@ -257,6 +257,18 @@ export default {
             this.$nextTick(() => {
                 this.$bvModal.hide('modal-prevent-closing')
             })
+        },
+        resetModal() {
+            this.modalShow= false
+            this.startTime= ''
+            this.endTime= ''
+            this.id= ''
+            this.timeslots= []
+            this.mechanics= []
+            this.appointments= []
+            this.startTimeState=null
+            this.endTimeState= null
+            this.error= ""
         }
     }
 

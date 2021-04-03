@@ -320,7 +320,10 @@ function CustomerDto(name, password, phone, email, credit, debit, address){
     this.debit = debit;
     this.address= address;
     this.lastDate= "";
-    this.id ="";
+    this.appointments = "";
+	  this.id = "";
+	  this.cars = "";
+	  this.lastActive = "";
 }
     export default {
 
@@ -341,7 +344,7 @@ function CustomerDto(name, password, phone, email, credit, debit, address){
         customer:"",
         lastDate:"",
        	customers: [],
-       admin: "",
+        admin: "",
         nameState: null,
         emailState:null,
         phoneState:null,
@@ -413,7 +416,6 @@ function CustomerDto(name, password, phone, email, credit, debit, address){
 
             },
             
-
       handleSubmit() {
         if (!this.checkFormValidity()) {
           return
