@@ -1,47 +1,184 @@
 <template>
-    <div class = "row no-gutters">
+      <div class = "row no-gutters">
         <div class = "col no-gutters">
         <div class="profile">
         <div class="name">
              <div class="text">
-                <h1> {{mechanic.name}} </h1>
+                <h6> {{mechanic.name}} </h6>
             </div>
             <div class="ellipse">
                 <img src="../../assets/profile-default.png"   width = "60px" length = "60px" >
+
             </div>
         </div>
 
         <div class="container">
-        <div class="row">
-        <div class="col">Residence</div>
-        <div class="w-100"></div>
-        <input type="text" v-model="address" value=""><br>
-        <div class="w-100"></div>
-        <div class="col">Email</div>
-        <div class="w-100"></div>
-        <input type="text" v-model="email" value="" disabled><br>
-        <div class="w-100"></div>
-        <div class="col">Telephone</div>
-        <div class="w-100"></div>
-        <input type="text" v-model="phone" value=""><br>
-        </div>
+            <div class="row">
+                <div class="col-5">
+                    <div class="col"> 
+                        Residence 
+                    </div>
+                    <div class="w-100">
+                    </div>
+                    <b-group>
+                        <b-input type="text" v-model="address" :value="address" disabled>
+                        </b-input>
+                        <br>
+                    </b-group>
+                </div>
+                <div class = "col-5">
+                    <div class ="col">
+                        password
+                    </div>
+                    <div class="w-100">
+                    </div>
+                    <b-group>
+                        <b-input type="password" v-model="password" :value="password" disabled >
+                        </b-input>
+                        <br>
+                    </b-group>
+                </div>
+                <div class="w-100">
+                </div>
+                <div class="col">
+                    <div class="row">
+                        <div class="col-5">
+                            <div class="col">
+                            Email
+                            </div>
+                            <div class="w-100">
+                            </div>
+                            <b-group>
+                                <b-input type="text" v-model="email" :value="email" disabled>
+                                </b-input>
+                                <br>
+                            </b-group>
+                        </div>
+                        <div class ="col-5">
+                            <div class="col">
+                                Telephone
+                            </div>
+                            <div class="w-100">
+                            </div>
+                            <b-group>
+                                <b-input type="text" v-model="phone" :value="phone" disabled>
+                                </b-input>
+                            </b-group>
+                        </div> 
+                    </div>
+                </div>
+             <div class="w-100">
+            </div>
+             <div class="col">
+                    <div class="row">
+                        <div class="col-5">
+                            <div class="col">
+                            Capabilities
+                            </div>
+                            <div class="w-100">
+                            </div>
+                            <b-group>
+                                <b-input type="text" v-model="capabilities" :value="capabilities"disabled>
+                                </b-input>
+                                <br>
+                            </b-group>
+                        </div>
+                        <div class="col-5">
+                             <button @click="modalShow=!modalShow; fillCredentials() " align ="center">Edit Profile</button>
+                        </div>
+                    </div>
+                </div>
+           
+            </div>
+
+              <b-modal
+                v-model="modalShow"
+                title="Edit Profile"
+                id="modal-scoped"
+            >
+            <b-form ref="form" @submit.stop.prevent="handleSubmit">
+                           
+                <b-form-group
+                label="Name"
+                label-for="editName-input"
+                invalid-feedback="Name is required"
+                :state="editEmailState"
+                >
+                            <b-form-input
+                                id="editName"
+                                type="text"
+                                v-model="editName"
+                                name="editName"
+                                :value="editName"
+                            >
+                            </b-form-input>
+                            </b-form-group>
+
+                              <b-form-group
+                            label="Email"
+                            label-for="editEmail-input"
+                            invalid-feedback="Email is required"
+                            :state="editEmailState"
+                            >
+                            <b-form-input
+                                id="editEmail"
+                                type="text"
+                                v-model="editEmail"
+                                name="editEmail"
+                                :value="editEmail"
+                                disabled
+                            >
+                            </b-form-input>
+                            </b-form-group> 
+
+
+                            <b-form-group
+                            label="Phone"
+                            label-for="editPhone-input"
+                            invalid-feedback="Phone is required"
+                            :state="editPhoneState"
+                            >
+                            <b-form-input
+                               id="editPhone"
+                               v-model="editPhone"
+                               type="text"
+                               name="editPhone"
+                               :value="editPhone"
+                            > 
+                            </b-form-input>
+                            </b-form-group>
+
+                             <b-form-group
+                            label="Password"
+                            label-for="editPassword-input"
+                            invalid-feedback="Password is required"
+                            :state="editPasswordState"
+                            >
+                            <b-form-input
+                               id="editPassword"
+                               v-model="editPassword"
+                               type="text"
+                               name="editPassword"
+                               :value="editPassword"
+                            > 
+                            </b-form-input>
+                            </b-form-group>
+   
+                            </b-form>
+                                <template #modal-footer="{Save,Cancel}">
+                                <!-- Emulate built in modal footer ok and cancel button actions -->
+                                 <b-button size="sm" variant="success" @click="editMechanics(editEmail, editName, editPassword, editPhone); modalShow=!modalShow"> Save </b-button>
+                                <b-button size="sm" variant="danger" @click="modalShow =!modalShow">Cancel</b-button> 
+      
+                            </template>
+                        </b-modal> 
         </div>
 
-        <div class="container2">
-        <div class="row">
-        <div class="col">Password</div>
-        <div class="w-100"></div>
-        <input type="password" v-model="password" value=""><br>
-        <div class="w-100"></div>
-        <div class="col">Services</div>
-        <div class="w-100"></div>
-        <input type="service" value="services" disabled></input>
-        </div>
-        </div>
+   
+     
 
-        <div class="container3">
-                <button class="button1" @click="editMechanic(email, password, phone, credit, debit, address)" align = "right">Edit Profile</button>
-        </div>
+        
+
     </div> 
         </div>
         
@@ -52,18 +189,17 @@
                         <center><img src="../../assets/profile-default.png"   width = "100px" length = "100px" ></center>
                         <br>
                         <center> <b style = "color: rgb(51 41 134); font-size: 20px;"> {{mechanic.name}} <br> id: {{mechanic.id}}  </b> </center>
-
                     </div>
                 </div>
 
                 <div class = "row no-gutters" >
                     <div class = "middle"> 
-                        <br>     <date-pick v-model="date" :hasInputElement="false"></date-pick>
+                            <br> <date-pick v-model="date" :hasInputElement="false"></date-pick>
                     </div>
                 </div>
                 <div class = "row no-gutters" >
                     <div class = "bottom"> 
-                    <br>    <img src="../../assets/paint job 1.jpg" width = "400px" length = "400px">
+                        <br> <img src="../../assets/paint job 1.jpg" width = "400px" length = "400px">
                     </div>
                 </div>
             </div>
@@ -71,46 +207,8 @@
     </div>
 </template>
 
-<script>
-import axios from 'axios';
-import DatePick from 'vue-date-pick';
-import 'vue-date-pick/dist/vueDatePick.css';
-var config = require('../../../config')
+<script src="./MechanicEditProfile.js">
 
-var frontendUrl = 'http://' + config.dev.host + ':' + config.dev.port
-var backendUrl = 'http://' + config.dev.backendHost + ':' + config.dev.backendPort
-
-var AXIOS = axios.create({
-  baseURL: backendUrl,
-  headers: { 'Access-Control-Allow-Origin': frontendUrl }
-})
-
-export default {
-    components: {DatePick},
-    computed: {
-        userId(){
-            return this.$route.params.userId
-        }
-    },   
-    data () {
-    return {
-	  mechanic: "",
-	  error: ""
-    }
-    },
-    created: function () {
-        var id = this.$route.params.userId
-        AXIOS.get('/mechanic/'.concat(id))
-        .then(response => {
-        // JSON responses are automatically parsed.
-        this.mechanic = response.data
-    })
-    .catch(e => {
-        this.error = e
-        console.log(e)
-    })
-    }
-}
 </script>
 
 <style scoped>
