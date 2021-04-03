@@ -75,6 +75,7 @@ export default {
         this.error = e
         console.log(e)
     })
+    
     }
 }
 </script>

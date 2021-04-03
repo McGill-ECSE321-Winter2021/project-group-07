@@ -290,9 +290,11 @@ public class TestAppointmentService {
 		String dummyNote = "dummy Note";
 		int appointmentId = customer.hashCode() * dummyTime.hashCode();
 		Appointment appointment = null;
+		List<Service> services = new ArrayList<Service>();
+		services.add(new Service(Service.ServiceType.OilChange, 10));
 		
 		try {
-			appointment = service.createApp(customer, dummyTime, dummyCar, dummyNote);
+			appointment = service.createApp(customer, dummyTime, dummyCar, services, dummyNote);
 		}catch(IllegalArgumentException e)
 		{
 			fail();
@@ -320,9 +322,11 @@ public class TestAppointmentService {
 		Car dummyCar = new Car(451, CarType.Hatchback, true, 50000, customer);
 		String dummyNote = "dummy Note";
 		Appointment appointment = null;
+		List<Service> services = new ArrayList<Service>();
+		services.add(new Service(Service.ServiceType.OilChange, 10));
 		
 		try {
-			appointment = service.createApp(customer, dummyTime, dummyCar, dummyNote);
+			appointment = service.createApp(customer, dummyTime, dummyCar, services, dummyNote);
 		}catch(IllegalArgumentException e)
 		{
 			error = e.getMessage();
@@ -344,9 +348,11 @@ public class TestAppointmentService {
 		Car dummyCar = new Car(451, CarType.Hatchback, true, 50000, customer);
 		String dummyNote = "dummy Note";
 		Appointment appointment = null;
+		List<Service> services = new ArrayList<Service>();
+		services.add(new Service(Service.ServiceType.OilChange, 10));
 		
 		try {
-			appointment = service.createApp(customer, dummyTime, dummyCar, dummyNote);
+			appointment = service.createApp(customer, dummyTime, dummyCar, services, dummyNote);
 		}catch(IllegalArgumentException e)
 		{
 			error = e.getMessage();
@@ -369,9 +375,11 @@ public class TestAppointmentService {
 		Car dummyCar = null;
 		String dummyNote = "dummy Note";
 		Appointment appointment = null;
+		List<Service> services = new ArrayList<Service>();
+		services.add(new Service(Service.ServiceType.OilChange, 10));
 		
 		try {
-			appointment = service.createApp(customer, dummyTime, dummyCar, dummyNote);
+			appointment = service.createApp(customer, dummyTime, dummyCar, services, dummyNote);
 		}catch(IllegalArgumentException e)
 		{
 			error = e.getMessage();
@@ -394,9 +402,11 @@ public class TestAppointmentService {
 		Car dummyCar = null;
 		String dummyNote = "dummy Note";
 		Appointment appointment = null;
+		List<Service> services = new ArrayList<Service>();
+		services.add(new Service(Service.ServiceType.OilChange, 10));
 		
 		try {
-			appointment = service.createApp(customer, dummyTime, dummyCar, dummyNote);
+			appointment = service.createApp(customer, dummyTime, dummyCar, services, dummyNote);
 		}catch(IllegalArgumentException e)
 		{
 			error = e.getMessage();
@@ -421,7 +431,9 @@ public class TestAppointmentService {
 		car.setAppointments(new ArrayList<Appointment>());
 		car.setCustomer(customer);
 		String dummyNote = "dummy Note";
-		service.createApp(customer, time, car, dummyNote);
+		List<Service> services1 = new ArrayList<Service>();
+		services1.add(new Service(Service.ServiceType.OilChange, 10));
+		service.createApp(customer, time, car, services1, dummyNote);
 		int id = customer.hashCode()*time.hashCode();
 		
 		APPOINTMENT_ID = customer.hashCode()*time.hashCode();;
@@ -435,7 +447,9 @@ public class TestAppointmentService {
 		TimeSlot time2 =  new TimeSlot(LocalDateTime.of(2020, Month.JUNE,21,14,12,00),LocalDateTime.of(2022, Month.APRIL,21, 20, 00,00), 240);
 		Car car2 = car;
 		String dummyNote2 = "dummy Note2";
-		service.createApp(customer2, time2, car2, dummyNote2);
+		List<Service> services2 = new ArrayList<Service>();
+		services2.add(new Service(Service.ServiceType.OilChange, 10));
+		service.createApp(customer2, time2, car2, services2, dummyNote2);
 		int id2 = customer2.hashCode()*time2.hashCode();
 		
 		APPOINTMENT_ID2 = id2;
@@ -484,7 +498,9 @@ public class TestAppointmentService {
 		car.setAppointments(new ArrayList<Appointment>());
 		car.setCustomer(customer);
 		String dummyNote = "dummy Note";
-		service.createApp(customer, time, car, dummyNote);
+		List<Service> services1 = new ArrayList<Service>();
+		services1.add(new Service(Service.ServiceType.OilChange, 10));
+		service.createApp(customer, time, car, services1, dummyNote);
 		int id = customer.hashCode()*time.hashCode();
 		
 		APPOINTMENT_ID = customer.hashCode()*time.hashCode();;
@@ -501,7 +517,9 @@ public class TestAppointmentService {
 		car2.setAppointments(new ArrayList<Appointment>());
 		car2.setCustomer(customer2);
 		String dummyNote2 = "dummy Note2";
-		service.createApp(customer2, time2, car2, dummyNote2);
+		List<Service> services2 = new ArrayList<Service>();
+		services2.add(new Service(Service.ServiceType.OilChange, 10));
+		service.createApp(customer2, time2, car2, services2, dummyNote2);
 		int id2 = customer2.hashCode()*time2.hashCode();
 		
 		APPOINTMENT_ID2 = id2;
@@ -550,7 +568,9 @@ public class TestAppointmentService {
 		car.setAppointments(new ArrayList<Appointment>());
 		car.setCustomer(customer);
 		String dummyNote = "dummy Note";
-		service.createApp(customer, time, car, dummyNote);
+		List<Service> services1 = new ArrayList<Service>();
+		services1.add(new Service(Service.ServiceType.OilChange, 10));
+		service.createApp(customer, time, car, services1, dummyNote);
 		int id = customer.hashCode()*time.hashCode();
 		
 		APPOINTMENT_ID = customer.hashCode()*time.hashCode();;
@@ -567,7 +587,9 @@ public class TestAppointmentService {
 		car2.setAppointments(new ArrayList<Appointment>());
 		car2.setCustomer(customer2);
 		String dummyNote2 = "dummy Note2";
-		service.createApp(customer2, time2, car2, dummyNote2);
+		List<Service> services2 = new ArrayList<Service>();
+		services2.add(new Service(Service.ServiceType.OilChange, 10));
+		service.createApp(customer2, time2, car2, services2, dummyNote2);
 		int id2 = customer2.hashCode()*time2.hashCode();
 		
 		APPOINTMENT_ID2 = id2;
@@ -616,7 +638,9 @@ public class TestAppointmentService {
 		car.setAppointments(new ArrayList<Appointment>());
 		car.setCustomer(customer);
 		String dummyNote = "dummy Note";
-		service.createApp(customer, time, car, dummyNote);
+		List<Service> services1 = new ArrayList<Service>();
+		services1.add(new Service(Service.ServiceType.OilChange, 10));
+		service.createApp(customer, time, car, services1, dummyNote);
 		int id = customer.hashCode()*time.hashCode();
 		
 		APPOINTMENT_ID = customer.hashCode()*time.hashCode();;
@@ -633,7 +657,9 @@ public class TestAppointmentService {
 		car2.setAppointments(new ArrayList<Appointment>());
 		car2.setCustomer(customer2);
 		String dummyNote2 = "dummy Note2";
-		service.createApp(customer2, time2, car2, dummyNote2);
+		List<Service> services2 = new ArrayList<Service>();
+		services2.add(new Service(Service.ServiceType.OilChange, 10));
+		service.createApp(customer2, time2, car2, services2, dummyNote2);
 		int id2 = customer2.hashCode()*time2.hashCode();
 		
 		APPOINTMENT_ID2 = id2;
@@ -682,7 +708,9 @@ public class TestAppointmentService {
 		car.setAppointments(new ArrayList<Appointment>());
 		car.setCustomer(customer);
 		String dummyNote = "dummy Note";
-		Appointment appointment = service.createApp(customer, time, car, dummyNote);
+		List<Service> services1 = new ArrayList<Service>();
+		services1.add(new Service(Service.ServiceType.OilChange, 10));
+		Appointment appointment = service.createApp(customer, time, car, services1, dummyNote);
 		int id = customer.hashCode()*time.hashCode();
 		
 		APPOINTMENT_ID = customer.hashCode()*time.hashCode();;
@@ -722,7 +750,9 @@ public class TestAppointmentService {
 		car.setAppointments(new ArrayList<Appointment>());
 		car.setCustomer(customer);
 		String dummyNote = "dummy Note";
-		service.createApp(customer, time, car, dummyNote);
+		List<Service> services1 = new ArrayList<Service>();
+		services1.add(new Service(Service.ServiceType.OilChange, 10));
+		service.createApp(customer, time, car, services1, dummyNote);
 		int id = customer.hashCode()*time.hashCode();
 		
 		APPOINTMENT_ID = customer.hashCode()*time.hashCode();;
@@ -739,7 +769,9 @@ public class TestAppointmentService {
 		car2.setAppointments(new ArrayList<Appointment>());
 		car2.setCustomer(customer2);
 		String dummyNote2 = "dummy Note2";
-		service.createApp(customer2, time2, car2, dummyNote2);
+		List<Service> services2 = new ArrayList<Service>();
+		services2.add(new Service(Service.ServiceType.OilChange, 10));
+		service.createApp(customer2, time2, car2, services2, dummyNote2);
 		int id2 = customer2.hashCode()*time2.hashCode();
 		
 		APPOINTMENT_ID2 = id2;
@@ -791,7 +823,9 @@ public class TestAppointmentService {
 		car.setAppointments(new ArrayList<Appointment>());
 		car.setCustomer(customer);
 		String dummyNote = "dummy Note";
-		Appointment appointment = service.createApp(customer, time, car, dummyNote);
+		List<Service> services2 = new ArrayList<Service>();
+		services2.add(new Service(Service.ServiceType.OilChange, 10));
+		Appointment appointment = service.createApp(customer, time, car, services2, dummyNote);
 		int id = customer.hashCode()*time.hashCode();
 		
 		try {
@@ -823,7 +857,9 @@ public class TestAppointmentService {
 		car.setAppointments(new ArrayList<Appointment>());
 		car.setCustomer(customer);
 		String dummyNote = "dummy Note";
-		Appointment appointment = service.createApp(customer, time, car, dummyNote);
+		List<Service> services1 = new ArrayList<Service>();
+		services1.add(new Service(Service.ServiceType.OilChange, 10));
+		Appointment appointment = service.createApp(customer, time, car, services1, dummyNote);
 		int id = customer.hashCode()*time.hashCode();
 		
 		try {
@@ -854,7 +890,9 @@ public class TestAppointmentService {
 		car.setAppointments(new ArrayList<Appointment>());
 		car.setCustomer(customer);
 		String dummyNote = "dummy Note";
-		Appointment appointment = service.createApp(customer, time, car, dummyNote);
+		List<Service> services1 = new ArrayList<Service>();
+		services1.add(new Service(Service.ServiceType.OilChange, 10));
+		Appointment appointment = service.createApp(customer, time, car, services1, dummyNote);
 		int id = customer.hashCode()*time.hashCode();
 		
 		try {
@@ -888,7 +926,9 @@ public class TestAppointmentService {
 		car2.setAppointments(new ArrayList<Appointment>());
 		car2.setCustomer(customer);
 		String dummyNote2 = "dummy Note2";
-		Appointment appointment = service.createApp(customer, time, car, dummyNote);
+		List<Service> services1 = new ArrayList<Service>();
+		services1.add(new Service(Service.ServiceType.OilChange, 10));
+		Appointment appointment = service.createApp(customer, time, car, services1, dummyNote);
 
 		
 		APPOINTMENT_ID = customer.hashCode()*time.hashCode();;

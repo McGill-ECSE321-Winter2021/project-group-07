@@ -160,22 +160,6 @@
                             </b-form-input>
                             </b-form-group>
 
-                              <b-form-group
-                            label="Email"
-                            label-for="editEmail-input"
-                            invalid-feedback="Email is required"
-                            :state="editEmailState"
-                            >
-                            <b-form-input
-                                id="editEmail"
-                                type="text"
-                                v-model="editEmail"
-                                name="editEmail"
-                                :value="editEmail"
-                            >
-                            </b-form-input>
-                            </b-form-group> 
-
                             <b-form-group
                             label="Phone"
                             label-for="editPhone-input"
@@ -207,12 +191,18 @@
                             > 
                             </b-form-input>
                             </b-form-group>
-   
-                            </b-form>
+                        </b-form>
+                            <label class="typo__label"> Capabilities </label>
+                            <multiselect v-model="value" :state="capabilitiesState" :options="options" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Pick some" label="name" track-by="name" :preselect-first="true">     >
+                                <template slot="selection" slot-scope="{ values, search, isOpen }">
+                                    <span class="multiselect__single" v-if="values .length &amp;&amp; !isOpen">{{ values.length }} options selected</span>
+                                </template>
+                            </multiselect>
+                            
                             <template #modal-footer="{Save, Cancel}">
                               
                                 <!-- Emulate built in modal footer ok and cancel button actions -->
-                                <b-button size="sm" variant="success" @click="editMechanic(editEmail, editName, editPassword, editPhone); modalShow =!modalShow"> Save </b-button>
+                                <b-button size="sm" variant="success" @click="editMechanic(editName, editPassword, editPhone, editCapabilities); modalShow =!modalShow"> Save </b-button>
                                 <b-button size="sm" variant="danger" @click="modalShow =!modalShow">Cancel</b-button> 
       
                             </template>

@@ -100,13 +100,15 @@ function MechanicDto(name, password, phone, email){
         },
         
         /** To Save the Edits in Edit Profile */
-        editMechanic : function(email, name, password, phone)
+        editMechanic : function(name, password, phone, services)
         {
-          AXIOS.put('/mechanic/'.concat(email+"?name="+name+"&password="+password+"&phone="+phone),{},{})
+          AXIOS.put('/mechanic/'.concat(email+"?name="+name+"&password="+password+"&phone="+phone + "&"),{},{})
           .then(response => {
             for(var i = 0; i < this.mechanics.length; i++){
               if(this.mechanics[i].id == response.data.id){
                 this.mechanics[i] = response.data
+                this.mechanics.push(response.data)
+                this.mechanics.pop(response.data)
               }
             }
           }).catch(e => {

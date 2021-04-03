@@ -1,6 +1,6 @@
 
 <template>
-    <div class = "row no-gutters">
+      <div class = "row no-gutters">
         <div class = "col no-gutters">
         <div class="profile">
         <div class="name">
@@ -9,46 +9,216 @@
             </div>
             <div class="ellipse">
                 <img src="../../assets/profile-default.png"   width = "60px" length = "60px" >
+
             </div>
         </div>
 
-
-
         <div class="container">
-        <div class="row">
-        <div class="col">Residence</div>
-        <div class="w-100"></div>
-        <input type="text" v-model="newAddress"><br>
-        <div class="w-100"></div>
-        <div class="col">Email</div>
-        <div class="w-100"></div>
-        <input type="text" v-model="oldEmail" placeholder="enter your current email"><br>
-        <div class="w-100"></div>
-        <div class="col">Telephone</div>
-        <div class="w-100"></div>
-        <input type="text" v-model="newPhone"><br>
-        </div>
-        </div>
+            <div class="row">
+                <div class="col-5">
+                    <div class="col"> 
+                        Residence 
+                    </div>
+                    <div class="w-100">
+                    </div>
+                    <b-group>
+                        <b-input type="text" v-model="address" :value="address" readonly>
+                        </b-input>
+                        <br>
+                    </b-group>
+                </div>
+                <div class = "col-5">
+                    <div class ="col">
+                        password
+                    </div>
+                    <div class="w-100">
+                    </div>
+                    <b-group>
+                        <b-input type="password" v-model="password" :value="password" readonly >
+                        </b-input>
+                        <br>
+                    </b-group>
+                </div>
+                <div class="w-100">
+                </div>
+                <div class="col">
+                    <div class="row">
+                        <div class="col-5">
+                            <div class="col">
+                            Email
+                            </div>
+                            <div class="w-100">
+                            </div>
+                            <b-group>
+                                <b-input type="text" v-model="email" :value="email" readonly>
+                                </b-input>
+                                <br>
+                            </b-group>
+                        </div>
+                        <div class ="col-5">
+                            <div class="col">
+                                Telephone
+                            </div>
+                            <div class="w-100">
+                            </div>
+                            <b-group>
+                                <b-input type="text" v-model="phone" :value="phone" readonly>
+                                </b-input>
+                            </b-group>
+                        </div> 
+                    </div>
+                </div>
+             <div class="w-100">
+            </div>
+             <div class="col">
+                    <div class="row">
+                        <div class="col-5">
+                            <div class="col">
+                            Credit
+                            </div>
+                            <div class="w-100">
+                            </div>
+                            <b-group>
+                                <b-input type="text" v-model="credit" :value="credit"readonly>
+                                </b-input>
+                                <br>
+                            </b-group>
+                        </div>
+                        <div class="col-5">
+                            <div class="col">
+                                 Debit Card
+                            </div>
+                            <div class="w-100">
+                            </div>
+                            <b-group>
+                                <b-input type="text" v-model="debit" :value="dedit" readonly>
+                                </b-input>
+                                <br>
+                            </b-group>
+                        </div>
+                    </div>
+                        <button  class="button1" @click="modalShow=!modalShow; fillCredentials() " align ="center">Edit Profile</button>
 
-        <div class="container2">
-        <div class="row">
-        <div class="col">Password</div>
-        <div class="w-100"></div>
-        <input type="password" v-model="newPassword"><br>
-        <div class="w-100"></div>
-        <div class="col">Credit Card Number</div>
-        <div class="w-100"></div>
-        <input type="password" v-model="newCredit"><br>
-        <div class="w-100"></div>
-        <div class="col">Debit Card Number</div>
-        <div class="w-100"></div>
-        <input type="password" v-model="newDebit"><br>
-        </div>
-        </div>
+                            <b-modal
+                v-model="modalShow"
+                title="Edit Profile"
+                id="modal-scoped"
+            >
+            <b-form ref="form" @submit.stop.prevent="handleSubmit">
+                           
+                            <b-form-group
+                            label="Name"
+                            label-for="editName-input"
+                            invalid-feedback="Name is required"
+                            :state="editNameState"
+                            >
+                            <b-form-input
+                                id="editName"
+                                type="text"
+                                v-model="editName"
+                                name="editName"
+                                :value="editName"
+                            >
+                            </b-form-input>
+                            </b-form-group>
 
-        <div class="container3">
+                            <b-form-group
+                            label="Address"
+                            label-for="editAddress-input"
+                            invalid-feedback="Address is required"
+                            :state="editAddressState"
+                            >
+                            <b-form-input
+                                id="editAddress"
+                                type="text"
+                                v-model="editAddress"
+                                name="editAddress"
+                                :value="editAddress"
+                            >
+                            </b-form-input>
+                            </b-form-group>
+
+                            <b-form-group
+                            label="Phone"
+                            label-for="editPhone-input"
+                            invalid-feedback="Phone is required"
+                            :state="editPhoneState"
+                            >
+                            <b-form-input
+                               id="editPhone"
+                               v-model="editPhone"
+                               type="text"
+                               name="editPhone"
+                               :value="editPhone"
+                            > 
+                            </b-form-input>
+                            </b-form-group>
+
+                             <b-form-group
+                            label="Password"
+                            label-for="editPassword-input"
+                            invalid-feedback="Password is required"
+                            :state="editPasswordState"
+                            >
+                            <b-form-input
+                               id="editPassword"
+                               v-model="editPassword"
+                               type="text"
+                               name="editPassword"
+                               :value="editPassword"
+                            > 
+                            </b-form-input>
+                            </b-form-group>
+
+                            <b-form-group
+                            label="Credit"
+                            label-for="editCredit-input"
+                            invalid-feedback="Credit is required"
+                            :state="editCreditState"
+                            >
+                            <b-form-input
+                               id="editCredit"
+                               v-model="editCredit"
+                               type="text"
+                               name="editCredit"
+                               :value="editCredit"
+                            > 
+                            </b-form-input>
+                            </b-form-group>
+
+                            <b-form-group
+                            label="Debit"
+                            label-for="editDebit-input"
+                            invalid-feedback="Debit is required"
+                            :state="editDebitState"
+                            >
+                            <b-form-input
+                               id="editDebit"
+                               v-model="editDebit"
+                               type="text"
+                               name="editDebit"
+                               :value="editDebit"
+                            > 
+                            </b-form-input>
+                            </b-form-group>
+   
+                            </b-form>
+                                <template #modal-footer="{Save,Cancel}">
+                                <!-- Emulate built in modal footer ok and cancel button actions -->
+                                 <b-button size="sm" variant="success" @click="editCustomers(editName, editPassword, editPhone, editCredit, editDebit, editAddress); modalShow=!modalShow"> Save </b-button>
+                                <b-button size="sm" variant="danger" @click="modalShow =!modalShow">Cancel</b-button> 
+      
+                            </template>
+                        </b-modal> 
+                
+                </div>
+           </div>
+            </div>
+
+       <!-- <div class="container3">
+           
                 <button class="button1" @click="editCustomer(oldEmail, newPassword, newPhone, newCredit, newDebit, newAddress)" align = "right">Edit Profile</button>
-        </div>
+        </div>-->
     </div> 
         </div>
         
@@ -77,85 +247,18 @@
     </div>
 </template>
 
-<script>
-import axios from 'axios'
-import DatePick from 'vue-date-pick';
-import 'vue-date-pick/dist/vueDatePick.css';
-var config = require('../../../config')
+<script src="./CustomerEditProfile.js">
 
-var frontendUrl = 'http://' + config.dev.host + ':' + config.dev.port
-var backendUrl = 'http://' + config.dev.backendHost + ':' + config.dev.backendPort
-
-var AXIOS = axios.create({
-  baseURL: backendUrl,
-  headers: { 'Access-Control-Allow-Origin': frontendUrl }
-})
-
-function CustomerDto(email, password, name, phone, address, credit, debit) {
-	this.name = name;
-	this.password = password;
-	this.phone = phone;
-	this.email = email;
-	this.address = address;
-	this.creditHash = credit;
-	this.debitHash = debit;
-	this.appointments = "";
-	this.id = "";
-	this.cars = "";
-	this.lastActive = "";
-}
-
-export default {
-    components: {DatePick},
-    data () {
-    return {
-	  name: '',
-          password: '',
-          phone: '',
-          email: '',
-          address: '',
-          creditHash: '',
-          debitHash: '',
-          customer: "",
-          customers: [],
-          error: "",
-}
-    },
-    created: function () {
-        var id = this.$route.params.userId
-        AXIOS.get('/customer/'.concat(id))
-        .then(response => {
-        // JSON responses are automatically parsed.
-        this.customer = response.data
-    })
-    .catch(e => {
-        this.error = e
-        console.log(e)
-    })
-    },
-        methods: {
-      editCustomer : function(oldEmail, newPassword, newPhone, newCredit, newDebit, newAddress)
-        {
-         AXIOS.put('/customer/editAllCustomerCredentials/'.concat(oldEmail + "?newPassword=" + newPassword + "?newPhone=" + newPhone + "?newCredit=" + newCredit + "?newDebit=" + newDebit + "?newAddress=" + newAddress), {}, 
-         {})
-          .then(response => {
-            this.response = response.data;
-            location.reload();
-          }).catch(e => {
-            this.error = e;
-          })
-        }
-    }
-}
 </script>
 
+<style src="vue-date-pick/dist/vueDatePick.css"></style>
 <style scoped>
 .profile {
     position: relative;
     top: 20px;
     right: -20px;
     width: 115%;
-    height: 500px;
+    height: 550px;
     border-radius: 25px;
     background: white;
     border: 3px solid;
@@ -262,7 +365,7 @@ color: #37447E;
 .button1 {
   background: rgb(51 41 134);
   width: 100px;
-  height: 30px;
+  height: 40px;
   color: white;
   border-radius: 8px;
 }
