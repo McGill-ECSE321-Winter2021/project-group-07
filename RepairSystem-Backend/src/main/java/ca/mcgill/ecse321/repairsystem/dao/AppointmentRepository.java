@@ -10,7 +10,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 public interface AppointmentRepository extends CrudRepository<Appointment, String>{
 	
 	List<Appointment> findByCustomer(Customer customer);
-	List<Appointment> findByMechanic(Mechanic mechanic);
 	List<Appointment> findByTimeSlot(TimeSlot time);
 	List<Appointment> findByCar(Car car);
 	List<Appointment> findByStatus(AppointmentStatus status);
