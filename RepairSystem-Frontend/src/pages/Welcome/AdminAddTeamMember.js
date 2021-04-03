@@ -92,6 +92,46 @@ function MechanicDto(name, password, phone, emai){
 
         },
         
+        /** To Save the Edits in Edit Profile */
+        editMechanic : function(email, name, password, phone)
+        {
+          AXIOS.put('/mechanic'.concat(email),{},
+          {
+            params:{
+              name: name,
+              email: email,
+              password: password,
+              phone: phone,
+            }
+          }).then(response => {
+            this.response = response.data;
+            location.reload();
+          }).catch(e => {
+            this.error = e;
+          })
+        },
+
+        /** To AutoComplete the Edit Profile Modal */
+        fillCredentials : function(row)
+        {
+            
+          this.editName = row.name;
+          this.editEmail = row.email;
+          this.editPhone = row.phone;
+          this.editPassword = row.password;
+         
+        },
+        removeMechanic: function(id){
+          AXIOS.post('/mechanic/deleteById', {}, {})
+            .then(response => {
+              response = response.data;
+              location.reload();
+            })
+            .catch(e => {
+              this.error = e;
+            })
+        },
+
         searchForMechanics: function(search){
             AXIOS.get('/mechanics')
             .then(response => {
