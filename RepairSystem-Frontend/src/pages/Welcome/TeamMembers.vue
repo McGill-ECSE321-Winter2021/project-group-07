@@ -245,7 +245,7 @@
     font-family: Roboto;
     /**color: rgb(167, 167, 167);   */
     color:rgb(51 41 134);
-    background: linear-gradient(90deg, rgba(213,204,221,1) 0%, rgba(241,240,251,1) 84%)
+    background: #D3D2E1;
    
 }
 

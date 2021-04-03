@@ -55,11 +55,15 @@ public class AppointmentRestController {
 	 *Rest controller for creating appointment
 	 * */
 	@PostMapping(value = { "/appointment/{customerId}", "/appointment/{customerId}/"})
-	public AppointmentDto createAppointment(@PathVariable("customerId") String customerId, @RequestParam String timeSlotId,  @RequestParam String carId,  @RequestParam(defaultValue = "") String note) throws IllegalArgumentException {
+	public AppointmentDto createAppointment(@PathVariable("customerId") String customerId, @RequestParam String timeSlotId,  @RequestParam String carId, @RequestParam String[] services,  @RequestParam(defaultValue = "") String note) throws IllegalArgumentException {
 		Customer customer = customerService.getCustomerById(Integer.parseInt(customerId));
 		TimeSlot timeslot = timeSlotService.getTimeSlotById(Integer.parseInt(timeSlotId));
 		Car car = carService.getCarById(Integer.parseInt(carId));
-		Appointment appointment = appointmentService.createApp(customer, timeslot, car, note);
+		List<Service> serviceList = new ArrayList<Service>();
+		for(String service: services) {
+			serviceList.add(serviceService.getServiceByServiceType(ServiceType.valueOf(service)));
+		}
+		Appointment appointment = appointmentService.createApp(customer, timeslot, car, serviceList, note);
 		return Converter.convertToDto(appointment);
 	}
 	/**
