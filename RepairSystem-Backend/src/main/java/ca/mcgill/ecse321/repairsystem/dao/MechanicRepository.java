@@ -11,7 +11,7 @@ public interface MechanicRepository extends CrudRepository<Mechanic, String>{
 
 	Mechanic findById(int Id);
 	List<Mechanic> findByName(String name);
-	Mechanic findByPhone(int aPhone);
+	Mechanic findByPhone(long aPhone);
 	Mechanic findByEmail(String email);
 	List<Mechanic> findAll();
 	

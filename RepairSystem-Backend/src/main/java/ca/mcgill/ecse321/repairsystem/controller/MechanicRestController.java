@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -63,7 +64,7 @@ public class MechanicRestController {
 	 * */
 	@PostMapping(value = { "/mechanic/{name}", "/mechanic/{name}/" })
 	public MechanicDto createMechanic(@PathVariable("name") String name, @RequestParam String password, @RequestParam String phone, @RequestParam String email) throws IllegalArgumentException {
-		Mechanic mechanic = mechanicService.createMechanic(name, password, Integer.parseInt(phone), email, new ArrayList<Service>());
+		Mechanic mechanic = mechanicService.createMechanic(name, password, Long.parseLong(phone), email, new ArrayList<Service>());
 		return Converter.convertToDto(mechanic);
 	}
 	/**
@@ -88,6 +89,14 @@ public class MechanicRestController {
 			mechanicService.removeService(s, mechanic);
 		}
 		return Converter.convertToDto(mechanic);
+	}
+	
+	@DeleteMapping(value= {"/mechanic/{id}", "/mechanic/{id}/"})
+	public boolean removeMechanic(@PathVariable("id") String id)
+	{
+		mechanicService.deleteMechanic(Integer.parseInt(id));
+		return true;
+		
 	}
 	
 	

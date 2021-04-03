@@ -15,7 +15,7 @@ public class AdministrativeAssistantService {
 	private AdministrativeAssistantRepository administrativeAssistantRepository;
 
 	@Transactional
-	public AdministrativeAssistant createAdmin(String aName, String aPassword, int aPhone, String aEmail) {
+	public AdministrativeAssistant createAdmin(String aName, String aPassword, long aPhone, String aEmail) {
 		
 		if(aName == null || aName.trim().length() == 0)
 		{
@@ -44,7 +44,7 @@ public class AdministrativeAssistantService {
 	 * @return
 	 */
 	@Transactional
-	public AdministrativeAssistant editAdmin(AdministrativeAssistant admin, String name, String password, int phone) {
+	public AdministrativeAssistant editAdmin(AdministrativeAssistant admin, String name, String password, long phone) {
 		admin.setName(name);
 		admin.setPassword(password);
 		admin.setPhone(phone);
@@ -74,7 +74,7 @@ public class AdministrativeAssistantService {
 	 * @return
 	 */
 	@Transactional 
-	public AdministrativeAssistant getAdminByNumber(int number) {
+	public AdministrativeAssistant getAdminByNumber(long number) {
 		AdministrativeAssistant admin = administrativeAssistantRepository.findByPhone(number);
 		return admin;
 	}

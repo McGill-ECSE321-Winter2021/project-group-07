@@ -29,7 +29,7 @@ public class MechanicService {
 	 * @return
 	 */
 	@Transactional
-	public Mechanic createMechanic(String aName, String aPassword, int aPhone, String aEmail, List<ca.mcgill.ecse321.repairsystem.model.Service> allCapabilities) {
+	public Mechanic createMechanic(String aName, String aPassword, long aPhone, String aEmail, List<ca.mcgill.ecse321.repairsystem.model.Service> allCapabilities) {
 
 		if(aName == null || aName.trim().length() == 0)
 		{
@@ -77,7 +77,7 @@ public class MechanicService {
 	 * @return
 	 */
 	@Transactional 
-	public Mechanic getMechanicByNumber(int aPhone) {
+	public Mechanic getMechanicByNumber(long aPhone) {
 		Mechanic mechanic = mechanicRepository.findByPhone(aPhone);
 		return mechanic;
 	}
@@ -138,10 +138,23 @@ public class MechanicService {
 		Mechanic mechanic = mechanicRepository.findByEmail(email);
 		mechanic.setName(name);
 		mechanic.setPassword(password);
-		mechanic.setPhone(Integer.parseInt(phone));
+		mechanic.setPhone(Long.parseLong(phone));
 		mechanicRepository.save(mechanic);
 		return mechanic;
 	}
+	
+	@Transactional
+	public void deleteMechanic(int id)
+	{
+		if(mechanicRepository.findById(id) == null)
+		{
+			throw new IllegalArgumentException("No mechanic with id: " + id + "exists");
+		}
+		
+		mechanicRepository.delete(mechanicRepository.findById(id));
+	}
+	
+	
 	/* 
 	 * helper method
 	 */
