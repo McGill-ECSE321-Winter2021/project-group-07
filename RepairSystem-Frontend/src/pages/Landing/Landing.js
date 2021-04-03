@@ -27,52 +27,82 @@ export default {
 				password: "admin",
 				phone: "1234567",
 				email: "admin@gmail.com"}})
-			.then(response => {})
-    		.catch(e => {
-      			this.error = e
+			.then(response => {
+
+				AXIOS.post('/services/'.concat("CarRepair?price=200"), {}, {})
+				.then(response => {
+
+					AXIOS.post('/services/'.concat("OilChange?price=100"), {}, {})
+					.then(response => {
+
+						AXIOS.post('/services/'.concat("RegularCheckup?price=120"), {}, {})
+						.then(response => {
+
+							AXIOS.post('/services/'.concat("CarWash?price=50"), {}, {})
+							.then(response => {
+
+								AXIOS.post('/services/'.concat("TireChange?price=150"), {}, {})
+								.then(response => {
+
+									AXIOS.post('/services/'.concat("RoadsideAssistance?price=200"), {}, {})
+									.then(response => {
+
+										AXIOS.post('/services/'.concat("Towing?price=160"), {}, {})
+										.then(response => {
+
+											AXIOS.post('/services/'.concat("CarInspection?price=50"), {}, {})
+											.then(response => {
+
+												AXIOS.post('/services/'.concat("Other?price=1000"), {}, {})
+												.then(response => {
+
+													console.log("all done")
+												})
+												.catch(e => {
+													this.error = e
+												})
+
+											})
+											.catch(e => {
+												this.error = e
+											})
+
+										})
+										.catch(e => {
+											this.error = e
+										})
+
+									})
+    								.catch(e => {
+      									this.error = e
+									})
+
+								})
+    							.catch(e => {
+      								this.error = e
+								})
+
+							})
+    						.catch(e => {
+      							this.error = e
+							})
+
+						})
+    					.catch(e => {
+      						this.error = e
+						})
+
+					})
+    				.catch(e => {
+      					this.error = e
+					})
+
+				})
+    			.catch(e => {
+      				this.error = e
+				})
+
 			})
-			AXIOS.post('/services/'.concat("CarRepair?price=200"), {}, {})
-			.then(response => {})
-    		.catch(e => {
-      			this.error = e
-			})
-			AXIOS.post('/services/'.concat("OilChange?price=100"), {}, {})
-			.then(response => {})
-    		.catch(e => {
-      			this.error = e
-			})
-			AXIOS.post('/services/'.concat("RegularCheckup?price=120"), {}, {})
-			.then(response => {})
-    		.catch(e => {
-      			this.error = e
-			})
-			AXIOS.post('/services/'.concat("CarWash?price=50"), {}, {})
-			.then(response => {})
-    		.catch(e => {
-      			this.error = e
-			})
-			AXIOS.post('/services/'.concat("TireChange?price=150"), {}, {})
-			.then(response => {})
-    		.catch(e => {
-      			this.error = e
-			})
-			AXIOS.post('/services/'.concat("RoadsideAssistance?price=200"), {}, {})
-			.then(response => {})
-    		.catch(e => {
-      			this.error = e
-			})
-			AXIOS.post('/services/'.concat("Towing?price=160"), {}, {})
-			.then(response => {})
-    		.catch(e => {
-      			this.error = e
-			})
-			AXIOS.post('/services/'.concat("CarInspection?price=50"), {}, {})
-			.then(response => {})
-    		.catch(e => {
-      			this.error = e
-			})
-			AXIOS.post('/services/'.concat("Other?price=1000"), {}, {})
-			.then(response => {})
     		.catch(e => {
       			this.error = e
 			})

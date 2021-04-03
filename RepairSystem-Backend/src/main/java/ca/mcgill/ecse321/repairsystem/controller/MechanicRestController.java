@@ -101,6 +101,9 @@ public class MechanicRestController {
 	@PutMapping(value = { "/mechanic/updateServices/{oldEmail}", "/mechanic/updateServices/{oldEmail}/" })
 	public MechanicDto editService(@PathVariable("oldEmail") String oldEmail, @RequestParam String[] services) throws IllegalArgumentException {
 		Mechanic mechanic = mechanicService.getMechanicByEmail(oldEmail);
+		for(Service service: mechanic.getServices()){
+			service.removeMechanic(mechanic);
+		}
 		mechanic.setServices(new ArrayList<Service>());
 		for(String serviceType: services) {
 			mechanicService.addService(serviceService.getServiceByServiceType(ServiceType.valueOf(serviceType)), mechanic);
