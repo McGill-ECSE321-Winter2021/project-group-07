@@ -132,6 +132,8 @@ function MechanicDto(name, password, phone, email){
               for(var i = 0; i < this.mechanics.length; i++){
                 if(this.mechanics[i].id == response.data.id){
                   this.mechanics.splice(i,1)
+                  this.mechanics.push(response.data)
+                  this.mechanics.pop()
                   break
                 }
               }
