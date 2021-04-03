@@ -32,17 +32,18 @@ function MechanicDto(name, password, phone, email){
         address:'',
         admin: "",
         mechanic:"",
+        modalShow:false,
         mechanics: [],
         value:[],
         options: [
             {name: "CarRepair"},
-            {name: "Oil Change"},
-            {name: "Regular Checkup"},
+            {name: "OilChange"},
+            {name: "RegularCheckup"},
             {name: "CarWash"},
             {name: "TireChange"},
-            {name:"Roadside Assistance"},
+            {name:"RoadsideAssistance"},
             {name: "Towing"},
-            {name: "Car Inspection"},
+            {name: "CarInspection"},
             {name: "Other"}
         ],
         
@@ -80,29 +81,28 @@ function MechanicDto(name, password, phone, email){
                 email: email,
             }}).then(response => {
                 this.mechanics.push(response.data);
+                for(var i = 0; i < value.length; i++){
+                var specificService = value[i];
+                console.log(specificService.name)
+                AXIOS.put('/mechanic/editService/'.concat(specificService.name + "?addRemove=add&oldEmail=" +email), {},{})
+                .then(response => {
+                  console.log(response.data)
+                  this.mechanic = response.data
+                })
+                .catch(e => {
+                  this.error = e
+                })
+              }
             })
             .catch(e => {
                 this.error = e
           })
-          for(var i = 0; i < value.length; i++){
-            var specificService = value[i];
-            AXIOS.put('/mechanic/editService/'.concat(specificService + "?addRemove=add&oldEmail=" + email), {},{})
-              .then(response => {
-                console.log(response.data)
-                this.mechanic = response.data
-              })
-              .catch(e => {
-                this.error = e
-            })
-          }
-          
-
-            
         },
         
         /** To Save the Edits in Edit Profile */
         editMechanic : function(email, name, password, phone)
         {
+          console.log("test")
           AXIOS.put('/mechanic/'.concat(email+"?name="+name+"&password="+password+"&phone="+phone),{},{})
           .then(response => {
             this.mechanic = response.data;

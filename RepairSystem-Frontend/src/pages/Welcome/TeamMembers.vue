@@ -129,9 +129,13 @@
                         <td>{{ mechanic.name }}</td>
                         <td>{{ mechanic.email }}</td>
                         <td>{{ mechanic.phone }}</td>
-                        <td>{{ mechanic.services }}</td>
+                        <td>
+                            <span v-for="service in mechanic.services" style="text-align:center">
+                                {{service.serviceType}} 
+                            </span>
+                        </td>
                         <td> 
-                        <button class="btn-edit" @click=" modalShow =!modalShow; fillCredentials(mechanic)"> <img  class="img-add" src="../../assets/Admin/edit.png"/>  </button>
+                        <button class="btn-edit" @click="modalShow =!modalShow; fillCredentials(mechanic)"> <img  class="img-add" src="../../assets/Admin/edit.png"/>  </button>
                        <button class="btn-remove" @click="removeMechanic(mechanic.id)"> <img  class="img-add" src="../../assets/Admin/delete.png"/>  </button> 
                         
                         <b-modal
@@ -206,10 +210,10 @@
                             </b-form-group>
    
                             </b-form>
-                            <template #modal-footer="{save , cancel}">
+                            <template #modal-footer="{Save, Cancel}">
                               
                                 <!-- Emulate built in modal footer ok and cancel button actions -->
-                                <b-button size="sm" variant="success" @click="editMechanic(editEmail, editName, editPassword, editPhone, value)"> Save </b-button>
+                                <b-button size="sm" variant="success" @click="editMechanic(editEmail, editName, editPassword, editPhone)"> Save </b-button>
                                 <b-button size="sm" variant="danger" @click="modalShow =!modalShow">Cancel</b-button> 
       
                             </template>
