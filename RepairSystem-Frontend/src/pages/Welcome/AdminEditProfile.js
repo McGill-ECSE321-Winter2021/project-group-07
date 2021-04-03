@@ -34,6 +34,12 @@ export default {
       editAddress: "",
       editPassword: " ",
       editPhone:" ",
+
+        nameState: null,
+        emailState:null,
+        phoneState:null,
+        passwordState:null,
+        addressState:null,
     }
     },
     created: function () {
@@ -56,7 +62,7 @@ export default {
 
     methods: {
 
-      editAdmin:function(email, name, password, phone)
+      editAdmins: function(email, name, password, phone)
       {
         console.log(email);
         console.log("testing edit");
@@ -88,7 +94,23 @@ export default {
         this.$nextTick(() => {
           this.$bvModal.hide('modal-prevent-closing')
         })
-      }
+      }, 
+
+      resetModal() {
+      this.name = ''
+      this.email=''
+      this.phone=''
+      this.password=''
+      this.address=''
+      this.mechanic=""
+      this.capacities=""
+      this.nameState = null
+      this.emailState =null
+      this.phoneState = null
+      this.passwordState = null
+      this.addressState =null
+      this.capabilitiesState = null
+    },
 
     }
 }

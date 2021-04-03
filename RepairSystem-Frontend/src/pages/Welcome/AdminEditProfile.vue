@@ -3,7 +3,7 @@
         <div class = "col no-gutters">
         <div class="profile">
         <div class="name">
-             <div class="text" v-model="name">
+             <div class="text">
                 <h1> {{admin.name}} </h1>
             </div>
             <div class="ellipse">
@@ -68,22 +68,22 @@
                     </div>
                 </div>
             </div>
-            <button @click="modalShow=!modalShow; fillCredentials() " align = "center">Edit Profile</button>
+            <button @click="modalShow=!modalShow; fillCredentials() " align ="center">Edit Profile</button>
 
 
               <b-modal
-                        v-model="modalShow"
-                        title="Edit Profile"
-                        id="modal-scoped"
-                        >
-                        <b-form ref="form" @submit.stop.prevent="handleSubmit">
+                v-model="modalShow"
+                title="Edit Profile"
+                id="modal-scoped"
+            >
+            <b-form ref="form" @submit.stop.prevent="handleSubmit">
                            
-                            <b-form-group
-                            label="Name"
-                            label-for="editName-input"
-                            invalid-feedback="Name is required"
-                            :state="editEmailState"
-                            >
+                <b-form-group
+                label="Name"
+                label-for="editName-input"
+                invalid-feedback="Name is required"
+                :state="editEmailState"
+                >
                             <b-form-input
                                 id="editName"
                                 type="text"
@@ -145,9 +145,9 @@
                             </b-form-group>
    
                             </b-form>
-                                <template #modal-footer="{editAdmin}">
+                                <template #modal-footer="{Save,Cancel}">
                                 <!-- Emulate built in modal footer ok and cancel button actions -->
-                                 <b-button size="sm" variant="success" @click="editAdmin(editEmail, editName, editPassword, editPhone)"> Save </b-button>
+                                 <b-button size="sm" variant="success" @click="editAdmins(editEmail, editName, editPassword, editPhone)"> Save </b-button>
                                 <b-button size="sm" variant="danger" @click="modalShow =!modalShow">Cancel</b-button> 
       
                             </template>
