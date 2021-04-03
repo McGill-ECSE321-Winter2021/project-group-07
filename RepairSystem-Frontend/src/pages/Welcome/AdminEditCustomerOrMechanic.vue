@@ -9,8 +9,7 @@
                         <input type="text" v-model="s" value="" class="search-input" placeholder="  Search">
                     </form>
 
-                  <button class="search-btn" @click="searchForCustomers(s)"> <img class="img-add" src="../../assets/Admin/search.png"/> </button> 
-                  
+                  <button class="search-btn" @click="searchForCustomers(s)"> <img class="img-add" src="../../assets/Admin/search.png"/> </button>          
                   <b-button v-b-modal.modal-prevent-closing class="btn-primary"> Add Customer <img class="img-add" src="../../assets/Admin/plus.png"/> </b-button>
 
                         <b-modal
