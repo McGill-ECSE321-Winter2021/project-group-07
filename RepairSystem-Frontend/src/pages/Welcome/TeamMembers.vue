@@ -259,8 +259,8 @@
      
   <!--
         The Table containing all the mechanic information#D3D2E1 --> 
-        <div class="container mt-3 mb-3" style="background-color:white; border-radius:30px;">
-          <table class = "table table-striped tabled-bordered mydatatable" style="width: 100">
+        <div class="container mt-3 mb-3" style="background-color:white; border-radius:30px">
+          <table class = "table table-striped tabled-bordered mydatatable" style="width: 200px">
               <thead>
                     <tr style="text-align:center;  border-radius:30px;">
                         <th> Name </th>
@@ -297,12 +297,8 @@
                         </td>
                         <td> 
                         <button class="btn-edit" @click="modalShow =!modalShow; fillCredentials(mechanic)"> <img  class="img-add" src="../../assets/Admin/edit.png"/>  </button>
-<<<<<<< HEAD
-                       <button class="btn-remove" @click="removeMechanic(mechanic.id)"> <img  class="img-add" src="../../assets/Admin/delete.png"/>  </button> 
-=======
                         <button class="btn-remove" @click="removeMechanic(mechanic.id)"> <img  class="img-add" src="../../assets/Admin/delete.png"/>  </button> 
-                        
->>>>>>> 28fba2b9fe0cc31864a9be053f9f2c6a84e11226
+                       
                         <b-modal
                         v-model="modalShow"
                         title="Edit Profile"

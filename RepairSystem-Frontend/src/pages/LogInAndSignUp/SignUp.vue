@@ -56,21 +56,18 @@
     color: rgb(167, 167, 167);
     font-weight: 600;
 }
-
 .box {
   position: absolute;
   top: 250px;
   width: 800px;
   height: 300px;
 }
-
 .textBox {
   position: absolute;
   top: 260px;
   width: 800px;
   height: 200px;
 }
-
 .leftCar {
   position: absolute;
   bottom: 100px;
@@ -78,7 +75,6 @@
   width: 600px;
   height: 430px;
 }
-
 .rightCar {
   position: absolute;
   bottom: 65px;
@@ -86,16 +82,13 @@
   width: 500px;
   height: 383px;
 }
-
 label {
   color: white;
   font-size: 12px;
 }
-
 br {
     line-height:0px;
 }
-
 input {
   color: rgb(80, 95, 152);
   font-size: 12px;
@@ -108,6 +101,4 @@ input {
   padding: 2px;
   border-radius: 8px;
 }
-
-
 </style>

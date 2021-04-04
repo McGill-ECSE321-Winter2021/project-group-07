@@ -54,6 +54,15 @@ function MechanicDto(name, password, phone, email){
         addressState:null,
         capabilitiesState:null,
         error: "",
+
+
+        /** Work Hours */
+        mondayStartTime:"",
+        mondayEndTime:"",
+        tuesdayStartTime:"",
+        tuesdayEndTime:"",
+        wednesdayStartTime:"",
+        wednesdayEndTime:"",
       }
     },
 
