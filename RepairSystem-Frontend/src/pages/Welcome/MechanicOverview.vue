@@ -63,13 +63,7 @@
             </div>
             <div class="row no-gutters">
                 <div class="bottom">
-                    <div>
-                        <br>
-                        <b style="color: #F3BE35; font-size: 20px;"> &nbsp; Up Next... </b>
-                    </div>
-                    <div class="rcorners2">
-                        <b>next appointment info</b>
-                    </div>
+                    <br> <img src="../../assets/paint job 1.jpg" width="400px" length="400px">
                 </div>
             </div>
         </div>

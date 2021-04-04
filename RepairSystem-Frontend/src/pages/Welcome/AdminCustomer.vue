@@ -9,7 +9,7 @@
                 </form>
 
                 <button class="search-btn" @click="searchForCustomers(s)"> <img class="img-add" src="../../assets/Admin/search.png" /> </button>
-                <b-button v-b-modal.modal-prevent-closing class="btn-primary"> Add Customer <img class="img-add" src="../../assets/Admin/plus.png" /> </b-button>
+                <b-button v-b-modal.modal-prevent-closing class="btn-primary"> Add New Customer <img class="img-add" src="../../assets/Admin/plus.png" /> </b-button>
 
                 <b-modal id="modal-prevent-closing" ref="modal" title="Add New Customer" @show="resetModal" @hidden="resetModal" @ok="createCustomer(name,password,phone,email,credit,debit, address)">
                     <b-form ref="form" @submit.stop.prevent="handleSubmit">
