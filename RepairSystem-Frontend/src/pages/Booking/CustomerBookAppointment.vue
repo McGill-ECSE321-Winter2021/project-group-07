@@ -1,6 +1,5 @@
 <template>
     <div id="booking-calendar" style = "position: relative; left: 20px; top: 20px;">
-        <h1>{{customer.name}}</h1>
           <h2>Booking an Appointment</h2>
           <br>
         <date-pick style = "width: 90%"
@@ -11,7 +10,6 @@
             :displayFormat="'YYYY.MM.DD H:mm A'"
         ></date-pick>
 
-        <h2>{{date}}</h2>
         <br>
 
         <div class = "row" style = "position: relative; width: 100vh; left: 30px">
@@ -25,7 +23,7 @@
                 </multiselect>
         	</form>
 
-                    	<form>
+            <form>
                             <br>
         	    <label class="typo__label"> Car </label>
             	<multiselect v-model="car" :state="carState" :options="availableCars" :multiple="false" :close-on-select="true" :clear-on-select="false" :preserve-search="true" placeholder="Pick a Car" label="carType" track-by="carType" :preselect-first="true">
@@ -236,12 +234,12 @@ export default {
             // JSON responses are automatically parsed.
                 this.timeslot  = response.data
                 
-                console.log(response.data)
-                console.log('/appointment/'.concat(this.customer.id + "?timeSlotId="+this.timeslot.id + "&carId="+vehicleId + "&services="+this.service.serviceType + "&note="+this.note))
+                //console.log(response.data)
+                //console.log('/appointment/'.concat(this.customer.id + "?timeSlotId="+this.timeslot.id + "&carId="+vehicleId + "&services="+this.service.serviceType + "&note="+this.note))
             	
-            	AXIOS.post('/appointment/'.concat(this.customer.id + "?timeSlotId="+this.timeslot.id + "&carId="+this.car.id + "&services="+this.service.serviceType + "&note="+this.note), {}, {})
+            	AXIOS.post('/appointment/'.concat(this.customer.id + "?timeSlotId="+this.timeslot.id + "&carId="+vehicleId + "&services="+this.service.serviceType + "&note="+this.note), {}, {})
         			.then(response => {
-  					// open pop up? or redirect to main page?
+  					location.replace(frontendUrl+"/customerDashboard/Overview/"+id);
             	})
             	.catch(e => {
                 	var errorMsg = e.response.data.message
