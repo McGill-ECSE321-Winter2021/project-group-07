@@ -104,6 +104,10 @@ public class MechanicService {
 	@Transactional
 	public Mechanic addTimeSlots(String oldEmail, String[] timeslotsStart, String[] timeslotsEnd) {
 		Mechanic mechanic = mechanicRepository.findByEmail(oldEmail);
+		for(TimeSlot slot: mechanic.getTimeSlots()) {
+			slot.removeMechanic(mechanic);
+			//timeslotService.deleteTimeSlot(slot.getId());
+		}
 		String startTime = "";
 		String endTime = "";
 		List<TimeSlot> timeslotList = new ArrayList<TimeSlot>();
@@ -201,6 +205,10 @@ public class MechanicService {
 		for(ca.mcgill.ecse321.repairsystem.model.Service service: m.getServices()) {
 			service.removeMechanic(m);
 			serviceRepository.save(service);
+		}
+		for(TimeSlot t: m.getTimeSlots()) {
+			t.removeMechanic(m);
+			//timeslotService.deleteTimeSlot(t.getId());
 		}
 		mechanicRepository.delete(m);
 	}

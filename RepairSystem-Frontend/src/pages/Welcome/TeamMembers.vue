@@ -11,12 +11,12 @@
 
                   <button class="search-btn" @click="searchForMechanics(s)"> <img class="img-add" src="../../assets/Admin/search.png"/> </button> 
                   
-                  <b-button v-b-modal.modal-prevent-closing class="btn-primary"> Add New Member <img class="img-add" src="../../assets/Admin/plus.png"/> </b-button>
+                  <b-button v-b-modal.modal-prevent-closing class="btn-primary"> Add Mechanic <img class="img-add" src="../../assets/Admin/plus.png"/> </b-button>
 
                         <b-modal
                         id="modal-prevent-closing"
                         ref="modal"
-                        title="Add New Team Member"
+                        title="Add New Mechanic"
                         @show="resetModal"
                         @hidden="resetModal"
                         @ok="createMechanic(name,password,phone,email,value,mondayStart,mondayEnd,tuesdayStart,tuesdayEnd,wednesdayStart,wednesdayEnd,thursdayStart,thursdayEnd,fridayStart,fridayEnd,saturdayStart,saturdayEnd)"
@@ -273,7 +273,7 @@
                     <tr style="text-align:center;  border-radius:30px;">
                         <th> Name </th>
                         <th>Email</th>
-                        <th>Phone Number</th>
+                        <th> Number</th>
                         <th> Work Schedule </th>
                         <th>Capabilities</th>
                         <th> Actions </th>
@@ -287,12 +287,12 @@
                         <td> 
                             <table class="table">
                                 <tbody>
-                                    <td> Mo : {{mechanic.timeSlots[0].startTimeFormat}}-{{mechanic.timeSlots[0].endTimeFormat}} </td>
-                                    <td> Tu : {{mechanic.timeSlots[1].startTimeFormat}}-{{mechanic.timeSlots[1].endTimeFormat}}</td>
-                                    <td> We: {{mechanic.timeSlots[2].startTimeFormat}}-{{mechanic.timeSlots[2].endTimeFormat}}</td>
-                                    <td> Th {{mechanic.timeSlots[3].startTimeFormat}}-{{mechanic.timeSlots[3].endTimeFormat}}</td>
-                                    <td> Fr {{mechanic.timeSlots[4].startTimeFormat}}-{{mechanic.timeSlots[4].endTimeFormat}}</td>
-                                    <td> Sa {{mechanic.timeSlots[5].startTimeFormat}}-{{mechanic.timeSlots[5].endTimeFormat}}</td>
+                                    <td> Mo <br> {{mechanic.timeSlots[0].startTimeFormat}}-{{mechanic.timeSlots[0].endTimeFormat}} </td>
+                                    <td> Tu <br> {{mechanic.timeSlots[1].startTimeFormat}}-{{mechanic.timeSlots[1].endTimeFormat}}</td>
+                                    <td> We <br> {{mechanic.timeSlots[2].startTimeFormat}}-{{mechanic.timeSlots[2].endTimeFormat}}</td>
+                                    <td> Th <br> {{mechanic.timeSlots[3].startTimeFormat}}-{{mechanic.timeSlots[3].endTimeFormat}}</td>
+                                    <td> Fr <br> {{mechanic.timeSlots[4].startTimeFormat}}-{{mechanic.timeSlots[4].endTimeFormat}}</td>
+                                    <td> Sa <br> {{mechanic.timeSlots[5].startTimeFormat}}-{{mechanic.timeSlots[5].endTimeFormat}}</td>
                                 </tbody>
                             </table>
 
@@ -313,6 +313,7 @@
                         >
                         <b-form ref="form" @submit.stop.prevent="handleSubmit">
                            
+                           <label> <b>Personal Information  </b> </label>
                             <b-form-group
                             label="Name"
                             label-for="editName-input"
@@ -360,8 +361,162 @@
                             > 
                             </b-form-input>
                             </b-form-group>
+
+                            <label> <b> Work Hours </b> </label> 
+
+                            <div class="row">
+                                <p style="margin-left:20px;margin-right:28px"> Monday </p>
+                                <div class="col">
+                                    <b-form-input
+                                    id="editMondayStart"
+                                    type="time"
+                                    class="form-control"
+                                    v-model="editMondayStart"  
+                                    :value="editMondayStart"  
+                                    > 
+                                    </b-form-input>
+
+                                </div>
+                                <div class="col">
+                                 <b-form-input
+                                    id="editMondayEnd"
+                                    type="time"
+                                    class="form-control"
+                                    v-model="editMondayEnd" 
+                                    :value="editMondayEnd" 
+                                > 
+                                </b-form-input>
+                            </div>
+                        </div>
+
+                                <div class="row">
+                                <p style="margin-left:20px;margin-right:25px">Tuesday</p>
+                                <div class="col">
+                                    <b-form-input
+                                    id="editTuesdayStart"
+                                    type="time"
+                                    class="form-control"
+                                    v-model="editTuesdayStart"  
+                                    :value="editTuesdayStart"
+                                    > 
+                                    </b-form-input>
+
+                                </div>
+                                <div class="col">
+                                 <b-form-input
+                                    id="editTuesdayEnd"
+                                    type="time"
+                                    class="form-control"
+                                    v-model="editTuesdayEnd"  
+                                    :value="editTuesdayEnd"  
+                                > 
+                                </b-form-input>
+                            </div>
+                        </div>
+
+                            
+                                <div class="row">
+                                <p style="margin-left:20px">Wednesday</p>
+                                <div class="col">
+                                    <b-form-input
+                                    id="editWednesdayStart"
+                                    type="time"
+                                    class="form-control"
+                                    v-model="editWednesdayStart"  
+                                    :value="editWednesdayStart"  
+                                    > 
+                                    </b-form-input>
+
+                                </div>
+                                <div class="col">
+                                 <b-form-input
+                                    id="editWednesdayEnd"
+                                    type="time"
+                                    class="form-control"
+                                    v-model="editWednesdayEnd"
+                                    :value="editWednesdayEnd"     
+                                > 
+                                </b-form-input>
+                            </div>
+                        </div>
+
+                            <div class="row">
+                                <p style="margin-left:20px;margin-right:18px">Thursday</p>
+                                <div class="col">
+                                    <b-form-input
+                                    id="editThursdayStart"
+                                    type="time"
+                                    class="form-control"
+                                    v-model="editThursdayStart"  
+                                    :value="editThursdayStart" 
+                                    > 
+                                    </b-form-input>
+
+                                </div>
+                                <div class="col">
+                                 <b-form-input
+                                    id="editThursdayEnd"
+                                    type="time"
+                                    class="form-control"
+                                    v-model="editThursdayEnd"  
+                                    :value="editThursdayEnd"  
+                                > 
+                                </b-form-input>
+                            </div>
+                        </div>
+
+                               <div class="row">
+                                <p style="margin-left:20px;margin-right:40px">Friday</p>
+                                <div class="col">
+                                    <b-form-input
+                                    id="editFridayStart"
+                                    type="time"
+                                    class="form-control"
+                                    v-model="editFridayStart"  
+                                    :value="editFridayStart" 
+                                    > 
+                                    </b-form-input>
+
+                                </div>
+                                <div class="col">
+                                 <b-form-input
+                                    id="editFridayEnd"
+                                    type="time"
+                                    class="form-control"
+                                    v-model="editFridayEnd"   
+                                    :value="editFridayEnd" 
+                                > 
+                                </b-form-input>
+                            </div>
+                        </div>
+
+                            <div class="row">
+                                <p style="margin-left:20px;margin-right:21px">Saturday</p>
+                                <div class="col">
+                                    <b-form-input
+                                    id="editSaturdayStart"
+                                    type="time"
+                                    class="form-control"
+                                    v-model="editSaturdayStart"  
+                                    :value="editSaturdayStart"
+                                    > 
+                                    </b-form-input>
+
+                                </div>
+                                <div class="col">
+                                 <b-form-input
+                                    id="editSaturdayEnd"
+                                    type="time"
+                                    class="form-control"
+                                    v-model="editSaturdayEnd" 
+                                    :value="editSaturdayEnd"   
+                                > 
+                                </b-form-input>
+                            </div>
+                        </div>
+
                         </b-form>
-                            <label class="typo__label"> Capabilities </label>
+                            <label class="typo__label"> <b>Capabilities</b> </label>
                             <multiselect v-model="value" :state="capabilitiesState" :options="options" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Pick some" label="name" track-by="name" :preselect-first="true"> >
                                 <template slot="selection" slot-scope="{ values, search, isOpen }">
                                     <span class="multiselect__single" v-if="values .length &amp;&amp; !isOpen">{{ values.length }} options selected</span>
@@ -371,7 +526,7 @@
                             <template #modal-footer="{Save, Cancel}">
 
                                 <!-- Emulate built in modal footer ok and cancel button actions -->
-                                <b-button size="sm" variant="success" @click="editMechanic(mechanic.email, editName, editPassword, editPhone, value); modalShow =!modalShow"> Save </b-button>
+                                <b-button size="sm" variant="success" @click="editMechanic(mechanic.email, editName, editPassword, editPhone, value, editMondayStart,editMondayEnd,editTuesdayStart,editTuesdayEnd,editWednesdayStart,editWednesdayEnd,editThursdayStart,editThursdayEnd,editFridayStart,editFridayEnd,editSaturdayStart,editSaturdayEnd); modalShow =!modalShow"> Save </b-button>
                                 <b-button size="sm" variant="danger" @click="modalShow =!modalShow">Cancel</b-button>
 
                             </template>

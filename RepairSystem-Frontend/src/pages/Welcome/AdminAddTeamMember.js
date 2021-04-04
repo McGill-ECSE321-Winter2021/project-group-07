@@ -69,6 +69,21 @@ function MechanicDto(name, password, phone, email){
         fridayEndTime:"",
         saturdayStartTime:"",
         saturdayEndTime:"",
+
+        /** Edit Work Hours */
+        editMondayStart:"",
+        editMondayEnd:"",
+        editTuesdayStart:"",
+        editTuesdayEnd:"",
+        editWednesdayStart:"",
+        editWednesdayEnd:"",
+        editThursdayStart:"",
+        editThursdayEnd:"",
+        editFridayStart:"",
+        editFridayEnd:"",
+        editSaturdayStart:"",
+        editSaturdayEnd:"",
+        
       }
     },
 
@@ -123,7 +138,7 @@ function MechanicDto(name, password, phone, email){
         },
         
         /** To Save the Edits in Edit Profile */
-        editMechanic : function(email, name, password, phone, services)
+        editMechanic : function(email, name, password, phone, services, editMondayStart,editMondayEnd,editTuesdayStart,editTuesdayEnd,editWednesdayStart,editWednesdayEnd,editThursdayStart,editThursdayEnd,editFridayStart,editFridayEnd,editSaturdayStart,editSaturdayEnd)
         {
           AXIOS.put('/mechanic/'.concat(email+"?name="+name+"&password="+password+"&phone="+phone),{},{})
           .then(response => {
@@ -135,13 +150,21 @@ function MechanicDto(name, password, phone, email){
             console.log(request)
             AXIOS.put("/mechanic/updateServices/".concat(email + "?services=" + request), {},{})
                     .then(response => {
-                      for(var i = 0; i < this.mechanics.length; i++){
+                      var timeslotsStart = "".concat(editMondayStart + "," + editTuesdayStart + "," + editWednesdayStart + "," + editThursdayStart + "," + editFridayStart + "," + editSaturdayStart)
+                      var timeslotsEnd = "".concat(editMondayEnd + "," + editTuesdayEnd + "," + editWednesdayEnd + "," + editThursdayEnd + "," + editFridayEnd + "," + editSaturdayEnd)
+                      AXIOS.put("/mechanic/addTimeSlots/".concat(email + "?timeslotsStart=" + timeslotsStart + "&timeslotsEnd=" + timeslotsEnd), {},{})
+                      .then(response => {
+                        for(var i = 0; i < this.mechanics.length; i++){
                         if(this.mechanics[i].id == response.data.id){
                           this.mechanics[i] = response.data
                           this.mechanics.push(response.data)
                           this.mechanics.pop(response.data)
                         }
                       }
+                      })
+                      .catch(e => {
+                        this.error = e
+                      })
                     })
                     .catch(e => {
                       this.error = e
@@ -160,6 +183,18 @@ function MechanicDto(name, password, phone, email){
           this.editEmail = row.email;
           this.editPhone = row.phone;
           this.editPassword = row.password;
+          this.editMondayStart = row.timeSlots[0].startTimeFormat
+          this.editMondayEnd = row.timeSlots[0].endTimeFormat
+          this.editTuesdayStart = row.timeSlots[1].startTimeFormat
+          this.editTuesdayEnd = row.timeSlots[1].endTimeFormat
+          this.editWednesdayStart = row.timeSlots[2].startTimeFormat
+          this.editWednesdayEnd = row.timeSlots[2].endTimeFormat
+          this.editThursdayStart = row.timeSlots[3].startTimeFormat
+          this.editThursdayEnd = row.timeSlots[3].endTimeFormat
+          this.editFridayStart = row.timeSlots[4].startTimeFormat
+          this.editFridayEnd = row.timeSlots[4].endTimeFormat
+          this.editSaturdayStart = row.timeSlots[5].startTimeFormat
+          this.editSaturdayEnd = row.timeSlots[5].endTimeFormat
          
         },
         

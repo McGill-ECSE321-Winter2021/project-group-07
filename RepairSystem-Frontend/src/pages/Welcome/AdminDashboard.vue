@@ -18,7 +18,7 @@
             </router-link>
             <router-link :to="'/adminDashboard/TeamMembers/' + this.admin.id" active-class="active" tag="button" exact class="side-btn">
                 <div class="link-container">
-                    Team Members
+                    Mechanics
                 </div>
             </router-link>
             <router-link :to="'/adminDashboard/Customers/' + this.admin.id" active-class="active" tag="button" exact class="side-btn">

@@ -118,8 +118,14 @@ function CustomerDto(name, password, phone, email, credit, debit, address){
           console.log(address);
           AXIOS.put('/customer/'.concat(email+"?newName="+name+"&newPassword="+password+"&newPhone="+phone+"&newCredit="+credit+"&newDebit="+debit+"&newAddress="+address),{},{})
           .then(response => {
+            for(var i = 0; i < this.customers.length; i++){
+              if(this.customers[i].id === response.data.id){
+                this.customers[i] = response.data
+                this.customers.push(response.data)
+                this.customers.pop(response.data)
+              }
+            }
             this.customer = response.data;
-            location.reload();
           }).catch(e => {
             this.error = e;
           })
@@ -148,12 +154,14 @@ function CustomerDto(name, password, phone, email, credit, debit, address){
          
         },
         removeCustomer: function(id){
-          console.log("entered removeCustomer function")
-          console.log("id: "+ id)
           AXIOS.delete('/customer/'.concat(id), {}, {})
             .then(response => {
               console.log(response)
-              location.reload();
+              for(var i = 0; i < this.customers.length; i++){
+                if(this.customers[i].id === id){
+                  this.customers.splice(i,1)
+                }
+              }
             })
             .catch(e => {
               this.error = e;

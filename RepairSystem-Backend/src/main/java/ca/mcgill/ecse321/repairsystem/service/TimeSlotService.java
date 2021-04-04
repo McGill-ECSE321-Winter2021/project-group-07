@@ -120,6 +120,17 @@ public class TimeSlotService {
 		timeSlotRepository.save(timeslot);
 	}
 	
+	@Transactional
+	public void deleteTimeSlot(int id)
+	{
+		if(timeSlotRepository.findById(id) == null)
+		{
+			throw new IllegalArgumentException("No timeslot with id: " + id + "exists");
+		}
+		TimeSlot t = timeSlotRepository.findById(id);
+		timeSlotRepository.delete(t);
+	}
+	
 	/* 
 	 * helper method
 	 */
