@@ -91,23 +91,6 @@ const routes = [
         path: '/adminDashboard/ViewAllCustomersOrMechanics/:userId',
         component: () => import('../pages/Welcome/AdminViewAllCustomersOrMechanics.vue')
       },
-      {
-        path: '/adminDashboard/addAppointment',
-        component: () => import('../pages/Welcome/AdminAddAppointment.vue')
-      },
-      {
-        path: '/adminDashboard/editAppointment',
-        component: () => import('../pages/Welcome/AdminEditAppointment.vue')
-      },
-      {
-        path: '/adminDashboard/addTimeSlot',
-        component: () => import('../pages/Welcome/AdminAddTimeSlot.vue')
-      },
-      {
-        path: '/adminDashboard/editTimeSlot',
-        component: () => import('../pages/Welcome/AdminEditTimeSlot.vue')
-      }
-      
     ]
   }
 ]
