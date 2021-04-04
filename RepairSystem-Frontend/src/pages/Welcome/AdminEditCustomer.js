@@ -86,10 +86,9 @@ function CustomerDto(name, password, phone, email, credit, debit, address){
          */
         createCustomer: function (name,password,phone,email,credit, debit,address,){
            console.log(credit);
-          AXIOS.post('/customer/'.concat(name+"?="+credit), {},
+          AXIOS.post('/customer/'.concat(name), {},
             {  
                 params:{
-                  name: name,
                   phone: phone,
                   password: password,
                   email: email,
