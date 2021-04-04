@@ -33,8 +33,18 @@
                     </template>
                 </multiselect>
         	</form>
+        	
+        	<form>
+        	    <label class="typo__label"> Car </label>
+            	<multiselect v-model="car" :state="carState" :options="availableCars" :multiple="false" :close-on-select="true" :clear-on-select="false" :preserve-search="true" placeholder="Pick a Car" label="carType" track-by="carType" :preselect-first="true">
+                	<template slot="selection" slot-scope="{ values, search, isOpen }">
+                    	<span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen">{{ values.length }} options selected</span>
+                    </template>
+                </multiselect>
+        	</form>
+        	
         <br> 
-        <button class="button1" @click="createAppointment(date, value, service, note)">
+        <button class="button1" @click="createAppointment(date, value, service, note, car)">
         	Book Appointment
         </button>
         
@@ -125,13 +135,15 @@ export default {
         availableServices:[],
         customer: "",
 	    error: "",
-	    car: '',
 	    availableMechanics: [],
 	    mechanic: '',
-	    service: ''
+	    service: '',
+	    car: '',
+	    availableCars: []
     }),
     created: function () {
         var id = this.$route.params.userId
+        
         AXIOS.get('/customer/'.concat(id))
         .then(response => {
         // JSON responses are automatically parsed.
@@ -149,6 +161,15 @@ export default {
             AXIOS.get('/services')
         		.then(response => {
             		this.availableServices = response.data;
+            		
+            		AXIOS.get('/cars/'.concat(id), {}, {})
+        				.then(response => {
+            				this.availableCars = response.data
+            			})
+            			.catch(e => {
+                			var errorMsg = e.response.data.message
+            			})
+            		
         		})
         		.catch(e => {
             		this.error = e
@@ -165,7 +186,13 @@ export default {
             return date < new Date()
         },
         
-        createAppointment: function(startDate, mechanic, service, note) {
+        createAppointment: function(startDate, mechanic, service, note, car) {
+        
+        	if (car == null) {
+        		var vehicleId = this.car.id
+        	} else {
+        		var vehicleId = car.id
+        	}
         
             var endDate = startDate.split("-");
             var min_sec_array = endDate[3].split(":");
@@ -181,9 +208,9 @@ export default {
 			endDate[3] = min_sec_array;
 			endDate = endDate.join('-');
 
-            console.log("Old date: " + startDate);
-            console.log("New date: " + endDate);
-            console.log('/timeslot/'.concat(startDate + "?endTime="+endDate))
+            //console.log("Old date: " + startDate);
+            //console.log("New date: " + endDate);
+            //console.log('/timeslot/'.concat(startDate + "?endTime="+endDate))
 
             AXIOS.post('/timeslot/'.concat(startDate + "?endTime="+endDate), {}, {})
             .then(response => {
@@ -191,10 +218,11 @@ export default {
                 this.timeslot  = response.data
                 
                 console.log(response.data)
-                console.log('/appointment/'.concat(this.customer.id + "?timeSlotId="+this.timeslot.id + "&carId="+this.car.id + "&services="+this.service.serviceType + "&note="+this.note))
+                console.log('/appointment/'.concat(this.customer.id + "?timeSlotId="+this.timeslot.id + "&carId="+vehicleId + "&services="+this.service.serviceType + "&note="+this.note))
+            	
             	AXIOS.post('/appointment/'.concat(this.customer.id + "?timeSlotId="+this.timeslot.id + "&carId="+this.car.id + "&services="+this.service.serviceType + "&note="+this.note), {}, {})
         			.then(response => {
-            		// JSON responses are automatically parsed.
+  					// open pop up? or redirect to main page?
             	})
             	.catch(e => {
                 	var errorMsg = e.response.data.message
