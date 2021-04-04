@@ -338,9 +338,9 @@ public class CustomerService {
 		{
 			throw new NullPointerException("Customer does not exist!");
 		}
-	
 		List<Appointment> appointments = appointmentRepository.findByCustomer(customer);
-		if(appointments != null || appointments.size() > 0) {
+		customer.setAppointments(null);
+		if(appointments != null && appointments.size() > 0) {
 			for(Appointment a : appointments)
 			{
 				a.setCustomer(null);
@@ -349,14 +349,14 @@ public class CustomerService {
 		}
 		
 		List<Car> cars = carRepository.findByCustomer(customer);
-		if(cars != null || cars.size() > 0) {
+		customer.setCars(null);
+		if(cars != null && cars.size() > 0) {
 			for(Car c : cars)
 			{
 				c.setCustomer(null);
 				carRepository.delete(c);
 			}
 		}
-		
 		customerRepository.delete(customer);
 		return true;
 	}

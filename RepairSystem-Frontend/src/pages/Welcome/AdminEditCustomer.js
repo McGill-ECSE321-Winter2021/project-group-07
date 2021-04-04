@@ -34,6 +34,7 @@ function CustomerDto(name, password, phone, email, credit, debit, address){
       data() {
       return {
         modalShow:false,
+        modalCar:false,
         name: '',
         email:'',
         phone:'',
@@ -62,6 +63,10 @@ function CustomerDto(name, password, phone, email, credit, debit, address){
         editResidence: " ",
         editCredit: " ",
         editDebit:" ",
+
+        typeOfCar: "",
+        winterTires: "",
+        numOfKm: ""
       }
     },
 
@@ -153,6 +158,40 @@ function CustomerDto(name, password, phone, email, credit, debit, address){
         
          
         },
+        fillCredentials2 : function(row)
+        {
+          AXIOS.get('/customer/'.concat(row.id), {}, {})
+          .then(response => {
+            this.customer = response.data;
+          }).
+          catch(e=>{
+            this.error =e;
+          })
+        
+         
+        },
+        addCar: function(typeOfCar, winterTires, numOfKm){
+          AXIOS.post('/car/'.concat(this.customer.id + "?carType=" + typeOfCar + "&winterTires=" + winterTires + "&numOfKilometers=" + numOfKm), {}, {})
+            .then(response => {
+              AXIOS.get('/customer/'.concat(this.customer.id), {}, {})
+              .then(response => {
+                for(var i = 0; i < this.customers.length; i++){
+                  if(this.customers[i].id === this.customer.id){
+                    this.customers[i] = response.data
+                  }
+                }
+                this.customers.push(response.data)
+                this.customers.pop(response.data)
+              }).
+              catch(e=>{
+                this.error =e;
+              })
+            })
+            .catch(e => {
+              this.error = e;
+            })
+        },
+
         removeCustomer: function(id){
           AXIOS.delete('/customer/'.concat(id), {}, {})
             .then(response => {
@@ -213,10 +252,20 @@ function CustomerDto(name, password, phone, email, credit, debit, address){
         this.passwordState = valid 
         this.addressState = valid
         return valid
+      },checkFormValidity2() {
+        const valid = this.$refs.form.checkValidity()
+        this.typeOfCar = valid
+        this.winterTires = valid
+        this.numOfKm = valid
+        return valid
       },
       handleOk(bvModalEvt) {
         bvModalEvt.preventDefault()
         this.handleSubmit()
+      },
+      handleOk2(bvModalEvt) {
+        bvModalEvt.preventDefault()
+        this.handleSubmit2()
       },
        resetModal() {
         this.name = ''
@@ -244,8 +293,17 @@ function CustomerDto(name, password, phone, email, credit, debit, address){
         this.$nextTick(() => {
           this.$bvModal.hide('modal-prevent-closing')
         })
+      },
+      handleSubmit2() {
+        if (!this.checkFormValidity2()) {
+          return
+        }
+        
+        this.$nextTick(() => {
+          this.$bvModal.hide('modal-prevent-closing')
+        })
       }
-    }
     
        
     }
+  }

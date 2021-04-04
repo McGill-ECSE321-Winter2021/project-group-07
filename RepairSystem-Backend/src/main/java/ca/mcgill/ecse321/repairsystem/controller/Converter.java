@@ -58,7 +58,9 @@ public class Converter {
 		List<AppointmentDto> appointmentsDto = new ArrayList<AppointmentDto>();
 		List<CarDto> carsDto = new ArrayList<CarDto>();
 		for(Car car: customer.getCars()) {
-			carsDto.add(new CarDto(car.getId()));
+			CarDto c = new CarDto(car.getId());
+			c.setCarType(car.getCarType());
+			carsDto.add(c);
 		}
 		for(Appointment appointment: customer.getAppointments()) {
 			appointmentsDto.add(new AppointmentDto(appointment.getId()));

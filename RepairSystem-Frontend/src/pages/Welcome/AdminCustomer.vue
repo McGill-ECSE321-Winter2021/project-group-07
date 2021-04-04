@@ -133,6 +133,7 @@
                         <th>Email</th>
                         <th>Phone Number </th>
                         <th>Address</th>
+                        <th> Cars </th>
                    <!--     <th> Credit Card </th>
                         <th> Debit Card </th>-->
                         <th> Actions </th>
@@ -142,15 +143,93 @@
                     <tr v-for="customer in customers" style="text-align:center">
                         <td>{{ customer.name }}</td>
                         <td>{{ customer.email }}</td>
-                        <td>{{customer.phone }}</td>
+                        <td>{{ customer.phone }}</td>
                         <td>{{ customer.address  }}</td>
+                        <td> 
+                            <table class="table">
+                                <tbody>
+                                    <td v-for="car in customer.cars">
+                                        {{car.carType}}
+                                    </td>
+                                </tbody>
+                            </table>
+
+                        </td>
                    <!--     <td>{{ customer.creditHash}} </td>
                         <td>{{ customer.debitHash}} </td>-->
                         <td> 
                         <button class="btn-edit" @click=" modalShow =!modalShow; fillCredentials(customer)"> <img  class="img-add" src="../../assets/Admin/edit.png"/>  </button>
-                        <button class="btn-add-car" @click="modalCar =! modelCar; addCar(customer.id)"> <img  class="img-add" src="../../assets/Admin/addCar.png"/>  </button> 
+                        <button class="btn-add-car" @click="modalCar =! modelCar; fillCredentials2(customer)"> <img  class="img-add" src="../../assets/Admin/addCar.png"/>  </button> 
                         <button class="btn-remove" @click="removeCustomer(customer.id)"> <img  class="img-add" src="../../assets/Admin/delete.png"/>  </button> 
                         
+
+                        <!-- Modal for add car to customer-->
+                        <b-modal
+                        v-model="modalCar"
+                        title="Add Car"
+                        id="modal-scoped2"
+                        >
+                        <b-form ref="form" @submit.stop.prevent="handleSubmit2">
+
+                            <b-form-group
+                            label="Type of Car"
+                            label-for="typeOfCar-input"
+                            invalid-feedback="Type of Car is required"
+                            :state="typeOfCar"
+                            >
+                            <b-form-input
+                                id="typeOfCar"
+                                type="text"
+                                v-model="typeOfCar"
+                                name="typeOfCar"
+                                :value="typeOfCar"
+                            >
+                            </b-form-input>
+                            </b-form-group>
+
+                            <b-form-group
+                            label="Winter Tires"
+                            label-for="winterTires-input"
+                            invalid-feedback="Winter Tires is required"
+                            :state="winterTires"
+                            >
+                            <b-form-input
+                                id="winterTires"
+                                type="text"
+                                v-model="winterTires"
+                                name="winterTires"
+                                :value="winterTires"
+                            >
+                            </b-form-input>
+                            </b-form-group>
+
+                            <b-form-group
+                            label="Number of Kilometers"
+                            label-for="numOfKm-input"
+                            invalid-feedback="Number of Kilometers is required"
+                            :state="numOfKm"
+                            >
+                            <b-form-input
+                                id="numOfKm"
+                                type="text"
+                                v-model="numOfKm"
+                                name="numOfKm"
+                                :value="numOfKm"
+                            >
+                            </b-form-input>
+                            </b-form-group>
+                        </b-form>
+                            <template #modal-footer="{Save, Cancel}">
+                              
+                                <!-- Emulate built in modal footer ok and cancel button actions -->
+                                <b-button size="sm" variant="success" @click=" addCar(typeOfCar, winterTires, numOfKm);modalCar =!modalCar"> Save </b-button>
+                                <b-button size="sm" variant="danger" @click="modalCar =!modalCar">Cancel</b-button> 
+      
+                            </template>
+
+                        </b-modal>
+
+                        <!-- Modal for edit customer-->
                         <b-modal
                         v-model="modalShow"
                         title="Edit Profile"
@@ -373,10 +452,9 @@
     transform: translateY(-1px);
 }
 
-.table
-{
+.table {
     border-radius: 30px;
-    color:#111B47;
+    color: #111B47;
 
 }
 

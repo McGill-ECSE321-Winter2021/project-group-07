@@ -44,6 +44,10 @@ public class CarDto {
 	public CarType getCarType(){
 		return carType;
 	}
+	
+	public void setCarType(CarType c){
+		this.carType = c;
+	}
 	  
 	public boolean getWinterTires(){
 		return winterTires;
