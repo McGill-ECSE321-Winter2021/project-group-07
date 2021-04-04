@@ -35,7 +35,7 @@ have access and book a variety of services (towing, oil change, tire changes, re
   ### Member Roles & Time Spent
  | Team Member | Roles / Tasks | Time Spent (Hours)|
  | ------------|---------------| ------------------|
- |Annabelle Dion|      RESTful Service Class, Unit Testing, QA Plan        |              10     |
+ |Annabelle Dion|      RESTful Service Class, Unit Testing, QA Plan        |              13     |
  |Sia Ham       |   RESTful API, Documentation, Unit Testing, QA Plan, Bug fixing             |       17            |
  |Thomas Jarvis|     RESTful Service Class, Unit Testing, Integration Testing, API        |       18           |
  |Norman Kong |     RESTful Service Class, Unit Testing, Integration Testing, Bug fixing              |             15     |
@@ -48,11 +48,11 @@ have access and book a variety of services (towing, oil change, tire changes, re
   ### Member Roles & Time Spent
  | Team Member | Roles / Tasks | Time Spent (Hours)|
  | ------------|---------------| ------------------|
- |Annabelle Dion|               |                   |
- |Sia Ham       |              |                   |
- |Thomas Jarvis|               |                  |
- |Norman Kong |                |                  |
- |Catherine Van Gheluwe|       |                  |
+ |Annabelle Dion|   Project Management + Implementation of Web Frontend            |                   |
+ |Sia Ham       |      Implementation of Web Frontend        |                   |
+ |Thomas Jarvis|       Integration of Web Frontend with Backend Services        |                  |
+ |Norman Kong |        Integration of Web Frontend with Backend Services        |                  |
+ |Catherine Van Gheluwe|   Implementation of Web Frontend    |                  |
  
   ## Sprint 4 
 

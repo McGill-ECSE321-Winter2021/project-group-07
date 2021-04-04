@@ -1,12 +1,12 @@
 <template>
-    <div class="customerDashboard">
-        <div class="sidebar">
+<div class="customerDashboard">
+    <div class="sidebar">
         <div class="title">
-         &nbsp; <router-link to="/"><img src="../../assets/admin.png" width = "50px" length = "50px"></router-link>
+            &nbsp; <router-link to="/"><img src="../../assets/admin.png" width="50px" length="50px"></router-link>
 
         </div>
         <div class="menu-items">
-             <router-link :to="'/customerDashboard/Overview/' + this.customer.id" active-class="active" tag="button" exact class="side-btn">
+            <router-link :to="'/customerDashboard/Overview/' + this.customer.id" active-class="active" tag="button" exact class="side-btn">
                 <div class="link-container">
                     Overview
                 </div>
@@ -23,15 +23,15 @@
             </router-link>
         </div>
 
-        <div style="position: absolute; left: 5px; bottom: 5px; color: #D3D2E1;font-size: 20px; " >
-            <router-link to="/"><img src="../../assets/exit.png" width = "30" length = "20" >log out </router-link>
+        <div style="position: absolute; left: 5px; bottom: 5px; color: #D3D2E1;font-size: 20px; ">
+            <router-link to="/"><img src="../../assets/exit.png" width="30" length="20">log out </router-link>
         </div>
 
     </div>
-        <div class="content">
-            <router-view/>
-        </div>
+    <div class="content">
+        <router-view />
     </div>
+</div>
 </template>
 
 <script>
@@ -42,28 +42,30 @@ var frontendUrl = 'http://' + config.dev.host + ':' + config.dev.port
 var backendUrl = 'http://' + config.dev.backendHost + ':' + config.dev.backendPort
 
 var AXIOS = axios.create({
-  baseURL: backendUrl,
-  headers: { 'Access-Control-Allow-Origin': frontendUrl }
+    baseURL: backendUrl,
+    headers: {
+        'Access-Control-Allow-Origin': frontendUrl
+    }
 })
 
 export default {
-    data () {
-    return {
-	  customer: "",
-	  error: ""
-    }
+    data() {
+        return {
+            customer: "",
+            error: ""
+        }
     },
     created: function () {
         var id = this.$route.params.userId
         AXIOS.get('/customer/'.concat(id))
-        .then(response => {
-        // JSON responses are automatically parsed.
-        this.customer = response.data
-    })
-    .catch(e => {
-        this.error = e
-        console.log(e)
-    })
+            .then(response => {
+                // JSON responses are automatically parsed.
+                this.customer = response.data
+            })
+            .catch(e => {
+                this.error = e
+                console.log(e)
+            })
     }
 }
 </script>
@@ -82,7 +84,7 @@ export default {
     margin-left: 6px;
 }
 
-.menu-items > * {
+.menu-items>* {
     margin-top: 60px;
 }
 
@@ -117,8 +119,8 @@ export default {
     bottom: -30px;
 }
 
-
-.side-btn.active::before, .side-btn.active::after {
+.side-btn.active::before,
+.side-btn.active::after {
     position: absolute;
     content: "";
     right: 0;
@@ -136,7 +138,8 @@ export default {
     z-index: 99;
 }
 
-.side-btn.active .link-container::before, .side-btn.active .link-container::after {
+.side-btn.active .link-container::before,
+.side-btn.active .link-container::after {
     position: absolute;
     content: "";
     right: 0px;
@@ -145,6 +148,7 @@ export default {
     border-radius: 50%;
     background-color: rgb(51 41 134);
 }
+
 .customerDashboard {
     display: grid;
     grid-template-columns: 1fr 5fr;

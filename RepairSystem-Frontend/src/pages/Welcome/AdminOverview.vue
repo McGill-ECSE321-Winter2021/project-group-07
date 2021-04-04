@@ -3,140 +3,113 @@
     <div class="col no-gutters">
         <div class="row no-gutters">
             <div class="left-top">
-                 <nav class="navbar">
+                <nav class="navbar">
                     <span class="navbar-brand mb-0 h1">
                         <img src="../../assets/appointment.png" width="50px">
-                            Upcoming Appointments
-                        <b-button v-b-modal.modal-prevent-closing class="btn-primary"> Add Appointment <img class="img-add" src="../../assets/Admin/plus.png" /> </b-button>
-                        <b-modal
-                            id="modal-prevent-closing"
-                            ref="modal"
-                            title="Add New Team Member"
-                            @show="resetModal"
-                            @hidden="resetModal"
-                        >
+                        Upcoming Appointments
+                        <button class="btn-edit" @click="modalShow =!modalShow"> <img class="img-add" src="../../assets/Admin/plus.png" /> </button>
+                        <b-modal id="modal-prevent-closing" ref="modal" title="Add New Team Member" @show="resetModal" @hidden="resetModal">
                         </b-modal>
                     </span>
                 </nav>
 
-                  <!--The Table containing all the timeslot information--> 
-                    <div class="container mt-3 mb-3" style="background-color:white; border-radius:30px;">
-                        <table class="table table-striped tabled-bordered mydatatable" style="width: 100">
-                            <thead>
-                                <tr style="text-align:center;  border-radius:30px;">
-                                    <th> Appointment Id </th>
-                                    <th> Customter Name </th>
-                                    <th> Customter Id </th>
+                <!--The Table containing all the timeslot information-->
+                <div class="container mt-3 mb-3" style="background-color:white; border-radius:30px;">
+                    <table class="table table-striped tabled-bordered mydatatable" style="width: 100">
+                        <thead>
+                            <tr style="text-align:center;  border-radius:30px;">
+                                <th> Appointment Id </th>
+                                <th> Customter Name </th>
+                                <th> Customter Id </th>
 
-                                    <th> Status </th>
-                                    <th> Time Slot</th>
-                                    <th> Mechanics </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="appointment in appointments" style="text-align:center">
-                                    <td> {{appointment.id}} </td>
-                                    <td>{{ appointment.customer.name }}</td>
-                                    <td>{{ appointment.customer.id }}</td>
+                                <th> Status </th>
+                                <th> Time Slot</th>
+                                <th> Mechanics </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="appointment in appointments" style="text-align:center">
+                                <td> {{appointment.id}} </td>
+                                <td>{{ appointment.customer.name }}</td>
+                                <td>{{ appointment.customer.id }}</td>
 
-                                    <td>{{ appointment.status }}</td>
-                                    <td>{{ appointment.timeslot }}</td>
-                                    <td>{{ appointment.mechanics }}</td>
-                                </tr>
-                            </tbody>
-                            <tfoot>
-                                <h1 style="color:white"> Footer </h1>
-                            </tfoot>
-                        </table>
-                    </div>
+                                <td>{{ appointment.status }}</td>
+                                <td>{{ appointment.timeslot }}</td>
 
-        <div class="row no-gutters">
-            <div class="left-bottom">
-                   <nav class="navbar">
-                        <span class="navbar-brand mb-0 h1">
-                            <img src="../../assets/appointment.png" width="50px">
-                            Upcoming Mechanic Schedule
-                            <button class="btn-edit" @click="modalShow =!modalShow"> <img  class="img-add" src="../../assets/Admin/plus.png"/>  </button>
-                        </span>
-                    </nav>
-                    <div class="profile">
+                                <td><span v-for="mech in appointment.mechanics">
+                                        {{ appointment.mech.id }}
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <h1 style="color:white"> Footer </h1>
+                        </tfoot>
+                    </table>
+                </div>
+
+                <div class="row no-gutters">
+                    <div class="left-bottom">
+                        <nav class="navbar">
+                            <span class="navbar-brand mb-0 h1">
+                                <img src="../../assets/appointment.png" width="50px">
+                                Upcoming Mechanic Schedule
+                                <button class="btn-edit" @click="modalShow =!modalShow"> <img class="img-add" src="../../assets/Admin/plus.png" /> </button>
+                            </span>
+
+                        </nav>
+                        <!-- The Table containing all the timeslot information -->
+                        <div class="container mt-3 mb-3" style="background-color:white; border-radius:30px;">
+                            <table class="table table-striped tabled-bordered mydatatable" style="width: 100">
+                                <thead>
+                                    <tr style="text-align:center;  border-radius:30px; ">
+                                        <th> TimeSlotId </th>
+                                        <th> Start Time </th>
+                                        <th> End Time </th>
+                                        <th> Appointment </th>
+                                        <th> Mechanic</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="timeslot in timeslots" style="text-align:center">
+                                        <td> {{timeslot.id}} </td>
+                                        <td>{{ timeslot.startTime }}</td>
+                                        <td>{{ timeslot.endTime }}</td>
+                                        <td>{{ timeslot.appointments }}</td>
+                                        <td>{{ timeslot.mechanics }}</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <h1 style="color:white"> Footer </h1>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <div class="profile">
                             <div class="row">
-                                <b-modal
-                                v-model="modalShow"
-                                title="Add Time Slot"
-                                id="modal-scoped"
-                                >
-                                <b-form ref="form" @submit.stop.prevent="handleSubmit">
-                                
-                                    <b-form-group
-                                    label="Enter Start Time (YYYY-MM-DD-HH:mm)"
-                                    label-for="startTime-input"
-                                    invalid-feedback="Start Time is required"
-                                    :state="editStartTimeState"
-                                    required
-                                    >
-                                    <b-form-input
-                                        id="startTime"
-                                        type="text"
-                                        v-model="startTime"
-                                        name="startTime"
-                                    >
-                                    </b-form-input>
-                                    </b-form-group>
+                                <b-modal v-model="modalShow" title="Add Time Slot" id="modal-scoped">
+                                    <b-form ref="form" @submit.stop.prevent="handleSubmit">
 
-                                    <b-form-group
-                                        label="Enter End Time (YYYY-MM-DD-HH:mm)"
-                                        label-for="endTime-input"
-                                        invalid-feedback=" End Time is required"
-                                        :state="editEndTimeState"
-                                        required
-                                    >
-                                    <b-form-input
-                                        id="endTime"
-                                        type="text"
-                                        v-model="endTime"
-                                        name="endTime"
-                                    >
-                                    </b-form-input>
-                                    </b-form-group>
-                                </b-form> 
-                                <template #modal-footer="{Save, Cancel}">
-                                    <!-- Emulate built in modal footer ok and cancel button actions -->
-                                    <b-button size="sm" variant="success" @click="createTimeSlot(startTime,endTime); modalShow =!modalShow"> Save </b-button>
-                                    <b-button size="sm" variant="danger" @click="modalShow =!modalShow">Cancel</b-button> 
-                
-                                </template>
-                                </b-modal> 
+                                        <b-form-group label="Enter Start Time (YYYY-MM-DD-HH:mm)" label-for="startTime-input" invalid-feedback="Start Time is required" :state="editStartTimeState" required>
+                                            <b-form-input id="startTime" type="text" v-model="startTime" name="startTime">
+                                            </b-form-input>
+                                        </b-form-group>
+
+                                        <b-form-group label="Enter End Time (YYYY-MM-DD-HH:mm)" label-for="endTime-input" invalid-feedback=" End Time is required" :state="editEndTimeState" required>
+                                            <b-form-input id="endTime" type="text" v-model="endTime" name="endTime">
+                                            </b-form-input>
+                                        </b-form-group>
+                                    </b-form>
+                                    <template #modal-footer="{Save, Cancel}">
+                                        <!-- Emulate built in modal footer ok and cancel button actions -->
+                                        <b-button size="sm" variant="success" @click="createTimeSlot(startTime,endTime); modalShow =!modalShow"> Save </b-button>
+                                        <b-button size="sm" variant="danger" @click="modalShow =!modalShow">Cancel</b-button>
+
+                                    </template>
+                                </b-modal>
                             </div>
-                        
-                    <!-- The Table containing all the timeslot information -->
-                    <div class="container mt-3 mb-3" style="background-color:white; border-radius:30px;">
-                        <table class="table table-striped tabled-bordered mydatatable" style="width: 100">
-                            <thead>
-                                <tr style="text-align:center;  border-radius:30px;">
-                                    <th> TimeSlotId </th>
-                                    <th> Start Time </th>
-                                    <th> End Time </th>
-                                    <th> Appointment </th>
-                                    <th> Mechanic</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="timeslot in timeslots" style="text-align:center">
-                                    <td> {{timeslot.id}} </td>
-                                    <td>{{ timeslot.startTime }}</td>
-                                    <td>{{ timeslot.endTime }}</td>
-                                    <td>{{ timeslot.appointments }}</td>
-                                    <td>{{ timeslot.mechanics }}</td>
-                                </tr>
-                            </tbody>
-                            <tfoot>
-                                <h1 style="color:white"> Footer </h1>
-                            </tfoot>
-                        </table>
+
+                        </div>
                     </div>
-</div>
-</div>
 
                 </div>
             </div>
@@ -154,7 +127,6 @@
             </div>
 
             <div class="row no-gutters">
-                <br>
                 <div class="middle">
                     <br>
                     <date-pick v-model="date" :hasInputElement="false"></date-pick>
@@ -162,20 +134,13 @@
             </div>
             <div class="row no-gutters">
                 <div class="bottom">
-                    <div>
-                        <br>
-                        <b style="font-family: Roboto; color: #F3BE35; font-size: 20px;"> &nbsp; Reminder </b>
-                    </div>
-                    <div class="rcorners2">
-                        <b>reminder</b>
-                    </div>
+                    <br> <img src="../../assets/paint job 1.jpg" width="400px" length="400px">
                 </div>
             </div>
         </div>
     </div>
 </div>
 </template>
-
 
 <script src="./AdminOverview.js">
 </script>
@@ -273,7 +238,6 @@
 .profile {
     height: 100%;
     width: 100%;
-    font-family: Roboto;
     /**color: rgb(167, 167, 167);   */
     color: rgb(51 41 134);
     background: #D3D2E1;

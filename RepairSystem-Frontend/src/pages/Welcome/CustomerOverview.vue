@@ -23,26 +23,34 @@
                         <thead>
                             <tr style="text-align:center;  border-radius:30px;">
                                 <th> Appointment Id </th>
-                                <th> Mechanic </th>
-                                <th> Status </th>
-                                <th> Time Slot</th>
                                 <th> Services </th>
+                                <th> Status </th>
+                                <th> Timeslot Id</th>
+
+                                <th> Start Time</th>
+                                <th> End Time</th>
+
                             </tr>
                         </thead>
                         <tbody>
                             <tr v-for="appointment in appointments" style="text-align:center">
                                 <td> {{appointment.id}} </td>
-                                <td>{{ appointment.mechanic }}</td>
+                                <span v-for="service in appointment.services">
+                                    <td>{{ service.serviceType }}</td>
+                                </span>
                                 <td>{{ appointment.status }}</td>
-                                <td>{{ appointment.timeslot }}</td>
-                                <td>{{ appointment.services }}</td>
+                                <td>{{ appointment.timeSlot.id }}</td>
+
+                                <td>{{ appointment.timeSlot.startTime }}</td>
+                                <td>{{ appointment.timeSlot.endTime }}</td>
+
                             </tr>
                         </tbody>
                         <tfoot>
                             <h1 style="color:white"> Footer </h1>
                         </tfoot>
                     </table>
-                </div> 
+                </div>
             </div>
         </div>
     </div>
@@ -65,12 +73,7 @@
             </div>
             <div class="row no-gutters">
                 <div class="bottom">
-                    <div>
-                        <br> <b style="color: #F3BE35; font-size: 20px;"> &nbsp; Up Next... </b>
-                    </div>
-                    <div class="rcorners2">
-                        <b>next appointment info</b>
-                    </div>
+                    <br> <img src="../../assets/paint job 1.jpg" width="400px" length="400px">
                 </div>
             </div>
         </div>
@@ -102,7 +105,10 @@ export default {
     data() {
         return {
             customer: "",
+            appointments: [],
+            id: '',
             error: ""
+
         }
     },
     created: function () {
@@ -111,10 +117,10 @@ export default {
             .then(response => {
                 // JSON responses are automatically parsed.
                 this.customer = response.data
-                AXIOS.get('/appointment/'.concat(this.customer)).
-                    then(response => {
-                        this.appointments = response.data
-                    }).catch(e => {
+                AXIOS.get('/appointment/?customerId='.concat(this.$route.params.userId)).
+                then(response => {
+                    this.appointments = response.data
+                }).catch(e => {
                     this.error = e
                     console.log(e)
                 })

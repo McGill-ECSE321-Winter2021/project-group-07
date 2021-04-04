@@ -44,14 +44,17 @@ public class AppointmentRestController {
 	/**
 	 *Rest controller for getting appointment by customer
 	 * */
-	@GetMapping(value = { "/appointment/{customer}", "/appointment/{customer}/"})
-	public List<AppointmentDto> getAppointmentByCustomer(@PathVariable("customer") Customer customer) {
+	@GetMapping(value = { "/appointment/{customerId}", "/appointment/{customerId}/"})
+	public List<AppointmentDto> getAppointmentByCustomer(@PathVariable("customerId") String customerId) {
+		Customer customer = customerService.getCustomerById(Integer.parseInt(customerId));
+
 		List<Appointment> appointments = appointmentService.getAppointmentsByCustomer(customer);
 		List<AppointmentDto> appointmentsDto = new ArrayList<AppointmentDto>();
 		for(Appointment appointment: appointments) {
 			appointmentsDto.add(Converter.convertToDto(appointment));		}
 		return appointmentsDto;
 	}
+
 
 	/*
 	/**

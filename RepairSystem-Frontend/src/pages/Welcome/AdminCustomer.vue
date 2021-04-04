@@ -302,7 +302,6 @@
 .profile {
     height: 100%;
     width: 100%;
-    font-family: Roboto;
     /**color: rgb(167, 167, 167);   */
     color:rgb(51 41 134);
     background:  #D3D2E1;
