@@ -28,7 +28,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="appointment in appointments" style="text-align:center">
+                            <tr v-for="appointment in mechAppointments" style="text-align:center">
                                 <td> {{appointment.id}} </td>
                                 <td>{{ appointment.customer }}</td>
                                 <td>{{ appointment.status }}</td>
@@ -40,7 +40,7 @@
                             <h1 style="color:white"> Footer </h1>
                         </tfoot>
                     </table>
-                </div> 
+                </div>
             </div>
         </div>
     </div>
@@ -105,7 +105,9 @@ export default {
     data() {
         return {
             mechanic: "",
-            error: ""
+            error: "",
+            appointments: [],
+            mechAppointments: [],
         }
     },
     created: function () {
@@ -114,10 +116,17 @@ export default {
             .then(response => {
                 // JSON responses are automatically parsed.
                 this.mechanic = response.data
-                AXIOS.get('/appointment/'.concat(this.mechanic)).
-                    then(response => {
-                        this.appointments = response.data
-                    }).catch(e => {
+                AXIOS.get('/appointment/').
+                then(response => {
+                    this.appointments = response.data
+                    for (app in appointments) {
+                        for (mech in app.mechanics) {
+                            if (mech.id == mechanic.id) {
+                                this.mechAppointments.push(i)
+                            }
+                        }
+                    }
+                }).catch(e => {
                     this.error = e
                     console.log(e)
                 })
