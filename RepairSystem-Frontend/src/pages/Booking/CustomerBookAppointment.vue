@@ -171,7 +171,12 @@ export default {
             var min_sec_array = endDate[3].split(":");
             var hours = min_sec_array[0];
             hours++;
-            min_sec_array[0] = hours;
+            if (hours < 10) {
+            	min_sec_array[0] = '0'.concat(hours);
+            } else {
+            	min_sec_array[0] = hours;
+            }
+     
             min_sec_array = min_sec_array.join(':');
 			endDate[3] = min_sec_array;
 			endDate = endDate.join('-');
@@ -184,7 +189,19 @@ export default {
             .then(response => {
             // JSON responses are automatically parsed.
                 this.timeslot  = response.data
+                
                 console.log(response.data)
+                console.log('/appointment/'.concat(this.customer.id + "?timeSlotId="+this.timeslot.id + "&carId="+this.car.id + "&services="+this.service.serviceType + "&note="+this.note))
+            	AXIOS.post('/appointment/'.concat(this.customer.id + "?timeSlotId="+this.timeslot.id + "&carId="+this.car.id + "&services="+this.service.serviceType + "&note="+this.note), {}, {})
+        			.then(response => {
+            		// JSON responses are automatically parsed.
+            	})
+            	.catch(e => {
+                	var errorMsg = e.response.data.message
+                	console.log(errorMsg)
+                	this.errorAppointment = errorMsg
+            	})
+  
             })
             .catch(e => {
                 var errorMsg = e.response.data.message
@@ -192,18 +209,8 @@ export default {
                 this.errorTimeSlot = errorMsg
             })
             
-            console.log('/appointment/'.concat(this.customer.id + "?timeSlotId="+this.timeslot.id + "&carId="+this.car.id + "&services="+this.service.serviceType + "&note="+this.note))
-            AXIOS.post('/appointment/'.concat(this.customer.id + "?timeSlotId="+this.timeslot.id + "&carId="+this.car.id + "&services="+this.service.serviceType + "&note="+this.note), {}, {})
-        	.then(response => {
-            	// JSON responses are automatically parsed.
-            })
-            .catch(e => {
-                var errorMsg = e.response.data.message
-                console.log(errorMsg)
-                this.errorAppointment = errorMsg
-            })
         }, 
-        
+            
         createCar: function(carType, winterTires, numOfKm) {
         	AXIOS.post('/car/'.concat(this.customer.id + "?carType=" + carType + "&winterTires=" + winterTires + "&numOfKilometers=" + numOfKm), {}, {})
             .then(response => {
