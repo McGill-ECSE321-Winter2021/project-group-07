@@ -15,5 +15,6 @@ public interface AppointmentRepository extends CrudRepository<Appointment, Strin
 	List<Appointment> findByStatus(AppointmentStatus status);
 	Appointment findById(int id);
 	List<Appointment> findAll();
+	List<Appointment> findByMechanic(Mechanic mechanic);
 	
 }

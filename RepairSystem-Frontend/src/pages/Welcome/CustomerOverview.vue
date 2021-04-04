@@ -18,7 +18,6 @@
                 <img src="../../assets/appointment.png" width="50px">
                 My Appointments
 
-                <!-- Appointment 
                 <div class="container mt-3 mb-3" style="background-color:white; border-radius:30px;">
                     <table class="table table-striped tabled-bordered mydatatable" style="width: 100">
                         <thead>
@@ -43,7 +42,7 @@
                             <h1 style="color:white"> Footer </h1>
                         </tfoot>
                     </table>
-                </div> -->
+                </div> 
             </div>
         </div>
     </div>
@@ -112,14 +111,13 @@ export default {
             .then(response => {
                 // JSON responses are automatically parsed.
                 this.customer = response.data
-                /*I'm commenting this our cuz i am not connected to database
                 AXIOS.get('/appointment/'.concat(this.customer)).
                     then(response => {
                         this.appointments = response.data
                     }).catch(e => {
                     this.error = e
                     console.log(e)
-                })*/
+                })
             })
             .catch(e => {
                 this.error = e
@@ -207,5 +205,6 @@ export default {
     content: "";
     left: 70px;
     top: 250px;
+    width: 80vh;
 }
 </style>

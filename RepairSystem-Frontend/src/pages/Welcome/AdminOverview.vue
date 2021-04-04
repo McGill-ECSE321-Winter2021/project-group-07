@@ -253,7 +253,7 @@
     position: absolute;
     content: "";
     top: 50px;
-    left: 70px;
+    left: 30px;
     width: 80vh;
 }
 
@@ -261,7 +261,7 @@
 
     position: absolute;
     content: "";
-    left: 70px;
+    left: 0px;
     top: 450px;
     width: 80vh;
 }
