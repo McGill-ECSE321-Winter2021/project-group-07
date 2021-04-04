@@ -106,7 +106,9 @@ public class MechanicService {
 		Mechanic mechanic = mechanicRepository.findByEmail(oldEmail);
 		for(TimeSlot slot: mechanic.getTimeSlots()) {
 			slot.removeMechanic(mechanic);
-			//timeslotService.deleteTimeSlot(slot.getId());
+			if(slot.getAppointments().size() == 0 && slot.getMechanics().size() == 0) {
+				timeslotService.deleteTimeSlot(slot.getId());
+			}
 		}
 		String startTime = "";
 		String endTime = "";
@@ -120,6 +122,7 @@ public class MechanicService {
 			LocalDateTime end = LocalDateTime.parse(endTime, formatter);
 			TimeSlot t = timeslotService.createTimeSlot(start, end);
 			t.addMechanic(mechanic);
+			timeslotRepository.save(t);
 			timeslotList.add(t);
 			day++;
 		}
@@ -130,13 +133,10 @@ public class MechanicService {
 		LocalDateTime end = LocalDateTime.parse(endTime, formatter);
 		TimeSlot t = timeslotService.createTimeSlot(start, end);
 		t.addMechanic(mechanic);
+		timeslotRepository.save(t);
 		timeslotList.add(t);
 		mechanic.setTimeSlots(timeslotList);
-		
 		mechanicRepository.save(mechanic);
-		for(TimeSlot slot: timeslotList) {
-			timeslotRepository.save(slot);
-		}
 		return mechanic;
 	}
 
@@ -206,9 +206,15 @@ public class MechanicService {
 			service.removeMechanic(m);
 			serviceRepository.save(service);
 		}
-		for(TimeSlot t: m.getTimeSlots()) {
+		List<TimeSlot> slotList = m.getTimeSlots();
+		m.setTimeSlots(null);
+		mechanicRepository.save(m);
+		for(TimeSlot t: slotList) {
 			t.removeMechanic(m);
-			//timeslotService.deleteTimeSlot(t.getId());
+			timeslotRepository.save(t);
+			if(t.getAppointments().size() == 0 && t.getMechanics().size() == 0) {
+				timeslotService.deleteTimeSlot(t.getId());
+			}
 		}
 		mechanicRepository.delete(m);
 	}

@@ -67,5 +67,17 @@ public class Mechanic extends Person{
   public void addAppointment(Appointment appointment) {
 	  appointments.add(appointment);
   }
+  
+  public void removeAppointment(Appointment appointment) {
+	  appointments.remove(appointment);
+  }
+  
+  public void addTimeSlot(TimeSlot t) {
+	  timeSlots.add(t);
+  }
+  
+  public void removeTimeSlot(TimeSlot t) {
+	  timeSlots.remove(t);
+  }
 
 }
