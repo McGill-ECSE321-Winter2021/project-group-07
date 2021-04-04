@@ -35,7 +35,11 @@
 
                                 <td>{{ appointment.status }}</td>
                                 <td>{{ appointment.timeslot }}</td>
-                                <td>{{ appointment.mechanics }}</td>
+
+                                <td><span v-for="mech in appointment.mechanics">
+                                        {{ appointment.mech.id }}
+                                    </span>
+                                </td>
                             </tr>
                         </tbody>
                         <tfoot>
@@ -54,32 +58,32 @@
                             </span>
 
                         </nav>
-                    <!-- The Table containing all the timeslot information -->
-                    <div class="container mt-3 mb-3" style="background-color:white; border-radius:30px;">
-                        <table class="table table-striped tabled-bordered mydatatable" style="width: 100">
-                            <thead>
-                                <tr style="text-align:center;  border-radius:30px; ">
-                                    <th> TimeSlotId </th>
-                                    <th> Start Time </th>
-                                    <th> End Time </th>
-                                    <th> Appointment </th>
-                                    <th> Mechanic</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="timeslot in timeslots" style="text-align:center">
-                                    <td> {{timeslot.id}} </td>
-                                    <td>{{ timeslot.startTime }}</td>
-                                    <td>{{ timeslot.endTime }}</td>
-                                    <td>{{ timeslot.appointments }}</td>
-                                    <td>{{ timeslot.mechanics }}</td>
-                                </tr>
-                            </tbody>
-                            <tfoot>
-                                <h1 style="color:white"> Footer </h1>
-                            </tfoot>
-                        </table>
-                    </div>
+                        <!-- The Table containing all the timeslot information -->
+                        <div class="container mt-3 mb-3" style="background-color:white; border-radius:30px;">
+                            <table class="table table-striped tabled-bordered mydatatable" style="width: 100">
+                                <thead>
+                                    <tr style="text-align:center;  border-radius:30px; ">
+                                        <th> TimeSlotId </th>
+                                        <th> Start Time </th>
+                                        <th> End Time </th>
+                                        <th> Appointment </th>
+                                        <th> Mechanic</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="timeslot in timeslots" style="text-align:center">
+                                        <td> {{timeslot.id}} </td>
+                                        <td>{{ timeslot.startTime }}</td>
+                                        <td>{{ timeslot.endTime }}</td>
+                                        <td>{{ timeslot.appointments }}</td>
+                                        <td>{{ timeslot.mechanics }}</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <h1 style="color:white"> Footer </h1>
+                                </tfoot>
+                            </table>
+                        </div>
                         <div class="profile">
                             <div class="row">
                                 <b-modal v-model="modalShow" title="Add Time Slot" id="modal-scoped">
@@ -122,16 +126,17 @@
                 </div>
             </div>
 
-            <div class = "row no-gutters" >
-                    <div class = "middle"> 
-                            <br> <date-pick v-model="date" :hasInputElement="false"></date-pick>
-                    </div>
+            <div class="row no-gutters">
+                <div class="middle">
+                    <br>
+                    <date-pick v-model="date" :hasInputElement="false"></date-pick>
                 </div>
-                <div class = "row no-gutters" >
-                    <div class = "bottom"> 
-                        <br> <img src="../../assets/paint job 1.jpg" width = "400px" length = "400px">
-                    </div>
+            </div>
+            <div class="row no-gutters">
+                <div class="bottom">
+                    <br> <img src="../../assets/paint job 1.jpg" width="400px" length="400px">
                 </div>
+            </div>
         </div>
     </div>
 </div>

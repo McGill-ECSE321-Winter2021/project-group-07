@@ -87,10 +87,7 @@ const routes = [
         path: '/adminDashboard/Customers/:userId',
         component: () => import('../pages/Welcome/AdminCustomer.vue')
       },
-      {
-        path: '/adminDashboard/ViewAllCustomersOrMechanics/:userId',
-        component: () => import('../pages/Welcome/AdminViewAllCustomersOrMechanics.vue')
-      },
+      
     ]
   }
 ]

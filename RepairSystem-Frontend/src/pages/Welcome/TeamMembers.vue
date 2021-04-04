@@ -3,7 +3,7 @@
 <div class="profile">
     <nav class="navbar">
         <span class="navbar-brand mb-0 h1">
-            <div class="row" style = "position: relative; top: 20px">
+            <div class="row" style="position: relative; top: 20px">
                 <form onSubmit="return false;">
                     <input type="text" v-model="s" value="" class="search-input" placeholder="  Search">
                 </form>
