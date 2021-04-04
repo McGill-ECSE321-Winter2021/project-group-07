@@ -4,7 +4,7 @@
         <div class="profile">
         <div class="name">
              <div class="text">
-                <h6> {{mechanic.name}} </h6>
+                <h1> {{mechanic.name}} </h1>
             </div>
             <div class="ellipse">
                 <img src="../../assets/profile-default.png"   width = "60px" length = "60px" >

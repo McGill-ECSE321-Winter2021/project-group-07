@@ -4,7 +4,7 @@
     <div class="profile">
        <nav class="navbar">
             <span class="navbar-brand mb-0 h1">
-                <div class="row">
+                <div class="row" style = "position: relative; top: 20px">
                       <form>
                         <input type="text" v-model="s" value="" class="search-input" placeholder="  Search">
                     </form>
@@ -125,7 +125,7 @@
      
   <!--
         The Table containing all the mechanic information#D3D2E1 --> 
-        <div class="container mt-3 mb-3" style="background-color:white; border-radius:30px;">
+        <div class="container mt-3 mb-3" style="background-color:white; border-radius:30px;position: relative; top: 80; left: -20px"">
           <table class = "table table-striped tabled-bordered mydatatable" style="width: 100">
               <thead>
                     <tr style="text-align:center;  border-radius:30px;">
@@ -436,7 +436,6 @@ function CustomerDto(name, password, phone, email, credit, debit, address){
 .profile {
     height: 100%;
     width: 100%;
-    font-family: Roboto;
     /**color: rgb(167, 167, 167);   */
     color:rgb(51 41 134);
     background:  #D3D2E1;

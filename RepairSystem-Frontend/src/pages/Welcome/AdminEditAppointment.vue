@@ -1,13 +1,13 @@
 <template>
-    <div class="profile">
-        This is a dummy edit appointment page
-    </div>
+<div class="profile">
+    This is a dummy edit appointment page
+</div>
 </template>
 
 <script>
-    export default {
-        
-    }
+export default {
+
+}
 </script>
 
 <style scoped>

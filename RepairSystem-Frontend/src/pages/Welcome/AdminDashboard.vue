@@ -26,11 +26,6 @@
                    Customers
                 </div>
             </router-link>
-            <router-link :to="'/adminDashboard/ViewAllCustomersOrMechanics/' + this.admin.id" active-class="active" tag="button" exact class="side-btn">
-                <div class="link-container">
-                    View All Customer/Mechanic
-                </div>
-            </router-link>
 
         </div>
 
