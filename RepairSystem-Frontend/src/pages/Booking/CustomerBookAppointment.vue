@@ -260,8 +260,8 @@ export default {
         	AXIOS.post('/car/'.concat(this.customer.id + "?carType=" + carType + "&winterTires=" + winterTires + "&numOfKilometers=" + numOfKm), {}, {})
             .then(response => {
             // JSON responses are automatically parsed.
-            	this.car = response.data
-                console.log(response.data)
+                this.car = response.data
+                this.availableCars.push(response.data)
             })
         }
         
