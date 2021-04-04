@@ -25,7 +25,9 @@
                             <thead>
                                 <tr style="text-align:center;  border-radius:30px;">
                                     <th> Appointment Id </th>
-                                    <th> Cusomter </th>
+                                    <th> Customter Name </th>
+                                    <th> Customter Id </th>
+
                                     <th> Status </th>
                                     <th> Time Slot</th>
                                     <th> Mechanics </th>
@@ -34,7 +36,9 @@
                             <tbody>
                                 <tr v-for="appointment in appointments" style="text-align:center">
                                     <td> {{appointment.id}} </td>
-                                    <td>{{ appointment.customer }}</td>
+                                    <td>{{ appointment.customer.name }}</td>
+                                    <td>{{ appointment.customer.id }}</td>
+
                                     <td>{{ appointment.status }}</td>
                                     <td>{{ appointment.timeslot }}</td>
                                     <td>{{ appointment.mechanics }}</td>
