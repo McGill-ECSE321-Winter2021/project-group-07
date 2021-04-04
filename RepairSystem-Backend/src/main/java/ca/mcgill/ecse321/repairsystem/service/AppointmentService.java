@@ -53,14 +53,14 @@ public class AppointmentService {
 		int id = customer.hashCode() * time.hashCode();
 		Appointment app = new Appointment(customer, id, time,  car, note );
 		app.setServices(services);
-		for(ca.mcgill.ecse321.repairsystem.model.Service service: services) {
-			service.addAppointment(app);
-			serviceRepository.save(service);
-		}
 		customer.addAppointment(app);
 		time.addAppointment(app);
 		car.addAppointment(app);
 		appointmentRepository.save(app);
+		for(ca.mcgill.ecse321.repairsystem.model.Service service: services) {
+			service.addAppointment(app);
+			serviceRepository.save(service);
+		}
 		customerRepository.save(customer);
 		timeslotRepository.save(time);
 		carRepository.save(car);
