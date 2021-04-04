@@ -102,17 +102,6 @@ public class AppointmentService {
 		return appointments;
 	}
 
-	
-	/**
-	 * Getter methods to obtain a customer's list of appointments
-	 * @param customer
-	 * @return
-	 */
-	@Transactional
-	public List<Appointment> getAppointmentsByMechanic(Mechanic mechanic) {
-		List<Appointment> appointments = toList(appointmentRepository.findByMechanic(mechanic));
-		return appointments;
-	}
 	/**
 	 * Getter methods to obtain a customer's list of car
 	 * @param car

@@ -53,17 +53,6 @@ public class AppointmentRestController {
 		return appointmentsDto;
 	}
 
-	/**
-	 *Rest controller for getting appointment by mechanic
-	 * */
-	@GetMapping(value = { "/appointment/{mechanic}", "/appointment/{mechanic}/"})
-	public List<AppointmentDto> getAppointmentByMechanic(@PathVariable("mechanic") Mechanic mechanic) {
-		List<Appointment> appointments = appointmentService.getAppointmentsByMechanic(mechanic);
-		List<AppointmentDto> appointmentsDto = new ArrayList<AppointmentDto>();
-		for(Appointment appointment: appointments) {
-			appointmentsDto.add(Converter.convertToDto(appointment));		}
-		return appointmentsDto;
-	}
 	/*
 	/**
 	 *Rest controller for getting all appointments
