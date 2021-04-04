@@ -19,7 +19,7 @@
                         title="Add New Team Member"
                         @show="resetModal"
                         @hidden="resetModal"
-                        @ok="createMechanic(name,password,phone,email,value)"
+                        @ok="createMechanic(name,password,phone,email,value,mondayStart,mondayEnd,tuesdayStart,tuesdayEnd,wednesdayStart,wednesdayEnd,thursdayStart,thursdayEnd,fridayStart,fridayEnd,saturdayStart,saturdayEnd)"
                         >
 
                         <!-- Personal Information part of the form -->
@@ -100,16 +100,15 @@
                             <label> <b> Work Hours </b> </label> 
 
                             <div class="row">
-                                <p style="margin-left:20px"> Monday </p>
+                                <p style="margin-left:20px;margin-right:28px"> Monday </p>
                                 <div class="col">
                                     <b-form-input
                                     id="mondayStart"
                                     type="time"
                                     class="form-control"
                                     v-model="mondayStart"  
-                                    placeholder="Monday"   
+                                    placeholder="Start Time"   
                                     > 
-                                    <label for="Monday">Choose your time</label>
                                     </b-form-input>
 
                                 </div>
@@ -118,21 +117,22 @@
                                     id="mondayEnd"
                                     type="time"
                                     class="form-control"
-                                    v-model="mondayEnd"   
+                                    v-model="mondayEnd" 
+                                    placeholder="End Time"  
                                 > 
                                 </b-form-input>
                                 </div>
                             </div>
 
                                 <div class="row">
-                                <p style="margin-left:20px">Tuesday</p>
+                                <p style="margin-left:20px;margin-right:25px">Tuesday</p>
                                 <div class="col">
                                     <b-form-input
                                     id="tuesdayStart"
                                     type="time"
                                     class="form-control"
                                     v-model="tuesdayStart"  
-                                    placeholder="Monday"   
+                                    placeholder="Start Time"  
                                     > 
                                     </b-form-input>
 
@@ -142,7 +142,8 @@
                                     id="tuesdayEnd"
                                     type="time"
                                     class="form-control"
-                                    v-model="tuesdayEnd"   
+                                    v-model="tuesdayEnd"  
+                                    placeholder="End Time"  
                                 > 
                                 </b-form-input>
                                 </div>
@@ -157,6 +158,7 @@
                                     type="time"
                                     class="form-control"
                                     v-model="wednesdayStart"  
+                                    placeholder="Start Time" 
                                     > 
                                     </b-form-input>
 
@@ -166,20 +168,22 @@
                                     id="wednesdayEnd"
                                     type="time"
                                     class="form-control"
-                                    v-model="wednesdayEnd"   
+                                    v-model="wednesdayEnd"
+                                    placeholder="End Time"    
                                 > 
                                 </b-form-input>
                                 </div>
                             </div>
 
                             <div class="row">
-                                <p style="margin-left:20px">Thursday</p>
+                                <p style="margin-left:20px;margin-right:18px">Thursday</p>
                                 <div class="col">
                                     <b-form-input
                                     id="thursdayStart"
                                     type="time"
                                     class="form-control"
                                     v-model="thursdayStart"  
+                                    placeholder="Start Time" 
                                     > 
                                     </b-form-input>
 
@@ -189,20 +193,22 @@
                                     id="thursdayEnd"
                                     type="time"
                                     class="form-control"
-                                    v-model="thursdayEnd"   
+                                    v-model="thursdayEnd"  
+                                    placeholder="End Time"  
                                 > 
                                 </b-form-input>
                                 </div>
                             </div>
 
                                <div class="row">
-                                <p style="margin-left:20px">Friday</p>
+                                <p style="margin-left:20px;margin-right:40px">Friday</p>
                                 <div class="col">
                                     <b-form-input
                                     id="fridayStart"
                                     type="time"
                                     class="form-control"
                                     v-model="fridayStart"  
+                                    placeholder="Start Time" 
                                     > 
                                     </b-form-input>
 
@@ -213,19 +219,21 @@
                                     type="time"
                                     class="form-control"
                                     v-model="fridayEnd"   
+                                    placeholder="End Time" 
                                 > 
                                 </b-form-input>
                                 </div>
                             </div>
 
                             <div class="row">
-                                <p style="margin-left:20px">Saturday</p>
+                                <p style="margin-left:20px;margin-right:21px">Saturday</p>
                                 <div class="col">
                                     <b-form-input
                                     id="saturdayStart"
                                     type="time"
                                     class="form-control"
                                     v-model="saturdayStart"  
+                                    placeholder="Start Time" 
                                     > 
                                     </b-form-input>
 
@@ -235,7 +243,8 @@
                                     id="saturdayEnd"
                                     type="time"
                                     class="form-control"
-                                    v-model="saturdayEnd"   
+                                    v-model="saturdayEnd" 
+                                    placeholder="End Time"   
                                 > 
                                 </b-form-input>
                                 </div>
@@ -260,7 +269,7 @@
   <!--
         The Table containing all the mechanic information#D3D2E1 --> 
         <div class="container mt-3 mb-3" style="background-color:white; border-radius:30px">
-          <table class = "table table-striped tabled-bordered mydatatable" style="width: 200px">
+          <table class = "table table-striped tabled-bordered mydatatable" style="width:1100px">
               <thead>
                     <tr style="text-align:center;  border-radius:30px;">
                         <th> Name </th>
@@ -279,13 +288,12 @@
                         <td> 
                             <table class="table">
                                 <tbody>
-                                    <td> M : </td>
-                                    <td> Tu : </td>
-                                    <td> W: </td>
-                                    <td> Th </td>
-                                    <td> F </td>
-                                    <td> Sat </td>
-                                    <td> Sun </td>
+                                    <td> Mo : {{mechanic.timeSlots[0].startTimeFormat}}-{{mechanic.timeSlots[0].endTimeFormat}} </td>
+                                    <td> Tu : {{mechanic.timeSlots[1].startTimeFormat}}-{{mechanic.timeSlots[1].endTimeFormat}}</td>
+                                    <td> We: {{mechanic.timeSlots[2].startTimeFormat}}-{{mechanic.timeSlots[2].endTimeFormat}}</td>
+                                    <td> Th {{mechanic.timeSlots[3].startTimeFormat}}-{{mechanic.timeSlots[3].endTimeFormat}}</td>
+                                    <td> Fr {{mechanic.timeSlots[4].startTimeFormat}}-{{mechanic.timeSlots[4].endTimeFormat}}</td>
+                                    <td> Sa {{mechanic.timeSlots[5].startTimeFormat}}-{{mechanic.timeSlots[5].endTimeFormat}}</td>
                                 </tbody>
                             </table>
 

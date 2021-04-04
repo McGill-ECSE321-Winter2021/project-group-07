@@ -1,5 +1,7 @@
 package ca.mcgill.ecse321.repairsystem.controller;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -70,12 +72,22 @@ public class MechanicRestController {
 		Mechanic mechanic = mechanicService.createMechanic(name, password, Long.parseLong(phone), email, new ArrayList<Service>());
 		return Converter.convertToDto(mechanic);
 	}
+	
 	/**
 	 *restful controller for editing mechanic
 	 * */
 	@PutMapping(value = { "/mechanic/{oldEmail}", "/mechanic/{oldEmail}/" })
 	public MechanicDto editMechanic(@PathVariable("oldEmail") String oldEmail, @RequestParam String name, @RequestParam String password, @RequestParam String phone) throws IllegalArgumentException {
 		Mechanic mechanic = mechanicService.editMechanic(oldEmail, name, password, phone);
+		return Converter.convertToDto(mechanic);
+	}
+	
+	/**
+	 *restful controller for editing mechanic
+	 * */
+	@PutMapping(value = { "/mechanic/addTimeSlots/{oldEmail}", "/mechanic/addTimeSlots/{oldEmail}/" })
+	public MechanicDto addMechanicTimeSlots(@PathVariable("oldEmail") String oldEmail, @RequestParam String[] timeslotsStart, @RequestParam String[] timeslotsEnd) throws IllegalArgumentException {
+		Mechanic mechanic = mechanicService.addTimeSlots(oldEmail, timeslotsStart, timeslotsEnd);
 		return Converter.convertToDto(mechanic);
 	}
 	

@@ -4,11 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 import ca.mcgill.ecse321.repairsystem.model.*;
+import ca.mcgill.ecse321.repairsystem.service.*;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import ca.mcgill.ecse321.repairsystem.dao.MechanicRepository;
-import ca.mcgill.ecse321.repairsystem.dao.ServiceRepository;
+import ca.mcgill.ecse321.repairsystem.dao.*;
 
 @Service
 public class MechanicService {
@@ -17,6 +19,10 @@ public class MechanicService {
 	private MechanicRepository mechanicRepository;
 	@Autowired
 	private ServiceRepository serviceRepository;
+	@Autowired
+	private TimeSlotRepository timeslotRepository;
+	@Autowired
+	private TimeSlotService timeslotService;
 	////////////////////SERVICE MECHANIC METHODS //////////////////// 
 
 	/**
@@ -92,6 +98,41 @@ public class MechanicService {
 	@Transactional 
 	public Mechanic getMechanicByEmail(String email) {
 		Mechanic mechanic = mechanicRepository.findByEmail(email);
+		return mechanic;
+	}
+	
+	@Transactional
+	public Mechanic addTimeSlots(String oldEmail, String[] timeslotsStart, String[] timeslotsEnd) {
+		Mechanic mechanic = mechanicRepository.findByEmail(oldEmail);
+		String startTime = "";
+		String endTime = "";
+		List<TimeSlot> timeslotList = new ArrayList<TimeSlot>();
+		int day = 5;
+		for(int i = 0; i < timeslotsStart.length-1; i++) {
+			startTime = "2021-04-0".concat(day + "-" + timeslotsStart[i]);
+			endTime = "2021-04-0".concat(day + "-" + timeslotsEnd[i]);
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH:mm");
+			LocalDateTime start = LocalDateTime.parse(startTime, formatter);
+			LocalDateTime end = LocalDateTime.parse(endTime, formatter);
+			TimeSlot t = timeslotService.createTimeSlot(start, end);
+			t.addMechanic(mechanic);
+			timeslotList.add(t);
+			day++;
+		}
+		startTime = "2021-".concat("04-10-" + timeslotsStart[timeslotsStart.length-1]);
+		endTime = "2021-".concat("04-10-" + timeslotsEnd[timeslotsEnd.length-1]);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH:mm");
+		LocalDateTime start = LocalDateTime.parse(startTime, formatter);
+		LocalDateTime end = LocalDateTime.parse(endTime, formatter);
+		TimeSlot t = timeslotService.createTimeSlot(start, end);
+		t.addMechanic(mechanic);
+		timeslotList.add(t);
+		mechanic.setTimeSlots(timeslotList);
+		
+		mechanicRepository.save(mechanic);
+		for(TimeSlot slot: timeslotList) {
+			timeslotRepository.save(slot);
+		}
 		return mechanic;
 	}
 

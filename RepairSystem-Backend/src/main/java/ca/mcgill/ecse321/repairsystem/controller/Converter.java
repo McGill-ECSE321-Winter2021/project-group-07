@@ -85,7 +85,7 @@ public class Converter {
 		List<AppointmentDto> appointmentsDto = new ArrayList<AppointmentDto>();
 		List<TimeSlotDto> timeslotsDto = new ArrayList<TimeSlotDto>();
 		for(TimeSlot timeslot: mechanic.getTimeSlots()) {
-			timeslotsDto.add(new TimeSlotDto(timeslot.getId()));
+			timeslotsDto.add(new TimeSlotDto(timeslot.getId(), timeslot.getStartTime(), timeslot.getEndTime()));
 		}
 		for(Appointment appointment: mechanic.getAppointments()) {
 			appointmentsDto.add(new AppointmentDto(appointment.getId()));

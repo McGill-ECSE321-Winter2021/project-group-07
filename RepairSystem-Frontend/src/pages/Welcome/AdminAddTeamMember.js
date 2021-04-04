@@ -63,6 +63,12 @@ function MechanicDto(name, password, phone, email){
         tuesdayEndTime:"",
         wednesdayStartTime:"",
         wednesdayEndTime:"",
+        thursdayStartTime:"",
+        thursdayEndTime:"",
+        fridayStartTime:"",
+        fridayEndTime:"",
+        saturdayStartTime:"",
+        saturdayEndTime:"",
       }
     },
 
@@ -82,7 +88,7 @@ function MechanicDto(name, password, phone, email){
         /**
          * To Create a Mechanic 
          */
-        createMechanic: function (name,password,phone,email,value){
+        createMechanic: function (name,password,phone,email,value,mondayStart,mondayEnd,tuesdayStart,tuesdayEnd,wednesdayStart,wednesdayEnd,thursdayStart,thursdayEnd,fridayStart,fridayEnd,saturdayStart,saturdayEnd){
           AXIOS.post('/mechanic/'.concat(name), {},{
             params:{
                 name: name,
@@ -95,8 +101,16 @@ function MechanicDto(name, password, phone, email){
                 services.push(value[i].name)
               }
               AXIOS.put("/mechanic/updateServices/".concat(email + "?services=" + services), {},{})
-                    .then(response => { 
-                      this.mechanics.push(response.data)
+                    .then(response => {
+                      var timeslotsStart = "".concat(mondayStart + "," + tuesdayStart + "," + wednesdayStart + "," + thursdayStart + "," + fridayStart + "," + saturdayStart)
+                      var timeslotsEnd = "".concat(mondayEnd + "," + tuesdayEnd + "," + wednesdayEnd + "," + thursdayEnd + "," + fridayEnd + "," + saturdayEnd)
+                      AXIOS.put("/mechanic/addTimeSlots/".concat(email + "?timeslotsStart=" + timeslotsStart + "&timeslotsEnd=" + timeslotsEnd), {},{})
+                      .then(response => {
+                        this.mechanics.push(response.data)
+                      })
+                      .catch(e => {
+                        this.error = e
+                      })
                     })
                     .catch(e => {
                       this.error = e
