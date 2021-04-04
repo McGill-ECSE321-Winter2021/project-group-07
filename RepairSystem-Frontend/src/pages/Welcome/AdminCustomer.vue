@@ -129,7 +129,6 @@
           <table class = "table table-striped tabled-bordered mydatatable" style="width: 100">
               <thead>
                     <tr style="text-align:center;  border-radius:30px;">
-                        <th> ID </th>
                         <th> Name </th>
                         <th>Email</th>
                         <th>Phone Number </th>
@@ -141,7 +140,6 @@
                 </thead>
                 <tbody>
                     <tr v-for="customer in customers" style="text-align:center">
-                        <td> {{customer.id}} </td>
                         <td>{{ customer.name }}</td>
                         <td>{{ customer.email }}</td>
                         <td>{{customer.phone }}</td>
@@ -150,7 +148,8 @@
                         <td>{{ customer.debitHash}} </td>-->
                         <td> 
                         <button class="btn-edit" @click=" modalShow =!modalShow; fillCredentials(customer)"> <img  class="img-add" src="../../assets/Admin/edit.png"/>  </button>
-                       <button class="btn-remove" @click="removeCustomer(customer.id)"> <img  class="img-add" src="../../assets/Admin/delete.png"/>  </button> 
+                        <button class="btn-add-car" @click="modalCar =! modelCar; addCar(customer.id)"> <img  class="img-add" src="../../assets/Admin/addCar.png"/>  </button> 
+                        <button class="btn-remove" @click="removeCustomer(customer.id)"> <img  class="img-add" src="../../assets/Admin/delete.png"/>  </button> 
                         
                         <b-modal
                         v-model="modalShow"
@@ -323,9 +322,16 @@
 }
 
 .btn-edit{
-    background-color: #D3D2E1;
-    border-color:transparent;
+    border-color: #5430be;
+    background-color: transparent;
     border-radius:10px;
+    border-width:2px;
+}
+.btn-add-car{
+    border-color: #5430be;
+    background-color: transparent;
+    border-radius:10px;
+    border-width:2px;
 }
 .btn-secondary
 {
