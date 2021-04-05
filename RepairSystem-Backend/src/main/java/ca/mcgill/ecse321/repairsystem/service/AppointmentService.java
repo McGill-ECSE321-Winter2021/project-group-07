@@ -66,28 +66,17 @@ public class AppointmentService {
 		carRepository.save(car);
 		return app;
 	}
+	
 	@Transactional 
-	public Appointment editApp(Customer customer, TimeSlot time, Car car,String note) {
-		//input validation
-		if(customer == null)
-		{
-			throw new IllegalArgumentException("Customer cannot be null");
-		}else if (time == null)
-		{
-			throw new IllegalArgumentException("TimeSlot cannot be null");
-		}else if (car == null)
-		{
-			throw new IllegalArgumentException("Car cannot be null");
-		}
-		Appointment appointment = appointmentRepository.findById(customer.hashCode()*time.hashCode());
-		Car oldCar = appointment.getCar();
-		oldCar.removeAppointment(appointment);
-		appointment.setCar(car);
-		appointment.setNote(note);
-		appointment.setStatus(AppointmentStatus.AppointmentBooked);
-		car.addAppointment(appointment);
+	public Appointment editApp(Appointment appointment, String status) {
+		appointment.setStatus(AppointmentStatus.valueOf(status));
 		appointmentRepository.save(appointment);
-		carRepository.save(car);
+		return appointment;
+	}
+	
+	@Transactional 
+	public Appointment deleteApp(Appointment appointment) {
+		appointmentRepository.delete(appointment);
 		return appointment;
 	}
 
