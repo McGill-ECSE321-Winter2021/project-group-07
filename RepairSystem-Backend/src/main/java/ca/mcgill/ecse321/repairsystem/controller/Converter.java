@@ -43,7 +43,7 @@ public class Converter {
 		t.setStartTime(appointment.getTimeSlot().getStartTime());
 		CarDto car = new CarDto(appointment.getCar().getId());
 		car.setCarType(appointment.getCar().getCarType());
-		return new AppointmentDto(c, appointment.getId(), t, mechanicsDto, car, imagesDto, servicesDto, appointment.getNote(), appointment.getStatus());
+		return new AppointmentDto(c, appointment.getId(), t, mechanicsDto, car, imagesDto, servicesDto, appointment.getNote(), appointment.getStatus().toString());
 	}
 	
 	public static CarDto convertToDto(Car car) {

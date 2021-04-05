@@ -22,38 +22,24 @@
                     <table class="table table-striped tabled-bordered mydatatable" style="width: 100">
                         <thead>
                             <tr style="text-align:center;  border-radius:30px;">
-                                <th> Appointment Id </th>
-                                <th> Services </th>
+                                <th> Service </th>
+                                <th> Car </th>
                                 <th> Status </th>
                                 <th> Start Time</th>
-                                <th>
-                                    End Time
-                                </th>
+                                <th> Mechanic Email</th>
+                                <th> Actions </th>
 
                             </tr>
                         </thead>
                         <tbody>
 
                             <tr v-for="appointment in appointments" style="text-align:center">
-                                <td> {{appointment.id}} </td>
-                                <span v-for="service in appointment.services">
-                                    <td>{{ service.serviceType }}</td>
-                                </span>
+                                <td> {{appointment.services[0].serviceType}} </td>
+                                <td>{{ appointment.car.carType }}</td>
                                 <td>{{ appointment.status }}</td>
-                                <td>
-                                    <span v-for="time in timeslots">
-                                        <span v-if="time.id == appointment.timeSlot.id">
-                                            {{time.startTime}}
-                                        </span>
-                                    </span>
-                                </td>
-                                <td>
-                                    <span v-for="time in timeslots">
-                                        <span v-if="time.id == appointment.timeSlot.id">
-                                            {{time.endTime}}
-                                        </span>
-                                    </span>
-                                </td>
+                                <td>{{ appointment.timeSlot.startTime }}</td>
+                                <td>{{ appointment.mechanics[0].email}}</td>
+                                <td></td>
 
                             </tr>
                         </tbody>
@@ -72,7 +58,7 @@
                 <div class="top">
                     <center><img src="../../assets/profile-default.png" width="100px" length="100px"></center>
                     <br>
-                    <center> <b style="color: rgb(51 41 134); font-size: 20px;"> {{customer.name}} <br> id: {{customer.id}} </b> </center>
+                    <center> <b style="color: rgb(51 41 134); font-size: 20px;"> {{customer.name}}</b> </center>
                 </div>
             </div>
 
@@ -230,6 +216,6 @@ export default {
     content: "";
     left: 70px;
     top: 250px;
-    width: 80vh;
+    width: 680px;
 }
 </style>

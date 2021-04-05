@@ -86,12 +86,10 @@ public class AppointmentRestController {
 	/**
 	 *Rest controller for editing appointment
 	 * */
-	@PutMapping(value = { "/appointment/editAppointment/{customerId}", "/appointment/editAppointment/{customerId}/"})
-	public AppointmentDto editAppointment(@PathVariable("customerId") @RequestParam String customerId, @RequestParam String timeSlotId, @RequestParam String carId, @RequestParam String note) throws IllegalArgumentException {
-		TimeSlot timeSlot = timeSlotService.getTimeSlotById(Integer.parseInt(timeSlotId));
-		Customer customer = customerService.getCustomerById(Integer.parseInt(customerId));
-		Car car = carService.getCarById(Integer.parseInt(carId));
-		Appointment appointment = appointmentService.editApp(customer, timeSlot, car, note);
+	@PutMapping(value = { "/appointment/editAppointment/{appointmentId}", "/appointment/editAppointment/{customerId}/"})
+	public AppointmentDto editAppointment(@PathVariable("appointmentId") String appointmentId, @RequestParam String status) throws IllegalArgumentException {
+		Appointment appointment = appointmentService.getAppointmentById(Integer.parseInt(appointmentId));
+		appointment = appointmentService.editApp(appointment, status);
 		return Converter.convertToDto(appointment);
 	}
 	/**
@@ -116,7 +114,7 @@ public class AppointmentRestController {
 		Service service = serviceService.getServiceByServiceType(ServiceType.valueOf(serviceType));
 		appointmentService.addService(appointment, service);
 		return Converter.convertToDto(appointment);
-	}	
+	}
 
 }
 

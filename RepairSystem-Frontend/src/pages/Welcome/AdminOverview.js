@@ -39,6 +39,7 @@ export default {
             id: '',
             timeslots: [],
             mechanics: [],
+            cars:[],
             appointments: [],
             appointment: "",
 
@@ -46,6 +47,15 @@ export default {
             endTimeState: null,
 
             error: "",
+
+            statusOptions: [
+                {name: "AppointmentBooked"},
+                {name: "CarReceived"},
+                {name: "InRepair"},
+                {name: "Completed"}
+            ],
+
+            specificStatus: "",
         }
     },
 
@@ -93,6 +103,44 @@ export default {
             .then(response => {
 					this.timeslots = response.data;
 					console.log(this.timeslots)
+                })
+                .catch(e => {
+                    this.error = e
+                })
+        },
+
+        editAppointment: function(appointment, status, mech, car){
+            AXIOS.put('/appointment/editAppointment/'.concat(appointment.id + "?status=" + status.name)).
+                then(response => {
+                    for(var i = 0; i < this.appointments.length; i++){
+                        if(this.appointments[i].id === appointment.id){
+                            this.appointments[i] = response.data
+                            //work around
+                            this.appointments.push(response.data)
+                            this.appointments.pop(response.data)
+                        }
+                    }
+                })
+                .catch(e => {
+                    this.error = e
+                })
+        },
+
+        fillCredentials: function (appointment) {
+            AXIOS.get('/mechanics/').
+                then(response => {
+                    this.mechanics = response.data
+                    AXIOS.get('/cars/'.concat(appointment.customer.id)).
+                    then(response => {
+                        this.cars = response.data
+                        this.mechOptions = this.mechanics
+                        this.carOptions = this.cars
+                        this.specificStatus = this.status
+                    })
+                    .catch(e => {
+                    this.error = e
+                    console.log(e)
+                    })
                 })
                 .catch(e => {
                     this.error = e

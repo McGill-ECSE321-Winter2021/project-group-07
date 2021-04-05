@@ -4,6 +4,7 @@ import java.util.List;
 import ca.mcgill.ecse321.repairsystem.model.Appointment.AppointmentStatus;
 
 public class AppointmentDto {
+	private enum AppointmentStatus { AppointmentBooked, CarReceived, InRepair, Completed };
 	private CustomerDto customer;
 	private int id;
 	private AppointmentStatus status;
@@ -14,10 +15,10 @@ public class AppointmentDto {
 	private List<ImageDto> images;
 	private List<ServiceDto> services;
 	
-	public AppointmentDto(CustomerDto customer, int id, TimeSlotDto time, List<MechanicDto> mechanics, CarDto car, List<ImageDto> images, List<ServiceDto> services, String note, AppointmentStatus status) {
+	public AppointmentDto(CustomerDto customer, int id, TimeSlotDto time, List<MechanicDto> mechanics, CarDto car, List<ImageDto> images, List<ServiceDto> services, String note, String status) {
 		this.customer = customer;
 		this.id = id;
-		this.status = status;
+		this.status = AppointmentStatus.valueOf(status);
 		this.note = note;
 		this.timeslot = time;
 		this.mechanics = mechanics;

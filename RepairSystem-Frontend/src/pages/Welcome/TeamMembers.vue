@@ -305,7 +305,6 @@
                         <td> 
                         <button class="btn-edit" @click="modalShow =!modalShow; fillCredentials(mechanic)"> <img  class="img-add" src="../../assets/Admin/edit.png"/>  </button>
                         <button class="btn-remove" @click="removeMechanic(mechanic.id)"> <img  class="img-add" src="../../assets/Admin/delete.png"/>  </button> 
-                       
                         <b-modal
                         v-model="modalShow"
                         title="Edit Profile"

@@ -33,6 +33,33 @@
                                 <td>{{appointment.services[0].serviceType}}</td>
                                 <td>{{appointment.car.carType}}</td>
                                 <td>
+
+                        <button class="btn-edit" @click="modalShow =!modalShow; fillCredentials(appointment)"> <img  class="img-add" src="../../assets/Admin/edit.png"/>  </button>
+                        <button class="btn-remove" @click="removeMechanic(appointment.id)"> <img  class="img-add" src="../../assets/Admin/delete.png"/>  </button> 
+                        <b-modal
+                        v-model="modalShow"
+                        title="Edit Appointment"
+                        id="modal-scoped"
+                        >
+                        <b-form ref="form" @submit.stop.prevent="handleSubmit">
+                            <label class="typo__label"> <b>Appointment Status</b> </label>
+                            <multiselect v-model="specificStatus" :state="statusState" :options="statusOptions" :multiple="false" :close-on-select="true" :clear-on-select="false" :preserve-search="true" placeholder="Pick some" label="name" track-by="name" :preselect-first="true"> >
+                                <template slot="selection" slot-scope="{ values, search, isOpen }">
+                                    <span class="multiselect__single" v-if="values .length &amp;&amp; !isOpen">{{ values.length }} options selected</span>
+                                </template>
+                            </multiselect>
+                        </b-form>
+                            
+
+                            <template #modal-footer="{Save, Cancel}">
+
+                                <!-- Emulate built in modal footer ok and cancel button actions -->
+                                <b-button size="sm" variant="success" @click="editAppointment(appointment, specificStatus); modalShow =!modalShow"> Save </b-button>
+                                <b-button size="sm" variant="danger" @click="modalShow =!modalShow">Cancel</b-button>
+
+                            </template>
+                        </b-modal>
+
                                 </td>
                             </tr>
                         </tbody>
