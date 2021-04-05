@@ -23,7 +23,8 @@
                                 <th> Appointment Id </th>
                                 <th> Cusomter </th>
                                 <th> Status </th>
-                                <th> Time Slot Id</th>
+                                <th> Start Time</th>
+                                <th> End Time </th>
                                 <th> Services </th>
                             </tr>
                         </thead>
@@ -32,17 +33,42 @@
                                 <td v-for="mech in appointment.mechanics" v-if="mech.id == mechanic.id" style="text-align:center">
                                     {{appointment.id}}
                                 </td>
+
                                 <td v-for="mech in appointment.mechanics" v-if="mech.id == mechanic.id" style="text-align:center">
-                                    {{appointment.customer.id}}</td>
+
+                                    <span v-for="cus in customers">
+                                        <span v-if="cus.id == appointment.customer.id">
+                                            {{cus.name}} ({{appointment.customer.id}})
+                                        </span>
+                                    </span>
+
+                                </td>
                                 <td v-for="mech in appointment.mechanics" v-if="mech.id == mechanic.id" style="text-align:center">
                                     {{appointment.status}}</td>
+
+                                <!--timeslot-->
                                 <td v-for="mech in appointment.mechanics" v-if="mech.id == mechanic.id" style="text-align:center">
-                                    {{appointment.timeSlot.id}}</td>
+                                    <span v-for="time in timeslots">
+                                        <span v-if="time.id == appointment.timeSlot.id">
+                                            {{time.startTime}}
+                                        </span>
+                                    </span>
+                                </td>
                                 <td v-for="mech in appointment.mechanics" v-if="mech.id == mechanic.id" style="text-align:center">
-                                   <span v-for="service in appointment.services" > 
-                                       {{service.serviceType}}
-                                       </span>
-                                   </td>
+
+                                    <span v-for="time in timeslots">
+                                        <span v-if="time.id == appointment.timeSlot.id">
+                                            {{time.startTime}}
+                                        </span>
+                                    </span>
+
+                                </td>
+
+                                <td v-for="mech in appointment.mechanics" v-if="mech.id == mechanic.id" style="text-align:center">
+                                    <span v-for="service in appointment.services">
+                                        {{service.serviceType}}
+                                    </span>
+                                </td>
                             </tr>
                         </tbody>
                         <tfoot>
@@ -111,6 +137,8 @@ export default {
             error: "",
             appointments: [],
             mechAppointments: [],
+            timeslots: [],
+            customers: [],
         }
     },
     created: function () {
@@ -122,6 +150,20 @@ export default {
                 AXIOS.get('/appointment/').
                 then(response => {
                     this.appointments = response.data
+                    AXIOS.get('/timeslots/').
+                    then(response => {
+                        this.timeslots = response.data
+                        AXIOS.get('/customer/').
+                        then(response => {
+                            this.customers = response.data
+                        }).catch(e => {
+                            this.error = e
+                            console.log(e)
+                        })
+                    }).catch(e => {
+                        this.error = e
+                        console.log(e)
+                    })
 
                 }).catch(e => {
                     this.error = e
