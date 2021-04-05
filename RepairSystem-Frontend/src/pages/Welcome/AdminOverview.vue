@@ -35,7 +35,7 @@
                                 <td>
 
                         <button class="btn-edit" @click="modalShow =!modalShow; fillCredentials(appointment)"> <img  class="img-add" src="../../assets/Admin/edit.png"/>  </button>
-                        <button class="btn-remove" @click="removeMechanic(appointment.id)"> <img  class="img-add" src="../../assets/Admin/delete.png"/>  </button> 
+                        <button class="btn-remove" @click="removeApp(appointment.id)"> <img  class="img-add" src="../../assets/Admin/delete.png"/>  </button> 
                         <b-modal
                         v-model="modalShow"
                         title="Edit Appointment"

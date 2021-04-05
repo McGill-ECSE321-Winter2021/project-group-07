@@ -126,6 +126,20 @@ export default {
                 })
         },
 
+        removeApp: function(appointmentId){
+            AXIOS.delete('/appointment/'.concat(appointmentId)).
+                then(response => {
+                    for(var i = 0; i < this.appointments.length; i++){
+                        if(this.appointments[i].id === appointmentId){
+                            this.appointments.splice(i,1)
+                        }
+                    }
+                })
+                .catch(e => {
+                    this.error = e
+                })
+        },
+
         fillCredentials: function (appointment) {
             AXIOS.get('/mechanics/').
                 then(response => {

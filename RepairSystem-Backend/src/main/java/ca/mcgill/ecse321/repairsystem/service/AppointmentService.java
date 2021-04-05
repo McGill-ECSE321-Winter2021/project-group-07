@@ -76,6 +76,23 @@ public class AppointmentService {
 	
 	@Transactional 
 	public Appointment deleteApp(Appointment appointment) {
+		for(Mechanic m: appointment.getMechanics()) {
+			m.removeAppointment(appointment);
+			mechanicRepository.save(m);
+		}
+		for(ca.mcgill.ecse321.repairsystem.model.Service s: appointment.getServices()) {
+			s.removeAppointment(appointment);
+			serviceRepository.save(s);
+		}
+		TimeSlot t = appointment.getTimeSlot();
+		t.removeAppointment(appointment);
+		timeslotRepository.save(t);
+		Car car = appointment.getCar();
+		Customer c = appointment.getCustomer();
+		car.removeAppointment(appointment);
+		c.removeAppointment(appointment);
+		customerRepository.save(c);
+		carRepository.save(car);
 		appointmentRepository.delete(appointment);
 		return appointment;
 	}

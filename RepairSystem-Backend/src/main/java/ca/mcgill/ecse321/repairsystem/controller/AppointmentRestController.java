@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -86,7 +87,7 @@ public class AppointmentRestController {
 	/**
 	 *Rest controller for editing appointment
 	 * */
-	@PutMapping(value = { "/appointment/editAppointment/{appointmentId}", "/appointment/editAppointment/{customerId}/"})
+	@PutMapping(value = { "/appointment/editAppointment/{appointmentId}", "/appointment/editAppointment/{appointmentId}/"})
 	public AppointmentDto editAppointment(@PathVariable("appointmentId") String appointmentId, @RequestParam String status) throws IllegalArgumentException {
 		Appointment appointment = appointmentService.getAppointmentById(Integer.parseInt(appointmentId));
 		appointment = appointmentService.editApp(appointment, status);
@@ -113,6 +114,16 @@ public class AppointmentRestController {
 		Appointment appointment = appointmentService.getAppointmentById(customer.hashCode()*timeSlot.hashCode());	
 		Service service = serviceService.getServiceByServiceType(ServiceType.valueOf(serviceType));
 		appointmentService.addService(appointment, service);
+		return Converter.convertToDto(appointment);
+	}
+	
+	/**
+	 *Rest controller for deleting appointment
+	 * */
+	@DeleteMapping(value = { "/appointment/{appointmentId}", "/appointment/{customerId}/"})
+	public AppointmentDto deleteAppointment(@PathVariable("appointmentId") String appointmentId) throws IllegalArgumentException {
+		Appointment appointment = appointmentService.getAppointmentById(Integer.parseInt(appointmentId));
+		appointment = appointmentService.deleteApp(appointment);
 		return Converter.convertToDto(appointment);
 	}
 
