@@ -153,7 +153,8 @@ export default {
         customer: "",
 	    error: "",
 	    availableMechanics: [],
-	    mechanic: '',
+        mechanic: '',
+        appointment: "",
 	    service: '',
 	    car: '',
 	    availableCars: []
@@ -239,7 +240,18 @@ export default {
             	
             	AXIOS.post('/appointment/'.concat(this.customer.id + "?timeSlotId="+this.timeslot.id + "&carId="+vehicleId + "&services="+this.service.serviceType + "&note="+this.note), {}, {})
         			.then(response => {
-  					location.replace(frontendUrl+"/customerDashboard/Overview/"+id);
+                        this.appointment = response.data
+                        AXIOS.put('/appointment/addMechanic/'.concat(this.mechanic.id + "?appointmentId=" + this.appointment.id), {}, {})
+                        .then(response => {
+                            console.log("test")
+                            location.replace(frontendUrl+"/customerDashboard/Overview/"+id);
+                        })
+            	            .catch(e => {
+                	        var errorMsg = e.response.data.message
+                	        console.log(errorMsg)
+                	        this.errorAppointment = errorMsg
+                     })
+  					
             	})
             	.catch(e => {
                 	var errorMsg = e.response.data.message

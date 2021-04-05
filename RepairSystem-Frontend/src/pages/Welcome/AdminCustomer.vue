@@ -160,8 +160,95 @@
                         <td> 
                         <button class="btn-edit" @click=" modalShow =!modalShow; fillCredentials(customer)"> <img  class="img-add" src="../../assets/Admin/edit.png"/>  </button>
                         <button class="btn-add-car" @click="modalCar =! modelCar; fillCredentials2(customer)"> <img  class="img-add" src="../../assets/Admin/addCar.png"/>  </button> 
+                        <button class="btn-add-app" @click="modalApp =!modalApp; fillCredentials3(customer)"> <img class="img-add" src="../../assets/Admin/plus.png" /> </button>
                         <button class="btn-remove" @click="removeCustomer(customer.id)"> <img  class="img-add" src="../../assets/Admin/delete.png"/>  </button> 
                         
+                        <!-- Modal for add app to customer-->
+                        <b-modal
+                        v-model="modalApp"
+                        title="Add New Appointment"
+                        id="modal-scoped3"
+                        >
+                        <b-form ref="form" @submit.stop.prevent="handleSubmit3">
+
+                            <b-form-group
+                            label="Customer Id"
+                            label-for="customerId-input"
+                            invalid-feedback="Customer Id is required"
+                            :state="customerId"
+                            >
+                            <b-form-input
+                                id="customerId"
+                                type="text"
+                                v-model="customerId"
+                                name="customerId"
+                                :value="customerId"
+                            >
+                            </b-form-input>
+                            </b-form-group>
+
+                            <label class="typo__label"> Car </label>
+                            <multiselect v-model="specificCar" :state="specificCarState" :options="carNames" :multiple="false" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Pick some" label="carType" track-by="carType" :preselect-first="true"> >
+                                <template slot="selection" slot-scope="{ values, search, isOpen }">
+                                    <span class="multiselect__single" v-if="values .length &amp;&amp; !isOpen">{{ values.length }} options selected</span>
+                                </template>
+                            </multiselect>
+                            <br>
+                             <label class="typo__label"> Mechanic </label>
+                            <multiselect v-model="specificMech" :state="specificMechState" :options="mechNames" :multiple="false" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Pick some" label="name" track-by="name" :preselect-first="true"> >
+                                <template slot="selection" slot-scope="{ values, search, isOpen }">
+                                    <span class="multiselect__single" v-if="values .length &amp;&amp; !isOpen">{{ values.length }} options selected</span>
+                                </template>
+                            </multiselect>
+                            <br>
+                            <label class="typo__label"> Service </label>
+                            <multiselect v-model="specificService" :state="specificServiceState" :options="serviceNames" :multiple="false" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Pick some" label="serviceType" track-by="serviceType" :preselect-first="true"> >
+                                <template slot="selection" slot-scope="{ values, search, isOpen }">
+                                    <span class="multiselect__single" v-if="values .length &amp;&amp; !isOpen">{{ values.length }} options selected</span>
+                                </template>
+                            </multiselect>
+                            <br>
+                            <b-form-group
+                            label="Start Time (YYYY-MM-DD-HH:mm)"
+                            label-for="startTime-input"
+                            invalid-feedback="Start Time is required"
+                            :state="startTime"
+                            >
+                            <b-form-input
+                                id="startTime"
+                                type="time"
+                                v-model="startTime"
+                                name="startTime"
+                                :value="startTime"
+                            >
+                            </b-form-input>
+                            </b-form-group>
+
+                            <b-form-group
+                            label="Note"
+                            label-for="note-input"
+                            invalid-feedback="Note is required"
+                            :state="note"
+                            >
+                            <b-form-input
+                                id="note"
+                                type="text"
+                                v-model="note"
+                                name="note"
+                                :value="note"
+                            >
+                            </b-form-input>
+                            </b-form-group>
+                        </b-form>
+
+                            <template #modal-footer="{Save, Cancel}">
+                              
+                                <!-- Emulate built in modal footer ok and cancel button actions -->
+                                <b-button size="sm" variant="success" @click="modalApp =!modalApp; addApp(customerId, specificCar, specificMech, specificService, startTime, note)"> Save </b-button>
+                                <b-button size="sm" variant="danger" @click="modalApp =!modalApp">Cancel</b-button> 
+      
+                            </template>
+                        </b-modal>
 
                         <!-- Modal for add car to customer-->
                         <b-modal
@@ -375,7 +462,7 @@
 <script src="./AdminEditCustomer.js">
 </script>
 
-
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <style scoped>
 .profile {
     height: 100%;
@@ -407,6 +494,12 @@
     border-width:2px;
 }
 .btn-add-car{
+    border-color: #5430be;
+    background-color: transparent;
+    border-radius:10px;
+    border-width:2px;
+}
+.btn-add-app{
     border-color: #5430be;
     background-color: transparent;
     border-radius:10px;

@@ -7,9 +7,6 @@
                     <span class="navbar-brand mb-0 h1">
                         <img src="../../assets/appointment.png" width="50px">
                         Upcoming Appointments
-                        <button class="btn-edit" @click="modalShow =!modalShow"> <img class="img-add" src="../../assets/Admin/plus.png" /> </button>
-                        <b-modal id="modal-prevent-closing" ref="modal" title="Add New Team Member" @show="resetModal" @hidden="resetModal">
-                        </b-modal>
                     </span>
                 </nav>
 
@@ -18,27 +15,24 @@
                     <table class="table table-striped tabled-bordered mydatatable" style="width: 100">
                         <thead>
                             <tr style="text-align:center;  border-radius:30px;">
-                                <th> Appointment Id </th>
-                                <th> Customer Name </th>
-                                <th> Customer Id </th>
-
+                                <th> Customer Email </th>
                                 <th> Status </th>
                                 <th> Time Slot</th>
-                                <th> Mechanics </th>
+                                <th> Mechanic Email </th>
+                                <th> Service </th>
+                                <th> Car </th>
+                                <th> Actions </th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr v-for="appointment in appointments" style="text-align:center">
-                                <td> {{appointment.id}} </td>
-                                <td>{{ appointment.customer.name }}</td>
-                                <td>{{ appointment.customer.id }}</td>
-
+                                <td> {{appointment.customer.email}} </td>
                                 <td>{{ appointment.status }}</td>
-                                <td>{{ appointment.timeslot }}</td>
-
-                                <td><span v-for="mech in appointment.mechanics">
-                                        {{ appointment.mech.id }}
-                                    </span>
+                                <td> {{ appointment.timeSlot.startTime }}</td>
+                                <td> {{ appointment.mechanics[0].email}}</td>
+                                <td>{{appointment.services[0].serviceType}}</td>
+                                <td>{{appointment.car.carType}}</td>
+                                <td>
                                 </td>
                             </tr>
                         </tbody>
@@ -50,36 +44,13 @@
             </div>
         </div>
     </div>
-
-    <div class="col no-gutters">
-        <div class="rightside">
-            <div class="row no-gutters">
-                <div class="top">
-                    <center><img src="../../assets/profile-default.png" width="100px" length="100px"></center>
-                    <br>
-                    <center> <b style="color: rgb(51 41 134); font-size: 20px;"> {{admin.name}} </b> </center>
-                </div>
-            </div>
-
-            <div class="row no-gutters">
-                <div class="middle">
-                    <br>
-                    <date-pick v-model="date" :hasInputElement="false"></date-pick>
-                </div>
-            </div>
-            <div class="row no-gutters">
-                <div class="bottom">
-                    <br> <img src="../../assets/paint job 1.jpg" width="400px" length="400px">
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 </template>
 
 <script src="./AdminOverview.js">
 </script>
 
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <style scoped>
 .overview {
     display: flex;
@@ -90,15 +61,6 @@
     font-size: 40px;
     color: rgb(167, 167, 167);
     font-weight: 600;
-}
-
-.rightside {
-    height: 98.5vh;
-    width: 70%;
-    position: absolute;
-    content: "";
-    right: 0px;
-    background: white
 }
 
 .top {
@@ -158,7 +120,7 @@
     content: "";
     top: 50px;
     left: 30px;
-    width: 80vh;
+    width: 1100px;
 }
 
 .left-bottom {
