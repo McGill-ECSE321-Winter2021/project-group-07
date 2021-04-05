@@ -32,6 +32,7 @@
                             </tr>
                         </thead>
                         <tbody>
+
                             <tr v-for="appointment in appointments" style="text-align:center">
                                 <td> {{appointment.services[0].serviceType}} </td>
                                 <td>{{ appointment.car.carType }}</td>
@@ -102,6 +103,7 @@ export default {
         return {
             customer: "",
             appointments: [],
+            timeslots: [],
             id: '',
             error: ""
 
@@ -116,6 +118,13 @@ export default {
                 AXIOS.get('/appointment/?customerId='.concat(this.$route.params.userId)).
                 then(response => {
                     this.appointments = response.data
+                    AXIOS.get('/timeslots/').
+                    then(response => {
+                        this.timeslots = response.data
+                    }).catch(e => {
+                        this.error = e
+                        console.log(e)
+                    })
                 }).catch(e => {
                     this.error = e
                     console.log(e)
