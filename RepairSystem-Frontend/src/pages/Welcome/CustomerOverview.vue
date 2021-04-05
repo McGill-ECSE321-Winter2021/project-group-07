@@ -25,24 +25,35 @@
                                 <th> Appointment Id </th>
                                 <th> Services </th>
                                 <th> Status </th>
-                                <th> Timeslot Id</th>
-
                                 <th> Start Time</th>
-                                <th> End Time</th>
+                                <th>
+                                    End Time
+                                </th>
 
                             </tr>
                         </thead>
                         <tbody>
+
                             <tr v-for="appointment in appointments" style="text-align:center">
                                 <td> {{appointment.id}} </td>
                                 <span v-for="service in appointment.services">
                                     <td>{{ service.serviceType }}</td>
                                 </span>
                                 <td>{{ appointment.status }}</td>
-                                <td>{{ appointment.timeSlot.id }}</td>
-
-                                <td>{{ appointment.timeSlot.startTime }}</td>
-                                <td>{{ appointment.timeSlot.endTime }}</td>
+                                <td>
+                                    <span v-for="time in timeslots">
+                                        <span v-if="time.id == appointment.timeSlot.id">
+                                            {{time.startTime}}
+                                        </span>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span v-for="time in timeslots">
+                                        <span v-if="time.id == appointment.timeSlot.id">
+                                            {{time.endTime}}
+                                        </span>
+                                    </span>
+                                </td>
 
                             </tr>
                         </tbody>
@@ -106,6 +117,7 @@ export default {
         return {
             customer: "",
             appointments: [],
+            timeslots: [],
             id: '',
             error: ""
 
@@ -120,6 +132,13 @@ export default {
                 AXIOS.get('/appointment/?customerId='.concat(this.$route.params.userId)).
                 then(response => {
                     this.appointments = response.data
+                    AXIOS.get('/timeslots/').
+                    then(response => {
+                        this.timeslots = response.data
+                    }).catch(e => {
+                        this.error = e
+                        console.log(e)
+                    })
                 }).catch(e => {
                     this.error = e
                     console.log(e)
