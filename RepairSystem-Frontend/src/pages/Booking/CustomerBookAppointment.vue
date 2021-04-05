@@ -114,14 +114,9 @@
             </b-modal>
             </form>
 
-</div>
+			</div>
             </div>
-            
         </div>	
-
-        
-         
-
    </div>
 
 </template>
@@ -253,6 +248,8 @@ export default {
                 console.log(errorMsg)
                 this.errorTimeSlot = errorMsg
             })
+            
+            location.replace(frontendUrl+"/customerDashboard/Overview/"+this.customer.id);
             
         }, 
             

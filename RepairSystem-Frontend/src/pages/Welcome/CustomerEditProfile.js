@@ -39,7 +39,7 @@ export default {
 		customers: [],
 		error: "",
 
-		 nameState: null,
+		nameState: null,
         emailState:null,
         phoneState:null,
         passwordState:null,
