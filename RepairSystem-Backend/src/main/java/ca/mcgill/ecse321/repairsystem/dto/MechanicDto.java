@@ -43,4 +43,5 @@ public class MechanicDto extends PersonDto{
 	public void setAppointments(List<AppointmentDto> appointments) {
 	    this.appointments = appointments;
 	}
+	
 }

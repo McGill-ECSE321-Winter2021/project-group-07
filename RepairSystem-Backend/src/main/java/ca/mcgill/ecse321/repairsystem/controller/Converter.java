@@ -26,7 +26,10 @@ public class Converter {
 		List<ImageDto> imagesDto = new ArrayList<ImageDto>();
 		List<ServiceDto> servicesDto = new ArrayList<ServiceDto>();
 		for(Mechanic mechanic: appointment.getMechanics()) {
-			mechanicsDto.add(new MechanicDto(mechanic.getId()));
+			MechanicDto m = new MechanicDto(mechanic.getId());
+			m.setEmail(mechanic.getEmail());
+			mechanicsDto.add(m);
+			
 		}
 		for(Image image: appointment.getImages()) {
 			imagesDto.add(new ImageDto(image.getId()));
@@ -34,7 +37,13 @@ public class Converter {
 		for(Service service: appointment.getServices()) {
 			servicesDto.add(new ServiceDto(service.getServiceType()));
 		}
-		return new AppointmentDto(new CustomerDto(appointment.getCustomer().getId()), appointment.getId(), new TimeSlotDto(appointment.getTimeSlot().getId()), mechanicsDto, new CarDto(appointment.getCar().getId()), imagesDto, servicesDto, appointment.getNote(), appointment.getStatus());
+		CustomerDto c = new CustomerDto(appointment.getCustomer().getId());
+		c.setEmail(appointment.getCustomer().getEmail());
+		TimeSlotDto t = new TimeSlotDto(appointment.getTimeSlot().getId());
+		t.setStartTime(appointment.getTimeSlot().getStartTime());
+		CarDto car = new CarDto(appointment.getCar().getId());
+		car.setCarType(appointment.getCar().getCarType());
+		return new AppointmentDto(c, appointment.getId(), t, mechanicsDto, car, imagesDto, servicesDto, appointment.getNote(), appointment.getStatus());
 	}
 	
 	public static CarDto convertToDto(Car car) {

@@ -98,10 +98,8 @@ public class AppointmentRestController {
 	 *Rest controller for adding mechanic
 	 * */
 	@PutMapping(value = { "/appointment/addMechanic/{mechanicId}", "/appointment/addMechanic/{mechanicId}/"})
-	public AppointmentDto addMechanic(@PathVariable("mechanicId") String mechanicId, @RequestParam String timeSlotId, @RequestParam String customerId) throws IllegalArgumentException {
-		TimeSlot timeSlot = timeSlotService.getTimeSlotById(Integer.parseInt(timeSlotId));
-		Customer customer = customerService.getCustomerById(Integer.parseInt(customerId));		
-		Appointment appointment = appointmentService.getAppointmentById(customer.hashCode()*timeSlot.hashCode());	
+	public AppointmentDto addMechanic(@PathVariable("mechanicId") String mechanicId, @RequestParam String appointmentId) throws IllegalArgumentException {
+		Appointment appointment = appointmentService.getAppointmentById(Integer.parseInt(appointmentId));	
 		Mechanic mechanic = mechanicService.getMechanicById(Integer.parseInt(mechanicId));
 		appointmentService.addMechanic(appointment, mechanic);
 		return Converter.convertToDto(appointment);

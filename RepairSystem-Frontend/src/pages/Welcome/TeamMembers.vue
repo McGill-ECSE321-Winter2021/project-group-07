@@ -547,7 +547,8 @@
 <script src="./AdminAddTeamMember.js">
 </script>
 
-<style src="vue-multiselect/dist/vue-multiselect.min.css"></style><style scoped>
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
+<style scoped>
 .profile {
     height: 100%;
     width: 100%;

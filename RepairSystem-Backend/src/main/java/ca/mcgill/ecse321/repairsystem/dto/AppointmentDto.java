@@ -29,6 +29,7 @@ public class AppointmentDto {
 	
 	public AppointmentDto(int Id) {
 		this.id = Id;
+		this.status = AppointmentStatus.AppointmentBooked;
 	}
 	
 	public AppointmentDto() {

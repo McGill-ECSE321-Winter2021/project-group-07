@@ -35,6 +35,7 @@ function CustomerDto(name, password, phone, email, credit, debit, address){
       return {
         modalShow:false,
         modalCar:false,
+        modalApp:false,
         name: '',
         email:'',
         phone:'',
@@ -44,7 +45,12 @@ function CustomerDto(name, password, phone, email, credit, debit, address){
         debit:'',
         customer:"",
         lastDate:"",
-       	customers: [],
+        customers: [],
+        options: [],
+        carNames: [],
+        mechNames: [],
+        serviceNames: [],
+        appointment: [],
        
         nameState: null,
         emailState:null,
@@ -66,7 +72,15 @@ function CustomerDto(name, password, phone, email, credit, debit, address){
 
         typeOfCar: "",
         winterTires: "",
-        numOfKm: ""
+        numOfKm: "",
+
+        customerId: "",
+        startTime: "",
+        endTime: "",
+        specificCar: "",
+        specificMech: "",
+        specificService: "",
+        timeslot: ""
       }
     },
 
@@ -158,6 +172,7 @@ function CustomerDto(name, password, phone, email, credit, debit, address){
         
          
         },
+
         fillCredentials2 : function(row)
         {
           AXIOS.get('/customer/'.concat(row.id), {}, {})
@@ -170,6 +185,34 @@ function CustomerDto(name, password, phone, email, credit, debit, address){
         
          
         },
+        
+        fillCredentials3 : function(row)
+        {
+          AXIOS.get('/customer/'.concat(row.id), {}, {})
+          .then(response => {
+            this.carNames = response.data.cars
+            this.customerId = response.data.id
+
+            AXIOS.get('/mechanics/', {}, {})
+            .then(response => {
+              this.mechNames = response.data
+              AXIOS.get('/services/', {}, {})
+              .then(response => {
+                this.serviceNames = response.data
+              }).
+              catch(e=>{
+                this.error =e;
+              })
+            }).
+            catch(e=>{
+              this.error =e;
+            })
+          }).
+          catch(e=>{
+            this.error =e;
+          })
+        },
+
         addCar: function(typeOfCar, winterTires, numOfKm){
           AXIOS.post('/car/'.concat(this.customer.id + "?carType=" + typeOfCar + "&winterTires=" + winterTires + "&numOfKilometers=" + numOfKm), {}, {})
             .then(response => {
@@ -190,6 +233,60 @@ function CustomerDto(name, password, phone, email, credit, debit, address){
             .catch(e => {
               this.error = e;
             })
+        },
+
+        addApp: function(customerId, specificCar, specificMech, specificService, startDate, note){
+        
+            var endDate = startDate.split("-");
+            var min_sec_array = endDate[3].split(":");
+            var hours = min_sec_array[0];
+            hours++;
+            if (hours < 10) {
+            	min_sec_array[0] = '0'.concat(hours);
+            } else {
+            	min_sec_array[0] = hours;
+            }
+     
+            min_sec_array = min_sec_array.join(':');
+			      endDate[3] = min_sec_array;
+			      endDate = endDate.join('-');
+
+            //console.log("Old date: " + startDate);
+            //console.log("New date: " + endDate);
+            //console.log('/timeslot/'.concat(startDate + "?endTime="+endDate))
+
+            AXIOS.post('/timeslot/'.concat(startDate + "?endTime="+endDate), {}, {})
+            .then(response => {
+            // JSON responses are automatically parsed.
+                this.timeslot  = response.data
+            	AXIOS.post('/appointment/'.concat(customerId + "?timeSlotId="+this.timeslot.id + "&carId="+specificCar.id + "&services="+specificService.serviceType + "&note="+note), {}, {})
+              .then(response => {
+                this.appointment = response.data
+                AXIOS.put('/appointment/addMechanic/'.concat(specificMech.id + "?appointmentId=" + this.appointment.id), {}, {})
+                .then(response => {
+                  console.log("test")
+
+                })
+            	  .catch(e => {
+                	var errorMsg = e.response.data.message
+                	console.log(errorMsg)
+                	this.errorAppointment = errorMsg
+                })
+              })
+                AXIOS.put
+            	.catch(e => {
+                	var errorMsg = e.response.data.message
+                	console.log(errorMsg)
+                	this.errorAppointment = errorMsg
+            	})
+  
+            })
+            .catch(e => {
+                var errorMsg = e.response.data.message
+                console.log(errorMsg)
+                this.errorTimeSlot = errorMsg
+            })
+            
         },
 
         removeCustomer: function(id){
@@ -252,11 +349,19 @@ function CustomerDto(name, password, phone, email, credit, debit, address){
         this.passwordState = valid 
         this.addressState = valid
         return valid
-      },checkFormValidity2() {
+      },
+      checkFormValidity2() {
         const valid = this.$refs.form.checkValidity()
         this.typeOfCar = valid
         this.winterTires = valid
         this.numOfKm = valid
+        return valid
+      },
+      checkFormValidity3() {
+        const valid = this.$refs.form.checkValidity()
+        this.customerEmail = valid
+        this.startTime = valid
+        this.endTime = valid
         return valid
       },
       handleOk(bvModalEvt) {
@@ -266,6 +371,10 @@ function CustomerDto(name, password, phone, email, credit, debit, address){
       handleOk2(bvModalEvt) {
         bvModalEvt.preventDefault()
         this.handleSubmit2()
+      },
+      handleOk3(bvModalEvt) {
+        bvModalEvt.preventDefault()
+        this.handleSubmit3()
       },
        resetModal() {
         this.name = ''
@@ -296,6 +405,15 @@ function CustomerDto(name, password, phone, email, credit, debit, address){
       },
       handleSubmit2() {
         if (!this.checkFormValidity2()) {
+          return
+        }
+        
+        this.$nextTick(() => {
+          this.$bvModal.hide('modal-prevent-closing')
+        })
+      },
+      handleSubmit3() {
+        if (!this.checkFormValidity3()) {
           return
         }
         
