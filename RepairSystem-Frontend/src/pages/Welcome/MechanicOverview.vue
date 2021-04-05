@@ -20,55 +20,25 @@
                     <table class="table table-striped tabled-bordered mydatatable" style="width: 100">
                         <thead>
                             <tr style="text-align:center;  border-radius:30px;">
-                                <th> Appointment Id </th>
-                                <th> Cusomter </th>
+                                <th> Service </th>
+                                <th> Car </th>
                                 <th> Status </th>
                                 <th> Start Time</th>
-                                <th> End Time </th>
-                                <th> Services </th>
+                                <th> Mechanic Email</th>
+                                <th> Actions </th>
+
                             </tr>
                         </thead>
                         <tbody>
+
                             <tr v-for="appointment in appointments" style="text-align:center">
-                                <td v-for="mech in appointment.mechanics" v-if="mech.id == mechanic.id" style="text-align:center">
-                                    {{appointment.id}}
-                                </td>
+                                <td> {{appointment.services[0].serviceType}} </td>
+                                <td>{{ appointment.car.carType }}</td>
+                                <td>{{ appointment.status }}</td>
+                                <td>{{ appointment.timeSlot.startTime }}</td>
+                                <td>{{ appointment.mechanics[0].email}}</td>
+                                <td></td>
 
-                                <td v-for="mech in appointment.mechanics" v-if="mech.id == mechanic.id" style="text-align:center">
-
-                                    <span v-for="cus in customers">
-                                        <span v-if="cus.id == appointment.customer.id">
-                                            {{cus.name}} ({{appointment.customer.id}})
-                                        </span>
-                                    </span>
-
-                                </td>
-                                <td v-for="mech in appointment.mechanics" v-if="mech.id == mechanic.id" style="text-align:center">
-                                    {{appointment.status}}</td>
-
-                                <!--timeslot-->
-                                <td v-for="mech in appointment.mechanics" v-if="mech.id == mechanic.id" style="text-align:center">
-                                    <span v-for="time in timeslots">
-                                        <span v-if="time.id == appointment.timeSlot.id">
-                                            {{time.startTime}}
-                                        </span>
-                                    </span>
-                                </td>
-                                <td v-for="mech in appointment.mechanics" v-if="mech.id == mechanic.id" style="text-align:center">
-
-                                    <span v-for="time in timeslots">
-                                        <span v-if="time.id == appointment.timeSlot.id">
-                                            {{time.startTime}}
-                                        </span>
-                                    </span>
-
-                                </td>
-
-                                <td v-for="mech in appointment.mechanics" v-if="mech.id == mechanic.id" style="text-align:center">
-                                    <span v-for="service in appointment.services">
-                                        {{service.serviceType}}
-                                    </span>
-                                </td>
                             </tr>
                         </tbody>
                         <tfoot>
@@ -86,7 +56,7 @@
                 <div class="top">
                     <center><img src="../../assets/profile-default.png" width="100px" length="100px"></center>
                     <br>
-                    <center> <b style="color: rgb(51 41 134); font-size: 20px;"> {{mechanic.name}} <br> id: {{mechanic.id}} </b> </center>
+                    <center> <b style="color: rgb(51 41 134); font-size: 20px;"> {{mechanic.name}}</b> </center>
                 </div>
             </div>
 
