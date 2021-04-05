@@ -23,17 +23,26 @@
                                 <th> Appointment Id </th>
                                 <th> Cusomter </th>
                                 <th> Status </th>
-                                <th> Time Slot</th>
+                                <th> Time Slot Id</th>
                                 <th> Services </th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="appointment in mechAppointments" style="text-align:center">
-                                <td> {{appointment.id}} </td>
-                                <td>{{ appointment.customer }}</td>
-                                <td>{{ appointment.status }}</td>
-                                <td>{{ appointment.timeslot }}</td>
-                                <td>{{ appointment.services }}</td>
+                            <tr v-for="appointment in appointments" style="text-align:center">
+                                <td v-for="mech in appointment.mechanics" v-if="mech.id == mechanic.id" style="text-align:center">
+                                    {{appointment.id}}
+                                </td>
+                                <td v-for="mech in appointment.mechanics" v-if="mech.id == mechanic.id" style="text-align:center">
+                                    {{appointment.customer.id}}</td>
+                                <td v-for="mech in appointment.mechanics" v-if="mech.id == mechanic.id" style="text-align:center">
+                                    {{appointment.status}}</td>
+                                <td v-for="mech in appointment.mechanics" v-if="mech.id == mechanic.id" style="text-align:center">
+                                    {{appointment.timeSlot.id}}</td>
+                                <td v-for="mech in appointment.mechanics" v-if="mech.id == mechanic.id" style="text-align:center">
+                                   <span v-for="service in appointment.services" > 
+                                       {{service.serviceType}}
+                                       </span>
+                                   </td>
                             </tr>
                         </tbody>
                         <tfoot>
@@ -113,13 +122,7 @@ export default {
                 AXIOS.get('/appointment/').
                 then(response => {
                     this.appointments = response.data
-                    for (app in appointments) {
-                        for (mech in app.mechanics) {
-                            if (mech.id == mechanic.id) {
-                                this.mechAppointments.push(i)
-                            }
-                        }
-                    }
+
                 }).catch(e => {
                     this.error = e
                     console.log(e)
