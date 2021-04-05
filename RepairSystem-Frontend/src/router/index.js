@@ -50,6 +50,10 @@ const routes = [
       {
         path: '/customerDashboard/bookAppointment/:userId',
         component: () => import('../pages/Booking/CustomerBookAppointment.vue')
+      },
+      {
+        path: '/customerDashboard/makePayment/:userId',
+        component: () => import('../pages/Booking/MakePayment.vue')
       }
     ]
   },

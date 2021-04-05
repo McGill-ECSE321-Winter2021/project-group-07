@@ -21,6 +21,11 @@
                     Book Appointment
                 </div>
             </router-link>
+            <router-link :to="'/customerDashboard/makePayment/' + this.customer.id" active-class="active" tag="button" exact class="side-btn">
+                <div class="link-container">
+                    Make a Payment
+                </div>
+            </router-link>
         </div>
 
         <div style="position: absolute; left: 5px; bottom: 5px; color: #D3D2E1;font-size: 20px; ">
