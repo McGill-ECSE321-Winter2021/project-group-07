@@ -50,9 +50,9 @@ have access and book a variety of services (towing, oil change, tire changes, re
  | ------------|---------------| ------------------|
  |Annabelle Dion|   Project Management + Implementation of Web Frontend            |                   |
  |Sia Ham       |      Implementation of Web Frontend        |                   |
- |Thomas Jarvis|       Integration of Web Frontend with Backend Services        |         30         |
- |Norman Kong |        Integration of Web Frontend with Backend Services        |          20        |
- |Catherine Van Gheluwe|   Implementation of Web Frontend    |        25          |
+ |Thomas Jarvis|       Integration of Web Frontend with Backend Services        |         40         |
+ |Norman Kong |        Integration of Web Frontend with Backend Services        |          30        |
+ |Catherine Van Gheluwe|   Implementation of Web Frontend    |        35          |
  
   ## Sprint 4 
 
