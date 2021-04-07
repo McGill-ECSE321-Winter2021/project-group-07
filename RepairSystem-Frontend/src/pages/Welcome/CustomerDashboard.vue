@@ -151,8 +151,8 @@ export default {
     position: absolute;
     content: "";
     right: 0px;
-    height: 20px;
-    width: 20px;
+    height: 60px;
+    width: 60px;
     border-radius: 50%;
     background-color: rgb(51 41 134);
 }
