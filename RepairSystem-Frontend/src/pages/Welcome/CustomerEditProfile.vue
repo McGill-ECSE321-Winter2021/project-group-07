@@ -167,11 +167,6 @@
                     <date-pick v-model="date" :hasInputElement="false"></date-pick>
                 </div>
             </div>
-            <div class="row no-gutters">
-                <div class="bottom">
-                    <br> <img src="../../assets/paint job 1.jpg" width="400px" length="400px">
-                </div>
-            </div>
         </div>
     </div>
 </div>
