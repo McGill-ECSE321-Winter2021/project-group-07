@@ -183,10 +183,11 @@
 
 }
 
-.btn-edit {
-    background-color: #D3D2E1;
-    border-color: transparent;
-    border-radius: 10px;
+.btn-edit{
+    border-color: #5430be;
+    background-color: transparent;
+    border-radius:10px;
+    border-width:2px;
 }
 
 .btn-secondary {

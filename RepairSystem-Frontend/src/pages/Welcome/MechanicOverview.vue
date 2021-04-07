@@ -17,7 +17,7 @@
                 <img src="../../assets/appointment.png" width="50px">
                 My Appointments
                 <div class="container mt-3 mb-3" style="background-color:white; border-radius:30px;">
-                    <table class="table table-striped tabled-bordered mydatatable" style="width: 100">
+                    <table class="table table-striped tabled-bordered mydatatable" style="width: 670px">
                         <thead>
                             <tr style="text-align:center;  border-radius:30px;">
                                 <th> Service </th>
@@ -37,7 +37,35 @@
                                 <td>{{ appointment.status }}</td>
                                 <td>{{ appointment.timeSlot.startTime }}</td>
                                 <td>{{ appointment.mechanics[0].email}}</td>
-                                <td></td>
+                                <td>
+
+                                    <button class="btn-edit" @click="modalShow =!modalShow; fillCredentials(appointment)"> <img  class="img-add" src="../../assets/Admin/edit.png"/>  </button>
+                                    <button class="btn-remove" @click="removeApp(appointment.id)"> <img  class="img-add" src="../../assets/Admin/delete.png"/>  </button> 
+                        <b-modal
+                        v-model="modalShow"
+                        title="Edit Appointment"
+                        id="modal-scoped"
+                        >
+                        <b-form ref="form" @submit.stop.prevent="handleSubmit">
+                            <label class="typo__label"> <b>Appointment Status</b> </label>
+                            <multiselect v-model="specificStatus" :state="statusState" :options="statusOptions" :multiple="false" :close-on-select="true" :clear-on-select="false" :preserve-search="true" placeholder="Pick some" label="name" track-by="name" :preselect-first="true"> >
+                                <template slot="selection" slot-scope="{ values, search, isOpen }">
+                                    <span class="multiselect__single" v-if="values .length &amp;&amp; !isOpen">{{ values.length }} options selected</span>
+                                </template>
+                            </multiselect>
+                        </b-form>
+                            
+
+                            <template #modal-footer="{Save, Cancel}">
+
+                                <!-- Emulate built in modal footer ok and cancel button actions -->
+                                <b-button size="sm" variant="success" @click="this.appointment = appointment; editAppointment(specificStatus); modalShow =!modalShow"> Save </b-button>
+                                <b-button size="sm" variant="danger" @click="modalShow =!modalShow">Cancel</b-button>
+
+                            </template>
+                        </b-modal>
+
+                                </td>
 
                             </tr>
                         </tbody>
@@ -78,6 +106,7 @@
 
 <script>
 import axios from 'axios';
+import Multiselect from 'vue-multiselect'
 import DatePick from 'vue-date-pick';
 import 'vue-date-pick/dist/vueDatePick.css';
 var config = require('../../../config')
@@ -94,7 +123,8 @@ var AXIOS = axios.create({
 
 export default {
     components: {
-        DatePick
+        DatePick,
+        Multiselect
     },
     computed: {
         userId() {
@@ -104,11 +134,24 @@ export default {
     data() {
         return {
             mechanic: "",
+            modalShow: false,
             error: "",
             appointments: [],
+            appointment: "",
             mechAppointments: [],
             timeslots: [],
             customers: [],
+
+            error: "",
+
+            statusOptions: [
+                {name: "AppointmentBooked"},
+                {name: "CarReceived"},
+                {name: "InRepair"},
+                {name: "Completed"}
+            ],
+
+            specificStatus: "",
         }
     },
     created: function () {
@@ -144,7 +187,79 @@ export default {
                 this.error = e
                 console.log(e)
             })
+    },
+
+    methods: {
+        editAppointment: function(status){
+            console.log("test")
+            AXIOS.put('/appointment/editAppointment/'.concat(this.appointment.id + "?status=" + status.name)).
+                then(response => {
+                    for(var i = 0; i < this.appointments.length; i++){
+                        if(this.appointments[i].id === appointment.id){
+                            this.appointments[i] = response.data
+                            //work around
+                            this.appointments.push(response.data)
+                            this.appointments.pop(response.data)
+                        }
+                    }
+                })
+                .catch(e => {
+                    this.error = e
+                })
+        },
+
+        removeApp: function(appointmentId){
+            console.log("test")
+            AXIOS.delete('/appointment/'.concat(appointmentId)).
+                then(response => {
+                    for(var i = 0; i < this.appointments.length; i++){
+                        if(this.appointments[i].id === appointmentId){
+                            this.appointments.splice(i,1)
+                        }
+                    }
+                })
+                .catch(e => {
+                    this.error = e
+                })
+        },
+
+        fillCredentials: function (appointment) {
+            AXIOS.get('/mechanics/').
+                then(response => {
+                    this.mechanics = response.data
+                    AXIOS.get('/cars/'.concat(appointment.customer.id)).
+                    then(response => {
+                        this.cars = response.data
+                        this.mechOptions = this.mechanics
+                        this.carOptions = this.cars
+                        this.specificStatus = this.status
+                    })
+                    .catch(e => {
+                    this.error = e
+                    console.log(e)
+                    })
+                })
+                .catch(e => {
+                    this.error = e
+                })
+        },
+
+        handleSubmit() {
+            if (!this.checkFormValidity()) {
+                return
+            }
+
+            this.$nextTick(() => {
+                this.$bvModal.hide('modal-prevent-closing')
+            })
+        },
+        resetModal() {
+            this.modalShow= false
+            this.error= ""
+        }
+
     }
+
 }
 </script>
 
@@ -226,6 +341,30 @@ export default {
     content: "";
     left: 70px;
     top: 250px;
-    width: 80vh;
+    width: 690px;
 }
+
+.mydatatable {
+    transform: translateX(-8px);
+}
+
+.img-add {
+    max-height: 20px;
+    transform: translateY(-1px);
+}
+
+.btn-remove {
+    border-color: #5430be;
+    background-color: transparent;
+    border-radius: 10px;
+    border-width: 2px;
+}
+
+.btn-edit{
+    border-color: #5430be;
+    background-color: transparent;
+    border-radius:10px;
+    border-width:2px;
+}
+
 </style>

@@ -232,7 +232,8 @@ export default {
                         this.appointment = response.data
                         AXIOS.put('/appointment/addMechanic/'.concat(this.mechanic.id + "?appointmentId=" + this.appointment.id), {}, {})
                         .then(response => {
-                            location.replace(frontendUrl+"/customerDashboard/Overview/"+id);
+                            console.log("test")
+                            location.replace(frontendUrl+"/customerDashboard/Overview/"+this.customer.id);
                         })
             	            .catch(e => {
                 	        var errorMsg = e.response.data.message

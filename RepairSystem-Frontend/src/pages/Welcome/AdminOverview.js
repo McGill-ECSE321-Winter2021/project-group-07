@@ -109,7 +109,7 @@ export default {
                 })
         },
 
-        editAppointment: function(appointment, status, mech, car){
+        editAppointment: function(appointment, status){
             AXIOS.put('/appointment/editAppointment/'.concat(appointment.id + "?status=" + status.name)).
                 then(response => {
                     for(var i = 0; i < this.appointments.length; i++){

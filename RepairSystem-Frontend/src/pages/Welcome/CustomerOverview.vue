@@ -18,8 +18,8 @@
                 <img src="../../assets/appointment.png" width="50px">
                 My Appointments
 
-                <div class="container mt-3 mb-3" style="background-color:white; border-radius:30px;">
-                    <table class="table table-striped tabled-bordered mydatatable" style="width: 100">
+                <div class="container mt-3 mb-3" style="background-color:white; border-radius:30px">
+                    <table class="table table-striped tabled-bordered mydatatable">
                         <thead>
                             <tr style="text-align:center;  border-radius:30px;">
                                 <th> Service </th>
@@ -39,7 +39,7 @@
                                 <td>{{ appointment.status }}</td>
                                 <td>{{ appointment.timeSlot.startTime }}</td>
                                 <td>{{ appointment.mechanics[0].email}}</td>
-                                <td></td>
+                                <td> <button class="btn-remove" @click="removeApp(appointment.id)"> <img  class="img-add" src="../../assets/Admin/delete.png"/>  </button> </td>
 
                             </tr>
                         </tbody>
@@ -110,7 +110,7 @@ export default {
             .then(response => {
                 // JSON responses are automatically parsed.
                 this.customer = response.data
-                AXIOS.get('/appointment/?customerId='.concat(this.$route.params.userId)).
+                AXIOS.get('/appointments/'.concat(this.$route.params.userId)).
                 then(response => {
                     this.appointments = response.data
                     AXIOS.get('/timeslots/').
@@ -129,7 +129,26 @@ export default {
                 this.error = e
                 console.log(e)
             })
+    },
+
+    methods: {
+
+        removeApp: function(appointmentId){
+            AXIOS.delete('/appointment/'.concat(appointmentId)).
+                then(response => {
+                    for(var i = 0; i < this.appointments.length; i++){
+                        if(this.appointments[i].id === appointmentId){
+                            this.appointments.splice(i,1)
+                        }
+                    }
+                })
+                .catch(e => {
+                    this.error = e
+                })
+        },
+
     }
+
 }
 </script>
 
@@ -213,4 +232,21 @@ export default {
     top: 250px;
     width: 680px;
 }
+
+.btn-remove {
+    border-color: #5430be;
+    background-color: transparent;
+    border-radius: 10px;
+    border-width: 2px;
+
+}
+
+.img-add {
+    max-height: 20px;
+}
+
+.mydatatable {
+    transform: translateX(-12px);
+}
+
 </style>

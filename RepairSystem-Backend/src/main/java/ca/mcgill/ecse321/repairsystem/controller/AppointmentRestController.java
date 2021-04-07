@@ -45,7 +45,7 @@ public class AppointmentRestController {
 	/**
 	 *Rest controller for getting appointment by customer
 	 * */
-	@GetMapping(value = { "/appointment/{customerId}", "/appointment/{customerId}/"})
+	@GetMapping(value = { "/appointments/{customerId}", "/appointment/{customerId}/"})
 	public List<AppointmentDto> getAppointmentByCustomer(@PathVariable("customerId") String customerId) {
 		Customer customer = customerService.getCustomerById(Integer.parseInt(customerId));
 
