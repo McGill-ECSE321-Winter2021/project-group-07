@@ -4,7 +4,7 @@
     <div class="main">
           <div style = "position: absolute; left: 5px; top: 10px"> &nbsp; <router-link to="/"><img src="../../assets/admin.png" width = "50px" length = "50px"></router-link>
           </div>
-        Log In
+       
         <div class="leftCar">
             <img src="../../assets/LogInCarLeft.svg" alt="Left Car" width="600" height="430">
         </div>

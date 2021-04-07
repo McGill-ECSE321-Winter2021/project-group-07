@@ -23,14 +23,17 @@
             </router-link>
             <router-link :to="'/customerDashboard/makePayment/' + this.customer.id" active-class="active" tag="button" exact class="side-btn">
                 <div class="link-container">
-                    Make a Payment
+                   Payment/E-Transfer
                 </div>
+            </router-link>
+            <router-link :to="'/'" active-class="active" tag="button" exact class="side-btn">
+              <div class="link-container">
+                   Log Out
+               </div>
             </router-link>
         </div>
 
-        <div style="position: absolute; left: 5px; bottom: 5px; color: #D3D2E1;font-size: 20px; ">
-            <router-link to="/"><img src="../../assets/exit.png" width="30" length="20">log out </router-link>
-        </div>
+     
 
     </div>
     <div class="content">
@@ -148,8 +151,8 @@ export default {
     position: absolute;
     content: "";
     right: 0px;
-    height: 60px;
-    width: 60px;
+    height: 20px;
+    width: 20px;
     border-radius: 50%;
     background-color: rgb(51 41 134);
 }
