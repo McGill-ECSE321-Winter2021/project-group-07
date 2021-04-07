@@ -56,7 +56,7 @@
             <form>
                 <br>
                 <br>
-                <b-button v-b-modal.modal-prevent-closing class="btn-primary1"> Add Car <img class="img-add" src="../../assets/Admin/plus.png"width="20px" /> </b-button>
+                <b-button v-b-modal.modal-prevent-closing class="btn-primary1"> Add Car <img class="img-add" src="../../assets/Admin/plus.png" width="20px" /> </b-button>
 
             <b-modal
             id="modal-prevent-closing"
@@ -221,16 +221,10 @@ export default {
 			endDate[3] = min_sec_array;
 			endDate = endDate.join('-');
 
-            //console.log("Old date: " + startDate);
-            //console.log("New date: " + endDate);
-            //console.log('/timeslot/'.concat(startDate + "?endTime="+endDate))
-
             AXIOS.post('/timeslot/'.concat(startDate + "?endTime="+endDate), {}, {})
             .then(response => {
             // JSON responses are automatically parsed.
                 this.timeslot  = response.data
-                
-                //console.log(response.data)
                 //console.log('/appointment/'.concat(this.customer.id + "?timeSlotId="+this.timeslot.id + "&carId="+vehicleId + "&services="+this.service.serviceType + "&note="+this.note))
             	
             	AXIOS.post('/appointment/'.concat(this.customer.id + "?timeSlotId="+this.timeslot.id + "&carId="+vehicleId + "&services="+this.service.serviceType + "&note="+this.note), {}, {})
@@ -238,7 +232,6 @@ export default {
                         this.appointment = response.data
                         AXIOS.put('/appointment/addMechanic/'.concat(this.mechanic.id + "?appointmentId=" + this.appointment.id), {}, {})
                         .then(response => {
-                            console.log("test")
                             location.replace(frontendUrl+"/customerDashboard/Overview/"+id);
                         })
             	            .catch(e => {
@@ -260,8 +253,6 @@ export default {
                 console.log(errorMsg)
                 this.errorTimeSlot = errorMsg
             })
-            
-            location.replace(frontendUrl+"/customerDashboard/Overview/"+this.customer.id);
             
         }, 
             

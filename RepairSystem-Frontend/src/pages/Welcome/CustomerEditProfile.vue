@@ -157,7 +157,7 @@
                 <div class="top">
                     <center><img src="../../assets/profile-default.png" width="100px" length="100px"></center>
                     <br>
-                    <center> <b style="color: rgb(51 41 134); font-size: 20px;"> {{customer.name}} <br> id: {{customer.id}} </b> </center>
+                    <center> <b style="color: rgb(51 41 134); font-size: 20px;"> {{customer.name}}</b> </center>
                 </div>
             </div>
 
@@ -197,7 +197,7 @@
 
 .name {
     position: absolute;
-    width: 266px;
+    width: 600px;
     height: 65px;
     left: 19px;
     top: 9px;
@@ -205,7 +205,7 @@
 
 .text {
     position: absolute;
-    width: 190px;
+    width: 600px;
     height: 38px;
     top: 17px;
     left: 95px;

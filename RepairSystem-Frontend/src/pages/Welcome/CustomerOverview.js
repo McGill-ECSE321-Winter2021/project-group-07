@@ -46,4 +46,24 @@ export default {
       this.error = e
     })
   },
+
+  methods: {
+    
+      removeCustomer: function(id){
+          AXIOS.delete('/customer/'.concat(id), {}, {})
+            .then(response => {
+              console.log(response)
+              for(var i = 0; i < this.customers.length; i++){
+                if(this.customers[i].id === id){
+                  this.customers.splice(i,1)
+                }
+              }
+            })
+            .catch(e => {
+              this.error = e;
+            })
+        },
+
+  }
+
 }
