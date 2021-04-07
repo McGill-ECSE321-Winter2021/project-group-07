@@ -12,22 +12,30 @@
         <div class="rightCar">
             <img src="../../assets/LogInCarRight.svg" alt="Right Car" width="500" height="383">
         </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="container">
+          <br>
+          <h1>Log In </h1>
+          <form>
+            <br>
+              <label for="email" style="color:white">Email: </label>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" v-model="customerEmail" value="" style="transform: translateX(1px); width:300px"><br>
+              <label for="password" style="color:white">Password: </label>
+              <input type="password" v-model="customerPassword" value="" style="width:300px"><br>
 
-        <div class="box">
-            <svg width="800" height="200">
-                <rect width="1200" height="200" fill-opacity="0.4" style="fill:rgb(17,27,71)" />
-            </svg>
-        </div>
-
-        <div class="textBox">
-            <form>
-                &nbsp;&nbsp;<label for="email">Email: </label>
-                <input type="text" v-model="customerEmail" value=""><br>
-                &nbsp;&nbsp;<label for="password">Password: </label>
-                <input type="password" v-model="customerPassword" value=""><br>
-
-            </form>
-           &nbsp;&nbsp; <button class = "button1" @click="logIn(customerEmail, customerPassword)">Log In</button>
+          </form>
+          <br>
+          &nbsp;&nbsp; <button class = "button1" @click="logIn(customerEmail, customerPassword)">Log In</button>
         </div>
 
         <h2>{{error}}</h2>
@@ -38,29 +46,21 @@
 <script src="./LogIn.js">
 </script>
 
-<style scoped>
+<style>
 .main {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    color: white;
+    font-weight: 600;
     height: 100%;
     width: 100%;
-    color: rgb(167, 167, 167);
-    font-weight: 600;
 }
 
-.box {
-  position: absolute;
-  top: 250px;
-  width: 800px;
-  height: 200px;
-}
-
-.textBox {
-  position: absolute;
-  top: 300px;;
-  width: 800px;
-  height: 200px;
+.container {
+  height: 260px;
+  width: 450px;
+  border-radius: 30px;
+  justify-content: center;
+  text-align:  center;
+  background-color:rgba(51, 41, 134, 0.8);
 }
 
 .leftCar {

@@ -104,10 +104,15 @@ public class MechanicService {
 	@Transactional
 	public Mechanic addTimeSlots(String oldEmail, String[] timeslotsStart, String[] timeslotsEnd) {
 		Mechanic mechanic = mechanicRepository.findByEmail(oldEmail);
-		for(TimeSlot slot: mechanic.getTimeSlots()) {
+		List<TimeSlot> slots = mechanic.getTimeSlots();
+		mechanic.setTimeSlots(new ArrayList<TimeSlot>());
+		mechanicRepository.save(mechanic);
+		for(TimeSlot slot: slots) {
 			slot.removeMechanic(mechanic);
 			if(slot.getAppointments().size() == 0 && slot.getMechanics().size() == 0) {
 				timeslotService.deleteTimeSlot(slot.getId());
+			} else {
+				timeslotRepository.save(slot);
 			}
 		}
 		String startTime = "";
@@ -120,7 +125,11 @@ public class MechanicService {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH:mm");
 			LocalDateTime start = LocalDateTime.parse(startTime, formatter);
 			LocalDateTime end = LocalDateTime.parse(endTime, formatter);
-			TimeSlot t = timeslotService.createTimeSlot(start, end);
+			int id = start.hashCode() * end.hashCode();
+			TimeSlot t = timeslotRepository.findById(id);
+			if(t == null) {
+				t = timeslotService.createTimeSlot(start, end);
+			}
 			t.addMechanic(mechanic);
 			timeslotRepository.save(t);
 			timeslotList.add(t);
@@ -131,7 +140,11 @@ public class MechanicService {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH:mm");
 		LocalDateTime start = LocalDateTime.parse(startTime, formatter);
 		LocalDateTime end = LocalDateTime.parse(endTime, formatter);
-		TimeSlot t = timeslotService.createTimeSlot(start, end);
+		int id = start.hashCode() * end.hashCode();
+		TimeSlot t = timeslotRepository.findById(id);
+		if(t == null) {
+			t = timeslotService.createTimeSlot(start, end);
+		}
 		t.addMechanic(mechanic);
 		timeslotRepository.save(t);
 		timeslotList.add(t);

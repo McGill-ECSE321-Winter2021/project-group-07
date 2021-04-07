@@ -525,7 +525,7 @@
                             <template #modal-footer="{Save, Cancel}">
 
                                 <!-- Emulate built in modal footer ok and cancel button actions -->
-                                <b-button size="sm" variant="success" @click="editMechanic(mechanic.email, editName, editPassword, editPhone, value, editMondayStart,editMondayEnd,editTuesdayStart,editTuesdayEnd,editWednesdayStart,editWednesdayEnd,editThursdayStart,editThursdayEnd,editFridayStart,editFridayEnd,editSaturdayStart,editSaturdayEnd); modalShow =!modalShow"> Save </b-button>
+                                <b-button size="sm" variant="success" @click="editMechanic(editName, editPassword, editPhone, value, editMondayStart,editMondayEnd,editTuesdayStart,editTuesdayEnd,editWednesdayStart,editWednesdayEnd,editThursdayStart,editThursdayEnd,editFridayStart,editFridayEnd,editSaturdayStart,editSaturdayEnd); modalShow =!modalShow"> Save </b-button>
                                 <b-button size="sm" variant="danger" @click="modalShow =!modalShow">Cancel</b-button>
 
                             </template>

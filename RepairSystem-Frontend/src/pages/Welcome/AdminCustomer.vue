@@ -216,7 +216,7 @@
                             >
                             <b-form-input
                                 id="startTime"
-                                type="time"
+                                type="text"
                                 v-model="startTime"
                                 name="startTime"
                                 :value="startTime"

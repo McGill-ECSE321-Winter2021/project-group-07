@@ -33,10 +33,6 @@ public class TimeSlotService {
 			throw new IllegalArgumentException("End time cannot be null");
 		}
 		int id = aStartTime.hashCode() * aEndTime.hashCode();
-		TimeSlot t = timeSlotRepository.findById(id);
-		if(t != null) {
-			return t;
-		}
 		TimeSlot timeslot = new TimeSlot(aStartTime, aEndTime, id);
 		timeSlotRepository.save(timeslot);
 		return timeslot;

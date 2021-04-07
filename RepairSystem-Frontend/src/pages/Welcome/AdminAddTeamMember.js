@@ -138,8 +138,9 @@ function MechanicDto(name, password, phone, email){
         },
         
         /** To Save the Edits in Edit Profile */
-        editMechanic : function(email, name, password, phone, services, editMondayStart,editMondayEnd,editTuesdayStart,editTuesdayEnd,editWednesdayStart,editWednesdayEnd,editThursdayStart,editThursdayEnd,editFridayStart,editFridayEnd,editSaturdayStart,editSaturdayEnd)
+        editMechanic : function(name, password, phone, services, editMondayStart,editMondayEnd,editTuesdayStart,editTuesdayEnd,editWednesdayStart,editWednesdayEnd,editThursdayStart,editThursdayEnd,editFridayStart,editFridayEnd,editSaturdayStart,editSaturdayEnd)
         {
+          var email = this.mechanic.email
           AXIOS.put('/mechanic/'.concat(email+"?name="+name+"&password="+password+"&phone="+phone),{},{})
           .then(response => {
             var request = ""
@@ -155,11 +156,11 @@ function MechanicDto(name, password, phone, email){
                       AXIOS.put("/mechanic/addTimeSlots/".concat(email + "?timeslotsStart=" + timeslotsStart + "&timeslotsEnd=" + timeslotsEnd), {},{})
                       .then(response => {
                         for(var i = 0; i < this.mechanics.length; i++){
-                        if(this.mechanics[i].id == response.data.id){
-                          this.mechanics[i] = response.data
-                          this.mechanics.push(response.data)
-                          this.mechanics.pop(response.data)
-                        }
+                          if(this.mechanics[i].id === this.mechanic.id){
+                            this.mechanics[i] = response.data
+                            this.mechanics.push(response.data)
+                            this.mechanics.pop(response.data)
+                          }
                       }
                       })
                       .catch(e => {
@@ -195,6 +196,7 @@ function MechanicDto(name, password, phone, email){
           this.editFridayEnd = row.timeSlots[4].endTimeFormat
           this.editSaturdayStart = row.timeSlots[5].startTimeFormat
           this.editSaturdayEnd = row.timeSlots[5].endTimeFormat
+          this.mechanic = row;
          
         },
         
