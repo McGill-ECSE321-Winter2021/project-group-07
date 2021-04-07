@@ -24,14 +24,14 @@
 			
             <h7>Credit</h7>
             <b-group>
-            	<b-input type="text" v-model="credit" :value="credit" readonly>
+            	<b-input type="password" v-model="credit" :value="credit" readonly>
                 </b-input>
                 <br>
             </b-group>
             
             <h7>Debit</h7>
             <b-group>
-            	<b-input type="text" v-model="debit" :value="debit" readonly>
+            	<b-input type="password" v-model="debit" :value="debit" readonly>
                 </b-input>
             </b-group>
            <br> 

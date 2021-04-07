@@ -26,11 +26,11 @@
                     Customers
                 </div>
             </router-link>
-
-        </div>
-
-        <div style="position: absolute; left: 5px; bottom: 5px; color: #D3D2E1;font-size: 20px; ">
-            <router-link to="/"><img src="../../assets/exit.png" width="30" length="20">log out </router-link>
+            <router-link :to="'/'" active-class="active" tag="button" exact class="side-btn">
+              <div class="link-container">
+                   Log Out
+               </div>
+            </router-link>
         </div>
 
     </div>

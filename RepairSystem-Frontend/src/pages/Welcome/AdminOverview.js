@@ -39,6 +39,7 @@ export default {
             id: '',
             timeslots: [],
             mechanics: [],
+            customers: [],
             cars:[],
             appointments: [],
             appointment: "",
@@ -71,6 +72,21 @@ export default {
                     AXIOS.get('/appointment').
                     then(response => {
                         this.appointments = response.data
+                        AXIOS.get('/mechanics').
+                        then(response => {
+                            this.mechanics = response.data
+                            AXIOS.get('/customer').
+                            then(response => {
+                                this.customers = response.data
+                            }).catch(e => {
+                                this.error = e
+                                console.log(e)
+                            })
+                        }).catch(e => {
+                            this.error = e
+                            console.log(e)
+                        })
+
                     }).catch(e => {
                     this.error = e
                     console.log(e)

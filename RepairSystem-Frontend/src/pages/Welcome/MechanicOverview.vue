@@ -24,7 +24,7 @@
                                 <th> Car </th>
                                 <th> Status </th>
                                 <th> Start Time</th>
-                                <th> Mechanic Email</th>
+                                <th> Customer Name</th>
                                 <th> Actions </th>
 
                             </tr>
@@ -36,7 +36,9 @@
                                 <td>{{ appointment.car.carType }}</td>
                                 <td>{{ appointment.status }}</td>
                                 <td>{{ appointment.timeSlot.startTime }}</td>
-                                <td>{{ appointment.mechanics[0].email}}</td>
+                                <td v-for="cus in customers" v-if="cus.id == appointment.customer.id">
+                                {{cus.name}}
+                                </td>
                                 <td>
 
                                     <button class="btn-edit" @click="modalShow =!modalShow; fillCredentials(appointment)"> <img  class="img-add" src="../../assets/Admin/edit.png"/>  </button>

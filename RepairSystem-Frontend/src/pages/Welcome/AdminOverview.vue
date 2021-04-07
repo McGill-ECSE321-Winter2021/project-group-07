@@ -15,10 +15,10 @@
                     <table class="table table-striped tabled-bordered mydatatable" style="width: 100">
                         <thead>
                             <tr style="text-align:center;  border-radius:30px;">
-                                <th> Customer Email </th>
+                                <th> Customer Name </th>
                                 <th> Status </th>
                                 <th> Time Slot</th>
-                                <th> Mechanic Email </th>
+                                <th> Mechanic Name </th>
                                 <th> Service </th>
                                 <th> Car </th>
                                 <th> Actions </th>
@@ -26,10 +26,13 @@
                         </thead>
                         <tbody>
                             <tr v-for="appointment in appointments" style="text-align:center">
-                                <td> {{appointment.customer.email}} </td>
+                                <td v-for="cus in customers" v-if="cus.id == appointment.customer.id">
+                                {{cus.name}}
+                                </td>
                                 <td>{{ appointment.status }}</td>
                                 <td> {{ appointment.timeSlot.startTime }}</td>
-                                <td> {{ appointment.mechanics[0].email}}</td>
+                                <td v-for="mech in mechanics" v-if="mech.id == appointment.mechanics[0].id">{{mech.name}}
+                                </td>
                                 <td>{{appointment.services[0].serviceType}}</td>
                                 <td>{{appointment.car.carType}}</td>
                                 <td>

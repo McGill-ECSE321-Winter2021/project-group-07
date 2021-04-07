@@ -7,7 +7,7 @@
                     &nbsp; &nbsp; &nbsp;
                     <b style="color: rgb(51 41 134); font-size: 30px; position: absolute; top: 25px; left: 65px"> Hello, </b>
                     <b style="color: #F3BE35; font-size: 30px; position: absolute; top: 25px; left: 150px "> {{customer.name}} </b>
-                    <p style="color: black; font-size: 20px; position: absolute; top: 55px; left: 65px;"> Have a nice day! </p>
+                    <p style="color: black; font-size: 20px; position: absolute; top: 70px; left: 85px;"> Have a nice day! </p>
                 </div>
             </div>
         </div>
@@ -26,7 +26,7 @@
                                 <th> Car </th>
                                 <th> Status </th>
                                 <th> Start Time</th>
-                                <th> Mechanic Email</th>
+                                <th> Mechanic Name</th>
                                 <th> Actions </th>
 
                             </tr>
@@ -38,7 +38,8 @@
                                 <td>{{ appointment.car.carType }}</td>
                                 <td>{{ appointment.status }}</td>
                                 <td>{{ appointment.timeSlot.startTime }}</td>
-                                <td>{{ appointment.mechanics[0].email}}</td>
+                                <td v-for="mech in mechanics" v-if="mech.id == appointment.mechanics[0].id">{{mech.name}}
+                                </td>
                                 <td> <button class="btn-remove" @click="removeApp(appointment.id)"> <img  class="img-add" src="../../assets/Admin/delete.png"/>  </button> </td>
 
                             </tr>
@@ -62,10 +63,15 @@
                 </div>
             </div>
 
-            <div class="row no-gutters">
+             <div class="row no-gutters">
                 <div class="middle">
                     <br>
                     <date-pick v-model="date" :hasInputElement="false"></date-pick>
+                </div>
+            </div>
+            <div class="row no-gutters">
+                <div class="bottom">
+                    <br> <img src="../../assets/paint job 1.jpg" width="400px" length="400px">
                 </div>
             </div>
         </div>
@@ -99,6 +105,7 @@ export default {
             customer: "",
             appointments: [],
             timeslots: [],
+            mechanics:[], 
             id: '',
             error: ""
 
@@ -116,6 +123,13 @@ export default {
                     AXIOS.get('/timeslots/').
                     then(response => {
                         this.timeslots = response.data
+                        AXIOS.get('/mechanics/').
+                        then(response => {
+                            this.mechanics = response.data
+                             }).catch(e => {
+                        this.error = e
+                        console.log(e)
+                    })
                     }).catch(e => {
                         this.error = e
                         console.log(e)

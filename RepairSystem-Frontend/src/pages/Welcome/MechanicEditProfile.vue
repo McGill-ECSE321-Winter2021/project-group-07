@@ -134,7 +134,7 @@
                 <div class="top">
                     <center><img src="../../assets/profile-default.png" width="100px" length="100px"></center>
                     <br>
-                    <center> <b style="color: rgb(51 41 134); font-size: 20px;"> {{mechanic.name}} <br> id: {{mechanic.id}} </b> </center>
+                    <center> <b style="color: rgb(51 41 134); font-size: 20px;"> {{mechanic.name}}  </b> </center>
                 </div>
             </div>
 
