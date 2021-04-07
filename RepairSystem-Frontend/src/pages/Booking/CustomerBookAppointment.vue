@@ -1,42 +1,136 @@
 <template>
-    <div id="booking-calendar" style = "position: relative; left: 20px; top: 20px;">
-          <h2>Booking an Appointment</h2>
-          <br>
-        <date-pick style = "width: 90%"
-            v-model="date"
-            :hasInputElement="false"
-            :pickTime="true"
-            :format="'YYYY-MM-DD-HH:mm'"
-            :displayFormat="'YYYY.MM.DD H:mm A'"
-        ></date-pick>
+<div class="row no-gutters">
+    <div class="col no-gutters">
+        <div class="row no-gutters">
+            <div class="left-top">
+                <div class="rcorners">
+                    <date-pick 
+                    style = "width: 90%;height: 100%; transform:translate(30px,60px) "
+                    v-model="date"
+                    :hasInputElement="false"
+                    :pickTime="true"
+                    :format="'YYYY-MM-DD-HH:mm'"
+                    :displayFormat="'YYYY.MM.DD H:mm A'"
+                    >
+                    </date-pick>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        <br>
 
-        <div class = "row" style = "position: relative; width: 100vh; left: 30px">
-            <div class = "col">
-        	<form>
-        	    <label class="typo__label"> Service </label>
-            	<multiselect v-model="service" :state="serviceState" :options="availableServices" :multiple="false" :close-on-select="true" :clear-on-select="false" :preserve-search="true" placeholder="Pick a Service" label="serviceType" track-by="serviceType" :preselect-first="true">
-                	<template slot="selection" slot-scope="{ values, search, isOpen }">
-                    	<span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen">{{ values.length }} options selected</span>
-                    </template>
-                </multiselect>
-        	</form>
+        <div class="col no-gutters">
+            <div class="rightside">
+                <div class="row no-gutters">
+                    <div class="top">
+                        <b style="color: rgb(51 41 134); font-size: 30px; position: absolute; top: 25px; left: 65px"> Ready to book your appointment? </b>
+                    </div>
+                </div>
 
-            <form>
+                <div class="row no-gutters">
+                    <div class="middle">
+                        <div class = "col">
+                            <form>
+                                <label class="typo__label"> Service </label>
+                                <multiselect v-model="service" :state="serviceState" :options="availableServices" :multiple="false" :close-on-select="true" :clear-on-select="false" :preserve-search="true" placeholder="Pick a Service" label="serviceType" track-by="serviceType" :preselect-first="true">
+                                    <template slot="selection" slot-scope="{ values, search, isOpen }">
+                                        <span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen">{{ values.length }} options selected</span>
+                                    </template>
+                                </multiselect>
+                            </form>
+                            <form>
                             <br>
-        	    <label class="typo__label"> Car </label>
-            	<multiselect v-model="car" :state="carState" :options="availableCars" :multiple="false" :close-on-select="true" :clear-on-select="false" :preserve-search="true" placeholder="Pick a Car" label="carType" track-by="carType" :preselect-first="true">
-                	<template slot="selection" slot-scope="{ values, search, isOpen }">
-                    	<span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen">{{ values.length }} options selected</span>
-                    </template>
-                </multiselect>
-        	</form>
-        	        	<form>
-            	<br> <label> Note </label>
-            	<input type="text" v-model="note" value="">
-        	</form>
+                                <label class="typo__label"> Car  </label> <b-button v-b-modal.modal-prevent-closing class="btn-primary1"> <img class="img-add" src='../../assets/Admin/plus.png'/> </b-button> 
+                                <multiselect v-model="car" :state="carState" :options="availableCars" :multiple="false" :close-on-select="true" :clear-on-select="false" :preserve-search="true" placeholder="Pick a Car" label="carType" track-by="carType" :preselect-first="true">
+                                    <template slot="selection" slot-scope="{ values, search, isOpen }">
+                                        <span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen">{{ values.length }} options selected</span>
+                                    </template>
+                                </multiselect>
+                              
+                                <b-modal
+                                id="modal-prevent-closing"
+                                ref="modal"
+                                title="Add Car"
+                                @show="resetModal"
+                                @hidden="resetModal"
+                                @ok="createCar(carType, winterTires, numOfKm)"
+                                >
+                                <b-form ref="form" @submit.stop.prevent="handleSubmit">
 
+                                    <b-form-group
+                                    label="Car Type"
+                                    label-for="name-input"
+                                    invalid-feedback="Car Type is required"
+                                    :state="CarTypeState"
+                                    >
+                                    <b-form-input
+                                        id="CarType-input"
+                                        v-model="carType"
+                                        :state="CarTypeState"
+                                        required
+                                    ></b-form-input>
+                                    </b-form-group>
+
+                                <b-form-group
+                                    label="Winter Tires"
+                                    label-for="winterTires-input"
+                                    invalid-feedback="State of winter tires is required"
+                                    :state="winterTiresState"
+                                    >
+                                    <b-form-input
+                                        id="winterTires-input"
+                                        v-model="winterTires"
+                                        :state="winterTiresState"
+                                        required
+                                    ></b-form-input>
+                                    </b-form-group> 
+
+                                    <b-form-group
+                                    label="Number of Kilometers"
+                                    label-for="numOfKm-input"
+                                    invalid-feedback="Number of Kilometers is required"
+                                    :state="numOfKmState"
+                                    >
+                                    <b-form-input
+                                        id="numOfKm-input"
+                                        v-model="numOfKm"
+                                        :state="numOfKmState"
+                                        required
+                                    ></b-form-input>
+                                    </b-form-group>
+
+                                </b-form>
+                                </b-modal>
+                            </form>
+                            <br>
+                            <form>
+                                <label class="typo__label"> Mechanic </label>
+                                <multiselect v-model="mechanic" :state="mechanicState" :options="availableMechanics" :multiple="false" :close-on-select="true" :clear-on-select="false" :preserve-search="true" placeholder="Pick a Mechanic" label="name" track-by="name" :preselect-first="true">
+                                    <template slot="selection" slot-scope="{ values, search, isOpen }">
+                                        <span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen">{{ values.length }} options selected</span>
+                                    </template>
+                                </multiselect>
+                            </form>
+                            <br>
+                            <form>
+                             <label  class="typo__label"> Note </label>
+                             <br>
+                                <input type="text" v-model="note" value="" style="width:380px, border-color:gray">
+                            </form>
+                            
+                             <br> 
+                            <button class="button1" @click="createAppointment(date, value, service, note, car)">
+                                Book Appointment
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>    
+        </div>
+    </div>
+                    
+
+          <!-- 
                     <br> 
         <button class="button1" @click="createAppointment(date, value, service, note, car)">
         	Book Appointment
@@ -45,14 +139,7 @@
             </div>
             <div class = "col">
                 <div style = "width: 20 px">
-        	<form>
-        	    <label class="typo__label"> Mechanic </label>
-            	<multiselect v-model="mechanic" :state="mechanicState" :options="availableMechanics" :multiple="false" :close-on-select="true" :clear-on-select="false" :preserve-search="true" placeholder="Pick a Mechanic" label="name" track-by="name" :preselect-first="true">
-                	<template slot="selection" slot-scope="{ values, search, isOpen }">
-                    	<span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen">{{ values.length }} options selected</span>
-                    </template>
-                </multiselect>
-        	</form>
+        	
             <form>
                 <br>
                 <br>
@@ -112,12 +199,27 @@
 
             </b-form>
             </b-modal>
-            </form>
+            </form>-->
 
-			</div>
+	
+   <!-- <div id="booking-calendar" style = "position: relative; left: 20px; top: 20px;">
+          <br>
+        <date-pick style = "width: 90%"
+            v-model="date"
+            :hasInputElement="false"
+            :pickTime="true"
+            :format="'YYYY-MM-DD-HH:mm'"
+            :displayFormat="'YYYY.MM.DD H:mm A'"
+        ></date-pick>
+
+        <br>
+
+
+        <div class = "row" style = "position: relative; width: 100vh; left: 30px">
+         
             </div>
         </div>	
-   </div>
+   </div>-->
 
 </template>
 
@@ -273,6 +375,39 @@ export default {
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 
 <style scoped>
+.left-top {
+
+    position: absolute;
+    content: "";
+    top: 100px;
+    left: 70px;
+    height:300px;
+}
+
+
+.rcorners {
+    border-radius: 25px;
+    background: white;
+    width: 700px;
+    height: 400px;
+}
+.rightside {
+    height: 98.5vh;
+    width: 70%;
+    position: absolute;
+    content: "";
+    right: 0px;
+    background: white
+}
+.middle {
+    height: 30%;
+    width: 90%;
+    position: absolute;
+    content: "";
+    left: 20px;
+    top: 200px;
+}
+
 .messages {
     display: flex;
     justify-content: center;
@@ -293,22 +428,54 @@ export default {
 }
 
 .button1 {
-  background: rgb(51 41 134);
   width: 200px;
-  height: 30px;
-  color: white;
+  height: 50px;
+  color: black;
   border-radius: 8px;
+  border-color: transparent;
+  background: rgb(244,206,122);
+  background: linear-gradient(325deg, rgba(244,206,122,1) 2%, rgba(167,148,218,1) 84%);
+}
+
+.top {
+    height: 50%;
+    width: 100%;
+    position: absolute;
+    content: "";
+    top: 20px;
+}
+
+.Rectangle
+	{
+		height:60px;
+		width:60px;
+		border-radius: 20px;
+		background-color: #E6E6FA
+		
+	}
+.rightside {
+    height: 98.5vh;
+    width: 70%;
+    position: absolute;
+    content: "";
+    right: 0px;
+    background: white
 }
 
 .btn-primary1{
     border-radius: 10px;
     margin-right:20px;  
-    border-color: rgb(51 41 134);
-border-width: 3px;
-color: black;
+    border-color: #F3BE35;
+    border-width: 3px;
+    color: black;
     transform: translateY(-5px);
-    background: #D3D2E1;
+    background: #F3BE35;
     position:relative;
-    top: 20px;
+    height:20px;
+    width:15px;
+}
+.img-add{
+    max-height:17px;
+    transform: translate(-8px, -12px);
 }
 </style>

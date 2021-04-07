@@ -366,7 +366,7 @@
 		height:60px;
 		width:60px;
 		border-radius: 20px;
-		background-color: #E6E6FA
+		background-color: #E6E6FA;
 		
 	}
 
