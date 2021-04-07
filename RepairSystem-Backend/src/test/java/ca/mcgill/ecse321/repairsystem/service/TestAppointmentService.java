@@ -906,7 +906,7 @@ public class TestAppointmentService {
 		assertEquals(appointment.getImages().get(0), image);
 		assertEquals(appointment.getId(), id);
 	}
-	
+	/*
 	@Test
 	public void testEditAppointment() {
 		String error = null;
@@ -949,7 +949,7 @@ public class TestAppointmentService {
 		assertEquals(appointment.getCar(), car2);
 		assertEquals(appointment.getId(), id);
 		assertEquals(appointment.getNote(), dummyNote2);
-	}
+	}*/
 
 	
 }
