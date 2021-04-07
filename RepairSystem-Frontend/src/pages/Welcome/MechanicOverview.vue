@@ -59,7 +59,7 @@
                             <template #modal-footer="{Save, Cancel}">
 
                                 <!-- Emulate built in modal footer ok and cancel button actions -->
-                                <b-button size="sm" variant="success" @click="this.appointment = appointment; editAppointment(specificStatus); modalShow =!modalShow"> Save </b-button>
+                                <b-button size="sm" variant="success" @click="editAppointment(specificStatus); modalShow =!modalShow"> Save </b-button>
                                 <b-button size="sm" variant="danger" @click="modalShow =!modalShow">Cancel</b-button>
 
                             </template>
@@ -162,7 +162,14 @@ export default {
                 this.mechanic = response.data
                 AXIOS.get('/appointment/').
                 then(response => {
-                    this.appointments = response.data
+                    for(var i = 0; i < response.data.length; i++){
+                        console.log(response.data[i].mechanics[0].id)
+                        console.log(id)
+                        if(response.data[i].mechanics[0].id.toString() === id){
+                            console.log(response.data[i])
+                            this.appointments.push(response.data[i])
+                        }
+                    }
                     AXIOS.get('/timeslots/').
                     then(response => {
                         this.timeslots = response.data
@@ -191,11 +198,12 @@ export default {
 
     methods: {
         editAppointment: function(status){
-            console.log("test")
+            console.log(this.appointment)
+            console.log(status)
             AXIOS.put('/appointment/editAppointment/'.concat(this.appointment.id + "?status=" + status.name)).
                 then(response => {
                     for(var i = 0; i < this.appointments.length; i++){
-                        if(this.appointments[i].id === appointment.id){
+                        if(this.appointments[i].id === this.appointment.id){
                             this.appointments[i] = response.data
                             //work around
                             this.appointments.push(response.data)
@@ -233,6 +241,7 @@ export default {
                         this.mechOptions = this.mechanics
                         this.carOptions = this.cars
                         this.specificStatus = this.status
+                        this.appointment = appointment
                     })
                     .catch(e => {
                     this.error = e
@@ -262,7 +271,7 @@ export default {
 
 }
 </script>
-
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <style scoped>
 .overview {
     display: flex;

@@ -188,21 +188,21 @@
                             </b-form-group>
 
                             <label class="typo__label"> Car </label>
-                            <multiselect v-model="specificCar" :state="specificCarState" :options="carNames" :multiple="false" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Pick some" label="carType" track-by="carType" :preselect-first="true"> >
+                            <multiselect v-model="specificCar" :state="specificCarState" :options="carNames" :multiple="false" :close-on-select="true" :clear-on-select="false" :preserve-search="true" placeholder="Pick some" label="carType" track-by="carType" :preselect-first="true"> >
                                 <template slot="selection" slot-scope="{ values, search, isOpen }">
                                     <span class="multiselect__single" v-if="values .length &amp;&amp; !isOpen">{{ values.length }} options selected</span>
                                 </template>
                             </multiselect>
                             <br>
                              <label class="typo__label"> Mechanic </label>
-                            <multiselect v-model="specificMech" :state="specificMechState" :options="mechNames" :multiple="false" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Pick some" label="name" track-by="name" :preselect-first="true"> >
+                            <multiselect v-model="specificMech" :state="specificMechState" :options="mechNames" :multiple="false" :close-on-select="true" :clear-on-select="false" :preserve-search="true" placeholder="Pick some" label="name" track-by="name" :preselect-first="true"> >
                                 <template slot="selection" slot-scope="{ values, search, isOpen }">
                                     <span class="multiselect__single" v-if="values .length &amp;&amp; !isOpen">{{ values.length }} options selected</span>
                                 </template>
                             </multiselect>
                             <br>
                             <label class="typo__label"> Service </label>
-                            <multiselect v-model="specificService" :state="specificServiceState" :options="serviceNames" :multiple="false" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Pick some" label="serviceType" track-by="serviceType" :preselect-first="true"> >
+                            <multiselect v-model="specificService" :state="specificServiceState" :options="serviceNames" :multiple="false" :close-on-select="true" :clear-on-select="false" :preserve-search="true" placeholder="Pick some" label="serviceType" track-by="serviceType" :preselect-first="true"> >
                                 <template slot="selection" slot-scope="{ values, search, isOpen }">
                                     <span class="multiselect__single" v-if="values .length &amp;&amp; !isOpen">{{ values.length }} options selected</span>
                                 </template>

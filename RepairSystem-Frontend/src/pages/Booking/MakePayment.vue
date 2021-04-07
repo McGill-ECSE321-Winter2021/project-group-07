@@ -1,6 +1,6 @@
 <template>
     <div id="payment" style = "position: relative; left: 20px; top: 20px;">
-          <h2>Booking an Appointment</h2>
+          <h2>Make a Payment</h2>
           <br>
 
         <div class = "row" style = "position: relative; width: 100vh; left: 30px">
