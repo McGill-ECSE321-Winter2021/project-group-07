@@ -43,30 +43,60 @@ public class CusomterProfile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.customer_profile);
-        final TextView tv_name = (TextView) findViewById(R.id.cNameText);
-        final TextView tv_password = (TextView) findViewById(R.id.cPasswordText);
-        final TextView tv_phone = (TextView) findViewById(R.id.cPhoneText);
-        final TextView tv_email = (TextView) findViewById(R.id.cEmailText);
-        final TextView tv_address = (TextView) findViewById(R.id.cAddressText);
-        final TextView tv_credit = (TextView) findViewById(R.id.cCreditText);
-        final TextView tv_debit = (TextView) findViewById(R.id.cDebitText);
 
-        //TODO: get current customer info
-        tv_name.setText(""/*get current customer name*/);
-        tv_password.setText(""/*get current customer password*/);
-        tv_phone.setText(""/*get current customer phone*/);
-        tv_email.setText(""/*get current customer email*/);
-        tv_address.setText(""/*get current customer address*/);
-        tv_credit.setText(""/*get current customer credit*/);
-        tv_debit.setText(""/*get current customer debit*/);
+        viewCrendentials(findViewById(R.id.cNameText));
+        updateProfile(findViewById(R.id.cNameText));
     }
 
     public void returnToMain(View v) {
         finish();
     }
 
+    public void viewCrendentials(View v)
+    {
+        TextView tv_name = (TextView) findViewById(R.id.cNameText);
+        final TextView tv_password = (TextView) findViewById(R.id.cPasswordText);
+        final TextView tv_phone = (TextView) findViewById(R.id.cPhoneText);
+        final TextView tv_email = (TextView) findViewById(R.id.cEmailText);
+        final TextView tv_address = (TextView) findViewById(R.id.cAddressText);
+        final TextView tv_credit = (TextView) findViewById(R.id.cCreditText);
+        final TextView tv_debit = (TextView) findViewById(R.id.cDebitText);
+
+        RequestParams requestParams = new RequestParams();
+        String request = "";
+        String customerId = getIntent().getStringExtra("CUSTOMER_ID");
+        request = request.concat(customerId);
+
+        HttpUtils.get("customer/" +request, requestParams, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                try {
+                    tv_name.setText(response.getString("name"));
+                    tv_password.setText(response.getString("password"));
+                    tv_phone.setText(response.getString("phone"));
+                    tv_email.setText(response.getString("email"));
+                    tv_address.setText(response.getString("address"));
+                    tv_credit.setText(response.getString("creditHash"));
+                    tv_debit.setText(response.getString("debitHash"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                try {
+                    error += errorResponse.get(" email and password ").toString();
+                } catch (JSONException e) {
+                    error += e.getMessage();
+                }
+
+            }
+        });
+
+    }
     public void updateProfile(View v){
         error = "";
+        Button toUpdate = findViewById(R.id.profileUpdateButton);
         final TextView tv_name = (TextView) findViewById(R.id.cNameText);
         final TextView tv_password = (TextView) findViewById(R.id.cPasswordText);
         final TextView tv_phone = (TextView) findViewById(R.id.cPhoneText);
@@ -75,15 +105,51 @@ public class CusomterProfile extends AppCompatActivity {
         final TextView tv_credit = (TextView) findViewById(R.id.cCreditText);
         final TextView tv_debit = (TextView) findViewById(R.id.cDebitText);
 
-        //TODO: get current customer info
-        /*print values for debugging*/
-        System.out.println("name: " + ""/*get current customer name*/);
-        System.out.println("password: " +""/*get current customer name*/);
-        System.out.println("phone: "  +""/*get current customer phone*/);
-        System.out.println("email: "  +""/*get current customer email*/);
-        System.out.println("address: "  +""/*get current customer address*/);
-        System.out.println("credit: "  +""/*get current customer credit*/);
-        System.out.println("debit: "  +""/*get current customer debit*/);
+        toUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String request = "";
+                request = request.concat(tv_email.getText().toString());
+                request = request.concat("?newName="+tv_name.getText().toString());
+                request = request.concat("&newPassword="+tv_password.getText().toString());
+                request = request.concat("&newPhone="+tv_phone.getText().toString());
+                request = request.concat("&newCredit="+tv_credit.getText().toString());
+                request = request.concat("&newDebit="+tv_debit.getText().toString());
+                request = request.concat("&newAddress="+tv_address.getText().toString());
+
+                HttpUtils.put("customer/" + request, new RequestParams(), new JsonHttpResponseHandler(){
+
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response)
+                    {
+                        try {
+                            tv_name.setText(response.getString("name"));
+                            tv_password.setText(response.getString("password"));
+                            tv_phone.setText(response.getString("phone"));
+                            tv_email.setText(response.getString("email"));
+                            tv_address.setText(response.getString("address"));
+                            tv_credit.setText(response.getString("creditHash"));
+                            tv_debit.setText(response.getString("debitHash"));
+                            finish();
+                            startActivity(getIntent());
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                        try {
+                            error += errorResponse.get("").toString();
+                        } catch (JSONException e) {
+                            error += e.getMessage();
+                        }
+                    }
+                });
+            }
+        });
+
+
+
 
     }
 
