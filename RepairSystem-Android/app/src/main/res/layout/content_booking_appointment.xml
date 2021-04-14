@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+<LinearLayout
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical">
+
+<TextView
+    android:id="@+id/textView4"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text=""
+    android:translationY="30dp"
+    android:visibility="gone" />
+
+<EditText
+    android:id="@+id/selectMech_name"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="@string/selectMech_hint"
+    android:translationX="15px" />
+
+<Button
+    android:id="@+id/button3"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="end"
+    android:onClick="addMechanic"
+    android:text="@string/selectMech_button" />
+</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
