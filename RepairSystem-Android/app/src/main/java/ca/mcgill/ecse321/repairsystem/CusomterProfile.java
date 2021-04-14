@@ -115,6 +115,7 @@ public class CusomterProfile extends AppCompatActivity {
                 request = request.concat("&newPhone="+tv_phone.getText().toString());
                 request = request.concat("&newCredit="+tv_credit.getText().toString());
                 request = request.concat("&newDebit="+tv_debit.getText().toString());
+                request = request.concat("&newAddress="+tv_address.getText().toString());
 
                 HttpUtils.put("customer/" + request, new RequestParams(), new JsonHttpResponseHandler(){
 
@@ -129,6 +130,8 @@ public class CusomterProfile extends AppCompatActivity {
                             tv_address.setText(response.getString("address"));
                             tv_credit.setText(response.getString("creditHash"));
                             tv_debit.setText(response.getString("debitHash"));
+                            finish();
+                            startActivity(getIntent());
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
