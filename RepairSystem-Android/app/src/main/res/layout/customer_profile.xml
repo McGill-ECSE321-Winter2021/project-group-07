@@ -10,7 +10,7 @@
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="655dp"
+        android:layout_height="675dp"
         app:layout_constraintBottom_toTopOf="@+id/toolbar4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -18,6 +18,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="675dp"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -169,14 +170,11 @@
                 android:onClick="updateProfile"
                 android:text="Update Profile" />
 
-            <Button
-                android:id="@+id/returnToMainButton"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/black"
-                android:gravity="center"
-                android:onClick="returnToMain"
-                android:text="Return to main" />
+                android:layout_marginTop="10dp"
+                android:textAlignment="center" />
         </LinearLayout>
     </ScrollView>
 
@@ -192,11 +190,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"/>
 
     <Button
         android:id="@+id/payment"
-        android:layout_width="92dp"
+        android:layout_width="87dp"
         android:layout_height="75dp"
         android:backgroundTint="@color/purple_500"
         android:text="Pay"
@@ -208,7 +206,7 @@
 
     <Button
         android:id="@+id/bookAppointment"
-        android:layout_width="92dp"
+        android:layout_width="87dp"
         android:layout_height="75dp"
         android:backgroundTint="@color/purple_500"
         android:onClick="toBook"
@@ -221,11 +219,12 @@
 
     <Button
         android:id="@+id/editProfile"
-        android:layout_width="95dp"
+        android:layout_width="87dp"
         android:layout_height="75dp"
-        android:backgroundTint="@color/purple_500"
+        android:backgroundTint="@color/white"
         android:onClick="toEditProfile"
         android:text="Profile"
+        android:textColor="#4D00EA"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar4"
         app:layout_constraintEnd_toStartOf="@+id/bookAppointment"
         app:layout_constraintStart_toStartOf="@+id/toolbar4"
@@ -233,12 +232,12 @@
 
     <Button
         android:id="@+id/home"
-        android:layout_width="92dp"
+        android:layout_width="87dp"
         android:layout_height="75dp"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="@color/purple_500"
         android:onClick="toEditProfile"
         android:text="Home"
-        android:textColor="#4D00EA"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar4"
         app:layout_constraintEnd_toStartOf="@+id/payment"
         app:layout_constraintStart_toEndOf="@+id/bookAppointment"
@@ -247,7 +246,7 @@
 
     <Button
         android:id="@+id/logout"
-        android:layout_width="95dp"
+        android:layout_width="87dp"
         android:layout_height="75dp"
         android:backgroundTint="@color/purple_500"
         android:onClick="bye"

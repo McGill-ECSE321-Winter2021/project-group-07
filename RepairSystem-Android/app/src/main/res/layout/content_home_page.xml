@@ -9,7 +9,7 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_height="655dp"
+        android:layout_height="670dp"
         android:layout_width="match_parent"
         android:gravity="top"
         android:orientation="vertical"
@@ -48,7 +48,7 @@
 
     <Button
         android:id="@+id/payment"
-        android:layout_width="92dp"
+        android:layout_width="87dp"
         android:layout_height="75dp"
         android:backgroundTint="@color/purple_500"
         android:text="Pay"
@@ -60,7 +60,7 @@
 
     <Button
         android:id="@+id/bookAppointment"
-        android:layout_width="92dp"
+        android:layout_width="87dp"
         android:layout_height="75dp"
         android:backgroundTint="@color/purple_500"
         android:onClick="toBook"
@@ -73,7 +73,7 @@
 
     <Button
         android:id="@+id/editProfile"
-        android:layout_width="95dp"
+        android:layout_width="87dp"
         android:layout_height="75dp"
         android:backgroundTint="@color/purple_500"
         android:onClick="toEditProfile"
@@ -85,7 +85,7 @@
 
     <Button
         android:id="@+id/home"
-        android:layout_width="92dp"
+        android:layout_width="87dp"
         android:layout_height="75dp"
         android:backgroundTint="@color/white"
         android:onClick="toEditProfile"
@@ -99,7 +99,7 @@
 
     <Button
         android:id="@+id/logout"
-        android:layout_width="95dp"
+        android:layout_width="87dp"
         android:layout_height="75dp"
         android:backgroundTint="@color/purple_500"
         android:onClick="bye"
