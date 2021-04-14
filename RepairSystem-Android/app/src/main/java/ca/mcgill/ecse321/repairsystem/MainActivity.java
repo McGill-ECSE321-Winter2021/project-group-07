@@ -44,7 +44,8 @@ public class MainActivity extends AppCompatActivity {
         });
         //refreshErrorMessage();
         goLogIn();
-        goSignUp();
+        goSignUp( findViewById(R.id.startSignUp));
+        createServices();
 
     }
 
@@ -70,19 +71,10 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-   /* private void refreshErrorMessage() {
-        // set the error message
-        TextView tvError = findViewById(R.id.error);
-        tvError.setText(error);
-
-        if (error == null || error.length() == 0) {
-            tvError.setVisibility(View.GONE);
-        } else {
-            tvError.setVisibility(View.VISIBLE);
-        }
-    }*/
-
-   public void goLogIn(){
+    /**
+     * Redirects to the logIn page
+     */
+    public void goLogIn(){
         Button toLogIn = findViewById(R.id.startLogIn);
 
         //handle event list
@@ -94,7 +86,10 @@ public class MainActivity extends AppCompatActivity {
        });
     }
 
-   public void goSignUp(){
+    /**
+     * Redirects to the Sign Up page
+     */
+   public void goSignUp(View v){
        Button toSignUp = findViewById(R.id.startSignUp);
        //handle event list
        toSignUp.setOnClickListener(new View.OnClickListener(){
@@ -105,65 +100,51 @@ public class MainActivity extends AppCompatActivity {
        });
     }
 
-  /*  public void logIn(View v) {
-        error = "";
-        final EditText email = (EditText) findViewById(R.id.email);
-        final EditText password = (EditText) findViewById(R.id.password);
-        RequestParams requestParams = new RequestParams();
-        requestParams.put("password", password.getText().toString());
+    /**
+     * During boot up, the system will create the mechanics
+     */
 
-        HttpUtils.get("customer/login/" + email.getText().toString(), requestParams, new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                refreshErrorMessage();
-                //change page once logged
-            }
+    public void createServices() {
+        String request = "";
+        request = request.concat("CarRepair");
+        request = request.concat("50");
+        HttpUtils.post("services/" + request, new RequestParams(), new JsonHttpResponseHandler()
+        {
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 try {
-                    error += errorResponse.get(" email and password ").toString();
+                    error += errorResponse.get("").toString();
                 } catch (JSONException e) {
                     error += e.getMessage();
                 }
-                refreshErrorMessage();
             }
         });
+
+     /*   for (int i = 0; i < services.length; i++) {
+            String request = "";
+            request = request.concat(services[i]);
+            request = request.concat("?price=" + prices[i]);
+            HttpUtils.post("services/" + request, new RequestParams(), new JsonHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                    try {
+                        JSONObject serverResp = new JSONObject(response.toString());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                    try {
+                        error += errorResponse.get("").toString();
+                    } catch (JSONException e) {
+                        error += e.getMessage();
+                    }
+                }
+            });
+        }*/
     }
 
-    public void signUp(View v) {
-        error = "";
-        final EditText email = (EditText) findViewById(R.id.new_email);
-        final EditText password = (EditText) findViewById(R.id.new_password);
-        final EditText name = (EditText) findViewById(R.id.new_name);
-        final EditText phone = (EditText) findViewById(R.id.new_phone);
-        final EditText address = (EditText) findViewById(R.id.new_address);
-        final EditText credit = (EditText) findViewById(R.id.credit);
-        final EditText debit = (EditText) findViewById(R.id.debit);
 
-        RequestParams requestParams = new RequestParams();
-        requestParams.put("name", name.getText().toString());
-        requestParams.put("password", password.getText().toString());
-        requestParams.put("phone", phone.getText().toString());
-        requestParams.put("email", email.getText().toString());
-        requestParams.put("credit", credit.getText().toString());
-        requestParams.put("debit", debit.getText().toString());
-        requestParams.put("address", address.getText().toString());
-
-        HttpUtils.post("customer/" + name.getText().toString(), requestParams, new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                refreshErrorMessage();
-               setContentView(R.layout.login_page);
-            }
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                try {
-                    error += errorResponse.get(" email and password ").toString();
-                } catch (JSONException e) {
-                    error += e.getMessage();
-                }
-                refreshErrorMessage();
-            }
-        });
-    }*/
 }

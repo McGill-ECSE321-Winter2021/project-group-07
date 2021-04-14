@@ -42,7 +42,10 @@ public class homePage extends AppCompatActivity {
         toBook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(homePage.this, BookingAppointment.class));
+                String customerId = getIntent().getStringExtra("customerId");
+                Intent intent = new Intent(homePage.this, BookingAppointment.class);
+                intent.putExtra("CUSTOMER_ID", customerId);
+                startActivity(intent);
             }
         });
     }
