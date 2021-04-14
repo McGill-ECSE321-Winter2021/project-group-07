@@ -9,7 +9,7 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_height="540dp"
+        android:layout_height="600dp"
         android:layout_width="match_parent"
         android:gravity="top"
         android:orientation="vertical"
@@ -37,6 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="@color/purple_500"
+        android:backgroundTint="@color/purple_500"
         android:gravity="bottom"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
@@ -47,56 +48,65 @@
 
     <Button
         android:id="@+id/payment"
-        android:layout_width="103dp"
-        android:layout_height="70dp"
-        android:background="@color/purple_500"
+        android:layout_width="82dp"
+        android:layout_height="75dp"
+        android:backgroundTint="@color/purple_500"
         android:text="Pay"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar4"
         app:layout_constraintEnd_toStartOf="@+id/logout"
-        app:layout_constraintStart_toEndOf="@+id/bookAppointment"
+        app:layout_constraintStart_toEndOf="@+id/home"
         app:layout_constraintTop_toTopOf="@+id/toolbar4"
-        app:strokeColor="#FFFFFF"
-        app:strokeWidth="1dp" />
+        app:strokeColor="#FFFFFF" />
 
     <Button
         android:id="@+id/bookAppointment"
-        android:layout_width="103dp"
-        android:layout_height="70dp"
-        android:background="@color/purple_500"
-        android:text="Book"
+        android:layout_width="82dp"
+        android:layout_height="75dp"
+        android:backgroundTint="@color/purple_500"
         android:onClick="toBook"
+        android:text="Book"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar4"
-        app:layout_constraintEnd_toStartOf="@+id/payment"
+        app:layout_constraintEnd_toStartOf="@+id/home"
         app:layout_constraintStart_toEndOf="@+id/editProfile"
         app:layout_constraintTop_toTopOf="@+id/toolbar4"
-        app:strokeColor="#FFFFFF"
-        app:strokeWidth="1dp" />
+        app:strokeColor="#FFFFFF" />
 
     <Button
         android:id="@+id/editProfile"
-        android:layout_width="103dp"
-        android:layout_height="70dp"
-        android:background="@color/purple_500"
-        android:text="Profile"
+        android:layout_width="82dp"
+        android:layout_height="75dp"
+        android:backgroundTint="@color/purple_500"
         android:onClick="toEditProfile"
+        android:text="Profile"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar4"
         app:layout_constraintEnd_toStartOf="@+id/bookAppointment"
         app:layout_constraintStart_toStartOf="@+id/toolbar4"
+        app:layout_constraintTop_toTopOf="@+id/toolbar4" />
+
+    <Button
+        android:id="@+id/home"
+        android:layout_width="82dp"
+        android:layout_height="75dp"
+        android:backgroundTint="@color/white"
+        android:onClick="toEditProfile"
+        android:text="Home"
+        android:textColor="#4D00EA"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar4"
+        app:layout_constraintEnd_toStartOf="@+id/payment"
+        app:layout_constraintStart_toEndOf="@+id/bookAppointment"
         app:layout_constraintTop_toTopOf="@+id/toolbar4"
-        app:strokeColor="#FFFFFF"
-        app:strokeWidth="1dp" />
+        app:strokeColor="#FFFFFF" />
 
     <Button
         android:id="@+id/logout"
-        android:layout_width="103dp"
-        android:layout_height="70dp"
-        android:background="@color/purple_500"
+        android:layout_width="82dp"
+        android:layout_height="75dp"
+        android:backgroundTint="@color/purple_500"
+        android:onClick="bye"
         android:text="logout"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar4"
-        android:onClick="bye"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/payment"
         app:layout_constraintTop_toTopOf="@+id/toolbar4"
-        app:strokeColor="#FFFFFF"
-        app:strokeWidth="1dp" />
+        app:strokeColor="#FFFFFF" />
 </androidx.constraintlayout.widget.ConstraintLayout>
