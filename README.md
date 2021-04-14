@@ -55,6 +55,10 @@ have access and book a variety of services (towing, oil change, tire changes, re
  |Catherine Van Gheluwe|   Implementation of Web Frontend    |        35          |
  
   ## Sprint 4 
+- [Project Report #4](https://github.com/McGill-ECSE321-Winter2021/project-group-07/wiki/Project-Report-(Sprint-4))
+- [User Documentation](https://github.com/McGill-ECSE321-Winter2021/project-group-07/wiki/User-Documentation)
+
+
 
   ### Member Roles & Time Spent
  | Team Member | Roles / Tasks | Time Spent (Hours)|
