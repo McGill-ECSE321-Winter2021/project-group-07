@@ -73,7 +73,13 @@ public class LogIn extends AppCompatActivity {
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         refreshErrorMessage();
                         //change page once logged in
-                        startActivity(new Intent(LogIn.this, homePage.class));
+                        Intent intent = new Intent(LogIn.this, homePage.class);
+                        try {
+                            intent.putExtra("customerId", response.getString("id"));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        startActivity(intent);
                     }
                     @Override
                     public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
