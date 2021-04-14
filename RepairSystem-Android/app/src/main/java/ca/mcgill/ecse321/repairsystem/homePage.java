@@ -1,5 +1,6 @@
 package ca.mcgill.ecse321.repairsystem;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -9,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
+import android.widget.Button;
 
 public class homePage extends AppCompatActivity {
 
@@ -25,6 +27,45 @@ public class homePage extends AppCompatActivity {
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+            }
+        });
+
+        toBook(findViewById(R.id.bookAppointment));
+        toEditProfile(findViewById(R.id.editProfile));
+        bye(findViewById(R.id.bye));
+    }
+
+    public void toBook(View v)
+    {
+        Button toBook = findViewById(R.id.bookAppointment);
+
+        toBook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(homePage.this, BookingAppointment.class));
+            }
+        });
+    }
+
+    public void toEditProfile(View v)
+    {
+        Button toEdit = findViewById(R.id.editProfile);
+        toEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(homePage.this, CusomterProfile.class));
+            }
+        });
+    }
+
+    public void bye(View v)
+    {
+        Button toLogOut = findViewById(R.id.bye);
+        toLogOut.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v)
+            {
+                startActivity(new Intent(homePage.this, MainActivity.class));
             }
         });
     }
