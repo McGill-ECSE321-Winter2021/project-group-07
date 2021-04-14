@@ -29,6 +29,10 @@ public class homePage extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        toBook(findViewById(R.id.bookAppointment));
+        toEditProfile(findViewById(R.id.editProfile));
+        bye(findViewById(R.id.bye));
     }
 
     public void toBook(View v)
@@ -38,7 +42,30 @@ public class homePage extends AppCompatActivity {
         toBook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(homePage.this, homePage.class));
+                startActivity(new Intent(homePage.this, BookingAppointment.class));
+            }
+        });
+    }
+
+    public void toEditProfile(View v)
+    {
+        Button toEdit = findViewById(R.id.editProfile);
+        toEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(homePage.this, CusomterProfile.class));
+            }
+        });
+    }
+
+    public void bye(View v)
+    {
+        Button toLogOut = findViewById(R.id.bye);
+        toLogOut.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v)
+            {
+                startActivity(new Intent(homePage.this, MainActivity.class));
             }
         });
     }

@@ -29,6 +29,10 @@
             android:label="@string/title_activity_booking_appointment"
             android:theme="@style/Theme.RepairSystemAndroid.NoActionBar" />
         <activity
+            android:name=".CusomterProfile"
+            android:label="CusomterProfile"
+            android:theme="@style/Theme.RepairSystemAndroid.NoActionBar"/>
+        <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.RepairSystemAndroid.NoActionBar">
