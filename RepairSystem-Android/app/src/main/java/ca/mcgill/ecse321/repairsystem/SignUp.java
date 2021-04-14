@@ -1,5 +1,6 @@
 package ca.mcgill.ecse321.repairsystem;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -86,6 +87,8 @@ public class SignUp extends AppCompatActivity {
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         try {
                             JSONObject serverResp = new JSONObject(response.toString());
+                            //redirect to homepage
+                            startActivity(new Intent(SignUp.this, homePage.class));
                         } catch (JSONException e) {
                             error += e.getMessage();
                         }

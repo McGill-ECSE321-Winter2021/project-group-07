@@ -85,4 +85,24 @@
             android:id="@+id/action_Second2Fragment_to_First3Fragment"
             app:destination="@id/First3Fragment" />
     </fragment>
+    <fragment
+        android:id="@+id/First4Fragment"
+        android:name="ca.mcgill.ecse321.repairsystem.First4Fragment"
+        android:label="@string/first_fragment_label"
+        tools:layout="@layout/fragment_first4">
+
+        <action
+            android:id="@+id/action_First4Fragment_to_Second3Fragment"
+            app:destination="@id/Second3Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/Second3Fragment"
+        android:name="ca.mcgill.ecse321.repairsystem.Second3Fragment"
+        android:label="@string/second_fragment_label"
+        tools:layout="@layout/fragment_second3">
+
+        <action
+            android:id="@+id/action_Second3Fragment_to_First4Fragment"
+            app:destination="@id/First4Fragment" />
+    </fragment>
 </navigation>

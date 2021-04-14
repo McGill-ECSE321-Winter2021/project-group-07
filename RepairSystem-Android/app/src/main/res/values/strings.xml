@@ -33,4 +33,21 @@
     <string name="selectMech_hint"> Select a Mechanic </string>
     <string name="title_activity_log_in">LogIn</string>
     <string name="title_activity_sign_up">SignUp</string>
+
+    <string name="profile"> Good Morning!</string>
+    <string name="profile_name">  Name</string>
+    <string name="name"> Customer Name</string>
+    <string name="profile_password"> Password </string>
+    <string name="profile_phone"> Phone </string>
+    <string name="phone"> 514-974-2735</string>
+    <string name="profile_email"> Email </string>
+    <string name="email"> customer@mail.com</string>
+    <string name="profile_address"> Address </string>
+    <string name="address"> 123 Avenue Boulevard</string>
+    <string name="profile_credit"> Credit</string>
+    <string name="credit"> 123 456 789</string>
+    <string name="debit"> 012 345 678</string>
+    <string name="title_activity_home_page">homePage</string>
+
+
 </resources>
