@@ -13,9 +13,13 @@
         android:theme="@style/Theme.RepairSystemAndroid"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".MakePayment"
+            android:label="@string/title_activity_make_payment"
+            android:theme="@style/Theme.RepairSystemAndroid.NoActionBar"></activity>
+        <activity
             android:name=".ViewAppointments"
             android:label="@string/title_activity_view_appointments"
-            android:theme="@style/Theme.RepairSystemAndroid.NoActionBar"></activity>
+            android:theme="@style/Theme.RepairSystemAndroid.NoActionBar" />
         <activity
             android:name=".homePage"
             android:label="@string/title_activity_home_page"

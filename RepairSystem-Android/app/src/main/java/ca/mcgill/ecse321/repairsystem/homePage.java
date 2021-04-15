@@ -65,14 +65,13 @@ public class homePage extends AppCompatActivity {
                 for(int i = 0; i < response.length(); i++)
                 {
                     try {
-                        //appointments.add(response.getJSONObject(i).getString("id"));
+
                         String toAdd ="";
                         String ID = response.getJSONObject(i).getString("id");
                         toAdd = toAdd.concat(ID+"    "+"Start: ");
                         JSONObject timeSlot = response.getJSONObject(i).getJSONObject("timeSlot");
                         toAdd = toAdd.concat(timeSlot.getString("startTime"));
                        appointments.add(toAdd);
-                        //appointments[i] = timeSlot.getString("startTime");
                     } catch (JSONException e) {
                         error += e.getMessage();
                     }
@@ -110,30 +109,7 @@ public class homePage extends AppCompatActivity {
         toBook(findViewById(R.id.bookAppointment));
         toEditProfile(findViewById(R.id.editProfile));
         bye(findViewById(R.id.logout));
-
-    }
-
-    private class StableArrayAdapter extends ArrayAdapter<String>{
-        HashMap<String, Integer> mIdMap = new HashMap<String, Integer>();
-
-        public StableArrayAdapter(Context context, int textViewResourceId,
-                                  List<String> objects) {
-            super(context, textViewResourceId, objects);
-            for (int i = 0; i < objects.size(); ++i) {
-                mIdMap.put(objects.get(i), i);
-            }
-        }
-
-        @Override
-        public long getItemId(int position) {
-            String item = getItem(position);
-            return mIdMap.get(item);
-        }
-
-        @Override
-        public boolean hasStableIds() {
-            return true;
-        }
+        toPayment(findViewById(R.id.payment));
 
     }
 
@@ -178,4 +154,44 @@ public class homePage extends AppCompatActivity {
             }
         });
     }
+
+    public void toPayment(View v){
+        Button toPay = findViewById(R.id.payment);
+        toPay.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v)
+            {
+                String customerId = getIntent().getStringExtra("customerId");
+                Intent intent = new Intent(homePage.this, Payment.class);
+                intent.putExtra("CUSTOMER_ID", customerId);
+                startActivity(intent);
+            }
+        });
+    }
+
+
+    private class StableArrayAdapter extends ArrayAdapter<String>{
+        HashMap<String, Integer> mIdMap = new HashMap<String, Integer>();
+
+        public StableArrayAdapter(Context context, int textViewResourceId,
+                                  List<String> objects) {
+            super(context, textViewResourceId, objects);
+            for (int i = 0; i < objects.size(); ++i) {
+                mIdMap.put(objects.get(i), i);
+            }
+        }
+
+        @Override
+        public long getItemId(int position) {
+            String item = getItem(position);
+            return mIdMap.get(item);
+        }
+
+        @Override
+        public boolean hasStableIds() {
+            return true;
+        }
+
+    }
+
 }

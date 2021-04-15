@@ -50,5 +50,12 @@
     <string name="title_activity_home_page">homePage</string>
     <string name="title_activity_view_appointments">ViewAppointments</string>
 
-
+    <!-- Make Payment -->
+    <string name="payment_email_hint">Email</string>
+    <string name="address_hint">Address</string>
+    <string name="credit_hint">Credit</string>
+    <string name="debit_hint">Debit</string>
+    <string name="amount_hint">Amount</string>
+    <string name="makePayment_button">Make Payment</string>
+    <string name="title_activity_make_payment">MakePayment</string>
 </resources>

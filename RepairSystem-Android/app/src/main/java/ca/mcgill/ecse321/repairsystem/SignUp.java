@@ -85,15 +85,13 @@ public class SignUp extends AppCompatActivity {
                 HttpUtils.post("customer/" + request, new RequestParams(), new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        Intent intent = new Intent(SignUp.this, homePage.class);
                         try {
-                            JSONObject serverResp = new JSONObject(response.toString());
-                            //redirect to homepage
-                            startActivity(new Intent(SignUp.this, homePage.class));
+                            intent.putExtra("customerId", response.getString("id"));
                         } catch (JSONException e) {
-                            error += e.getMessage();
+                            e.printStackTrace();
                         }
-                        refreshErrorMessage();
-                        tv.setText("No Error");
+                        startActivity(intent);
                     }
                     @Override
                     public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {

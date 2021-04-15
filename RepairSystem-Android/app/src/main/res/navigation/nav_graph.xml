@@ -125,4 +125,24 @@
             android:id="@+id/action_Second4Fragment_to_First5Fragment"
             app:destination="@id/First5Fragment" />
     </fragment>
+    <fragment
+        android:id="@+id/First6Fragment"
+        android:name="ca.mcgill.ecse321.repairsystem.First6Fragment"
+        android:label="@string/first_fragment_label"
+        tools:layout="@layout/fragment_first6">
+
+        <action
+            android:id="@+id/action_First6Fragment_to_Second5Fragment"
+            app:destination="@id/Second5Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/Second5Fragment"
+        android:name="ca.mcgill.ecse321.repairsystem.Second5Fragment"
+        android:label="@string/second_fragment_label"
+        tools:layout="@layout/fragment_second5">
+
+        <action
+            android:id="@+id/action_Second5Fragment_to_First6Fragment"
+            app:destination="@id/First6Fragment" />
+    </fragment>
 </navigation>
