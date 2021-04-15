@@ -45,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
         //refreshErrorMessage();
         goLogIn();
         goSignUp( findViewById(R.id.startSignUp));
+        createServices();
+
     }
 
     @Override
@@ -98,6 +100,51 @@ public class MainActivity extends AppCompatActivity {
        });
     }
 
+    /**
+     * During boot up, the system will create the mechanics
+     */
+
+    public void createServices() {
+        String request = "";
+        request = request.concat("CarRepair");
+        request = request.concat("50");
+        HttpUtils.post("services/" + request, new RequestParams(), new JsonHttpResponseHandler()
+        {
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                try {
+                    error += errorResponse.get("").toString();
+                } catch (JSONException e) {
+                    error += e.getMessage();
+                }
+            }
+        });
+
+     /*   for (int i = 0; i < services.length; i++) {
+            String request = "";
+            request = request.concat(services[i]);
+            request = request.concat("?price=" + prices[i]);
+            HttpUtils.post("services/" + request, new RequestParams(), new JsonHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                    try {
+                        JSONObject serverResp = new JSONObject(response.toString());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                    try {
+                        error += errorResponse.get("").toString();
+                    } catch (JSONException e) {
+                        error += e.getMessage();
+                    }
+                }
+            });
+        }*/
+    }
 
 
 }
