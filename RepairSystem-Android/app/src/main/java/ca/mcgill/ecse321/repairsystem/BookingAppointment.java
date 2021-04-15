@@ -40,6 +40,11 @@ public class BookingAppointment extends AppCompatActivity {
             }
         });
 
+        toHome(findViewById(R.id.bookAppointment));
+        toEditProfile(findViewById(R.id.editProfile));
+        bye(findViewById(R.id.logout));
+        toPayment(findViewById(R.id.payment));
+
         //refreshErrorMessage();
     }
     private void refreshErrorMessage() {

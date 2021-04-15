@@ -104,8 +104,7 @@ public class homePage extends AppCompatActivity {
                 }
             }
         });
-
-
+        
         toBook(findViewById(R.id.bookAppointment));
         toEditProfile(findViewById(R.id.editProfile));
         bye(findViewById(R.id.logout));

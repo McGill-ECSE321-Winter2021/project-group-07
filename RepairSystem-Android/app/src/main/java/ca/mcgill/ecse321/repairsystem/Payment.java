@@ -20,6 +20,10 @@ public class Payment extends AppCompatActivity {
         setContentView(R.layout.activity_make_payment);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        toBook(findViewById(R.id.bookAppointment));
+        toEditProfile(findViewById(R.id.editProfile));
+        bye(findViewById(R.id.logout));
+        toHome(findViewById(R.id.payment));
     }
 
     public void bye(View v)
