@@ -13,7 +13,7 @@
         android:theme="@style/Theme.RepairSystemAndroid"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".MakePayment"
+            android:name=".Payment"
             android:label="@string/title_activity_make_payment"
             android:theme="@style/Theme.RepairSystemAndroid.NoActionBar"></activity>
         <activity
