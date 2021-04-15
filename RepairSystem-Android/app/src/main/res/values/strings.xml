@@ -48,6 +48,7 @@
     <string name="credit"> 123 456 789</string>
     <string name="debit"> 012 345 678</string>
     <string name="title_activity_home_page">homePage</string>
+    <string name="title_activity_view_appointments">ViewAppointments</string>
 
 
 </resources>

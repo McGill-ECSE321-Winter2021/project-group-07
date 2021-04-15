@@ -5,12 +5,14 @@
     android:id="@+id/by"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="5dp"
+    tools:context=".homePage"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_height="670dp"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:gravity="top"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/toolbar4"
@@ -28,8 +30,11 @@
             android:text="My Appointments" />
 
         <ListView
+            android:id="@+id/appointmentList"
             android:layout_width="match_parent"
-            android:layout_height="490dp" />
+            android:layout_height="match_parent">
+
+        </ListView>
     </LinearLayout>
 
     <androidx.appcompat.widget.Toolbar
