@@ -46,6 +46,10 @@ public class CusomterProfile extends AppCompatActivity {
 
         viewCrendentials(findViewById(R.id.cNameText));
         updateProfile(findViewById(R.id.cNameText));
+        toBook(findViewById(R.id.bookAppointment));
+        toHome(findViewById(R.id.home));
+        bye(findViewById(R.id.logout));
+        toPayment(findViewById(R.id.payment));
     }
 
     public void returnToMain(View v) {
@@ -148,9 +152,61 @@ public class CusomterProfile extends AppCompatActivity {
             }
         });
 
+    }
 
+    public void toBook(View v)
+    {
+        Button toBook = findViewById(R.id.bookAppointment);
 
+        toBook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String customerId = getIntent().getStringExtra("customerId");
+                Intent intent = new Intent(CusomterProfile.this, BookingAppointment.class);
+                intent.putExtra("CUSTOMER_ID", customerId);
+                startActivity(intent);
+            }
+        });
+    }
 
+    public void toHome(View v)
+    {
+        Button toHome = findViewById(R.id.home);
+        toHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String customerId = getIntent().getStringExtra("customerId");
+                Intent intent = new Intent(CusomterProfile.this, homePage.class);
+                intent.putExtra("CUSTOMER_ID", customerId);
+                startActivity(intent);
+            }
+        });
+    }
+
+    public void bye(View v)
+    {
+        Button toLogOut = findViewById(R.id.logout);
+        toLogOut.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v)
+            {
+                startActivity(new Intent(CusomterProfile.this, MainActivity.class));
+            }
+        });
+    }
+
+    public void toPayment(View v){
+        Button toPay = findViewById(R.id.payment);
+        toPay.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v)
+            {
+                String customerId = getIntent().getStringExtra("customerId");
+                Intent intent = new Intent(CusomterProfile.this, Payment.class);
+                intent.putExtra("CUSTOMER_ID", customerId);
+                startActivity(intent);
+            }
+        });
     }
 
 
