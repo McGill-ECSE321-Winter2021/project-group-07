@@ -32,7 +32,7 @@ module.exports = {
     autoOpenBrowser: true,
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    backendHost: 'localhost',
+    backendHost: 'https://repairsystem-backend-g07.herokuapp.com',
     backendPort: 3087,
     proxyTable: {},
     // CSS Sourcemaps off by default because relative paths are "buggy"

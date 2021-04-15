@@ -114,8 +114,7 @@ import 'vue-date-pick/dist/vueDatePick.css';
 var config = require('../../../config')
 
 var frontendUrl = 'http://' + config.dev.host + ':' + config.dev.port
-var backendUrl = 'http://' + config.dev.backendHost + ':' + config.dev.backendPort
-
+var backendUrl = config.dev.backendHost
 var AXIOS = axios.create({
     baseURL: backendUrl,
     headers: {
