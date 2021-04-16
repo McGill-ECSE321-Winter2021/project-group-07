@@ -271,14 +271,22 @@ public class homePage extends AppCompatActivity {
 
     public void bye(View v)
     {
-        Button toLogOut = findViewById(R.id.logout);
-        toLogOut.setOnClickListener(new View.OnClickListener(){
+        Button toLogOutHome = findViewById(R.id.logoutHome);
+        Button toLogOutPay = findViewById(R.id.logoutPay);
+        Button toLogOutBook = findViewById(R.id.logoutBook);
+        Button toLogOutEdit = findViewById(R.id.logoutEdit);
+        View.OnClickListener listener = new View.OnClickListener(){
             @Override
             public void onClick(View v)
             {
                 startActivity(new Intent(homePage.this, MainActivity.class));
             }
-        });
+        };
+
+        toLogOutHome.setOnClickListener(listener);
+        toLogOutPay.setOnClickListener(listener);
+        toLogOutBook.setOnClickListener(listener);
+        toLogOutEdit.setOnClickListener(listener);
     }
 
     public void toPayment(View v){
