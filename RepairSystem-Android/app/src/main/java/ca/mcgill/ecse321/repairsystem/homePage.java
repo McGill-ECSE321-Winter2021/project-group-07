@@ -115,6 +115,7 @@ public class homePage extends AppCompatActivity {
             }
         });
 
+        setInfo(findViewById(R.id.cNameText));
         viewCrendentials(findViewById(R.id.cNameText));
         updateProfile(findViewById(R.id.cNameText));
         toBook(findViewById(R.id.bookAppointmentView));
@@ -122,6 +123,42 @@ public class homePage extends AppCompatActivity {
         bye(findViewById(R.id.logout));
         toPayment(findViewById(R.id.makePaymentView));
         toHome(findViewById(R.id.homePageView));
+
+    }
+
+    public void setInfo(View v) {
+        final TextView tv_email = (TextView) findViewById(R.id.email);
+        final TextView tv_address = (TextView) findViewById(R.id.address);
+        final TextView tv_credit = (TextView) findViewById(R.id.credit);
+        final TextView tv_debit = (TextView) findViewById(R.id.debit);
+
+        RequestParams requestParams = new RequestParams();
+        String request = "";
+        String customerId = getIntent().getStringExtra("CUSTOMER_ID");
+        request = request.concat(customerId);
+
+        HttpUtils.get("customer/" +request, requestParams, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                try {
+                    tv_email.setText(response.getString("email"));
+                    tv_address.setText(response.getString("address"));
+                    tv_credit.setText(response.getString("creditHash"));
+                    tv_debit.setText(response.getString("debitHash"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                try {
+                    error += errorResponse.get(" email and password ").toString();
+                } catch (JSONException e) {
+                    error += e.getMessage();
+                }
+
+            }
+        });
 
     }
 
