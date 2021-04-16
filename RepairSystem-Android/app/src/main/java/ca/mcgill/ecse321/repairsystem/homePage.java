@@ -134,7 +134,6 @@ public class homePage extends AppCompatActivity {
 
         RequestParams requestParams = new RequestParams();
         String request = "";
-        String customerId = getIntent().getStringExtra("CUSTOMER_ID");
         request = request.concat(customerId);
 
         HttpUtils.get("customer/" +request, requestParams, new JsonHttpResponseHandler() {

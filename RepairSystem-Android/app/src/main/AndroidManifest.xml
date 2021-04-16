@@ -13,10 +13,6 @@
         android:theme="@style/Theme.RepairSystemAndroid"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".Payment"
-            android:label="@string/title_activity_make_payment"
-            android:theme="@style/Theme.RepairSystemAndroid.NoActionBar"></activity>
-        <activity
             android:name=".ViewAppointments"
             android:label="@string/title_activity_view_appointments"
             android:theme="@style/Theme.RepairSystemAndroid.NoActionBar" />
@@ -35,10 +31,6 @@
         <activity
             android:name=".BookingAppointment"
             android:label="@string/title_activity_booking_appointment"
-            android:theme="@style/Theme.RepairSystemAndroid.NoActionBar" />
-        <activity
-            android:name=".CusomterProfile"
-            android:label="CusomterProfile"
             android:theme="@style/Theme.RepairSystemAndroid.NoActionBar" />
         <activity
             android:name=".MainActivity"
