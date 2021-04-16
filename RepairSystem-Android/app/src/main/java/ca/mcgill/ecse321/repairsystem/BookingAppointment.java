@@ -23,6 +23,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
@@ -41,12 +42,11 @@ public class BookingAppointment extends AppCompatActivity implements PopupMenu.O
     EditText etDate;
     TextView tvTimer2;
     int t2Hour, t2Minute;
-    private Button button;
+    private FloatingActionButton button;
     private Button addTimeSlot;
     private Button selectMechBtn;
     private Button bookAppBtn;
-    private EditText editTextMainScreen;
-    private EditText editTextMainScreen2;
+
 
     /*variables for book appointment and add timeslot*/
     String startT= "";
@@ -138,11 +138,10 @@ public class BookingAppointment extends AppCompatActivity implements PopupMenu.O
         tvTimer2 = findViewById(R.id.tv_timer2);
 
         //add car
-        button = (Button) findViewById(R.id.addCarBtn);
+        button = (FloatingActionButton) findViewById(R.id.addCarBtn);
 
         //add Timeslot
         addTimeSlot = (Button) findViewById(R.id.addTimeSlot);
-        editTextMainScreen2 = (EditText) findViewById(R.id.editTextResult2);
 
 
         //bottom menu bar
@@ -268,7 +267,7 @@ public class BookingAppointment extends AppCompatActivity implements PopupMenu.O
                 alertD.show();
             }
         });
-       
+
 
 
 
