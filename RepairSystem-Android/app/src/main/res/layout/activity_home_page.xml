@@ -12,6 +12,7 @@
         android:theme="@style/Theme.RepairSystemAndroid.AppBarOverlay">
 
         <androidx.appcompat.widget.Toolbar
+            android:text="@string/homepage_title"
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"

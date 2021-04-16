@@ -12,10 +12,12 @@
         android:theme="@style/Theme.RepairSystemAndroid.AppBarOverlay">
 
         <androidx.appcompat.widget.Toolbar
+
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
+            android:text="@string/login_title"
             app:popupTheme="@style/Theme.RepairSystemAndroid.PopupOverlay" />
 
     </com.google.android.material.appbar.AppBarLayout>
