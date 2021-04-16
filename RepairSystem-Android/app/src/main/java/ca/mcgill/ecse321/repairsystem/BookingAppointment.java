@@ -1,5 +1,6 @@
 package ca.mcgill.ecse321.repairsystem;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import ca.mcgill.ecse321.repairsystem.HttpUtils;
@@ -13,23 +14,34 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Calendar;
+
 import cz.msebera.android.httpclient.Header;
 
 public class BookingAppointment extends AppCompatActivity {
     private String error = null;
-
+    EditText etDate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking_appointment);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        etDate = findViewById(R.id.et_date);
+
+        Calendar calendar = Calendar.getInstance();
+        final int year = calendar.get(Calendar.YEAR);
+        final int month = calendar.get(Calendar.MONTH);
+        final int day = calendar.get(Calendar.DAY_OF_MONTH);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -46,6 +58,22 @@ public class BookingAppointment extends AppCompatActivity {
         toPayment(findViewById(R.id.payment));
 
         //refreshErrorMessage();
+        etDate.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                DatePickerDialog datePickerDialog = new DatePickerDialog(
+                        BookingAppointment.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                        month= month+1;
+                        String date = day+"/"+month+"/"+year;
+                        etDate.setText(date);
+
+                    }
+                },year,month,day);
+                datePickerDialog.show();
+            }
+        });
     }
     private void refreshErrorMessage() {
         // set the error message
@@ -58,7 +86,7 @@ public class BookingAppointment extends AppCompatActivity {
             tvError.setVisibility(View.VISIBLE);
         }
     }
-
+/*
     public void addMechanic(View v) {
         error = "";
         final TextView tv = (TextView) findViewById(R.id.selectMech_name);
@@ -79,7 +107,7 @@ public class BookingAppointment extends AppCompatActivity {
                 refreshErrorMessage();
             }
         });
-    }
+    }*/
 
     public void toHome(View v)
     {
