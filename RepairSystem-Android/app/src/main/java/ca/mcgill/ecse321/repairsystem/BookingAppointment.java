@@ -45,13 +45,23 @@ public class BookingAppointment extends AppCompatActivity implements PopupMenu.O
     int t2Hour, t2Minute;
     private Button button;
     private Button addTimeSlot;
+    private Button selectMechBtn;
+    private Button bookAppBtn;
     private EditText editTextMainScreen;
     private EditText editTextMainScreen2;
+
+    /*variables for book appointment and add timeslot*/
     String startT= "";
     String endT= "";
     String startYmd= "";
     String startTime= "";
     String endTime= "";
+    String service="";
+    String timeSlotId="";
+    String appId="";
+    //TODO:CARID MECHID
+    String carId="181807788";
+    String mechId="3347453";
 
     final Context context = this;
 
@@ -82,22 +92,31 @@ public class BookingAppointment extends AppCompatActivity implements PopupMenu.O
             Toast.makeText(this, "item4 selected", Toast.LENGTH_SHORT).show();
         }else if(item.getItemId()==R.id.CarRepair){
             Toast.makeText(this, "CarRepair selected", Toast.LENGTH_SHORT).show();
+            service="CarRepair";
         }else if(item.getItemId()==R.id.OilChange){
             Toast.makeText(this, "OilChange selected", Toast.LENGTH_SHORT).show();
+            service="OilChange";
         }else if(item.getItemId()==R.id.RegularCheckup){
             Toast.makeText(this, "RegularCheckup selected", Toast.LENGTH_SHORT).show();
+            service="RegularCheckup";
         }else if(item.getItemId()==R.id.CarWash){
             Toast.makeText(this, "CarWash selected", Toast.LENGTH_SHORT).show();
+            service="CarWash";
         }else if(item.getItemId()==R.id.TireChange){
             Toast.makeText(this, "TireChange selected", Toast.LENGTH_SHORT).show();
+            service="TireChange";
         }else if(item.getItemId()==R.id.RoadsideAssistance){
             Toast.makeText(this, "RoadsideAssistance selected", Toast.LENGTH_SHORT).show();
+            service="RoadsideAssistance";
         }else if(item.getItemId()==R.id.Towing){
             Toast.makeText(this, "Towing selected", Toast.LENGTH_SHORT).show();
+            service="Towing";
         }else if(item.getItemId()==R.id.CarInspection){
             Toast.makeText(this, "CarInspection selected", Toast.LENGTH_SHORT).show();
+            service="CarInspection";
         }else if(item.getItemId()==R.id.Other){
             Toast.makeText(this, "Other selected", Toast.LENGTH_SHORT).show();
+            service="Other";
         }
         return false;
     }
@@ -122,7 +141,7 @@ public class BookingAppointment extends AppCompatActivity implements PopupMenu.O
         //add car
         button = (Button) findViewById(R.id.addCarBtn);
 
-        //add Timeslog
+        //add Timeslot
         addTimeSlot = (Button) findViewById(R.id.addTimeSlot);
         editTextMainScreen2 = (EditText) findViewById(R.id.editTextResult2);
 
@@ -133,6 +152,51 @@ public class BookingAppointment extends AppCompatActivity implements PopupMenu.O
         bye(findViewById(R.id.logout));
         toPayment(findViewById(R.id.payment));
 
+        //select Mechanic
+        selectMechBtn = (Button) findViewById(R.id.selectMechBtn);
+
+        //book Appointment
+        bookAppBtn  = (Button) findViewById(R.id.bookAppBtn);
+
+
+        selectMechBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                error = "";
+
+                String request = "";
+                request = request.concat(startTime);
+                request =  request.concat("?endTime="+endTime);
+
+                Context context = getApplicationContext();
+                CharSequence text = "time slot Added!";
+                int duration = Toast.LENGTH_SHORT;
+
+                HttpUtils.post("/timeslot/" + request, new RequestParams(), new JsonHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        try {
+                            timeSlotId = response.getString("id");
+                            Toast toast = Toast.makeText(context, text, duration);
+                            toast.show();
+                        }catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                        try {
+                            error += errorResponse.get("message").toString();
+                        } catch (JSONException e) {
+                            error += e.getMessage();
+                        }
+                        refreshErrorMessage();
+                    }
+
+                });
+            }
+        });
 
         //add car methods
         button.setOnClickListener(new View.OnClickListener() {
@@ -171,9 +235,17 @@ public class BookingAppointment extends AppCompatActivity implements PopupMenu.O
                                     @Override
                                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 
-                                        Toast toast = Toast.makeText(context, text, duration);
-                                        toast.show();
+                                       Toast toast = Toast.makeText(context, text, duration);
+                                       toast.show();
+                                        /*get car id of the added car
+                                        try {
+                                            Toast toast = Toast.makeText(context, response.getString("id"), duration);
+                                            toast.show();
+                                        }catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }*/
                                     }
+
 
                                     @Override
                                     public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
@@ -185,7 +257,6 @@ public class BookingAppointment extends AppCompatActivity implements PopupMenu.O
                                         refreshErrorMessage();
                                     }
                                 });
-
                             }
                         })
                         .setNegativeButton("Cancel",
@@ -306,8 +377,13 @@ public class BookingAppointment extends AppCompatActivity implements PopupMenu.O
                 HttpUtils.post("/timeslot/" + request, new RequestParams(), new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                        Toast toast = Toast.makeText(context, text, duration);
-                        toast.show();
+                        try {
+                            timeSlotId = response.getString("id");
+                            Toast toast = Toast.makeText(context, text, duration);
+                            toast.show();
+                        }catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
 
                     @Override
@@ -323,7 +399,86 @@ public class BookingAppointment extends AppCompatActivity implements PopupMenu.O
                 });
             }
         });
+
+
+        //book appointment method
+        bookAppBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            //https://repairsystem-backend-g07.herokuapp.com/appointment/108960?timeSlotId=511806436&carId=181807788&services=CarRepair
+            public void onClick(View v) {
+                error = "";
+
+                RequestParams requestParams = new RequestParams();
+                String request = "";
+                String customerId = getIntent().getStringExtra("CUSTOMER_ID");
+                request = request.concat(customerId);
+                request = request.concat("?timeSlotId="+timeSlotId);
+                request = request.concat("&carId="+carId);
+                request = request.concat("&services="+service);
+
+                Context context = getApplicationContext();
+                CharSequence text = "Appointment Booked!";
+                int duration = Toast.LENGTH_SHORT;
+
+
+                HttpUtils.post("/appointment/" + request, new RequestParams(), new JsonHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+
+                        try {
+                            appId = response.getString("id");
+
+                            //add mechanic to the appointment
+                            RequestParams requestParams = new RequestParams();
+                            String request2 = "";
+                            request2 = request2.concat(mechId);
+                            request2 = request2.concat("?appointmentId="+appId);
+                            Toast toast = Toast.makeText(context, text, duration);
+                            toast.show();
+
+                            CharSequence finalText = request2.toString();;
+                            HttpUtils.put("/appointment/addMechanic/" + request2, new RequestParams(), new JsonHttpResponseHandler() {
+                                @Override
+                                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                                    refreshErrorMessage();
+                                    Toast toast = Toast.makeText(context, finalText, duration);
+                                    toast.show();
+                                }
+
+                                @Override
+                                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                                    try {
+                                        error += errorResponse.get("message").toString();
+                                    } catch (JSONException e) {
+                                        error += e.getMessage();
+                                    }
+                                    refreshErrorMessage();
+                                }
+                            });
+
+                        }catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                        try {
+                            error += errorResponse.get("message").toString();
+                        } catch (JSONException e) {
+                            error += e.getMessage();
+                        }
+                        refreshErrorMessage();
+                    }
+
+                });
+
+
+
+            }
+        });
     }
+
 
 
 
@@ -409,8 +564,7 @@ public class BookingAppointment extends AppCompatActivity implements PopupMenu.O
         });
     }
 
-    public void toEditProfile(View v)
-    {
+    public void toEditProfile(View v){
         Button toEdit = findViewById(R.id.editProfile);
         toEdit.setOnClickListener(new View.OnClickListener() {
             @Override
