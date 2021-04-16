@@ -44,10 +44,16 @@ public class BookingAppointment extends AppCompatActivity implements PopupMenu.O
     TextView tvTimer2;
     int t2Hour, t2Minute;
     private Button button;
+    private Button addTimeSlot;
     private EditText editTextMainScreen;
     private EditText editTextMainScreen2;
+    String startT= "";
+    String startYmd= "";
+    String startTime= "";
 
     final Context context = this;
+
+
 
     public void showPopup(View v){
         PopupMenu popup = new PopupMenu(this, v);
@@ -98,35 +104,38 @@ public class BookingAppointment extends AppCompatActivity implements PopupMenu.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking_appointment);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //date picker
         etDate = findViewById(R.id.et_date);
         Calendar calendar = Calendar.getInstance();
         final int year = calendar.get(Calendar.YEAR);
         final int month = calendar.get(Calendar.MONTH);
         final int day = calendar.get(Calendar.DAY_OF_MONTH);
-
+        //time picker
         tvTimer2 = findViewById(R.id.tv_timer2);
 
-        // components from main.xml
+        //add car
         button = (Button) findViewById(R.id.addCarBtn);
-        //editTextMainScreen = (EditText) findViewById(R.id.editTextResult);
         editTextMainScreen2 = (EditText) findViewById(R.id.editTextResult2);
 
+        //bottom menu bar
+        toHome(findViewById(R.id.bookAppointment));
+        toEditProfile(findViewById(R.id.editProfile));
+        bye(findViewById(R.id.logout));
+        toPayment(findViewById(R.id.payment));
+
+
+        //add car methods
         button.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
-
-                // get prompts.xml view
                 LayoutInflater layoutInflater = LayoutInflater.from(context);
-
                 View promptView = layoutInflater.inflate(R.layout.prompts, null);
-
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
-
-                // set prompts.xml to be the layout file of the alertdialog builder
                 alertDialogBuilder.setView(promptView);
 
                 final EditText carInput = (EditText) promptView.findViewById(R.id.carTypeInput);
@@ -146,32 +155,27 @@ public class BookingAppointment extends AppCompatActivity implements PopupMenu.O
                                 request = request.concat("?carType="+carInput.getText().toString());
                                 request = request.concat("&winterTires="+WinterTiresInput.getText().toString());
                                 request = request.concat("&numOfKilometers="+NumberofKilometersInput.getText().toString());
-                                TextView tv_name = (TextView) findViewById(R.id.test);
 
-                                //108960?carType=SUV&winterTires=true&numOfKilometers=1234
-
-
-
-                                HttpUtils.put("/car/" +request, requestParams, new JsonHttpResponseHandler()
+                                Context context = getApplicationContext();
+                                CharSequence text = "Car Added!";
+                                int duration = Toast.LENGTH_SHORT;
 
 
-                                {
+                                HttpUtils.post("/car/" +request, requestParams, new JsonHttpResponseHandler() {
                                     @Override
                                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                                        try {
-                                            tv_name.setText(response.getString("carType"));
-                                        } catch (JSONException e) {
-                                            e.printStackTrace();
-                                        }
+                                        Toast toast = Toast.makeText(context, text, duration);
+                                        toast.show();
                                     }
+
                                     @Override
                                     public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                                         try {
-                                            error += errorResponse.get(" email and password ").toString();
+                                            error += errorResponse.get("message").toString();
                                         } catch (JSONException e) {
                                             error += e.getMessage();
                                         }
-
+                                        refreshErrorMessage();
                                     }
                                 });
 
@@ -183,12 +187,8 @@ public class BookingAppointment extends AppCompatActivity implements PopupMenu.O
                                         dialog.cancel();
                                     }
                                 });
-
-                // create an alert dialog
                 AlertDialog alertD = alertDialogBuilder.create();
-
                 alertD.show();
-
             }
         });
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -200,12 +200,9 @@ public class BookingAppointment extends AppCompatActivity implements PopupMenu.O
             }
         });
 
-        toHome(findViewById(R.id.bookAppointment));
-        toEditProfile(findViewById(R.id.editProfile));
-        bye(findViewById(R.id.logout));
-        toPayment(findViewById(R.id.payment));
 
-        //refreshErrorMessage();
+
+        //date set methods
         etDate.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -215,14 +212,24 @@ public class BookingAppointment extends AppCompatActivity implements PopupMenu.O
                     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                         month= month+1;
                         String date = day+"/"+month+"/"+year;
+                        if (month<10 & day<10){
+                            startYmd = year+"-0"+month+"-0"+day;
+                        }
+                        else if (month>=10 & day<10){
+                            startYmd = year+"-"+month+"-0"+day;}
+                        else if (month<10 & day>=10){
+                            startYmd = year+"-0"+month+"-"+day;}
+                        else {
+                            startYmd = year+"-"+month+"-"+day;
+                        }
                         etDate.setText(date);
-
                     }
                 },year,month,day);
                 datePickerDialog.show();
             }
         });
 
+        //time set methods
         tvTimer2.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 TimePickerDialog timePickerDialog = new TimePickerDialog(
@@ -234,6 +241,18 @@ public class BookingAppointment extends AppCompatActivity implements PopupMenu.O
                                 t2Hour = hourOfDay;
                                 t2Minute = minute;
                                 String time = t2Hour + ":" + t2Minute;
+                                if(t2Hour<10 & t2Minute<10){
+                                    startT = "-0"+t2Hour + ":0" + t2Minute;
+                                }else if(t2Hour<10 & t2Minute>=10){
+                                    startT = "-0"+t2Hour + ":" + t2Minute;
+                                }else if(t2Hour>=10 & t2Minute<10){
+                                    startT = "-"+t2Hour + ":0" + t2Minute;
+                                }else{
+                                    startT = "-"+t2Hour + ":" + t2Minute;
+                                }
+                                startTime = startYmd+startT;
+                                editTextMainScreen2.setText(startTime);
+
                                 SimpleDateFormat f24Hours = new SimpleDateFormat("HH:mm");
                                 try{
                                     Date date = f24Hours.parse(time);
@@ -242,9 +261,8 @@ public class BookingAppointment extends AppCompatActivity implements PopupMenu.O
                                 } catch (ParseException e) {
                                     e.printStackTrace();
                                 }
-
                             }
-                        },12,0,true
+                        },24,0,true
                 );
                 timePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 timePickerDialog.updateTime(t2Hour, t2Minute);
@@ -252,6 +270,8 @@ public class BookingAppointment extends AppCompatActivity implements PopupMenu.O
             }
         });
     }
+
+
     private void refreshErrorMessage() {
         // set the error message
         TextView tvError = (TextView) findViewById(R.id.error);
@@ -263,6 +283,10 @@ public class BookingAppointment extends AppCompatActivity implements PopupMenu.O
             tvError.setVisibility(View.VISIBLE);
         }
     }
+
+
+
+
 /*
     public void addMechanic(View v) {
         error = "";
@@ -286,6 +310,9 @@ public class BookingAppointment extends AppCompatActivity implements PopupMenu.O
         });
     }*/
 
+
+
+    /*Button Menu*/
     public void toHome(View v)
     {
         Button toHome = findViewById(R.id.home);
