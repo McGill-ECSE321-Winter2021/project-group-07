@@ -20,10 +20,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
+
     <TextView
         android:id="@+id/tv_timer2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="364dp"
+        android:layout_height="87dp"
+        android:layout_centerHorizontal="true"
         android:background="@android:drawable/editbox_background"
         android:drawableTop="@drawable/ic_time"
         android:drawablePadding="16dp"
@@ -42,26 +44,27 @@
         android:id="@+id/addTimeSlot"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Set Schedule "
+        android:text="Confirm Schedule"
+        android:layout_centerHorizontal="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.429" />
+        app:layout_constraintVertical_bias="0.329" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="servicePopup"
         android:text="Select Service "
+        android:layout_centerHorizontal="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.474"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.527" />
+        app:layout_constraintVertical_bias="0.429" />
 
     <Button
         android:layout_width="wrap_content"
@@ -74,7 +77,9 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.629" />
+        android:layout_centerHorizontal="true"
+
+        app:layout_constraintVertical_bias="0.529" />
 
     <!--Menu Button goes here-->
 
@@ -88,21 +93,23 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:layout_centerHorizontal="true"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.729" />
+        app:layout_constraintVertical_bias="0.629" />
 
     <Button
         android:id="@+id/addCarBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add Car "
+        android:text="Add Car"
+        android:layout_centerHorizontal="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.829" />
+        app:layout_constraintVertical_bias="0.729" />
     <!--
         <EditText
             android:id="@+id/editTextResult"
