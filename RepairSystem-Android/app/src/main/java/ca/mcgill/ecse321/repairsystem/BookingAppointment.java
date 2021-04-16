@@ -2,20 +2,13 @@ package ca.mcgill.ecse321.repairsystem;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import ca.mcgill.ecse321.repairsystem.HttpUtils;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-import com.loopj.android.http.JsonHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import android.text.format.DateFormat;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -26,23 +19,28 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import cz.msebera.android.httpclient.Header;
-
 public class BookingAppointment extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener{
     private String error = null;
     EditText etDate;
     TextView tvTimer2;
     int t2Hour, t2Minute;
+    private Button button;
+    private EditText editTextMainScreen;
+    private EditText editTextMainScreen2;
 
+    final Context context = this;
 
     public void showPopup(View v){
         PopupMenu popup = new PopupMenu(this, v);
@@ -104,7 +102,54 @@ public class BookingAppointment extends AppCompatActivity implements PopupMenu.O
 
         tvTimer2 = findViewById(R.id.tv_timer2);
 
+        // components from main.xml
+        button = (Button) findViewById(R.id.addCarBtn);
+        //editTextMainScreen = (EditText) findViewById(R.id.editTextResult);
+        editTextMainScreen2 = (EditText) findViewById(R.id.editTextResult2);
 
+        button.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
+                // get prompts.xml view
+                LayoutInflater layoutInflater = LayoutInflater.from(context);
+
+                View promptView = layoutInflater.inflate(R.layout.prompts, null);
+
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+
+                // set prompts.xml to be the layout file of the alertdialog builder
+                alertDialogBuilder.setView(promptView);
+
+                final EditText carInput = (EditText) promptView.findViewById(R.id.carTypeInput);
+                final EditText WinterTiresInput = (EditText) promptView.findViewById(R.id.WinterTiresInput);
+                final EditText NumberofKilometersInput = (EditText) promptView.findViewById(R.id.NumberofKilometersInput);
+
+                // setup a dialog window
+                alertDialogBuilder
+                        .setCancelable(false)
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                // get user input and set it to result
+                               // editTextMainScreen2.setText(NumberofKilometersInput.getText());
+
+                            }
+                        })
+                        .setNegativeButton("Cancel",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+
+                // create an alert dialog
+                AlertDialog alertD = alertDialogBuilder.create();
+
+                alertD.show();
+
+            }
+        });
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
