@@ -57,6 +57,11 @@ public class homePage extends AppCompatActivity {
         //editProfileView = findViewById(R.id.editProfileView);
         homePageView = findViewById(R.id.homePageView);
 
+        bookAppointmentView.setVisibility(View.GONE);
+        //editProfileView.setVisibility(View.GONE);
+        //makePaymentView.setVisibility(View.GONE);
+        homePageView.setVisibility(View.VISIBLE);
+
         String customerId = getIntent().getStringExtra("customerId");
         String request = "";
         request = request.concat(customerId);
