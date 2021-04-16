@@ -48,8 +48,10 @@ public class BookingAppointment extends AppCompatActivity implements PopupMenu.O
     private EditText editTextMainScreen;
     private EditText editTextMainScreen2;
     String startT= "";
+    String endT= "";
     String startYmd= "";
     String startTime= "";
+    String endTime= "";
 
     final Context context = this;
 
@@ -119,7 +121,11 @@ public class BookingAppointment extends AppCompatActivity implements PopupMenu.O
 
         //add car
         button = (Button) findViewById(R.id.addCarBtn);
+
+        //add Timeslog
+        addTimeSlot = (Button) findViewById(R.id.addTimeSlot);
         editTextMainScreen2 = (EditText) findViewById(R.id.editTextResult2);
+
 
         //bottom menu bar
         toHome(findViewById(R.id.bookAppointment));
@@ -164,6 +170,7 @@ public class BookingAppointment extends AppCompatActivity implements PopupMenu.O
                                 HttpUtils.post("/car/" +request, requestParams, new JsonHttpResponseHandler() {
                                     @Override
                                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+
                                         Toast toast = Toast.makeText(context, text, duration);
                                         toast.show();
                                     }
@@ -250,8 +257,18 @@ public class BookingAppointment extends AppCompatActivity implements PopupMenu.O
                                 }else{
                                     startT = "-"+t2Hour + ":" + t2Minute;
                                 }
+
+                                if((hourOfDay+1)+1<10 & t2Minute<10){
+                                    endT = "-0"+(hourOfDay+1) + ":0" + t2Minute;
+                                }else if((hourOfDay+1)+1<10 & t2Minute>=10){
+                                    endT = "-0"+(hourOfDay+1) + ":" + t2Minute;
+                                }else if((hourOfDay+1)+1>=10 & t2Minute<10){
+                                    endT = "-"+(hourOfDay+1) + ":0" + t2Minute;
+                                }else{
+                                    endT = "-"+(hourOfDay+1) + ":" + t2Minute;
+                                }
+                                endTime = startYmd+endT;
                                 startTime = startYmd+startT;
-                                editTextMainScreen2.setText(startTime);
 
                                 SimpleDateFormat f24Hours = new SimpleDateFormat("HH:mm");
                                 try{
@@ -269,7 +286,46 @@ public class BookingAppointment extends AppCompatActivity implements PopupMenu.O
                 timePickerDialog.show();
             }
         });
+
+        //add time slot methods
+        addTimeSlot = (Button) findViewById(R.id.addTimeSlot);
+
+        addTimeSlot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                error = "";
+
+                String request = "";
+                request = request.concat(startTime);
+                request =  request.concat("?endTime="+endTime);
+
+                Context context = getApplicationContext();
+                CharSequence text = "time slot Added!";
+                int duration = Toast.LENGTH_SHORT;
+
+                HttpUtils.post("/timeslot/" + request, new RequestParams(), new JsonHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                        try {
+                            error += errorResponse.get("message").toString();
+                        } catch (JSONException e) {
+                            error += e.getMessage();
+                        }
+                        refreshErrorMessage();
+                    }
+
+                });
+            }
+        });
     }
+
+
 
 
     private void refreshErrorMessage() {
