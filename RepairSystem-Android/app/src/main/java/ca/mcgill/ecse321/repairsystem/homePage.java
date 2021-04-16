@@ -114,11 +114,56 @@ public class homePage extends AppCompatActivity {
             }
         });
 
+        viewCrendentials(findViewById(R.id.cNameText));
+        updateProfile(findViewById(R.id.cNameText));
         toBook(findViewById(R.id.bookAppointmentView));
         toEditProfile(findViewById(R.id.editProfileView));
         bye(findViewById(R.id.logout));
         toPayment(findViewById(R.id.makePaymentView));
         toHome(findViewById(R.id.homePageView));
+
+    }
+
+    public void viewCrendentials(View v)
+    {
+        TextView tv_name = (TextView) findViewById(R.id.cNameText);
+        final TextView tv_password = (TextView) findViewById(R.id.cPasswordText);
+        final TextView tv_phone = (TextView) findViewById(R.id.cPhoneText);
+        final TextView tv_email = (TextView) findViewById(R.id.cEmailText);
+        final TextView tv_address = (TextView) findViewById(R.id.cAddressText);
+        final TextView tv_credit = (TextView) findViewById(R.id.cCreditText);
+        final TextView tv_debit = (TextView) findViewById(R.id.cDebitText);
+
+        RequestParams requestParams = new RequestParams();
+        String request = "";
+        String customerId = getIntent().getStringExtra("CUSTOMER_ID");
+        request = request.concat(customerId);
+
+        HttpUtils.get("customer/" +request, requestParams, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                try {
+                    tv_name.setText(response.getString("name"));
+                    tv_password.setText(response.getString("password"));
+                    tv_phone.setText(response.getString("phone"));
+                    tv_email.setText(response.getString("email"));
+                    tv_address.setText(response.getString("address"));
+                    tv_credit.setText(response.getString("creditHash"));
+                    tv_debit.setText(response.getString("debitHash"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                try {
+                    error += errorResponse.get(" email and password ").toString();
+                } catch (JSONException e) {
+                    error += e.getMessage();
+                }
+
+            }
+        });
 
     }
 
