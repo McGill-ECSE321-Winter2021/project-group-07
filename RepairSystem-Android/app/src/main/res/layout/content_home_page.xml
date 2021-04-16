@@ -2,116 +2,244 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/by"
+    android:id="@+id/top"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".homePage"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:gravity="top"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/toolbar4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <EditText
-            android:id="@+id/upcomingAppointments"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="My Appointments" />
-
-        <ListView
-            android:id="@+id/appointmentList"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </ListView>
-    </LinearLayout>
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar4"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/homePageView"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@color/purple_500"
-        android:backgroundTint="@color/purple_500"
-        android:gravity="bottom"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"/>
+        android:layout_height="match_parent"
+        tools:context=".homePage"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <Button
-        android:id="@+id/payment"
-        android:layout_width="87dp"
-        android:layout_height="75dp"
-        android:backgroundTint="@color/purple_500"
-        android:text="Pay"
-        android:onClick="toPayment"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar4"
-        app:layout_constraintEnd_toStartOf="@+id/logout"
-        app:layout_constraintStart_toEndOf="@+id/home"
-        app:layout_constraintTop_toTopOf="@+id/toolbar4"
-        app:strokeColor="#FFFFFF" />
+        <LinearLayout
+            android:id="@+id/linearLayoutHome"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="top"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/toolbarHome"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    <Button
-        android:id="@+id/bookAppointment"
-        android:layout_width="87dp"
-        android:layout_height="75dp"
-        android:backgroundTint="@color/purple_500"
-        android:onClick="toBook"
-        android:text="Book"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar4"
-        app:layout_constraintEnd_toStartOf="@+id/home"
-        app:layout_constraintStart_toEndOf="@+id/editProfile"
-        app:layout_constraintTop_toTopOf="@+id/toolbar4"
-        app:strokeColor="#FFFFFF" />
+            <EditText
+                android:id="@+id/upcomingAppointmentsHome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="My Appointments" />
 
-    <Button
-        android:id="@+id/editProfile"
-        android:layout_width="87dp"
-        android:layout_height="75dp"
-        android:backgroundTint="@color/purple_500"
-        android:onClick="toEditProfile"
-        android:text="Profile"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar4"
-        app:layout_constraintEnd_toStartOf="@+id/bookAppointment"
-        app:layout_constraintStart_toStartOf="@+id/toolbar4"
-        app:layout_constraintTop_toTopOf="@+id/toolbar4" />
+            <ListView
+                android:id="@+id/appointmentListHome"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/home"
-        android:layout_width="87dp"
-        android:layout_height="75dp"
-        android:backgroundTint="@color/white"
-        android:onClick="toEditProfile"
-        android:text="Home"
-        android:textColor="#4D00EA"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar4"
-        app:layout_constraintEnd_toStartOf="@+id/payment"
-        app:layout_constraintStart_toEndOf="@+id/bookAppointment"
-        app:layout_constraintTop_toTopOf="@+id/toolbar4"
-        app:strokeColor="#FFFFFF" />
+            </ListView>
+        </LinearLayout>
 
-    <Button
-        android:id="@+id/logout"
-        android:layout_width="87dp"
-        android:layout_height="75dp"
-        android:backgroundTint="@color/purple_500"
-        android:onClick="bye"
-        android:text="logout"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/payment"
-        app:layout_constraintTop_toTopOf="@+id/toolbar4"
-        app:strokeColor="#FFFFFF" />
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarHome"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/purple_500"
+            android:backgroundTint="@color/purple_500"
+            android:gravity="bottom"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayoutHome"/>
+
+        <Button
+            android:id="@+id/paymentHome"
+            android:layout_width="87dp"
+            android:layout_height="75dp"
+            android:backgroundTint="@color/purple_500"
+            android:text="Pay"
+            android:onClick="toPayment"
+            app:layout_constraintBottom_toBottomOf="@+id/toolbarHome"
+            app:layout_constraintEnd_toStartOf="@+id/logoutHome"
+            app:layout_constraintStart_toEndOf="@+id/homeHome"
+            app:layout_constraintTop_toTopOf="@+id/toolbarHome"
+            app:strokeColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/bookAppointmentHome"
+            android:layout_width="87dp"
+            android:layout_height="75dp"
+            android:backgroundTint="@color/purple_500"
+            android:onClick="toBook"
+            android:text="Book"
+            app:layout_constraintBottom_toBottomOf="@+id/toolbarHome"
+            app:layout_constraintEnd_toStartOf="@+id/homeHome"
+            app:layout_constraintStart_toEndOf="@+id/editProfileHome"
+            app:layout_constraintTop_toTopOf="@+id/toolbarHome"
+            app:strokeColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/editProfileHome"
+            android:layout_width="87dp"
+            android:layout_height="75dp"
+            android:backgroundTint="@color/purple_500"
+            android:onClick="toEditProfile"
+            android:text="Profile"
+            app:layout_constraintBottom_toBottomOf="@+id/toolbarHome"
+            app:layout_constraintEnd_toStartOf="@+id/bookAppointmentHome"
+            app:layout_constraintStart_toStartOf="@+id/toolbarHome"
+            app:layout_constraintTop_toTopOf="@+id/toolbarHome" />
+
+        <Button
+            android:id="@+id/homeHome"
+            android:layout_width="87dp"
+            android:layout_height="75dp"
+            android:backgroundTint="@color/white"
+            android:onClick="toEditProfile"
+            android:text="Home"
+            android:textColor="#4D00EA"
+            app:layout_constraintBottom_toBottomOf="@+id/toolbarHome"
+            app:layout_constraintEnd_toStartOf="@+id/paymentHome"
+            app:layout_constraintStart_toEndOf="@+id/bookAppointmentHome"
+            app:layout_constraintTop_toTopOf="@+id/toolbarHome"
+            app:strokeColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/logoutHome"
+            android:layout_width="87dp"
+            android:layout_height="75dp"
+            android:backgroundTint="@color/purple_500"
+            android:onClick="bye"
+            android:text="logout"
+            app:layout_constraintBottom_toBottomOf="@+id/toolbarHome"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/paymentHome"
+            app:layout_constraintTop_toTopOf="@+id/toolbarHome"
+            app:strokeColor="#FFFFFF" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:id="@+id/bookAppointmentView">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:id="@+id/linearLayoutBook">
+
+            <TextView
+                android:id="@+id/textViewBook"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:translationY="30dp"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/selectMech_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/selectMech_hint"
+                android:translationX="15px" />
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:onClick="addMechanic"
+                android:text="@string/selectMech_button" />
+        </LinearLayout>
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarBook"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/purple_500"
+            android:backgroundTint="@color/purple_500"
+            android:gravity="bottom"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayoutBook"/>
+
+        <Button
+            android:id="@+id/paymentBook"
+            android:layout_width="87dp"
+            android:layout_height="75dp"
+            android:backgroundTint="@color/purple_500"
+            android:text="Pay"
+            app:layout_constraintBottom_toBottomOf="@+id/toolbarBook"
+            app:layout_constraintEnd_toStartOf="@+id/logoutBook"
+            app:layout_constraintStart_toEndOf="@+id/homeBook"
+            app:layout_constraintTop_toTopOf="@+id/toolbarBook"
+            app:strokeColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/bookAppointmentBook"
+            android:layout_width="87dp"
+            android:layout_height="75dp"
+            android:backgroundTint="@color/white"
+            android:onClick="toBook"
+            android:text="Book"
+            android:textColor="#4D00EA"
+            app:layout_constraintBottom_toBottomOf="@+id/toolbarBook"
+            app:layout_constraintEnd_toStartOf="@+id/homeBook"
+            app:layout_constraintStart_toEndOf="@+id/editProfileBook"
+            app:layout_constraintTop_toTopOf="@+id/toolbarBook"
+            app:strokeColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/editProfileBook"
+            android:layout_width="87dp"
+            android:layout_height="75dp"
+            android:backgroundTint="@color/purple_500"
+            android:onClick="toEditProfile"
+            android:text="Profile"
+            app:layout_constraintBottom_toBottomOf="@+id/toolbarBook"
+            app:layout_constraintEnd_toStartOf="@+id/bookAppointmentBook"
+            app:layout_constraintStart_toStartOf="@+id/toolbarBook"
+            app:layout_constraintTop_toTopOf="@+id/toolbarBook" />
+
+        <Button
+            android:id="@+id/homeBook"
+            android:layout_width="87dp"
+            android:layout_height="75dp"
+            android:backgroundTint="@color/purple_500"
+            android:onClick="toEditProfile"
+            android:text="Home"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="@+id/toolbarBook"
+            app:layout_constraintEnd_toStartOf="@+id/paymentBook"
+            app:layout_constraintStart_toEndOf="@+id/bookAppointmentBook"
+            app:layout_constraintTop_toTopOf="@+id/toolbarBook"
+            app:strokeColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/logoutBook"
+            android:layout_width="87dp"
+            android:layout_height="75dp"
+            android:backgroundTint="@color/purple_500"
+            android:onClick="bye"
+            android:text="logout"
+            app:layout_constraintBottom_toBottomOf="@+id/toolbarBook"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/paymentBook"
+            app:layout_constraintTop_toTopOf="@+id/toolbarBook"
+            app:strokeColor="#FFFFFF" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

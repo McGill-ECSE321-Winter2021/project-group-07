@@ -17,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -35,6 +36,14 @@ public class homePage extends AppCompatActivity {
     ArrayList<String> appointments = new ArrayList<String>();
     //String appointments[] = new String[100];
     String error = "";
+    Boolean bookAppointmentIsVisible = false;
+    Boolean makePaymentIsVisible = false;
+    Boolean editProfileIsVisible = false;
+    Boolean homePageIsVisible = true;
+    View bookAppointmentView;
+    View makePaymentView;
+    View editProfileView;
+    View homePageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,15 +52,10 @@ public class homePage extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
+        bookAppointmentView = findViewById(R.id.bookAppointmentView);
+        //makePaymentView = findViewById(R.id.makePaymentView);
+        //editProfileView = findViewById(R.id.editProfileView);
+        homePageView = findViewById(R.id.homePageView);
 
         String customerId = getIntent().getStringExtra("customerId");
         String request = "";
@@ -71,13 +75,13 @@ public class homePage extends AppCompatActivity {
                         toAdd = toAdd.concat(ID+"    "+"Start: ");
                         JSONObject timeSlot = response.getJSONObject(i).getJSONObject("timeSlot");
                         toAdd = toAdd.concat(timeSlot.getString("startTime"));
-                       appointments.add(toAdd);
+                        appointments.add(toAdd);
                     } catch (JSONException e) {
                         error += e.getMessage();
                     }
                 }
 
-                final ListView listView=(ListView)findViewById(R.id.appointmentList);
+                final ListView listView=(ListView)findViewById(R.id.appointmentListHome);
                 final StableArrayAdapter  adapdter = new StableArrayAdapter(homePage.this, android.R.layout.simple_list_item_1, appointments);
                 listView.setAdapter(adapdter);
                 String delims = "[    ]";
@@ -104,14 +108,48 @@ public class homePage extends AppCompatActivity {
                 }
             }
         });
-        
-        toBook(findViewById(R.id.bookAppointment));
-        toEditProfile(findViewById(R.id.editProfile));
-        bye(findViewById(R.id.logout));
-        toPayment(findViewById(R.id.payment));
+
+        toBook(findViewById(R.id.bookAppointmentView));
+        //toEditProfile(findViewById(R.id.editProfileView));
+        //bye(findViewById(R.id.logout));
+        //toPayment(findViewById(R.id.makePaymentView));
+        toPayment(findViewById(R.id.homePageView));
 
     }
 
+    private void refreshErrorMessage() {
+        // set the error message
+        TextView tvError = (TextView) findViewById(R.id.error);
+        tvError.setText(error);
+
+        if (error == null || error.length() == 0) {
+            tvError.setVisibility(View.GONE);
+        } else {
+            tvError.setVisibility(View.VISIBLE);
+        }
+    }
+
+    public void addMechanic(View v) {
+        error = "";
+        final TextView tv = (TextView) findViewById(R.id.selectMech_name);
+        HttpUtils.post("persons/" + tv.getText().toString(), new RequestParams(), new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                refreshErrorMessage();
+                tv.setText("");
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                try {
+                    error += errorResponse.get("message").toString();
+                } catch (JSONException e) {
+                    error += e.getMessage();
+                }
+                refreshErrorMessage();
+            }
+        });
+    }
 
     public void toBook(View v)
     {
@@ -120,10 +158,16 @@ public class homePage extends AppCompatActivity {
         toBook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String customerId = getIntent().getStringExtra("customerId");
-                Intent intent = new Intent(homePage.this, BookingAppointment.class);
-                intent.putExtra("CUSTOMER_ID", customerId);
-                startActivity(intent);
+                if(!bookAppointmentIsVisible){
+                    bookAppointmentView.setVisibility(View.VISIBLE);
+                    //editProfileView.setVisibility(View.GONE);
+                    //makePaymentView.setVisibility(View.GONE);
+                    homePageView.setVisibility(View.GONE);
+                    bookAppointmentIsVisible = true;
+                    //makePaymentIsVisible = false;
+                    //editProfileIsVisible = false;
+                    homePageIsVisible = false;
+                }
             }
         });
     }
@@ -134,10 +178,16 @@ public class homePage extends AppCompatActivity {
         toEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String customerId = getIntent().getStringExtra("customerId");
-                Intent intent = new Intent(homePage.this, CusomterProfile.class);
-               intent.putExtra("CUSTOMER_ID", customerId);
-               startActivity(intent);
+                if(!editProfileIsVisible){
+                    bookAppointmentView.setVisibility(View.GONE);
+                    editProfileView.setVisibility(View.VISIBLE);
+                    makePaymentView.setVisibility(View.GONE);
+                    homePageView.setVisibility(View.GONE);
+                    bookAppointmentIsVisible = false;
+                    makePaymentIsVisible = false;
+                    editProfileIsVisible = true;
+                    homePageIsVisible = false;
+                }
             }
         });
     }
@@ -160,14 +210,39 @@ public class homePage extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                String customerId = getIntent().getStringExtra("customerId");
-                Intent intent = new Intent(homePage.this, Payment.class);
-                intent.putExtra("CUSTOMER_ID", customerId);
-                startActivity(intent);
+                if(!makePaymentIsVisible){
+                    bookAppointmentView.setVisibility(View.GONE);
+                    editProfileView.setVisibility(View.GONE);
+                    makePaymentView.setVisibility(View.VISIBLE);
+                    homePageView.setVisibility(View.GONE);
+                    bookAppointmentIsVisible = false;
+                    makePaymentIsVisible = true;
+                    editProfileIsVisible = false;
+                    homePageIsVisible = false;
+                }
             }
         });
     }
 
+    public void toHome(View v)
+    {
+        Button toHome = findViewById(R.id.home);
+        toHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!homePageIsVisible){
+                    bookAppointmentView.setVisibility(View.GONE);
+                    //editProfileView.setVisibility(View.GONE);
+                    //makePaymentView.setVisibility(View.GONE);
+                    homePageView.setVisibility(View.VISIBLE);
+                    bookAppointmentIsVisible = false;
+                    //makePaymentIsVisible = false;
+                    //editProfileIsVisible = false;
+                    homePageIsVisible = true;
+                }
+            }
+        });
+    }
 
     private class StableArrayAdapter extends ArrayAdapter<String>{
         HashMap<String, Integer> mIdMap = new HashMap<String, Integer>();
