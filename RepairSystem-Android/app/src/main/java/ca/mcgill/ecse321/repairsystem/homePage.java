@@ -155,11 +155,19 @@ public class homePage extends AppCompatActivity {
                 } catch (JSONException e) {
                     error += e.getMessage();
                 }
-
             }
         });
-
     }
+
+    public void makePayment(View v) {
+        Context context = getApplicationContext();
+        CharSequence text = "Payment received!";
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+    }
+
 
     public void viewCrendentials(View v)
     {
