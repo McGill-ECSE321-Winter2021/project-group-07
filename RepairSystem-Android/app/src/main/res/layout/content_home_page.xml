@@ -5,8 +5,9 @@
     android:id="@+id/top"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".homePage"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    android:backgroundTint="@color/purple_500"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".homePage">
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -124,47 +125,138 @@
             app:strokeColor="#FFFFFF" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    <!-- ////////////////// BOOK APPOINTMENT ////////////////// -->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bookAppointmentView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:id="@+id/bookAppointmentView">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:orientation="vertical"
-            android:id="@+id/linearLayoutBook"
-            android:gravity="top"
-            app:layout_constraintBottom_toTopOf="@id/toolbarBook"
+
+        <EditText
+            android:id="@+id/et_date"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:hint="Select Date"
+            android:textAlignment="center"
+            android:textSize="30sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/tv_timer2"
+            tools:ignore="MissingConstraints" />
+
+
+        <TextView
+            android:id="@+id/tv_timer2"
+            android:layout_width="409dp"
+            android:layout_height="127dp"
+            android:layout_centerHorizontal="true"
+            android:background="@android:drawable/editbox_background"
+            android:drawableTop="@drawable/ic_time"
+            android:drawablePadding="10dp"
+            android:gravity="center"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/addTimeSlot"
+            app:layout_constraintTop_toBottomOf="@id/et_date"
+            tools:ignore="MissingConstraints" />
+
+        <Button
+            android:id="@+id/addTimeSlot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="Confirm Schedule"
+            app:layout_constraintBottom_toTopOf="@id/selectServiceBtn"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@id/tv_timer2"
+            app:layout_constraintVertical_bias="0.429" />
 
-            <TextView
-                android:id="@+id/textViewBook"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:translationY="30dp"
-                android:visibility="gone" />
+        <Button
+            android:id="@+id/selectServiceBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:onClick="servicePopup"
+            android:text="Select Service "
+            app:layout_constraintBottom_toTopOf="@id/addTimeSlot"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/selectMechBtn"
+            app:layout_constraintVertical_bias="0.529" />
 
-            <EditText
-                android:id="@+id/selectMech_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/selectMech_hint"
-                android:translationX="15px" />
+        <Button
+            android:id="@+id/selectMechBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:onClick="showPopup"
+            android:text="Select Mechanic"
+            app:layout_constraintTop_toBottomOf="@id/selectServiceBtn"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/selectCarBtn"
 
-            <Button
-                android:id="@+id/button3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:onClick="addMechanic"
-                android:text="@string/selectMech_button" />
-        </LinearLayout>
+            app:layout_constraintVertical_bias="0.629" />
+
+        <!--Menu Button goes here-->
+
+        <Button
+            android:id="@+id/selectCarBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:onClick="showPopup"
+            android:text="Select Car"
+            app:layout_constraintBottom_toTopOf="@id/bookAppBtn"
+            app:layout_constraintTop_toBottomOf="@id/selectServiceBtn"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintVertical_bias="0.729" />
+
+        <!--
+        ***
+        THE POSITION OF ADD CAR BUTTON MIGHT LOOK WEIRD ON THE DESIGN EDITOR,
+        BUT IT LOOKS CORRECT ON THE APP SO PLZ DON'T CHANGE
+        ****
+        -->
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/addCarBtn"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:clickable="true"
+            android:visibility="visible"
+            app:fabCustomSize="30dp"
+            app:layout_constraintBottom_toBottomOf="@id/selectCarBtn"
+            app:layout_constraintTop_toTopOf="@id/selectCarBtn"
+            app:layout_constraintLeft_toRightOf="@id/selectCarBtn"
+
+            app:srcCompat="@android:drawable/ic_input_add"
+            tools:ignore="ExtraText,MissingConstraints" />
+
+        <Button
+            android:id="@+id/bookAppBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:backgroundTint="@color/purple_700"
+            android:text="Book Appointment"
+            app:layout_constraintBottom_toTopOf="@id/toolbarBook"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/selectCarBtn" />
+
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbarBook"
@@ -177,8 +269,7 @@
             android:theme="?attr/actionBarTheme"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayoutBook"/>
+            app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/paymentBook"
@@ -244,6 +335,7 @@
             app:layout_constraintStart_toEndOf="@+id/paymentBook"
             app:layout_constraintTop_toTopOf="@+id/toolbarBook"
             app:strokeColor="#FFFFFF" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -337,7 +429,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:text="@string/makePayment_button" />
+                android:text="@string/makePayment_button"
+                android:onClick="makePayment" />
 
             <TextView
                 android:id="@+id/error"
@@ -459,7 +552,6 @@
                 android:gravity="center"
                 android:orientation="vertical"
                 android:id="@+id/linearLayoutEdit">
-
 
                 <ImageView
                     android:id="@+id/imageView"
@@ -678,5 +770,5 @@
             app:strokeColor="#FFFFFF" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
+
