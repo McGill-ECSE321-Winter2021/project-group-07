@@ -1,7 +1,10 @@
 package ca.mcgill.ecse321.repairsystem;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import ca.mcgill.ecse321.repairsystem.HttpUtils;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -12,23 +15,63 @@ import com.loopj.android.http.RequestParams;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.text.format.DateFormat;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.TimePicker;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import cz.msebera.android.httpclient.Header;
 
-public class BookingAppointment extends AppCompatActivity {
+public class BookingAppointment extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener{
     private String error = null;
     EditText etDate;
+    TextView tvTimer2;
+    int t2Hour, t2Minute;
+
+
+    public void showPopup(View v){
+        PopupMenu popup = new PopupMenu(this, v);
+        popup.setOnMenuItemClickListener(this);
+        popup.inflate(R.menu.popup_menu);
+        popup.show();
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem item){
+        switch (item.getItemId()){
+            case R.id.item1:
+                Toast.makeText(this, "Item 1 clickes", Toast.LENGTH_SHORT);
+                return true;
+            case R.id.item2:
+                Toast.makeText(this, "Item 2 clickes", Toast.LENGTH_SHORT);
+                return true;
+
+                case R.id.item3:
+                Toast.makeText(this, "Item 3 clickes", Toast.LENGTH_SHORT);
+                return true;
+
+                case R.id.item4:
+                Toast.makeText(this, "Item 4 clickes", Toast.LENGTH_SHORT);
+                return true;
+            default:
+                return false;
+        }
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,11 +80,13 @@ public class BookingAppointment extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         etDate = findViewById(R.id.et_date);
-
         Calendar calendar = Calendar.getInstance();
         final int year = calendar.get(Calendar.YEAR);
         final int month = calendar.get(Calendar.MONTH);
         final int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        tvTimer2 = findViewById(R.id.tv_timer2);
+
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -72,6 +117,39 @@ public class BookingAppointment extends AppCompatActivity {
                     }
                 },year,month,day);
                 datePickerDialog.show();
+            }
+        });
+
+
+
+
+
+        tvTimer2.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                TimePickerDialog timePickerDialog = new TimePickerDialog(
+                        BookingAppointment.this,
+                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                        new TimePickerDialog.OnTimeSetListener() {
+                            @Override
+                            public void onTimeSet(TimePicker timePicker, int hourOfDay, int minute) {
+                                t2Hour = hourOfDay;
+                                t2Minute = minute;
+                                String time = t2Hour + ":" + t2Minute;
+                                SimpleDateFormat f24Hours = new SimpleDateFormat("HH:mm");
+                                try{
+                                    Date date = f24Hours.parse(time);
+                                    SimpleDateFormat f12Hours = new SimpleDateFormat("hh:mm aa");
+                                    tvTimer2.setText(f12Hours.format(date));
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+
+                            }
+                        },12,0,true
+                );
+                timePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                timePickerDialog.updateTime(t2Hour, t2Minute);
+                timePickerDialog.show();
             }
         });
     }
