@@ -47,7 +47,6 @@ public class BookingAppointment extends AppCompatActivity implements PopupMenu.O
     private Button selectMechBtn;
     private Button bookAppBtn;
 
-
     /*variables for book appointment and add timeslot*/
     String startT= "";
     String endT= "";
@@ -62,8 +61,6 @@ public class BookingAppointment extends AppCompatActivity implements PopupMenu.O
     String mechId="3347453";
 
     final Context context = this;
-
-
 
     public void showPopup(View v){
         PopupMenu popup = new PopupMenu(this, v);
@@ -127,8 +124,6 @@ public class BookingAppointment extends AppCompatActivity implements PopupMenu.O
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
-
         //date picker
         etDate = findViewById(R.id.et_date);
         Calendar calendar = Calendar.getInstance();
@@ -143,13 +138,6 @@ public class BookingAppointment extends AppCompatActivity implements PopupMenu.O
 
         //add Timeslot
         addTimeSlot = (Button) findViewById(R.id.addTimeSlot);
-
-
-        //bottom menu bar
-        toHome(findViewById(R.id.bookAppointment));
-        toEditProfile(findViewById(R.id.editProfile));
-        bye(findViewById(R.id.logout));
-        toPayment(findViewById(R.id.payment));
 
         //select Mechanic
         selectMechBtn = (Button) findViewById(R.id.selectMechBtn);
@@ -463,19 +451,10 @@ public class BookingAppointment extends AppCompatActivity implements PopupMenu.O
                         }
                         refreshErrorMessage();
                     }
-
                 });
-
-
-
             }
         });
-
     }
-
-
-
-
 
     private void refreshErrorMessage() {
         // set the error message
@@ -488,89 +467,4 @@ public class BookingAppointment extends AppCompatActivity implements PopupMenu.O
             tvError.setVisibility(View.VISIBLE);
         }
     }
-
-
-
-
-/*
-    public void addMechanic(View v) {
-        error = "";
-        final TextView tv = (TextView) findViewById(R.id.selectMech_name);
-        HttpUtils.post("persons/" + tv.getText().toString(), new RequestParams(), new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                refreshErrorMessage();
-                tv.setText("");
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                try {
-                    error += errorResponse.get("message").toString();
-                } catch (JSONException e) {
-                    error += e.getMessage();
-                }
-                refreshErrorMessage();
-            }
-        });
-    }*/
-
-
-
-
-    /*Button Menu*/
-    public void toHome(View v)
-    {
-        Button toHome = findViewById(R.id.home);
-        toHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String customerId = getIntent().getStringExtra("customerId");
-                Intent intent = new Intent(BookingAppointment.this, homePage.class);
-                intent.putExtra("CUSTOMER_ID", customerId);
-                startActivity(intent);
-            }
-        });
-    }
-
-    public void bye(View v)
-    {
-        Button toLogOut = findViewById(R.id.logout);
-        toLogOut.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v)
-            {
-                startActivity(new Intent(BookingAppointment.this, MainActivity.class));
-            }
-        });
-    }
-
-    public void toPayment(View v){
-        Button toPay = findViewById(R.id.payment);
-        toPay.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v)
-            {
-                String customerId = getIntent().getStringExtra("customerId");
-                Intent intent = new Intent(BookingAppointment.this, Payment.class);
-                intent.putExtra("CUSTOMER_ID", customerId);
-                startActivity(intent);
-            }
-        });
-    }
-
-    public void toEditProfile(View v){
-        Button toEdit = findViewById(R.id.editProfile);
-        toEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String customerId = getIntent().getStringExtra("customerId");
-                Intent intent = new Intent(BookingAppointment.this, CusomterProfile.class);
-                intent.putExtra("CUSTOMER_ID", customerId);
-                startActivity(intent);
-            }
-        });
-    }
-
-
 }
