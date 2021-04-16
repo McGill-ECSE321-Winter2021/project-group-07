@@ -153,9 +153,9 @@ public class homePage extends AppCompatActivity {
 
     public void toBook(View v)
     {
-        Button toBook = findViewById(R.id.bookAppointmentView);
-
-        toBook.setOnClickListener(new View.OnClickListener() {
+        Button toBookHome = findViewById(R.id.bookAppointmentHome);
+        Button toBookBook = findViewById(R.id.bookAppointmentBook);
+        View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(!bookAppointmentIsVisible){
@@ -169,7 +169,11 @@ public class homePage extends AppCompatActivity {
                     homePageIsVisible = false;
                 }
             }
-        });
+        };
+
+        toBookHome.setOnClickListener(listener);
+        toBookBook.setOnClickListener(listener);
+
     }
 /*
     public void toEditProfile(View v)
@@ -226,8 +230,9 @@ public class homePage extends AppCompatActivity {
 */
     public void toHome(View v)
     {
-        Button toHome = findViewById(R.id.homePageView);
-        toHome.setOnClickListener(new View.OnClickListener() {
+        Button toHomeHome = findViewById(R.id.homeHome);
+        Button toHomeBook = findViewById(R.id.homeHome);
+        View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(!homePageIsVisible){
@@ -241,7 +246,10 @@ public class homePage extends AppCompatActivity {
                     homePageIsVisible = true;
                 }
             }
-        });
+        };
+
+        toHomeHome.setOnClickListener(listener);
+        toHomeBook.setOnClickListener(listener);
     }
 
     private class StableArrayAdapter extends ArrayAdapter<String>{
