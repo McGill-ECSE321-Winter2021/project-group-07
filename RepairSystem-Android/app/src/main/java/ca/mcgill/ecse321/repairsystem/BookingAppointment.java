@@ -50,28 +50,45 @@ public class BookingAppointment extends AppCompatActivity implements PopupMenu.O
         popup.inflate(R.menu.popup_menu);
         popup.show();
     }
+    public void servicePopup(View v){
+        PopupMenu popup = new PopupMenu(this, v);
+        popup.setOnMenuItemClickListener(this);
 
-    @Override
-    public boolean onMenuItemClick(MenuItem item){
-        switch (item.getItemId()){
-            case R.id.item1:
-                Toast.makeText(this, "Item 1 clickes", Toast.LENGTH_SHORT);
-                return true;
-            case R.id.item2:
-                Toast.makeText(this, "Item 2 clickes", Toast.LENGTH_SHORT);
-                return true;
-
-                case R.id.item3:
-                Toast.makeText(this, "Item 3 clickes", Toast.LENGTH_SHORT);
-                return true;
-
-                case R.id.item4:
-                Toast.makeText(this, "Item 4 clickes", Toast.LENGTH_SHORT);
-                return true;
-            default:
-                return false;
-        }
+        popup.inflate(R.menu.service_popup_menu);
+        popup.show();
     }
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        if(item.getItemId()==R.id.item1){
+            Toast.makeText(this, "item1 selected", Toast.LENGTH_SHORT).show();
+        }else if(item.getItemId()==R.id.item2){
+            Toast.makeText(this, "item2 selected", Toast.LENGTH_SHORT).show();
+        }else if(item.getItemId()==R.id.item3){
+            Toast.makeText(this, "item3 selected", Toast.LENGTH_SHORT).show();
+        }else if(item.getItemId()==R.id.item4){
+            Toast.makeText(this, "item4 selected", Toast.LENGTH_SHORT).show();
+        }else if(item.getItemId()==R.id.CarRepair){
+            Toast.makeText(this, "CarRepair selected", Toast.LENGTH_SHORT).show();
+        }else if(item.getItemId()==R.id.OilChange){
+            Toast.makeText(this, "OilChange selected", Toast.LENGTH_SHORT).show();
+        }else if(item.getItemId()==R.id.RegularCheckup){
+            Toast.makeText(this, "RegularCheckup selected", Toast.LENGTH_SHORT).show();
+        }else if(item.getItemId()==R.id.CarWash){
+            Toast.makeText(this, "CarWash selected", Toast.LENGTH_SHORT).show();
+        }else if(item.getItemId()==R.id.TireChange){
+            Toast.makeText(this, "TireChange selected", Toast.LENGTH_SHORT).show();
+        }else if(item.getItemId()==R.id.RoadsideAssistance){
+            Toast.makeText(this, "RoadsideAssistance selected", Toast.LENGTH_SHORT).show();
+        }else if(item.getItemId()==R.id.Towing){
+            Toast.makeText(this, "Towing selected", Toast.LENGTH_SHORT).show();
+        }else if(item.getItemId()==R.id.CarInspection){
+            Toast.makeText(this, "CarInspection selected", Toast.LENGTH_SHORT).show();
+        }else if(item.getItemId()==R.id.Other){
+            Toast.makeText(this, "Other selected", Toast.LENGTH_SHORT).show();
+        }
+        return false;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -119,10 +136,6 @@ public class BookingAppointment extends AppCompatActivity implements PopupMenu.O
                 datePickerDialog.show();
             }
         });
-
-
-
-
 
         tvTimer2.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
