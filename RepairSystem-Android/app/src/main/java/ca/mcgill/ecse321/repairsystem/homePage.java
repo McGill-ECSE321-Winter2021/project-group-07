@@ -182,20 +182,41 @@ public class homePage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String request = "";
+                String name = tv_name.getText().toString();
+                for(int i = 0; i < name.length(); i++){
+                    if(Character.compare(name.charAt(i),' ') == 0){
+                        if(i == name.length()-1){
+                            name = name.substring(0,name.length()-1) + "%20";
+                        } else {
+                            name = name.substring(0,i) + "%20" + name.substring(i+1,name.length());
+                        }
+
+                    }
+                }
+                String address = tv_address.getText().toString();
+                for(int i = 0; i < address.length(); i++){
+                    if(Character.compare(address.charAt(i),' ') == 0){
+                        if(i == address.length()-1){
+                            address = address.substring(0,address.length()-1) + "%20";
+                        } else {
+                            address = address.substring(0,i) + "%20" + address.substring(i+1,address.length());
+                        }
+                    }
+                }
                 request = request.concat(tv_email.getText().toString());
-                request = request.concat("?newName="+tv_name.getText().toString());
+                request = request.concat("?newName="+name);
                 request = request.concat("&newPassword="+tv_password.getText().toString());
                 request = request.concat("&newPhone="+tv_phone.getText().toString());
                 request = request.concat("&newCredit="+tv_credit.getText().toString());
                 request = request.concat("&newDebit="+tv_debit.getText().toString());
-                request = request.concat("&newAddress="+tv_address.getText().toString());
+                request = request.concat("&newAddress="+address);
 
                 HttpUtils.put("customer/" + request, new RequestParams(), new JsonHttpResponseHandler(){
 
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response)
                     {
-                        try {
+                        try{
                             tv_name.setText(response.getString("name"));
                             tv_password.setText(response.getString("password"));
                             tv_phone.setText(response.getString("phone"));
