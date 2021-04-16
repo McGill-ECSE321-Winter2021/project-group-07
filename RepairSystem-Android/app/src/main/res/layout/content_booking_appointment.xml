@@ -41,14 +41,16 @@
         android:hint="Select Date"
         android:textAlignment="center"
         android:textSize="30sp"
+        android:gravity="center"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="92dp" />
 
+
     <TextView
         android:id="@+id/tv_timer2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="374dp"
+        android:layout_height="87dp"
         android:background="@android:drawable/editbox_background"
         android:drawableTop="@drawable/ic_time"
         android:drawablePadding="16dp"
@@ -57,49 +59,52 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_center="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.181"
+        app:layout_constraintVertical_bias="0.162"
         tools:ignore="MissingConstraints" />
-
 
     <Button
         android:id="@+id/addTimeSlot"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Set Schedule "
+        app:layout_constraintHorizontal_center="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.429" />
+        app:layout_constraintVertical_bias="0.329" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="servicePopup"
         android:text="Select Service "
+        app:layout_constraintHorizontal_center="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.474"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.527" />
+        app:layout_constraintVertical_bias="0.429" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="showPopup"
         android:text="Select Mechanic"
+        app:layout_constraintHorizontal_center="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.629" />
+        app:layout_constraintVertical_bias="0.529" />
 
     <!--Menu Button goes here-->
 
@@ -108,6 +113,21 @@
         android:layout_height="wrap_content"
         android:onClick="showPopup"
         android:text="Select Car"
+        app:layout_constraintHorizontal_center="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.629" />
+
+    <Button
+        android:id="@+id/addCarBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Car "
+        app:layout_constraintHorizontal_center="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -117,10 +137,11 @@
         app:layout_constraintVertical_bias="0.729" />
 
     <Button
-        android:id="@+id/addCarBtn"
+        android:id="@+id/appBookBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add Car "
+        app:layout_constraintHorizontal_center="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
