@@ -153,7 +153,7 @@ public class homePage extends AppCompatActivity {
 
     public void toBook(View v)
     {
-        Button toBook = findViewById(R.id.bookAppointment);
+        Button toBook = findViewById(R.id.bookAppointmentView);
 
         toBook.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -171,10 +171,10 @@ public class homePage extends AppCompatActivity {
             }
         });
     }
-
+/*
     public void toEditProfile(View v)
     {
-        Button toEdit = findViewById(R.id.editProfile);
+        Button toEdit = findViewById(R.id.editProfileView);
         toEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -191,7 +191,7 @@ public class homePage extends AppCompatActivity {
             }
         });
     }
-
+*/
     public void bye(View v)
     {
         Button toLogOut = findViewById(R.id.logout);
@@ -203,7 +203,7 @@ public class homePage extends AppCompatActivity {
             }
         });
     }
-
+/*
     public void toPayment(View v){
         Button toPay = findViewById(R.id.payment);
         toPay.setOnClickListener(new View.OnClickListener(){
@@ -223,10 +223,10 @@ public class homePage extends AppCompatActivity {
             }
         });
     }
-
+*/
     public void toHome(View v)
     {
-        Button toHome = findViewById(R.id.home);
+        Button toHome = findViewById(R.id.homePageView);
         toHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
