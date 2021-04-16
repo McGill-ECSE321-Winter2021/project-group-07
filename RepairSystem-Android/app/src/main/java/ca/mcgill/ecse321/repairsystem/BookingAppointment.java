@@ -25,11 +25,18 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
+import cz.msebera.android.httpclient.Header;
 
 public class BookingAppointment extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener{
     private String error = null;
@@ -129,10 +136,44 @@ public class BookingAppointment extends AppCompatActivity implements PopupMenu.O
                 // setup a dialog window
                 alertDialogBuilder
                         .setCancelable(false)
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        .setPositiveButton("Add Car", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 // get user input and set it to result
-                               // editTextMainScreen2.setText(NumberofKilometersInput.getText());
+                                RequestParams requestParams = new RequestParams();
+                                String request = "";
+                                String customerId = getIntent().getStringExtra("CUSTOMER_ID");
+                                request = request.concat(customerId);
+                                request = request.concat("?carType="+carInput.getText().toString());
+                                request = request.concat("&winterTires="+WinterTiresInput.getText().toString());
+                                request = request.concat("&numOfKilometers="+NumberofKilometersInput.getText().toString());
+                                TextView tv_name = (TextView) findViewById(R.id.test);
+
+                                //108960?carType=SUV&winterTires=true&numOfKilometers=1234
+
+
+
+                                HttpUtils.put("/car/" +request, requestParams, new JsonHttpResponseHandler()
+
+
+                                {
+                                    @Override
+                                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                                        try {
+                                            tv_name.setText(response.getString("carType"));
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                    @Override
+                                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                                        try {
+                                            error += errorResponse.get(" email and password ").toString();
+                                        } catch (JSONException e) {
+                                            error += e.getMessage();
+                                        }
+
+                                    }
+                                });
 
                             }
                         })
