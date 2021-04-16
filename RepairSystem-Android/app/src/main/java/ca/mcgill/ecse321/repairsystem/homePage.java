@@ -113,7 +113,7 @@ public class homePage extends AppCompatActivity {
         //toEditProfile(findViewById(R.id.editProfileView));
         //bye(findViewById(R.id.logout));
         //toPayment(findViewById(R.id.makePaymentView));
-        toPayment(findViewById(R.id.homePageView));
+        toHome(findViewById(R.id.homePageView));
 
     }
 
