@@ -460,17 +460,6 @@
                 android:orientation="vertical"
                 android:id="@+id/linearLayoutEdit">
 
-                <TextView
-                    android:id="@+id/userProfileText"
-                    android:layout_width="238dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:gravity="center"
-                    android:text="@string/profile"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="24sp"
-                    android:textStyle="bold" />
 
                 <ImageView
                     android:id="@+id/imageView"
