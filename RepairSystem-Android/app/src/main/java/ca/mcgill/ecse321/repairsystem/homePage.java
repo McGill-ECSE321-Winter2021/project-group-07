@@ -35,6 +35,7 @@ public class homePage extends AppCompatActivity {
 
     ArrayList<String> appointments = new ArrayList<String>();
     //String appointments[] = new String[100];
+    String customerId;
     String error = "";
     Boolean bookAppointmentIsVisible = false;
     Boolean makePaymentIsVisible = false;
@@ -62,7 +63,7 @@ public class homePage extends AppCompatActivity {
         makePaymentView.setVisibility(View.GONE);
         homePageView.setVisibility(View.VISIBLE);
 
-        String customerId = getIntent().getStringExtra("customerId");
+        customerId = getIntent().getStringExtra("customerId");
         String request = "";
         request = request.concat(customerId);
         HttpUtils.get("appointments/" + request, new RequestParams(), new JsonHttpResponseHandler() {
@@ -136,7 +137,6 @@ public class homePage extends AppCompatActivity {
 
         RequestParams requestParams = new RequestParams();
         String request = "";
-        String customerId = getIntent().getStringExtra("CUSTOMER_ID");
         request = request.concat(customerId);
 
         HttpUtils.get("customer/" +request, requestParams, new JsonHttpResponseHandler() {
