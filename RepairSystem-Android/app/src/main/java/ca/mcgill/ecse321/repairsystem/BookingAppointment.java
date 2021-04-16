@@ -128,6 +128,7 @@ public class BookingAppointment extends AppCompatActivity implements PopupMenu.O
         setSupportActionBar(toolbar);
 
 
+
         //date picker
         etDate = findViewById(R.id.et_date);
         Calendar calendar = Calendar.getInstance();
@@ -469,6 +470,7 @@ public class BookingAppointment extends AppCompatActivity implements PopupMenu.O
 
             }
         });
+
     }
 
 
@@ -512,6 +514,7 @@ public class BookingAppointment extends AppCompatActivity implements PopupMenu.O
             }
         });
     }*/
+
 
 
 
@@ -568,5 +571,6 @@ public class BookingAppointment extends AppCompatActivity implements PopupMenu.O
             }
         });
     }
+
 
 }

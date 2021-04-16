@@ -17,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -34,7 +35,16 @@ public class homePage extends AppCompatActivity {
 
     ArrayList<String> appointments = new ArrayList<String>();
     //String appointments[] = new String[100];
+    String customerId;
     String error = "";
+    Boolean bookAppointmentIsVisible = false;
+    Boolean makePaymentIsVisible = false;
+    Boolean editProfileIsVisible = false;
+    Boolean homePageIsVisible = true;
+    View bookAppointmentView;
+    View makePaymentView;
+    View editProfileView;
+    View homePageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +53,17 @@ public class homePage extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        String customerId = getIntent().getStringExtra("customerId");
+        bookAppointmentView = findViewById(R.id.bookAppointmentView);
+        makePaymentView = findViewById(R.id.makePaymentView);
+        editProfileView = findViewById(R.id.editProfileView);
+        homePageView = findViewById(R.id.homePageView);
+
+        bookAppointmentView.setVisibility(View.GONE);
+        editProfileView.setVisibility(View.GONE);
+        makePaymentView.setVisibility(View.GONE);
+        homePageView.setVisibility(View.VISIBLE);
+
+        customerId = getIntent().getStringExtra("customerId");
         String request = "";
         request = request.concat(customerId);
         HttpUtils.get("appointments/" + request, new RequestParams(), new JsonHttpResponseHandler() {
@@ -61,13 +81,13 @@ public class homePage extends AppCompatActivity {
                         toAdd = toAdd.concat(ID+"    "+"Start: ");
                         JSONObject timeSlot = response.getJSONObject(i).getJSONObject("timeSlot");
                         toAdd = toAdd.concat(timeSlot.getString("startTime"));
-                       appointments.add(toAdd);
+                        appointments.add(toAdd);
                     } catch (JSONException e) {
                         error += e.getMessage();
                     }
                 }
 
-                final ListView listView=(ListView)findViewById(R.id.appointmentList);
+                final ListView listView=(ListView)findViewById(R.id.appointmentListHome);
                 final StableArrayAdapter  adapdter = new StableArrayAdapter(homePage.this, android.R.layout.simple_list_item_1, appointments);
                 listView.setAdapter(adapdter);
                 String delims = "[    ]";
@@ -94,70 +114,347 @@ public class homePage extends AppCompatActivity {
                 }
             }
         });
-        
-        toBook(findViewById(R.id.bookAppointment));
-        toEditProfile(findViewById(R.id.editProfile));
+
+        setInfo(findViewById(R.id.cNameText));
+        viewCrendentials(findViewById(R.id.cNameText));
+        updateProfile(findViewById(R.id.cNameText));
+        toBook(findViewById(R.id.bookAppointmentView));
+        toEditProfile(findViewById(R.id.editProfileView));
         bye(findViewById(R.id.logout));
-        toPayment(findViewById(R.id.payment));
+        toPayment(findViewById(R.id.makePaymentView));
+        toHome(findViewById(R.id.homePageView));
 
     }
 
+    public void setInfo(View v) {
+        final TextView tv_email = (TextView) findViewById(R.id.email);
+        final TextView tv_address = (TextView) findViewById(R.id.address);
+        final TextView tv_credit = (TextView) findViewById(R.id.credit);
+        final TextView tv_debit = (TextView) findViewById(R.id.debit);
+
+        RequestParams requestParams = new RequestParams();
+        String request = "";
+        request = request.concat(customerId);
+
+        HttpUtils.get("customer/" +request, requestParams, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                try {
+                    tv_email.setText(response.getString("email"));
+                    tv_address.setText(response.getString("address"));
+                    tv_credit.setText(response.getString("creditHash"));
+                    tv_debit.setText(response.getString("debitHash"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                try {
+                    error += errorResponse.get(" email and password ").toString();
+                } catch (JSONException e) {
+                    error += e.getMessage();
+                }
+            }
+        });
+    }
+
+    public void makePayment(View v) {
+        Context context = getApplicationContext();
+        CharSequence text = "Payment received!";
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+    }
+
+
+    public void viewCrendentials(View v)
+    {
+        TextView tv_name = (TextView) findViewById(R.id.cNameText);
+        final TextView tv_password = (TextView) findViewById(R.id.cPasswordText);
+        final TextView tv_phone = (TextView) findViewById(R.id.cPhoneText);
+        final TextView tv_email = (TextView) findViewById(R.id.cEmailText);
+        final TextView tv_address = (TextView) findViewById(R.id.cAddressText);
+        final TextView tv_credit = (TextView) findViewById(R.id.cCreditText);
+        final TextView tv_debit = (TextView) findViewById(R.id.cDebitText);
+
+        RequestParams requestParams = new RequestParams();
+        String request = "";
+        request = request.concat(customerId);
+
+        HttpUtils.get("customer/" +request, requestParams, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                try {
+                    tv_name.setText(response.getString("name"));
+                    tv_password.setText(response.getString("password"));
+                    tv_phone.setText(response.getString("phone"));
+                    tv_email.setText(response.getString("email"));
+                    tv_address.setText(response.getString("address"));
+                    tv_credit.setText(response.getString("creditHash"));
+                    tv_debit.setText(response.getString("debitHash"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                try {
+                    error += errorResponse.get(" email and password ").toString();
+                } catch (JSONException e) {
+                    error += e.getMessage();
+                }
+
+            }
+        });
+
+    }
+
+    public void updateProfile(View v){
+        error = "";
+        Button toUpdate = findViewById(R.id.profileUpdateButton);
+        final TextView tv_name = (TextView) findViewById(R.id.cNameText);
+        final TextView tv_password = (TextView) findViewById(R.id.cPasswordText);
+        final TextView tv_phone = (TextView) findViewById(R.id.cPhoneText);
+        final TextView tv_email = (TextView) findViewById(R.id.cEmailText);
+        final TextView tv_address = (TextView) findViewById(R.id.cAddressText);
+        final TextView tv_credit = (TextView) findViewById(R.id.cCreditText);
+        final TextView tv_debit = (TextView) findViewById(R.id.cDebitText);
+
+        toUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String request = "";
+                String name = tv_name.getText().toString();
+                for(int i = 0; i < name.length(); i++){
+                    if(Character.compare(name.charAt(i),' ') == 0){
+                        if(i == name.length()-1){
+                            name = name.substring(0,name.length()-1) + "%20";
+                        } else {
+                            name = name.substring(0,i) + "%20" + name.substring(i+1,name.length());
+                        }
+
+                    }
+                }
+                String address = tv_address.getText().toString();
+                for(int i = 0; i < address.length(); i++){
+                    if(Character.compare(address.charAt(i),' ') == 0){
+                        if(i == address.length()-1){
+                            address = address.substring(0,address.length()-1) + "%20";
+                        } else {
+                            address = address.substring(0,i) + "%20" + address.substring(i+1,address.length());
+                        }
+                    }
+                }
+                request = request.concat(tv_email.getText().toString());
+                request = request.concat("?newName="+name);
+                request = request.concat("&newPassword="+tv_password.getText().toString());
+                request = request.concat("&newPhone="+tv_phone.getText().toString());
+                request = request.concat("&newCredit="+tv_credit.getText().toString());
+                request = request.concat("&newDebit="+tv_debit.getText().toString());
+                request = request.concat("&newAddress="+address);
+
+                HttpUtils.put("customer/" + request, new RequestParams(), new JsonHttpResponseHandler(){
+
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response)
+                    {
+                        try{
+                            tv_name.setText(response.getString("name"));
+                            tv_password.setText(response.getString("password"));
+                            tv_phone.setText(response.getString("phone"));
+                            tv_email.setText(response.getString("email"));
+                            tv_address.setText(response.getString("address"));
+                            tv_credit.setText(response.getString("creditHash"));
+                            tv_debit.setText(response.getString("debitHash"));
+                            finish();
+                            startActivity(getIntent());
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                        try {
+                            error += errorResponse.get("").toString();
+                        } catch (JSONException e) {
+                            error += e.getMessage();
+                        }
+                    }
+                });
+            }
+        });
+
+    }
+
+    private void refreshErrorMessage() {
+        // set the error message
+        TextView tvError = (TextView) findViewById(R.id.error);
+        tvError.setText(error);
+
+        if (error == null || error.length() == 0) {
+            tvError.setVisibility(View.GONE);
+        } else {
+            tvError.setVisibility(View.VISIBLE);
+        }
+    }
+
+    public void addMechanic(View v) {
+        error = "";
+        final TextView tv = (TextView) findViewById(R.id.selectMech_name);
+        HttpUtils.post("persons/" + tv.getText().toString(), new RequestParams(), new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                refreshErrorMessage();
+                tv.setText("");
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                try {
+                    error += errorResponse.get("message").toString();
+                } catch (JSONException e) {
+                    error += e.getMessage();
+                }
+                refreshErrorMessage();
+            }
+        });
+    }
 
     public void toBook(View v)
     {
-        Button toBook = findViewById(R.id.bookAppointment);
-
-        toBook.setOnClickListener(new View.OnClickListener() {
+        Button toBookHome = findViewById(R.id.bookAppointmentHome);
+        Button toBookBook = findViewById(R.id.bookAppointmentBook);
+        Button toBookPay = findViewById(R.id.bookAppointmentPay);
+        Button toBookMake = findViewById(R.id.bookAppointmentEdit);
+        View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String customerId = getIntent().getStringExtra("customerId");
-                Intent intent = new Intent(homePage.this, BookingAppointment.class);
-                intent.putExtra("CUSTOMER_ID", customerId);
-                startActivity(intent);
+                if(!bookAppointmentIsVisible){
+                    bookAppointmentView.setVisibility(View.VISIBLE);
+                    editProfileView.setVisibility(View.GONE);
+                    makePaymentView.setVisibility(View.GONE);
+                    homePageView.setVisibility(View.GONE);
+                    bookAppointmentIsVisible = true;
+                    makePaymentIsVisible = false;
+                    editProfileIsVisible = false;
+                    homePageIsVisible = false;
+                }
             }
-        });
+        };
+
+        toBookHome.setOnClickListener(listener);
+        toBookBook.setOnClickListener(listener);
+        toBookMake.setOnClickListener(listener);
+        toBookPay.setOnClickListener(listener);
+
     }
 
     public void toEditProfile(View v)
     {
-        Button toEdit = findViewById(R.id.editProfile);
-        toEdit.setOnClickListener(new View.OnClickListener() {
+        Button toEditHome = findViewById(R.id.editProfileHome);
+        Button toEditBook = findViewById(R.id.editProfileBook);
+        Button toEditMake = findViewById(R.id.editProfileEdit);
+        Button toEditPay = findViewById(R.id.editProfilePay);
+        View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String customerId = getIntent().getStringExtra("customerId");
-                Intent intent = new Intent(homePage.this, CusomterProfile.class);
-               intent.putExtra("CUSTOMER_ID", customerId);
-               startActivity(intent);
+                if(!editProfileIsVisible){
+                    bookAppointmentView.setVisibility(View.GONE);
+                    editProfileView.setVisibility(View.VISIBLE);
+                    makePaymentView.setVisibility(View.GONE);
+                    homePageView.setVisibility(View.GONE);
+                    bookAppointmentIsVisible = false;
+                    makePaymentIsVisible = false;
+                    editProfileIsVisible = true;
+                    homePageIsVisible = false;
+                }
             }
-        });
+        };
+
+        toEditHome.setOnClickListener(listener);
+        toEditBook.setOnClickListener(listener);
+        toEditMake.setOnClickListener(listener);
+        toEditPay.setOnClickListener(listener);
     }
 
     public void bye(View v)
     {
-        Button toLogOut = findViewById(R.id.logout);
-        toLogOut.setOnClickListener(new View.OnClickListener(){
+        Button toLogOutHome = findViewById(R.id.logoutHome);
+        Button toLogOutPay = findViewById(R.id.logoutPay);
+        Button toLogOutBook = findViewById(R.id.logoutBook);
+        Button toLogOutEdit = findViewById(R.id.logoutEdit);
+        View.OnClickListener listener = new View.OnClickListener(){
             @Override
             public void onClick(View v)
             {
                 startActivity(new Intent(homePage.this, MainActivity.class));
             }
-        });
+        };
+
+        toLogOutHome.setOnClickListener(listener);
+        toLogOutPay.setOnClickListener(listener);
+        toLogOutBook.setOnClickListener(listener);
+        toLogOutEdit.setOnClickListener(listener);
     }
 
     public void toPayment(View v){
-        Button toPay = findViewById(R.id.payment);
-        toPay.setOnClickListener(new View.OnClickListener(){
+        Button toPayHome = findViewById(R.id.paymentHome);
+        Button toPayPay = findViewById(R.id.paymentPay);
+        Button toPayBook = findViewById(R.id.paymentBook);
+        Button toPayMake = findViewById(R.id.paymentEdit);
+
+        View.OnClickListener listener = new View.OnClickListener(){
             @Override
             public void onClick(View v)
             {
-                String customerId = getIntent().getStringExtra("customerId");
-                Intent intent = new Intent(homePage.this, Payment.class);
-                intent.putExtra("CUSTOMER_ID", customerId);
-                startActivity(intent);
+                if(!makePaymentIsVisible){
+                    bookAppointmentView.setVisibility(View.GONE);
+                    editProfileView.setVisibility(View.GONE);
+                    makePaymentView.setVisibility(View.VISIBLE);
+                    homePageView.setVisibility(View.GONE);
+                    bookAppointmentIsVisible = false;
+                    makePaymentIsVisible = true;
+                    editProfileIsVisible = false;
+                    homePageIsVisible = false;
+                }
             }
-        });
+        };
+
+        toPayHome.setOnClickListener(listener);
+        toPayPay.setOnClickListener(listener);
+        toPayBook.setOnClickListener(listener);
+        toPayMake.setOnClickListener(listener);
     }
 
+    public void toHome(View v)
+    {
+        Button toHomeHome = findViewById(R.id.homeHome);
+        Button toHomeBook = findViewById(R.id.homeBook);
+        Button toHomePay = findViewById(R.id.homePay);
+        Button toHomeEdit = findViewById(R.id.homeEdit);
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!homePageIsVisible){
+                    bookAppointmentView.setVisibility(View.GONE);
+                    editProfileView.setVisibility(View.GONE);
+                    makePaymentView.setVisibility(View.GONE);
+                    homePageView.setVisibility(View.VISIBLE);
+                    bookAppointmentIsVisible = false;
+                    makePaymentIsVisible = false;
+                    editProfileIsVisible = false;
+                    homePageIsVisible = true;
+                }
+            }
+        };
+
+        toHomeHome.setOnClickListener(listener);
+        toHomeBook.setOnClickListener(listener);
+        toHomePay.setOnClickListener(listener);
+        toHomeEdit.setOnClickListener(listener);
+    }
 
     private class StableArrayAdapter extends ArrayAdapter<String>{
         HashMap<String, Integer> mIdMap = new HashMap<String, Integer>();

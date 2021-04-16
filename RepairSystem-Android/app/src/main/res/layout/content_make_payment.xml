@@ -93,7 +93,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:text="@string/makePayment_button" />
-        <!--  android:onClick="makePayment"-->/>
+            android:onClick="makePayment"/>
     </LinearLayout>
 
     <androidx.appcompat.widget.Toolbar
