@@ -174,7 +174,6 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:text="Confirm Schedule"
-            app:layout_constraintBottom_toTopOf="@id/selectServiceBtn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -209,6 +208,7 @@
 
             app:layout_constraintVertical_bias="0.629" />
 
+
         <!--Menu Button goes here-->
 
         <Button
@@ -216,7 +216,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:onClick="showPopup"
+            android:onClick="carPopup"
             android:text="Select Car"
             app:layout_constraintBottom_toTopOf="@id/bookAppBtn"
             app:layout_constraintTop_toBottomOf="@id/selectServiceBtn"
@@ -257,7 +257,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/selectCarBtn" />
 
-
+<!-- book app ends here-->
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbarBook"
             android:layout_width="match_parent"
