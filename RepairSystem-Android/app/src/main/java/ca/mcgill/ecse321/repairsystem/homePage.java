@@ -403,7 +403,7 @@ public class homePage extends AppCompatActivity implements PopupMenu.OnMenuItemC
     public void showPopup(View v) {
         PopupMenu popup = new PopupMenu(this, v);
         popup.setOnMenuItemClickListener(this);
-        popup.inflate(R.menu.popup_menu);
+        popup.inflate(R.menu.mech_popup_menu);
         menu = popup;
 
         HttpUtils.get("/mechanics/", new RequestParams(), new JsonHttpResponseHandler() {
@@ -411,6 +411,7 @@ public class homePage extends AppCompatActivity implements PopupMenu.OnMenuItemC
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 for (int i = 0; i < response.length(); i++) {
                     try {
+                        /*set popup menu item for mechanic list*/
                         /*set popup menu item for mechanic list*/
                         mechIds.add(response.getJSONObject(i).getString("id"));
                         String name = response.getJSONObject(i).getString("name");
@@ -448,7 +449,7 @@ public class homePage extends AppCompatActivity implements PopupMenu.OnMenuItemC
     public void carPopup(View v) {
         PopupMenu popup = new PopupMenu(this, v);
         popup.setOnMenuItemClickListener(this);
-        popup.inflate(R.menu.car_menu);
+        popup.inflate(R.menu.car_popup_menu);
         menuCar = popup;
 
         String request = "";
@@ -465,13 +466,13 @@ public class homePage extends AppCompatActivity implements PopupMenu.OnMenuItemC
                         carIds.add(id);
                         carTypes.add(carT);
                         if (i == 0) {
-                            menuCar.getMenu().findItem(R.id.car1).setTitle(response.getJSONObject(i).getString("carType"));
+                            menuCar.getMenu().findItem(R.id.car1).setTitle(carT);
                         } else if (i == 1) {
-                            menuCar.getMenu().findItem(R.id.car2).setTitle(response.getJSONObject(i).getString("carType"));
+                            menuCar.getMenu().findItem(R.id.car2).setTitle(carT);
                         } else if (i == 2) {
-                            menuCar.getMenu().findItem(R.id.car3).setTitle(response.getJSONObject(i).getString("carType"));
+                            menuCar.getMenu().findItem(R.id.car3).setTitle(carT);
                         } else if (i == 3) {
-                            menuCar.getMenu().findItem(R.id.car4).setTitle(response.getJSONObject(i).getString("carType"));
+                            menuCar.getMenu().findItem(R.id.car4).setTitle(carT);
                         }
                     } catch (JSONException e) {
                         error += e.getMessage();
