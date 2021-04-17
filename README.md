@@ -67,4 +67,4 @@ have access and book a variety of services (towing, oil change, tire changes, re
  |Sia Ham       |Book Appointment Front&Backend, Edit Profile Frontend    |  17 hours  
  |Thomas Jarvis|               |                  |
  |Norman Kong |                |                  |
- |Catherine Van Gheluwe|       |           18       |
+ |Catherine Van Gheluwe|    Backend of Login, Edit Profile, Sign Up and View Appointments   |           18       |
