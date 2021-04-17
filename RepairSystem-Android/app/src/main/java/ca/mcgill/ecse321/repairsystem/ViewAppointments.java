@@ -20,7 +20,7 @@ import cz.msebera.android.httpclient.Header;
     display the customer's appointments on the main page
  */
 public class ViewAppointments extends AppCompatActivity {
-    TextView txtAppTime, txtServiceType,txtMechanic, txtStatus;
+    private TextView txtAppTime, txtServiceType,txtMechanic, txtStatus;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
