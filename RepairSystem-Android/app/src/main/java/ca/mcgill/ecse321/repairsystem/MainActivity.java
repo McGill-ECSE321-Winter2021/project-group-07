@@ -2,11 +2,8 @@ package ca.mcgill.ecse321.repairsystem;
 
 import android.content.Intent;
 import android.os.Bundle;
-import ca.mcgill.ecse321.repairsystem.HttpUtils;
 import cz.msebera.android.httpclient.Header;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
@@ -18,8 +15,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
+
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,11 +30,9 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //refreshErrorMessage();
         goLogIn();
         goSignUp( findViewById(R.id.startSignUp));
         createServices();
-
     }
 
     @Override
@@ -59,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -111,32 +104,5 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
-     /*   for (int i = 0; i < services.length; i++) {
-            String request = "";
-            request = request.concat(services[i]);
-            request = request.concat("?price=" + prices[i]);
-            HttpUtils.post("services/" + request, new RequestParams(), new JsonHttpResponseHandler() {
-                @Override
-                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                    try {
-                        JSONObject serverResp = new JSONObject(response.toString());
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-                @Override
-                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                    try {
-                        error += errorResponse.get("").toString();
-                    } catch (JSONException e) {
-                        error += e.getMessage();
-                    }
-                }
-            });
-        }*/
     }
-
-
 }

@@ -3,8 +3,6 @@ package ca.mcgill.ecse321.repairsystem;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
@@ -18,12 +16,10 @@ import android.widget.TextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import cz.msebera.android.httpclient.Header;
 
 public class SignUp extends AppCompatActivity {
-
     String error;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,11 +28,10 @@ public class SignUp extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        signUp( findViewById(R.id.button_signUp));
+        signUp(findViewById(R.id.button_signUp));
     }
 
     private void refreshErrorMessage() {
-        // set the error message
         TextView tvError = findViewById(R.id.error);
         tvError.setText(error);
 
@@ -46,8 +41,9 @@ public class SignUp extends AppCompatActivity {
             tvError.setVisibility(View.VISIBLE);
         }
     }
-
-
+    /*
+        create a customer's profile
+     */
     public void signUp(View v) {
         Button toSignUp = (Button) findViewById(R.id.button_signUp);
 
@@ -62,7 +58,6 @@ public class SignUp extends AppCompatActivity {
                 final EditText address = (EditText) findViewById(R.id.new_address);
                 final EditText credit = (EditText) findViewById(R.id.credit);
                 final EditText debit = (EditText) findViewById(R.id.debit);
-                TextView tv = findViewById(R.id.error);
 
                 String request = "";
                 request = request.concat(name.getText().toString());
@@ -96,8 +91,5 @@ public class SignUp extends AppCompatActivity {
                 });
             }
         });
-
     }
-
-
 }
