@@ -3,8 +3,6 @@ package ca.mcgill.ecse321.repairsystem;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
@@ -33,7 +31,6 @@ public class LogIn extends AppCompatActivity {
     }
 
     private void refreshErrorMessage() {
-        // set the error message
         TextView tvError = findViewById(R.id.error);
         tvError.setText(error);
 
@@ -43,7 +40,9 @@ public class LogIn extends AppCompatActivity {
             tvError.setVisibility(View.VISIBLE);
         }
     }
-
+    /*
+        get an existing customer's profile from the database to login
+     */
     public void logIn(View v ) {
         error = "";
         Button toLogIn = (Button) findViewById(R.id.button_logIn);
@@ -52,7 +51,6 @@ public class LogIn extends AppCompatActivity {
             public void onClick(View v) {
                 final EditText email = (EditText) findViewById(R.id.email);
                 final EditText password = (EditText) findViewById(R.id.password);
-                TextView tv = findViewById(R.id.error);
 
                 RequestParams requestParams = new RequestParams();
                 String request = "";
@@ -84,7 +82,5 @@ public class LogIn extends AppCompatActivity {
                 });
             }
         });
-
     }
-
 }

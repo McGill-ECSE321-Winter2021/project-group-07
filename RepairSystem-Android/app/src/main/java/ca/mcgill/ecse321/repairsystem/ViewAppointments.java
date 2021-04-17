@@ -1,17 +1,13 @@
 package ca.mcgill.ecse321.repairsystem;
 
-import android.content.Intent;
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.view.View;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -20,6 +16,9 @@ import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
 
+/*
+    display the customer's appointments on the main page
+ */
 public class ViewAppointments extends AppCompatActivity {
     TextView txtAppTime, txtServiceType,txtMechanic, txtStatus;
     @Override
@@ -34,8 +33,6 @@ public class ViewAppointments extends AppCompatActivity {
         txtMechanic=(TextView)findViewById(R.id.txtMechanic);
         txtStatus=(TextView)findViewById(R.id.txtStatus);
 
-
-        Intent intent=getIntent();
         String appointmentId = getIntent().getStringExtra("select");
         String request="";
         request= request.concat(appointmentId);
@@ -45,7 +42,6 @@ public class ViewAppointments extends AppCompatActivity {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response)
             {
                 try {
-
                     txtAppTime.setText( txtAppTime.getText()+" "+ response.getJSONObject("timeSlot").getString("startTime"));
                     JSONArray service = response.getJSONArray("services");
                     txtServiceType.setText(txtServiceType.getText()+" "+service.getJSONObject(0).getString("serviceType"));
@@ -58,7 +54,6 @@ public class ViewAppointments extends AppCompatActivity {
                         public void onSuccess(int statusCode, Header[] headers, JSONObject response)
                         {
                             try {
-
                                 txtMechanic.setText(txtMechanic.getText()+""+response.getString("name"));
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -71,6 +66,5 @@ public class ViewAppointments extends AppCompatActivity {
                 }
             }
         });
-
     }
 }
