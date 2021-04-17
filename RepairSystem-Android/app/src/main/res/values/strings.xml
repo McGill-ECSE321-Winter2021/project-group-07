@@ -49,6 +49,7 @@
     <string name="profile_address"> Address </string>
     <string name="address"> 123 Avenue Boulevard</string>
     <string name="profile_credit"> Credit</string>
+    <string name="profile_debit"> Debit</string>
     <string name="credit"> 123 456 789</string>
     <string name="debit"> 012 345 678</string>
     <string name="title_activity_home_page">Prestige Repairs</string>
