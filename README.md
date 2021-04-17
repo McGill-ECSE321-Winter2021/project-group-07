@@ -65,6 +65,6 @@ have access and book a variety of services (towing, oil change, tire changes, re
  | ------------|---------------| ------------------|
  |Annabelle Dion|      Frontend of Login, Edit Profile, Sign Up and Book Appointment Backend         |          17         |
  |Sia Ham       |Book Appointment Front&Backend, Edit Profile Frontend    |  17   
- |Thomas Jarvis|               |                  |
- |Norman Kong |                |                  |
+ |Thomas Jarvis|   Project Management, Navbar, Frontend      |   15 hours    |
+ |Norman Kong | |  | Documentation, general debugging, especially for UI, make payment | 14 hours |
  |Catherine Van Gheluwe|    Backend of Login, Edit Profile, Sign Up and View Appointments   |           18       |
