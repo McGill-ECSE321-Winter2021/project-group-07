@@ -146,7 +146,8 @@ public class homePage extends AppCompatActivity implements PopupMenu.OnMenuItemC
         bookAppBtn = (Button) findViewById(R.id.bookAppBtn);
 
         tvTimer2 = findViewById(R.id.tv_timer2);
-
+        //add time slot methods
+        addTimeSlot = (Button) findViewById(R.id.addTimeSlot);
 
         //select Mechanic
         selectMechBtn = (Button) findViewById(R.id.selectMechBtn);
@@ -155,11 +156,11 @@ public class homePage extends AppCompatActivity implements PopupMenu.OnMenuItemC
         bookAppBtn = (Button) findViewById(R.id.bookAppBtn);
 
 
-        //add car methods
+        /*add car methods*/
         button.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
+                //display popup window
                 LayoutInflater layoutInflater = LayoutInflater.from(context);
                 View promptView = layoutInflater.inflate(R.layout.prompts, null);
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
@@ -182,14 +183,10 @@ public class homePage extends AppCompatActivity implements PopupMenu.OnMenuItemC
                                 request = request.concat("&winterTires=" + WinterTiresInput.getText().toString());
                                 request = request.concat("&numOfKilometers=" + NumberofKilometersInput.getText().toString());
 
-                                Context context = getApplicationContext();
-                                CharSequence text = "Car Added!";
-                                int duration = Toast.LENGTH_SHORT;
-
                                 HttpUtils.post("/car/" + request, requestParams, new JsonHttpResponseHandler() {
                                     @Override
                                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                                        Toast toast = Toast.makeText(context, text, duration);
+                                        Toast toast = Toast.makeText(context, "Car Added!", duration);
                                         toast.show();
                                     }
 
@@ -216,7 +213,7 @@ public class homePage extends AppCompatActivity implements PopupMenu.OnMenuItemC
             }
         });
 
-        //date set methods
+        /*date set methods*/
         etDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -226,6 +223,7 @@ public class homePage extends AppCompatActivity implements PopupMenu.OnMenuItemC
                     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                         month = month + 1;
                         String date = day + "/" + month + "/" + year;
+                        //format startYmd
                         if (month < 10 & day < 10) {
                             startYmd = year + "-0" + month + "-0" + day;
                         } else if (month >= 10 & day < 10) {
@@ -238,11 +236,11 @@ public class homePage extends AppCompatActivity implements PopupMenu.OnMenuItemC
                         etDate.setText(date);
                     }
                 }, year, month, day);
-                datePickerDialog.show();
+                datePickerDialog.show();//display on the screen
             }
         });
 
-        //time set methods
+        /*time set methods*/
         tvTimer2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 TimePickerDialog timePickerDialog = new TimePickerDialog(
@@ -254,6 +252,7 @@ public class homePage extends AppCompatActivity implements PopupMenu.OnMenuItemC
                                 t2Hour = hourOfDay;
                                 t2Minute = minute;
                                 String time = t2Hour + ":" + t2Minute;
+                                //format starT
                                 if (t2Hour < 10 & t2Minute < 10) {
                                     startT = "-0" + t2Hour + ":0" + t2Minute;
                                 } else if (t2Hour < 10 & t2Minute >= 10) {
@@ -263,12 +262,12 @@ public class homePage extends AppCompatActivity implements PopupMenu.OnMenuItemC
                                 } else {
                                     startT = "-" + t2Hour + ":" + t2Minute;
                                 }
-
-                                if ((hourOfDay + 1) + 1 < 10 & t2Minute < 10) {
+                                //format endT
+                                if (t2Hour< 9 & t2Minute < 10) {
                                     endT = "-0" + (hourOfDay + 1) + ":0" + t2Minute;
-                                } else if ((hourOfDay + 1) + 1 < 10 & t2Minute >= 10) {
+                                } else if (t2Hour < 9 & t2Hour >= 10) {
                                     endT = "-0" + (hourOfDay + 1) + ":" + t2Minute;
-                                } else if ((hourOfDay + 1) + 1 >= 10 & t2Minute < 10) {
+                                } else if (t2Hour>= 9 & t2Minute < 10) {
                                     endT = "-" + (hourOfDay + 1) + ":0" + t2Minute;
                                 } else {
                                     endT = "-" + (hourOfDay + 1) + ":" + t2Minute;
@@ -288,32 +287,27 @@ public class homePage extends AppCompatActivity implements PopupMenu.OnMenuItemC
                         }, 24, 0, true
                 );
                 timePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                timePickerDialog.updateTime(t2Hour, t2Minute);
-                timePickerDialog.show();
+                timePickerDialog.updateTime(t2Hour, t2Minute); //update time
+                timePickerDialog.show(); //display time on the screen
             }
         });
-        //add time slot methods
-        addTimeSlot = (Button) findViewById(R.id.addTimeSlot);
 
+
+        //create timeslot
         addTimeSlot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 error = "";
-
                 String request = "";
                 request = request.concat(startTime);
                 request = request.concat("?endTime=" + endTime);
-
-                Context context = getApplicationContext();
-                CharSequence text = "time slot Added!";
-                int duration = Toast.LENGTH_SHORT;
 
                 HttpUtils.post("/timeslot/" + request, new RequestParams(), new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         try {
                             timeSlotId = response.getString("id");
-                            Toast toast = Toast.makeText(context, text, duration);
+                            Toast toast = Toast.makeText(context, "Time Slot Added!", duration);
                             toast.show();
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -347,83 +341,25 @@ public class homePage extends AppCompatActivity implements PopupMenu.OnMenuItemC
                 request = request.concat("&services=" + service);
                 request = request.concat("&note=car_fix");
 
-                CharSequence text = "Appointment Booked!";
-                int duration = Toast.LENGTH_SHORT;
-
+                //book appointment
                 HttpUtils.post("/appointment/" + request, new RequestParams(), new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         try {
                             appId = response.getString("id");
 
-                            //find mech meail
+                            RequestParams requestParams = new RequestParams();
+                            String request2 = "";
+                            request2 = request2.concat(mechId);
+                            request2 = request2.concat("?appointmentId=" + appId);
 
-
-                            HttpUtils.get("/mechanic/" + mechId, new RequestParams(), new JsonHttpResponseHandler() {
+                            //add mechanic to the appointment
+                            HttpUtils.put("/appointment/addMechanic/" + request2, new RequestParams(), new JsonHttpResponseHandler() {
                                 @Override
                                 public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                                    try {
-                                        mechEmail = response.getString("email");
-
-                                        String request3 = "";
-                                        request3.concat(mechEmail);
-                                        request3.concat("?timeslotsStart=" + startTime);
-                                        request3.concat("&timeslotsEnd=" + endTime);
-
-                                      /*
-                                        HttpUtils.put("/mechanic/addTimeSlots/" + request3, new RequestParams(), new JsonHttpResponseHandler(){
-
-                                            @Override
-                                            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                                                refreshErrorMessage();
-                                                CharSequence finalText2 = request3.toString();;*/
-                                        Toast toast = Toast.makeText(context, "add timeslot to mech", duration);
-                                        toast.show();
-
-                                        //add mechanic to the appointment
-                                        RequestParams requestParams = new RequestParams();
-                                        String request2 = "";
-                                        request2 = request2.concat(mechId);
-                                        request2 = request2.concat("?appointmentId=" + appId);
-                                        toast = Toast.makeText(context, text, duration);
-                                        toast.show();
-
-                                        CharSequence finalText = request2.toString();
-                                        ;
-                                        HttpUtils.put("/appointment/addMechanic/" + request2, new RequestParams(), new JsonHttpResponseHandler() {
-                                            @Override
-                                            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                                                refreshErrorMessage();
-                                                Toast toast = Toast.makeText(context, finalText, duration);
-                                                toast.show();
-                                            }
-
-                                            @Override
-                                            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                                                try {
-                                                    error += errorResponse.get("message").toString();
-                                                } catch (JSONException e) {
-                                                    error += e.getMessage();
-                                                }
-                                                refreshErrorMessage();
-                                            }
-                                        });
-                                        //add mechanic ends here
-                                            /*}
-
-                                            @Override
-                                            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                                                try {
-                                                    error += errorResponse.get("message").toString();
-                                                } catch (JSONException e) {
-                                                    error += e.getMessage();
-                                                }
-                                                refreshErrorMessage();
-                                            }
-                                        });*/
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
+                                    refreshErrorMessage();
+                                    Toast toast = Toast.makeText(context, "Appointment Booked!", duration);
+                                    toast.show();
                                 }
 
                                 @Override
@@ -433,9 +369,10 @@ public class homePage extends AppCompatActivity implements PopupMenu.OnMenuItemC
                                     } catch (JSONException e) {
                                         error += e.getMessage();
                                     }
+                                    refreshErrorMessage();
                                 }
                             });
-                            //find mech email ends here
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -448,12 +385,13 @@ public class homePage extends AppCompatActivity implements PopupMenu.OnMenuItemC
                         } catch (JSONException e) {
                             error += e.getMessage();
                         }
-                        refreshErrorMessage();
                     }
                 });
             }
+
         });
-        updateView();
+
+        updateView(); //update main page view
 
         //////////// BOTTOM NAV BAT MENU/////////
         setInfo(findViewById(R.id.cNameText));
@@ -466,6 +404,9 @@ public class homePage extends AppCompatActivity implements PopupMenu.OnMenuItemC
         toHome(findViewById(R.id.homePageView));
 
     }
+
+
+
 
     ////////////////// BOOK APPOINTMENT - SELECT MECH, SERVICE, CAR//////////////////
     /*display popup menu for mechanic list*/
@@ -783,7 +724,7 @@ public class homePage extends AppCompatActivity implements PopupMenu.OnMenuItemC
     }
 
 
-    ////////VIEW APPOINTMENTS///////////////
+////////VIEW APPOINTMENTS///////////////
 
     public void updateView() {
         /*get all appointment list*/
@@ -857,6 +798,7 @@ public class homePage extends AppCompatActivity implements PopupMenu.OnMenuItemC
         public boolean hasStableIds() {
             return true;
         }
+
     }
 
     ///////////MAKE PAYMENT///////
