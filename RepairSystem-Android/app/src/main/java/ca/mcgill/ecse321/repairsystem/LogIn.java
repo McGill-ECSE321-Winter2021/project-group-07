@@ -19,7 +19,7 @@ import org.json.JSONException;
 import cz.msebera.android.httpclient.Header;
 
 public class LogIn extends AppCompatActivity {
-    String error;
+    private String error;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
