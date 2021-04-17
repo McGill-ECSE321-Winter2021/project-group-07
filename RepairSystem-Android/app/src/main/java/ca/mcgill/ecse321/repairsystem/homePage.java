@@ -46,52 +46,55 @@ import cz.msebera.android.httpclient.Header;
 
 public class homePage extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
 
+    /*variables for time picker date picker */
+    private EditText etDate;
+    private TextView tvTimer2;
+    private int t2Hour, t2Minute;
+    private Calendar calendar;
+    private int year, month, day;
+
+
     /*variables for book appointment and add timeslot*/
+    private String startT = "";
+    private String endT = "";
+    private String startYmd = "";
+    private String startTime = "";
+    private String endTime = "";
+    private String service = "";
+    private String timeSlotId = "";
+    private String appId = "";
+    private String carId = "";
+    private String mechId = "";
+    private String customerId;
 
     private String error = null;
-    EditText etDate;
-    TextView tvTimer2;
-    int t2Hour, t2Minute;
-    private FloatingActionButton button;
+    private FloatingActionButton addCarBtn;
     private Button addTimeSlot;
     private Button bookAppBtn;
-    String mechEmail;
-
     private PopupMenu menu;
     private PopupMenu menuCar;
+
     private ArrayList<String> mechIds = new ArrayList<>();
+    private ArrayList<String> mechNames = new ArrayList<>();
     private ArrayList<String> carIds = new ArrayList<>();
+    private ArrayList<String> carTypes = new ArrayList<>();
+
+    private ArrayList<String> appointments = new ArrayList<String>();
+
+    private final Context context = this;
     private int duration = Toast.LENGTH_SHORT;
 
-    /*variables for book appointment and add timeslot*/
-    String startT = "";
-    String endT = "";
-    String startYmd = "";
-    String startTime = "";
-    String endTime = "";
-    String service = "";
-    String timeSlotId = "";
-    String appId = "";
-    String carId = "";
-    String mechId = "";
+    /*variables for homepage veiw change*/
+    private Boolean bookAppointmentIsVisible = false;
+    private Boolean makePaymentIsVisible = false;
+    private Boolean editProfileIsVisible = false;
+    private Boolean homePageIsVisible = true;
+    private View bookAppointmentView;
+    private View makePaymentView;
+    private View editProfileView;
+    private View homePageView;
 
-    final Context context = this;
-
-    private Button selectMechBtn;
-
-
-    ArrayList<String> appointments = new ArrayList<String>();
-    //String appointments[] = new String[100];
-    String customerId;
-    Boolean bookAppointmentIsVisible = false;
-    Boolean makePaymentIsVisible = false;
-    Boolean editProfileIsVisible = false;
-    Boolean homePageIsVisible = true;
-    View bookAppointmentView;
-    View makePaymentView;
-    View editProfileView;
-    View homePageView;
-
+    /*variables for customer profile*/
     private TextView tv_name;
     private TextView tv_password;
     private TextView tv_phone;
@@ -108,6 +111,7 @@ public class homePage extends AppCompatActivity implements PopupMenu.OnMenuItemC
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        /*variables for nav bar/ view change*/
         bookAppointmentView = findViewById(R.id.bookAppointmentView);
         makePaymentView = findViewById(R.id.makePaymentView);
         editProfileView = findViewById(R.id.editProfileView);
@@ -119,45 +123,33 @@ public class homePage extends AppCompatActivity implements PopupMenu.OnMenuItemC
         homePageView.setVisibility(View.VISIBLE);
         customerId = getIntent().getStringExtra("customerId");
 
-        ////////////////// BOOK APPOINTMENT //////////////////
 
-        //date picker
-        etDate = findViewById(R.id.et_date);
-        Calendar calendar = Calendar.getInstance();
-        final int year = calendar.get(Calendar.YEAR);
-        final int month = calendar.get(Calendar.MONTH);
-        final int day = calendar.get(Calendar.DAY_OF_MONTH);
-        //time picker
-        tvTimer2 = findViewById(R.id.tv_timer2);
 
-        //add car
-        button = (FloatingActionButton) findViewById(R.id.addCarBtn);
-
-        //add Timeslot
+        /*variables for book appointment */
+        addCarBtn = (FloatingActionButton) findViewById(R.id.addCarBtn);
+        bookAppBtn = (Button) findViewById(R.id.bookAppBtn);
         addTimeSlot = (Button) findViewById(R.id.addTimeSlot);
 
-        //bottom menu bar
+        //date picker & time picker
+        tvTimer2 = findViewById(R.id.tv_timer2);
+        etDate = findViewById(R.id.et_date);
+        calendar = Calendar.getInstance();
+        year = calendar.get(Calendar.YEAR);
+        month = calendar.get(Calendar.MONTH);
+        day = calendar.get(Calendar.DAY_OF_MONTH);
+
+
+        ////////bottom menu bar////////////
         toHome(findViewById(R.id.bookAppointment));
         toEditProfile(findViewById(R.id.editProfile));
         bye(findViewById(R.id.logout));
         toPayment(findViewById(R.id.payment));
 
-        //book Appointment
-        bookAppBtn = (Button) findViewById(R.id.bookAppBtn);
 
-        tvTimer2 = findViewById(R.id.tv_timer2);
-        //add time slot methods
-        addTimeSlot = (Button) findViewById(R.id.addTimeSlot);
-
-        //select Mechanic
-        selectMechBtn = (Button) findViewById(R.id.selectMechBtn);
-
-        //book Appointment
-        bookAppBtn = (Button) findViewById(R.id.bookAppBtn);
-
+        ////////////////// BOOK APPOINTMENT//////////////////
 
         /*add car methods*/
-        button.setOnClickListener(new View.OnClickListener() {
+        addCarBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //display popup window
@@ -166,9 +158,9 @@ public class homePage extends AppCompatActivity implements PopupMenu.OnMenuItemC
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
                 alertDialogBuilder.setView(promptView);
 
-                final EditText carInput = (EditText) promptView.findViewById(R.id.carTypeInput);
-                final EditText WinterTiresInput = (EditText) promptView.findViewById(R.id.WinterTiresInput);
-                final EditText NumberofKilometersInput = (EditText) promptView.findViewById(R.id.NumberofKilometersInput);
+                EditText carInput = (EditText) promptView.findViewById(R.id.carTypeInput);
+                EditText WinterTiresInput = (EditText) promptView.findViewById(R.id.WinterTiresInput);
+                EditText NumberofKilometersInput = (EditText) promptView.findViewById(R.id.NumberofKilometersInput);
 
                 // setup a dialog window
                 alertDialogBuilder
@@ -263,11 +255,11 @@ public class homePage extends AppCompatActivity implements PopupMenu.OnMenuItemC
                                     startT = "-" + t2Hour + ":" + t2Minute;
                                 }
                                 //format endT
-                                if (t2Hour< 9 & t2Minute < 10) {
+                                if (t2Hour < 9 & t2Minute < 10) {
                                     endT = "-0" + (hourOfDay + 1) + ":0" + t2Minute;
                                 } else if (t2Hour < 9 & t2Hour >= 10) {
                                     endT = "-0" + (hourOfDay + 1) + ":" + t2Minute;
-                                } else if (t2Hour>= 9 & t2Minute < 10) {
+                                } else if (t2Hour >= 9 & t2Minute < 10) {
                                     endT = "-" + (hourOfDay + 1) + ":0" + t2Minute;
                                 } else {
                                     endT = "-" + (hourOfDay + 1) + ":" + t2Minute;
@@ -406,8 +398,6 @@ public class homePage extends AppCompatActivity implements PopupMenu.OnMenuItemC
     }
 
 
-
-
     ////////////////// BOOK APPOINTMENT - SELECT MECH, SERVICE, CAR//////////////////
     /*display popup menu for mechanic list*/
     public void showPopup(View v) {
@@ -424,6 +414,7 @@ public class homePage extends AppCompatActivity implements PopupMenu.OnMenuItemC
                         /*set popup menu item for mechanic list*/
                         mechIds.add(response.getJSONObject(i).getString("id"));
                         String name = response.getJSONObject(i).getString("name");
+                        mechNames.add(name);
                         if (i == 0) {
                             menu.getMenu().findItem(R.id.item1).setTitle(name);
                         } else if (i == 1) {
@@ -470,7 +461,9 @@ public class homePage extends AppCompatActivity implements PopupMenu.OnMenuItemC
                         /*set popup menu item for car list*/
 
                         String id = response.getJSONObject(i).getString("id");
+                        String carT = response.getJSONObject(i).getString("carType");
                         carIds.add(id);
+                        carTypes.add(carT);
                         if (i == 0) {
                             menuCar.getMenu().findItem(R.id.car1).setTitle(response.getJSONObject(i).getString("carType"));
                         } else if (i == 1) {
@@ -511,55 +504,55 @@ public class homePage extends AppCompatActivity implements PopupMenu.OnMenuItemC
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         if (item.getItemId() == R.id.item1) {
-            Toast.makeText(this, "mech1 selected", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, mechNames.get(0) + " selected", duration).show();
             mechId = mechIds.get(0).toString();
         } else if (item.getItemId() == R.id.item2) {
-            Toast.makeText(this, "mech2 selected", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, mechNames.get(1) + " selected", duration).show();
             mechId = mechIds.get(1).toString();
         } else if (item.getItemId() == R.id.item3) {
-            Toast.makeText(this, "mech3 selected", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, mechNames.get(2) + " selected", duration).show();
             mechId = mechIds.get(2).toString();
         } else if (item.getItemId() == R.id.item4) {
-            Toast.makeText(this, "mech4 selected", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, mechNames.get(3) + " selected", duration).show();
             mechId = mechIds.get(3).toString();
         } else if (item.getItemId() == R.id.car1) {
-            Toast.makeText(this, "car1 selected", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, carTypes.get(0) + " selected", duration).show();
             carId = carIds.get(0).toString();
         } else if (item.getItemId() == R.id.car2) {
-            Toast.makeText(this, "car2 selected", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, carTypes.get(1) + " selected", duration).show();
             carId = carIds.get(1).toString();
         } else if (item.getItemId() == R.id.car3) {
-            Toast.makeText(this, "car3 selected", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, carTypes.get(2) + " selected", duration).show();
             carId = carIds.get(2).toString();
         } else if (item.getItemId() == R.id.car4) {
-            Toast.makeText(this, "car4 selected", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, carTypes.get(3) + " selected", duration).show();
             carId = carIds.get(3).toString();
         } else if (item.getItemId() == R.id.CarRepair) {
-            Toast.makeText(this, "CarRepair selected", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "CarRepair selected",duration).show();
             service = "CarRepair";
         } else if (item.getItemId() == R.id.OilChange) {
-            Toast.makeText(this, "OilChange selected", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "OilChange selected", duration).show();
             service = "OilChange";
         } else if (item.getItemId() == R.id.RegularCheckup) {
-            Toast.makeText(this, "RegularCheckup selected", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "RegularCheckup selected", duration).show();
             service = "RegularCheckup";
         } else if (item.getItemId() == R.id.CarWash) {
-            Toast.makeText(this, "CarWash selected", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "CarWash selected", duration).show();
             service = "CarWash";
         } else if (item.getItemId() == R.id.TireChange) {
-            Toast.makeText(this, "TireChange selected", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "TireChange selected", duration).show();
             service = "TireChange";
         } else if (item.getItemId() == R.id.RoadsideAssistance) {
-            Toast.makeText(this, "RoadsideAssistance selected", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "RoadsideAssistance selected", duration).show();
             service = "RoadsideAssistance";
         } else if (item.getItemId() == R.id.Towing) {
-            Toast.makeText(this, "Towing selected", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Towing selected", duration).show();
             service = "Towing";
         } else if (item.getItemId() == R.id.CarInspection) {
-            Toast.makeText(this, "CarInspection selected", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "CarInspection selected",duration).show();
             service = "CarInspection";
         } else if (item.getItemId() == R.id.Other) {
-            Toast.makeText(this, "Other selected", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Other selected", duration).show();
             service = "Other";
         }
         return false;
