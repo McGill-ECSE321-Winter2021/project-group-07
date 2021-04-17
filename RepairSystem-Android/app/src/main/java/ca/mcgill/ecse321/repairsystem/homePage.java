@@ -780,194 +780,23 @@ public class homePage extends AppCompatActivity implements PopupMenu.OnMenuItemC
 
     }
 
-    private void refreshErrorMessage() {
-        // set the error message
-        TextView tvError = (TextView) findViewById(R.id.error);
-        tvError.setText(error);
-
-        if (error == null || error.length() == 0) {
-            tvError.setVisibility(View.GONE);
-        } else {
-            tvError.setVisibility(View.VISIBLE);
-        }
-    }
-
-    public void toBook(View v)
-    {
-        Button toBookHome = findViewById(R.id.bookAppointmentHome);
-        Button toBookBook = findViewById(R.id.bookAppointmentBook);
-        Button toBookPay = findViewById(R.id.bookAppointmentPay);
-        Button toBookMake = findViewById(R.id.bookAppointmentEdit);
-        View.OnClickListener listener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(!bookAppointmentIsVisible){
-                    bookAppointmentView.setVisibility(View.VISIBLE);
-                    editProfileView.setVisibility(View.GONE);
-                    makePaymentView.setVisibility(View.GONE);
-                    homePageView.setVisibility(View.GONE);
-                    bookAppointmentIsVisible = true;
-                    makePaymentIsVisible = false;
-                    editProfileIsVisible = false;
-                    homePageIsVisible = false;
-                }
-            }
-        };
-
-        toBookHome.setOnClickListener(listener);
-        toBookBook.setOnClickListener(listener);
-        toBookMake.setOnClickListener(listener);
-        toBookPay.setOnClickListener(listener);
-
-    }
-
-    public void toEditProfile(View v)
-    {
-        Button toEditHome = findViewById(R.id.editProfileHome);
-        Button toEditBook = findViewById(R.id.editProfileBook);
-        Button toEditMake = findViewById(R.id.editProfileEdit);
-        Button toEditPay = findViewById(R.id.editProfilePay);
-        View.OnClickListener listener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(!editProfileIsVisible){
-                    bookAppointmentView.setVisibility(View.GONE);
-                    editProfileView.setVisibility(View.VISIBLE);
-                    makePaymentView.setVisibility(View.GONE);
-                    homePageView.setVisibility(View.GONE);
-                    bookAppointmentIsVisible = false;
-                    makePaymentIsVisible = false;
-                    editProfileIsVisible = true;
-                    homePageIsVisible = false;
-                }
-            }
-        };
-
-        toEditHome.setOnClickListener(listener);
-        toEditBook.setOnClickListener(listener);
-        toEditMake.setOnClickListener(listener);
-        toEditPay.setOnClickListener(listener);
-    }
-
-    public void bye(View v)
-    {
-        Button toLogOutHome = findViewById(R.id.logoutHome);
-        Button toLogOutPay = findViewById(R.id.logoutPay);
-        Button toLogOutBook = findViewById(R.id.logoutBook);
-        Button toLogOutEdit = findViewById(R.id.logoutEdit);
-        View.OnClickListener listener = new View.OnClickListener(){
-            @Override
-            public void onClick(View v)
-            {
-                startActivity(new Intent(homePage.this, MainActivity.class));
-            }
-        };
-
-        toLogOutHome.setOnClickListener(listener);
-        toLogOutPay.setOnClickListener(listener);
-        toLogOutBook.setOnClickListener(listener);
-        toLogOutEdit.setOnClickListener(listener);
-    }
-
-    public void toPayment(View v){
-        Button toPayHome = findViewById(R.id.paymentHome);
-        Button toPayPay = findViewById(R.id.paymentPay);
-        Button toPayBook = findViewById(R.id.paymentBook);
-        Button toPayMake = findViewById(R.id.paymentEdit);
-
-        View.OnClickListener listener = new View.OnClickListener(){
-            @Override
-            public void onClick(View v)
-            {
-                if(!makePaymentIsVisible){
-                    bookAppointmentView.setVisibility(View.GONE);
-                    editProfileView.setVisibility(View.GONE);
-                    makePaymentView.setVisibility(View.VISIBLE);
-                    homePageView.setVisibility(View.GONE);
-                    bookAppointmentIsVisible = false;
-                    makePaymentIsVisible = true;
-                    editProfileIsVisible = false;
-                    homePageIsVisible = false;
-                }
-            }
-        };
-
-        toPayHome.setOnClickListener(listener);
-        toPayPay.setOnClickListener(listener);
-        toPayBook.setOnClickListener(listener);
-        toPayMake.setOnClickListener(listener);
-    }
-
-    public void toHome(View v)
-    {
-        Button toHomeHome = findViewById(R.id.homeHome);
-        Button toHomeBook = findViewById(R.id.homeBook);
-        Button toHomePay = findViewById(R.id.homePay);
-        Button toHomeEdit = findViewById(R.id.homeEdit);
-        View.OnClickListener listener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(!homePageIsVisible){
-                    updateView();
-                    bookAppointmentView.setVisibility(View.GONE);
-                    editProfileView.setVisibility(View.GONE);
-                    makePaymentView.setVisibility(View.GONE);
-                    homePageView.setVisibility(View.VISIBLE);
-                    bookAppointmentIsVisible = false;
-                    makePaymentIsVisible = false;
-                    editProfileIsVisible = false;
-                    homePageIsVisible = true;
-                }
-            }
-        };
-
-        toHomeHome.setOnClickListener(listener);
-        toHomeBook.setOnClickListener(listener);
-        toHomePay.setOnClickListener(listener);
-        toHomeEdit.setOnClickListener(listener);
-    }
 
 
-    private class StableArrayAdapter extends ArrayAdapter<String>{
-        HashMap<String, Integer> mIdMap = new HashMap<String, Integer>();
 
-        public StableArrayAdapter(Context context, int textViewResourceId,
-                                  List<String> objects) {
-            super(context, textViewResourceId, objects);
-            for (int i = 0; i < objects.size(); ++i) {
-                mIdMap.put(objects.get(i), i);
-            }
-        }
 
-        @Override
-        public long getItemId(int position) {
-            String item = getItem(position);
-            return mIdMap.get(item);
-        }
 
-        @Override
-        public boolean hasStableIds() {
-            return true;
-        }
 
-    }
 
+    ////////VIEW APPOINTMENTS///////////////
 
     public void updateView(){
-
-        String request = "";
-        request = request.concat(customerId);
-        HttpUtils.get("appointments/" + request, new RequestParams(), new JsonHttpResponseHandler() {
-
+        HttpUtils.get("appointments/" + customerId.toString(), new RequestParams(), new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-
                 appointments = new ArrayList<String>();
 
-                for(int i = 0; i < response.length(); i++)
-                {
+                for(int i = 0; i < response.length(); i++) {
                     try {
-
                         String toAdd ="";
                         String ID = response.getJSONObject(i).getString("id");
                         toAdd = toAdd.concat(ID+"    "+"Start: ");
@@ -1007,5 +836,177 @@ public class homePage extends AppCompatActivity implements PopupMenu.OnMenuItemC
             }
         });
     }
+
+    /*retreive appointment*/
+    private class StableArrayAdapter extends ArrayAdapter<String>{
+        HashMap<String, Integer> mIdMap = new HashMap<String, Integer>();
+        public StableArrayAdapter(Context context, int textViewResourceId,
+                                  List<String> objects) {
+            super(context, textViewResourceId, objects);
+            for (int i = 0; i < objects.size(); ++i) {
+                mIdMap.put(objects.get(i), i);
+            }
+        }
+
+        @Override
+        public long getItemId(int position) {
+            String item = getItem(position);
+            return mIdMap.get(item);
+        }
+
+        @Override
+        public boolean hasStableIds() {
+            return true;
+        }
+    }
+
+    ////////////BOTTOM NAV MENU BAR///////////
+    /*navigate to book app view*/
+    public void toBook(View v)    {
+        Button toBookHome = findViewById(R.id.bookAppointmentHome);
+        Button toBookBook = findViewById(R.id.bookAppointmentBook);
+        Button toBookPay = findViewById(R.id.bookAppointmentPay);
+        Button toBookMake = findViewById(R.id.bookAppointmentEdit);
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!bookAppointmentIsVisible){
+                    bookAppointmentView.setVisibility(View.VISIBLE);
+                    editProfileView.setVisibility(View.GONE);
+                    makePaymentView.setVisibility(View.GONE);
+                    homePageView.setVisibility(View.GONE);
+                    bookAppointmentIsVisible = true;
+                    makePaymentIsVisible = false;
+                    editProfileIsVisible = false;
+                    homePageIsVisible = false;
+                }
+            }
+        };
+
+        toBookHome.setOnClickListener(listener);
+        toBookBook.setOnClickListener(listener);
+        toBookMake.setOnClickListener(listener);
+        toBookPay.setOnClickListener(listener);
+
+    }
+
+    /*navigate to edit profile view*/
+    public void toEditProfile(View v)    {
+        Button toEditHome = findViewById(R.id.editProfileHome);
+        Button toEditBook = findViewById(R.id.editProfileBook);
+        Button toEditMake = findViewById(R.id.editProfileEdit);
+        Button toEditPay = findViewById(R.id.editProfilePay);
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!editProfileIsVisible){
+                    bookAppointmentView.setVisibility(View.GONE);
+                    editProfileView.setVisibility(View.VISIBLE);
+                    makePaymentView.setVisibility(View.GONE);
+                    homePageView.setVisibility(View.GONE);
+                    bookAppointmentIsVisible = false;
+                    makePaymentIsVisible = false;
+                    editProfileIsVisible = true;
+                    homePageIsVisible = false;
+                }
+            }
+        };
+
+        toEditHome.setOnClickListener(listener);
+        toEditBook.setOnClickListener(listener);
+        toEditMake.setOnClickListener(listener);
+        toEditPay.setOnClickListener(listener);
+    }
+
+    /*navigate to logout view*/
+    public void bye(View v)    {
+        Button toLogOutHome = findViewById(R.id.logoutHome);
+        Button toLogOutPay = findViewById(R.id.logoutPay);
+        Button toLogOutBook = findViewById(R.id.logoutBook);
+        Button toLogOutEdit = findViewById(R.id.logoutEdit);
+        View.OnClickListener listener = new View.OnClickListener(){
+            @Override
+            public void onClick(View v)            {
+                startActivity(new Intent(homePage.this, MainActivity.class));
+            }
+        };
+
+        toLogOutHome.setOnClickListener(listener);
+        toLogOutPay.setOnClickListener(listener);
+        toLogOutBook.setOnClickListener(listener);
+        toLogOutEdit.setOnClickListener(listener);
+    }
+
+    /*navigate to payment view*/
+    public void toPayment(View v){
+        Button toPayHome = findViewById(R.id.paymentHome);
+        Button toPayPay = findViewById(R.id.paymentPay);
+        Button toPayBook = findViewById(R.id.paymentBook);
+        Button toPayMake = findViewById(R.id.paymentEdit);
+
+        View.OnClickListener listener = new View.OnClickListener(){
+            @Override
+            public void onClick(View v)
+            {
+                if(!makePaymentIsVisible){
+                    bookAppointmentView.setVisibility(View.GONE);
+                    editProfileView.setVisibility(View.GONE);
+                    makePaymentView.setVisibility(View.VISIBLE);
+                    homePageView.setVisibility(View.GONE);
+                    bookAppointmentIsVisible = false;
+                    makePaymentIsVisible = true;
+                    editProfileIsVisible = false;
+                    homePageIsVisible = false;
+                }
+            }
+        };
+
+        toPayHome.setOnClickListener(listener);
+        toPayPay.setOnClickListener(listener);
+        toPayBook.setOnClickListener(listener);
+        toPayMake.setOnClickListener(listener);
+    }
+
+    /*navigate to main page view*/
+    public void toHome(View v)    {
+        Button toHomeHome = findViewById(R.id.homeHome);
+        Button toHomeBook = findViewById(R.id.homeBook);
+        Button toHomePay = findViewById(R.id.homePay);
+        Button toHomeEdit = findViewById(R.id.homeEdit);
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!homePageIsVisible){
+                    updateView();
+                    bookAppointmentView.setVisibility(View.GONE);
+                    editProfileView.setVisibility(View.GONE);
+                    makePaymentView.setVisibility(View.GONE);
+                    homePageView.setVisibility(View.VISIBLE);
+                    bookAppointmentIsVisible = false;
+                    makePaymentIsVisible = false;
+                    editProfileIsVisible = false;
+                    homePageIsVisible = true;
+                }
+            }
+        };
+
+        toHomeHome.setOnClickListener(listener);
+        toHomeBook.setOnClickListener(listener);
+        toHomePay.setOnClickListener(listener);
+        toHomeEdit.setOnClickListener(listener);
+    }
+
+    private void refreshErrorMessage() {
+        // set the error message
+        TextView tvError = (TextView) findViewById(R.id.error);
+        tvError.setText(error);
+
+        if (error == null || error.length() == 0) {
+            tvError.setVisibility(View.GONE);
+        } else {
+            tvError.setVisibility(View.VISIBLE);
+        }
+    }
+
 
 }
