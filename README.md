@@ -64,7 +64,7 @@ have access and book a variety of services (towing, oil change, tire changes, re
  | Team Member | Roles / Tasks | Time Spent (Hours)|
  | ------------|---------------| ------------------|
  |Annabelle Dion|               |                   |
- |Sia Ham       |              |                   |
+ |Sia Ham       |Book Appointment Front&Backend, Edit Profile Frontend    |  17 hours  
  |Thomas Jarvis|               |                  |
  |Norman Kong |                |                  |
  |Catherine Van Gheluwe|       |           18       |
