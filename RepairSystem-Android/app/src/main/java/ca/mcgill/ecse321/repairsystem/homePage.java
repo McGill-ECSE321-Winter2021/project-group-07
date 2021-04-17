@@ -110,6 +110,7 @@ public class homePage extends AppCompatActivity implements PopupMenu.OnMenuItemC
         editProfileView.setVisibility(View.GONE);
         makePaymentView.setVisibility(View.GONE);
         homePageView.setVisibility(View.VISIBLE);
+        customerId = getIntent().getStringExtra("customerId");
 
         ////////////////// BOOK APPOINTMENT //////////////////
 
@@ -146,6 +147,7 @@ public class homePage extends AppCompatActivity implements PopupMenu.OnMenuItemC
         //book Appointment
         bookAppBtn  = (Button) findViewById(R.id.bookAppBtn);
 
+
         //add car methods
         button.setOnClickListener(new View.OnClickListener() {
 
@@ -168,7 +170,6 @@ public class homePage extends AppCompatActivity implements PopupMenu.OnMenuItemC
                                 // get user input and set it to result
                                 RequestParams requestParams = new RequestParams();
                                 String request = "";
-                                String customerId = getIntent().getStringExtra("CUSTOMER_ID");
                                 request = request.concat(customerId);
                                 request = request.concat("?carType="+carInput.getText().toString());
                                 request = request.concat("&winterTires="+WinterTiresInput.getText().toString());
@@ -332,13 +333,12 @@ public class homePage extends AppCompatActivity implements PopupMenu.OnMenuItemC
 
                 RequestParams requestParams = new RequestParams();
                 String request = "";
-                String customerId = getIntent().getStringExtra("CUSTOMER_ID");
                 request = request.concat(customerId);
                 request = request.concat("?timeSlotId="+timeSlotId);
                 request = request.concat("&carId="+carId);
                 request = request.concat("&services="+service);
+                request =request.concat("&note=car_fix");
 
-                Context context = getApplicationContext();
                 CharSequence text = "Appointment Booked!";
                 int duration = Toast.LENGTH_SHORT;
 
@@ -362,12 +362,13 @@ public class homePage extends AppCompatActivity implements PopupMenu.OnMenuItemC
                                         request3.concat("?timeslotsStart="+startTime);
                                         request3.concat("&timeslotsEnd="+endTime);
 
+                                      /*
                                         HttpUtils.put("/mechanic/addTimeSlots/" + request3, new RequestParams(), new JsonHttpResponseHandler(){
 
                                             @Override
                                             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                                                 refreshErrorMessage();
-                                                CharSequence finalText2 = request3.toString();;
+                                                CharSequence finalText2 = request3.toString();;*/
                                                 Toast toast = Toast.makeText(context, "add timeslot to mech", duration);
                                                 toast.show();
 
@@ -399,7 +400,7 @@ public class homePage extends AppCompatActivity implements PopupMenu.OnMenuItemC
                                                     }
                                                 });
                                                 //add mechanic ends here
-                                            }
+                                            /*}
 
                                             @Override
                                             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
@@ -410,7 +411,7 @@ public class homePage extends AppCompatActivity implements PopupMenu.OnMenuItemC
                                                 }
                                                 refreshErrorMessage();
                                             }
-                                        });
+                                        });*/
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                     }
@@ -442,60 +443,9 @@ public class homePage extends AppCompatActivity implements PopupMenu.OnMenuItemC
             }
         });
         ////////////////////////////////////////
+        updateView();
 
 
-
-        customerId = getIntent().getStringExtra("customerId");
-        String request = "";
-        request = request.concat(customerId);
-        HttpUtils.get("appointments/" + request, new RequestParams(), new JsonHttpResponseHandler() {
-
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-
-
-                for(int i = 0; i < response.length(); i++)
-                {
-                    try {
-
-                        String toAdd ="";
-                        String ID = response.getJSONObject(i).getString("id");
-                        toAdd = toAdd.concat(ID+"    "+"Start: ");
-                        JSONObject timeSlot = response.getJSONObject(i).getJSONObject("timeSlot");
-                        toAdd = toAdd.concat(timeSlot.getString("startTime"));
-                        appointments.add(toAdd);
-                    } catch (JSONException e) {
-                        error += e.getMessage();
-                    }
-                }
-
-                final ListView listView=(ListView)findViewById(R.id.appointmentListHome);
-                final StableArrayAdapter  adapter = new StableArrayAdapter(homePage.this, android.R.layout.simple_list_item_1, appointments);
-                listView.setAdapter(adapter);
-                String delims = "[    ]";
-
-                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        String divide[] = listView.getItemAtPosition(i).toString().split(delims);
-                        String select= divide[0];
-                        Toast.makeText(homePage.this,"you have selected: "+divide[1], Toast.LENGTH_SHORT).show();
-                        Intent intent=new Intent(homePage.this,ViewAppointments.class);
-                        intent.putExtra("select", select);
-                        startActivity(intent);
-                    }
-                });
-
-            }
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                try {
-                    error += errorResponse.get("").toString();
-                } catch (JSONException e) {
-                    error += e.getMessage();
-                }
-            }
-        });
 
         setInfo(findViewById(R.id.cNameText));
         viewCrendentials(findViewById(R.id.cNameText));
@@ -565,7 +515,6 @@ public class homePage extends AppCompatActivity implements PopupMenu.OnMenuItemC
         menuCar = popup;
 
         String request = "";
-        String customerId = getIntent().getStringExtra("CUSTOMER_ID");
         request = request.concat(customerId);
         HttpUtils.get("/cars/" + request, new RequestParams(), new JsonHttpResponseHandler()  {
             @Override
@@ -578,13 +527,13 @@ public class homePage extends AppCompatActivity implements PopupMenu.OnMenuItemC
                             menuCar.getMenu().findItem(R.id.car1).setTitle( response.getJSONObject(i).getString("carType"));
                         }
                         else if (i == 1){
-                            menuCar.getMenu().findItem(R.id.car1).setTitle( response.getJSONObject(i).getString("carType"));
+                            menuCar.getMenu().findItem(R.id.car2).setTitle( response.getJSONObject(i).getString("carType"));
                         }
                         else if (i == 2){
-                            menuCar.getMenu().findItem(R.id.car1).setTitle( response.getJSONObject(i).getString("carType"));
+                            menuCar.getMenu().findItem(R.id.car3).setTitle( response.getJSONObject(i).getString("carType"));
                         }
                         else if (i == 3){
-                            menuCar.getMenu().findItem(R.id.car1).setTitle( response.getJSONObject(i).getString("carType"));
+                            menuCar.getMenu().findItem(R.id.car4).setTitle( response.getJSONObject(i).getString("carType"));
                         }
                     }catch (JSONException e) {
                         error += e.getMessage();
@@ -959,6 +908,7 @@ public class homePage extends AppCompatActivity implements PopupMenu.OnMenuItemC
             @Override
             public void onClick(View v) {
                 if(!homePageIsVisible){
+                    updateView();
                     bookAppointmentView.setVisibility(View.GONE);
                     editProfileView.setVisibility(View.GONE);
                     makePaymentView.setVisibility(View.GONE);
@@ -1000,6 +950,62 @@ public class homePage extends AppCompatActivity implements PopupMenu.OnMenuItemC
             return true;
         }
 
+    }
+
+
+    public void updateView(){
+
+        String request = "";
+        request = request.concat(customerId);
+        HttpUtils.get("appointments/" + request, new RequestParams(), new JsonHttpResponseHandler() {
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+
+                appointments = new ArrayList<String>();
+
+                for(int i = 0; i < response.length(); i++)
+                {
+                    try {
+
+                        String toAdd ="";
+                        String ID = response.getJSONObject(i).getString("id");
+                        toAdd = toAdd.concat(ID+"    "+"Start: ");
+                        JSONObject timeSlot = response.getJSONObject(i).getJSONObject("timeSlot");
+                        toAdd = toAdd.concat(timeSlot.getString("startTime"));
+                        appointments.add(toAdd);
+                    } catch (JSONException e) {
+                        error += e.getMessage();
+                    }
+                }
+
+                final ListView listView=(ListView)findViewById(R.id.appointmentListHome);
+                final StableArrayAdapter  adapter = new StableArrayAdapter(homePage.this, android.R.layout.simple_list_item_1, appointments);
+                listView.setAdapter(adapter);
+                String delims = "[    ]";
+
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        String divide[] = listView.getItemAtPosition(i).toString().split(delims);
+                        String select= divide[0];
+                        Toast.makeText(homePage.this,"you have selected: "+divide[1], Toast.LENGTH_SHORT).show();
+                        Intent intent=new Intent(homePage.this,ViewAppointments.class);
+                        intent.putExtra("select", select);
+                        startActivity(intent);
+                    }
+                });
+
+            }
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                try {
+                    error += errorResponse.get("").toString();
+                } catch (JSONException e) {
+                    error += e.getMessage();
+                }
+            }
+        });
     }
 
 }
