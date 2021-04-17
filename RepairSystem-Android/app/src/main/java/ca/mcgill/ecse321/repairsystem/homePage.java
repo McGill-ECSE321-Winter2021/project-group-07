@@ -458,8 +458,8 @@ public class homePage extends AppCompatActivity implements PopupMenu.OnMenuItemC
                 }
 
                 final ListView listView=(ListView)findViewById(R.id.appointmentListHome);
-                final StableArrayAdapter  adapdter = new StableArrayAdapter(homePage.this, android.R.layout.simple_list_item_1, appointments);
-                listView.setAdapter(adapdter);
+                final StableArrayAdapter  adapter = new StableArrayAdapter(homePage.this, android.R.layout.simple_list_item_1, appointments);
+                listView.setAdapter(adapter);
                 String delims = "[    ]";
 
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
